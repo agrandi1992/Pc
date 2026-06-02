@@ -1755,7 +1755,7 @@
               "    fact_parcours_candidat[etape_parcours_id] = \"Rendez-vous Suivi\"",
               ")"
             ],
-            "displayFolder": "Pilotage Commercial",
+            "displayFolder": "Développement Réseau",
             "lineageTag": "27d8c737-5abf-4143-a86a-d27c578c3224",
             "annotations": [
               {
@@ -1840,7 +1840,7 @@
               ""
             ],
             "formatString": "0",
-            "displayFolder": "Pilotage Commercial",
+            "displayFolder": "Développement Réseau",
             "lineageTag": "f1293a55-cf04-4efd-a64a-e689c478df02"
           },
           {
@@ -1877,7 +1877,7 @@
               ")"
             ],
             "formatString": "0",
-            "displayFolder": "Pilotage Commercial",
+            "displayFolder": "Développement Réseau",
             "lineageTag": "cf333a45-5b4b-44fc-97d9-04b543b68dbf"
           },
           {
@@ -1918,7 +1918,7 @@
               "    [Taux réalisation de rendez-vous]",
               ")"
             ],
-            "displayFolder": "Pilotage Commercial",
+            "displayFolder": "Pilotage Commercial - Analytique",
             "lineageTag": "f5a48a34-fd79-469d-afa2-e6159dd87021",
             "annotations": [
               {
@@ -1935,7 +1935,7 @@
               ""
             ],
             "formatString": "0.0%;-0.0%;0.0%",
-            "displayFolder": "Pilotage Commercial",
+            "displayFolder": "Pilotage Commercial - Analytique",
             "lineageTag": "4cc66dc5-adb6-4be9-be82-66e4d4ea2836"
           },
           {
@@ -1952,7 +1952,7 @@
               "    )",
               ")"
             ],
-            "displayFolder": "Pilotage Commercial",
+            "displayFolder": "Pilotage Commercial - Analytique",
             "lineageTag": "c7247f50-d351-4033-8aee-eaeea6049967"
           },
           {
@@ -1964,7 +1964,7 @@
               "    [Année présence mandataire dans le groupe]",
               ")"
             ],
-            "displayFolder": "Pilotage Commercial",
+            "displayFolder": "Développement Réseau",
             "lineageTag": "515842b2-7e91-4c72-a503-452bac3b6976",
             "annotations": [
               {
@@ -2127,7 +2127,7 @@
               ")"
             ],
             "formatString": "0",
-            "displayFolder": "Pilotage Commercial",
+            "displayFolder": "Pilotage Commercial - Analytique",
             "lineageTag": "0e9467c6-73a2-4608-939a-8f72a0d06a84"
           },
           {
@@ -2141,7 +2141,7 @@
               ")"
             ],
             "formatString": "0",
-            "displayFolder": "Pilotage Commercial",
+            "displayFolder": "Pilotage Commercial - Analytique",
             "lineageTag": "1593dbbc-562a-4a8e-8781-bc0f01e0a1d7"
           },
           {
@@ -2153,7 +2153,7 @@
               "    [Nombre RDV prévus (par type mandataire)]",
               ")"
             ],
-            "displayFolder": "Pilotage Commercial",
+            "displayFolder": "Pilotage Commercial - Analytique",
             "lineageTag": "1ba2835e-e887-4358-872c-5be219075d03",
             "annotations": [
               {
@@ -2191,7 +2191,7 @@
               ""
             ],
             "formatString": "0",
-            "displayFolder": "Pilotage Commercial",
+            "displayFolder": "Pilotage Commercial - Analytique",
             "lineageTag": "991ab623-e24e-4679-9e27-7a5e7bebf26b"
           },
           {
@@ -2223,7 +2223,7 @@
               ")"
             ],
             "formatString": "0",
-            "displayFolder": "Pilotage Commercial",
+            "displayFolder": "Pilotage Commercial - Analytique",
             "lineageTag": "aa9939dd-d6f0-4ad9-90c4-725979984cf9"
           },
           {
@@ -2237,7 +2237,7 @@
               "    "
             ],
             "formatString": "0",
-            "displayFolder": "Pilotage Commercial",
+            "displayFolder": "Pilotage Commercial - Analytique",
             "lineageTag": "ba468911-e26a-4a57-8bd5-5a69afcbaa41"
           },
           {
@@ -2252,7 +2252,7 @@
               "    DIVIDE ( N - N_1, N_1 )",
               ")"
             ],
-            "displayFolder": "Pilotage Commercial",
+            "displayFolder": "Pilotage Commercial - Analytique",
             "lineageTag": "9d9fddbf-05d2-44cf-8596-9946474777f7",
             "annotations": [
               {
@@ -3597,125 +3597,6 @@
             "sourceColumn": "[Ordre]",
             "lineageTag": "7ca8f8f0-90cc-422c-8dd2-dd46529681c0",
             "summarizeBy": "sum"
-          }
-        ],
-        "annotations": [
-          {
-            "name": "PBI_ResultType",
-            "value": "Table"
-          }
-        ]
-      },
-      {
-        "name": "KPI_Status",
-        "lineageTag": "d57b9d9e-30d0-40a2-a86a-68b28ee2ec66",
-        "mode": "calculated",
-        "calculatedTableExpression": {
-          "kind": "calculated",
-          "expression": [
-            "DATATABLE(",
-            "    \"KPI_ID\", STRING,",
-            "    \"KPI_Label\", STRING,",
-            "    \"Page\", STRING,",
-            "    \"Source_Excel\", STRING,",
-            "    \"Statut_BIM\", STRING,",
-            "    \"Mesure_BIM\", STRING,",
-            "    \"Note\", STRING,",
-            "    {",
-            "        {\"G.1\",\"Nombre de ventes\",\"Performance\",\"G.1\",\"BIM absent\",\"fact_affaires à créer\",\"Nécessite fact_affaires\"}",
-            "        {\"G.2\",\"Nombre d'affaires produites\",\"Affaires\",\"G.2\",\"BIM absent\",\"fact_affaires à créer\",\"Nécessite fact_affaires\"}",
-            "        {\"G.3\",\"Volume d'affaires produites\",\"Accueil,Performance,Affaires\",\"G.3\",\"BIM absent\",\"fact_affaires à créer\",\"Nécessite fact_affaires\"}",
-            "        {\"G.4\",\"Budget affaires en nombre\",\"Affaires\",\"G.4\",\"BIM absent\",\"budget_affaires à intégrer\",\"Nécessite budget_affaires\"}",
-            "        {\"G.5\",\"Budget affaires en euro\",\"Affaires\",\"G.5\",\"BIM absent\",\"budget_affaires à intégrer\",\"Nécessite budget_affaires\"}",
-            "        {\"G.6\",\"Nombre mandataires actifs\",\"Réseau,Accueil\",\"G.6\",\"BIM OK\",\"_Indicateurs[Nombre mandataires actifs]\",\"Disponible\"}",
-            "        {\"G.7\",\"Nombre mandataires inactifs\",\"Réseau\",\"G.7\",\"BIM OK\",\"_Indicateurs[Nombre mandataires inactifs]\",\"Disponible\"}",
-            "        {\"G.8\",\"Nombre mandataires productifs\",\"Réseau\",\"G.8\",\"BIM absent\",\"Mesure à créer\",\"Nécessite fact_affaires\"}",
-            "        {\"G.9\",\"Nombre mandataires non productifs\",\"Réseau\",\"G.9\",\"BIM absent\",\"Mesure à créer\",\"Dérivable de G.6-G.8\"}",
-            "        {\"G.10\",\"Nombre mandataires rétrocommissionnés\",\"Réseau\",\"G.10\",\"BIM OK\",\"_Indicateurs[Nombre mandataires rétrocommissionnés]\",\"Disponible\"}",
-            "        {\"G.11\",\"Nombre mandataires non rétrocommissionnés\",\"Réseau\",\"G.11\",\"BIM absent\",\"Mesure à créer\",\"Dérivable de G.6-G.10\"}",
-            "        {\"G.12\",\"RDV hebdomadaire moyen\",\"RDV\",\"G.12\",\"BIM à créer\",\"Calculable depuis RDV+Date\",\"Dérivable\"}",
-            "        {\"G.13\",\"Taux réalisation RDV\",\"Accueil,RDV,Alertes\",\"G.13\",\"BIM OK\",\"_Indicateurs[Taux réalisation de rendez-vous]\",\"Disponible\"}",
-            "        {\"G.14\",\"Nombre RDV prévus\",\"RDV\",\"G.14\",\"BIM OK\",\"_Indicateurs[Nombre rendez-vous prévus]\",\"Disponible\"}",
-            "        {\"G.15\",\"Nombre RDV réalisés\",\"RDV\",\"G.15\",\"BIM OK\",\"_Indicateurs[Nombre rendez-vous réalisés]\",\"Disponible\"}",
-            "        {\"G.18\",\"Taux RDV visioconférence\",\"RDV\",\"G.18\",\"BIM OK\",\"_Indicateurs[Taux rendez vous réalisés en visioconférence]\",\"Disponible\"}",
-            "        {\"G.19\",\"Taux RDV domicile\",\"RDV\",\"G.19\",\"BIM OK\",\"_Indicateurs[Taux rendez-vous faits à domicile]\",\"Disponible\"}",
-            "        {\"G.20\",\"Nombre RDV visio\",\"RDV\",\"G.20\",\"BIM OK\",\"_Indicateurs[Nombre rendez-vous réalisés en visioconférence]\",\"Disponible\"}",
-            "        {\"G.21\",\"Nombre RDV domicile\",\"RDV\",\"G.21\",\"BIM OK\",\"_Indicateurs[Nombre rendez-vous réalisés à domicile]\",\"Disponible\"}",
-            "        {\"ALERTE_CRIT\",\"Nombre Alertes Critiques\",\"Alertes\",\"À créer\",\"BIM absent\",\"fact_alertes à créer\",\"Nécessite fact_alertes\"}",
-            "    }",
-            ")"
-          ]
-        },
-        "columns": [
-          {
-            "type": "calculatedTableColumn",
-            "name": "KPI_ID",
-            "dataType": "string",
-            "isNameInferred": true,
-            "isDataTypeInferred": true,
-            "sourceColumn": "[KPI_ID]",
-            "lineageTag": "2f74039b-af10-4ee3-a085-6b5bd866c610",
-            "summarizeBy": "none"
-          },
-          {
-            "type": "calculatedTableColumn",
-            "name": "KPI_Label",
-            "dataType": "string",
-            "isNameInferred": true,
-            "isDataTypeInferred": true,
-            "sourceColumn": "[KPI_Label]",
-            "lineageTag": "28897d4e-61c8-4e57-8402-b3bb1bed8fab",
-            "summarizeBy": "none"
-          },
-          {
-            "type": "calculatedTableColumn",
-            "name": "Page",
-            "dataType": "string",
-            "isNameInferred": true,
-            "isDataTypeInferred": true,
-            "sourceColumn": "[Page]",
-            "lineageTag": "a03971e3-ff4a-44be-8cec-80285cecf3a9",
-            "summarizeBy": "none"
-          },
-          {
-            "type": "calculatedTableColumn",
-            "name": "Source_Excel",
-            "dataType": "string",
-            "isNameInferred": true,
-            "isDataTypeInferred": true,
-            "sourceColumn": "[Source_Excel]",
-            "lineageTag": "acedaa1f-aa5b-488e-bb7f-dbd6ef31dd34",
-            "summarizeBy": "none"
-          },
-          {
-            "type": "calculatedTableColumn",
-            "name": "Statut_BIM",
-            "dataType": "string",
-            "isNameInferred": true,
-            "isDataTypeInferred": true,
-            "sourceColumn": "[Statut_BIM]",
-            "lineageTag": "3b9b374e-16e1-496f-8a05-1f4827f450eb",
-            "summarizeBy": "none"
-          },
-          {
-            "type": "calculatedTableColumn",
-            "name": "Mesure_BIM",
-            "dataType": "string",
-            "isNameInferred": true,
-            "isDataTypeInferred": true,
-            "sourceColumn": "[Mesure_BIM]",
-            "lineageTag": "d66a816f-7dd4-4f14-95eb-e0774a7425f4",
-            "summarizeBy": "none"
-          },
-          {
-            "type": "calculatedTableColumn",
-            "name": "Note",
-            "dataType": "string",
-            "isNameInferred": true,
-            "isDataTypeInferred": true,
-            "sourceColumn": "[Note]",
-            "lineageTag": "a5f759d2-0d9b-4880-9a32-a640522f6df9",
-            "summarizeBy": "none"
           }
         ],
         "annotations": [
