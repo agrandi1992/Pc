@@ -24,8 +24,8 @@ Audit complet de tous les indicateurs : source Excel, mesure BIM, statut de disp
 | G.13 | Taux réalisation RDV | Accueil, RDV, Alertes | G.13 | `_Indicateurs[Taux réalisation de rendez-vous]` | **BIM OK** | fact_rendez_vous_client | Disponible — mesure originale |
 | G.14 | Nombre RDV prévus | RDV | G.14 | `_Indicateurs[Nombre rendez-vous prévus]` | **BIM OK** | fact_rendez_vous_client | Disponible — mesure originale |
 | G.15 | Nombre RDV réalisés | RDV | G.15 | `_Indicateurs[Nombre rendez-vous réalisés]` | **BIM OK** | fact_rendez_vous_client | Disponible — mesure originale |
-| G.16 | Nombre RDV confirmés | RDV | G.16 | À créer | À CRÉER | fact_rendez_vous_client | Dérivable selon statut RDV |
-| G.17 | Taux RDV confirmés | RDV | G.17 | À créer | À CRÉER | fact_rendez_vous_client | DIVIDE G.16/G.14 |
+| G.16 | Nombre RDV confirmés | RDV | G.16 | `_Indicateurs[Nombre RDV confirmés]` | **BIM OK (proxy)** | fact_rendez_vous_client | Proxy : parent_rendez_vous_id non vide. Remplacer par flag_confirme quand dispo. |
+| G.17 | Taux RDV confirmés | RDV | G.17 | `_Indicateurs[Taux RDV confirmés]` | **BIM OK** | fact_rendez_vous_client | DIVIDE G.16/G.14 ✓ |
 | G.18 | Taux RDV visioconférence | RDV | G.18 | `_Indicateurs[Taux rendez vous réalisés en visioconférence]` | **BIM OK** | fact_rendez_vous_client | Disponible — mesure originale |
 | G.19 | Taux RDV domicile | RDV | G.19 | `_Indicateurs[Taux rendez-vous faits à domicile]` | **BIM OK** | fact_rendez_vous_client | Disponible — mesure originale |
 | G.20 | Nombre RDV visio | RDV | G.20 | `_Indicateurs[Nombre rendez-vous réalisés en visioconférence]` | **BIM OK** | fact_rendez_vous_client | Disponible — mesure originale |
@@ -46,9 +46,9 @@ Audit complet de tous les indicateurs : source Excel, mesure BIM, statut de disp
 
 | Statut | Nb KPI | Détail |
 |--------|--------|--------|
-| **BIM OK** (disponible) | 11 | G.6, G.7, G.10, G.13, G.14, G.15, G.18, G.19, G.20, G.21, G.22, G.23 |
+| **BIM OK** (disponible) | 13 | G.6, G.7, G.10, G.13, G.14, G.15, G.16 (proxy), G.17, G.18, G.19, G.20, G.21, G.22, G.23 |
 | **BIM CRÉÉ placeholder** | 16 | G.1-G.5, G.8-G.9, G.11-G.12, G.24-G.26, ALERTE×4 |
-| **À CRÉER** | 2 | G.16, G.17 (statut RDV confirmés) |
+| **À CRÉER** | 0 | — Tous créés |
 | **TOTAL** | 29 | — |
 
 ---

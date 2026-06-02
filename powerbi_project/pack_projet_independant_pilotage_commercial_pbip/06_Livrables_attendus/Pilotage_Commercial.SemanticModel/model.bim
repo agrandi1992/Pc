@@ -1708,13 +1708,14 @@
           {
             "name": "Nombre mandataires actifs",
             "expression": [
-              "",
-              "VAR DateLimite = TODAY() - 30",
+              "VAR DateContexte = COALESCE(MAX(dim_date[Date]), TODAY())",
+              "VAR DateLimite = DateContexte - 30",
               "RETURN",
               "CALCULATE(",
               "    DISTINCTCOUNT(fact_activite_mandataire[mandataire_id]),",
               "    fact_activite_mandataire[flag_connexion] = 1,",
-              "    fact_activite_mandataire[date_connexion] >= DateLimite",
+              "    fact_activite_mandataire[date_connexion] >= DateLimite,",
+              "    fact_activite_mandataire[date_connexion] <= DateContexte",
               ")"
             ],
             "displayFolder": "Pilotage Commercial",
@@ -1729,14 +1730,15 @@
           {
             "name": "Nombre mandataires inactifs",
             "expression": [
-              "",
-              "VAR DateLimite = TODAY() - 30",
+              "VAR DateContexte = COALESCE(MAX(dim_date[Date]), TODAY())",
+              "VAR DateLimite = DateContexte - 30",
               "RETURN",
               "CALCULATE(",
               "    DISTINCTCOUNT(fact_activite_mandataire[mandataire_id]),",
-              "    NOT (",
+              "    NOT(",
               "        fact_activite_mandataire[flag_connexion] = 1",
               "            && fact_activite_mandataire[date_connexion] >= DateLimite",
+              "            && fact_activite_mandataire[date_connexion] <= DateContexte",
               "    )",
               ")"
             ],
@@ -2225,26 +2227,6 @@
             "lineageTag": "aa9939dd-d6f0-4ad9-90c4-725979984cf9"
           },
           {
-            "name": "Nombre mandataires actifs new",
-            "expression": [
-              "",
-              "VAR DateContexteMax =",
-              "    MAX ( dim_date[date] )",
-              "VAR DateLimite =",
-              "    DateContexteMax - 30",
-              "RETURN",
-              "CALCULATE (",
-              "    DISTINCTCOUNT ( fact_activite_mandataire[mandataire_id] ),",
-              "    fact_activite_mandataire[flag_connexion] = 1,",
-              "    fact_activite_mandataire[date_connexion] >= DateLimite,",
-              "    fact_activite_mandataire[date_connexion] <= DateContexteMax",
-              ")"
-            ],
-            "formatString": "0",
-            "displayFolder": "Pilotage Commercial",
-            "lineageTag": "1b762a1a-aa1e-4e6b-8b81-79bb230d308a"
-          },
-          {
             "name": "Nombre mandataires rétrocommissionnés N-1",
             "expression": [
               "",
@@ -2278,54 +2260,6 @@
                 "value": "{\"isGeneralNumber\":true}"
               }
             ]
-          },
-          {
-            "name": "test_Taux réalisation RDV N-1",
-            "expression": [
-              "",
-              "CALCULATE(",
-              "    [Taux réalisation de rendez-vous],",
-              "    SAMEPERIODLASTYEAR(dim_date[Date])",
-              ")"
-            ],
-            "displayFolder": "Pilotage Commercial",
-            "lineageTag": "5fff2a8b-dca5-4fe3-88be-82862785f64e",
-            "annotations": [
-              {
-                "name": "PBI_FormatHint",
-                "value": "{\"isGeneralNumber\":true}"
-              }
-            ]
-          },
-          {
-            "name": "test_Evolution RDV vs N-1",
-            "expression": [
-              "",
-              "[Taux réalisation de rendez-vous] - [test_Taux réalisation RDV N-1]"
-            ],
-            "displayFolder": "Pilotage Commercial",
-            "lineageTag": "2cac7937-2b46-42c8-9e56-4c0f17673b9d",
-            "annotations": [
-              {
-                "name": "PBI_FormatHint",
-                "value": "{\"isGeneralNumber\":true}"
-              }
-            ]
-          },
-          {
-            "name": "test_Evolution RDV affichage",
-            "expression": [
-              "",
-              "VAR val = [test_Evolution RDV vs N-1]",
-              "RETURN ",
-              "IF(",
-              "    val >= 0,",
-              "    \"+\" & FORMAT(val, \"0%\"),",
-              "    FORMAT(val, \"0%\")",
-              ") & \" versus N-1\""
-            ],
-            "displayFolder": "Pilotage Commercial",
-            "lineageTag": "7f36e078-f5b4-49ac-abc9-d529214c0326"
           },
           {
             "name": "Montant rétrocommission",
@@ -2576,6 +2510,32 @@
             "expression": "VAR v = [Variation vs MTD-1 Volume Affaires (%)]\nRETURN SWITCH(TRUE(),\n    ISBLANK(v), \"Vs MTD-1 —\",\n    v >= 0, \"▲ Vs MTD-1 \" & FORMAT(v, \"+0.0%;-0.0%\"),\n    \"▼ Vs MTD-1 \" & FORMAT(v, \"+0.0%;-0.0%\"))",
             "displayFolder": "Pilotage Commercial - Affichage",
             "lineageTag": "0046c9fc-a46f-43eb-b06d-9854a1233ee8"
+          },
+          {
+            "name": "Nombre RDV confirmés",
+            "lineageTag": "d71f5fd2-4729-460c-af39-54e3338be216",
+            "displayFolder": "Pilotage Commercial - RDV",
+            "description": "G.16 — RDV confirmés : proxy parent_rendez_vous_id non vide (RDV re-planifié/confirmé). Nécessite une colonne flag_confirme dans fact_rendez_vous_client pour une valeur précise.",
+            "expression": [
+              "// G.16 — proxy : RDV ayant un parent_rendez_vous_id (re-planifié / confirmé par le client)",
+              "// À remplacer par flag_confirme quand la colonne est disponible dans le Lakehouse",
+              "CALCULATE(",
+              "    DISTINCTCOUNT(bridge_rendez_vous_mandataire[rendez_vous_id]),",
+              "    NOT ISBLANK(fact_rendez_vous_client[parent_rendez_vous_id])",
+              ")"
+            ],
+            "formatString": "#,0"
+          },
+          {
+            "name": "Taux RDV confirmés",
+            "lineageTag": "ea5c7075-45ce-40d5-8d9a-bedd49e89e49",
+            "displayFolder": "Pilotage Commercial - RDV",
+            "description": "G.17 — Taux RDV confirmés / RDV prévus. Dépend de G.16.",
+            "expression": [
+              "// G.17 — DIVIDE G.16 / G.14",
+              "DIVIDE([Nombre RDV confirmés], [Nombre rendez-vous prévus], 0)"
+            ],
+            "formatString": "0.0%"
           }
         ],
         "annotations": [
@@ -4200,6 +4160,30 @@
         "fromColumn": "mandataire_id",
         "toTable": "dim_mandataire",
         "toColumn": "mandataire_id"
+      },
+      {
+        "name": "51d3b9c2-347d-4e34-a41f-b5c4c5ded267",
+        "fromTable": "fact_alertes",
+        "fromColumn": "mandataire_id",
+        "toTable": "dim_mandataire",
+        "toColumn": "mandataire_id",
+        "crossFilteringBehavior": "oneDirection"
+      },
+      {
+        "name": "15cb7270-f84c-49a2-b37f-523883899a46",
+        "fromTable": "fact_alertes",
+        "fromColumn": "agence_id",
+        "toTable": "dim_agence",
+        "toColumn": "agence_id",
+        "crossFilteringBehavior": "oneDirection"
+      },
+      {
+        "name": "0a66ccbb-4930-4753-82e6-43338270734f",
+        "fromTable": "fact_alertes",
+        "fromColumn": "date_analyse",
+        "toTable": "dim_date",
+        "toColumn": "Date",
+        "crossFilteringBehavior": "oneDirection"
       }
     ],
     "expressions": [
