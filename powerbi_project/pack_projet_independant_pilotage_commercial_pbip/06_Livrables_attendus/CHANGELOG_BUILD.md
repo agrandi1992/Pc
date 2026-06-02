@@ -239,3 +239,48 @@
 | KPIs Excel en placeholder (données pending) | 16/29 |
 | Pages rapport | 8 |
 | Visuels total | 711 |
+
+---
+
+## [1.2.0] — 2026-06-02 — Alertes dynamiques, complétion Réseau MIA, correction Accueil
+
+### Report (report.json) — 723 visual containers
+
+#### Page Alertes — recommandations et niveaux dynamiques
+
+| Action | Détail |
+|--------|--------|
+| Suppression | 18 visuels statiques CRITIQUE/HAUTE/CONFORME dans la section droite (x≥760, y=502–688) |
+| Ajout | Carte `Recommandation Volume` — texte adaptatif selon variation N-1 (x=768, y=505, w=725, h=72) |
+| Ajout | 3 cartes `Niveau Alerte` dynamiques — Volume, RDV, Réseau (y=628, w=225/250) |
+| Ajout | 3 labels au-dessus des cartes (y=612) |
+| Ajout | 3 badges `Niveau Alerte` dans le panel gauche "Niveaux d'alerte" (x=695, y=509/575/641) |
+| Correction | Top card 5 : `Couleur Alerte Volume` → `Niveau Alerte Volume` |
+
+#### Page Réseau MIA & Réseau MIA - Tableau — métriques complémentaires
+
+| Action | Mesure | Position |
+|--------|--------|----------|
+| Ajout | `Nombre mandataires inactifs` (G.7) | x=920, y=796 (row 4 panel droit) |
+| Ajout | `Taux mandataires actifs` | x=1215, y=796 (row 4 panel droit) |
+
+#### Page Accueil — correction KPI G.13
+
+| Action | Détail |
+|--------|--------|
+| Correction | Card 5 (x=1222, y=337) : `Nombre rendez-vous réalisés` (G.15 — appartient à la page RDV) → `Taux réalisation de rendez-vous` (G.13 — spec prévoit Accueil) |
+| Correction | Label associé : "Nombre rendez-vous réalisés" → "Taux réalisation RDV" |
+| Correction | Tag KPI : "Excel G.15" → "Excel G.13" |
+
+### Statut global v1.2.0
+
+| Indicateur | Valeur |
+|-----------|--------|
+| Tables BIM | 27 |
+| Mesures totales | 72 |
+| Relations | 21 |
+| Mesures actives dans rapport | 39/72 (+1) |
+| KPIs Excel couverts (avec données) | 13/29 |
+| KPIs Excel en placeholder (données pending) | 16/29 |
+| Pages rapport | 8 |
+| Visuels total | 712 |
