@@ -165,3 +165,77 @@
 2. **Configurer les slicers** : Lier les slicers aux colonnes correspondantes
 3. **Vérifier les relations** : Créer les relations entre `fact_affaires`/`budget_affaires` et les dimensions
 4. **Publier** : Publier vers Power BI Service après validation
+
+---
+
+## [1.1.0] — 2026-06-02 — Consolidation, câblage KPIs, nettoyage
+
+### Semantic Model (model.bim) — 27 tables, 72 mesures, 21 relations
+
+#### Nouvelles mesures
+| Mesure | Folder | Source |
+|--------|--------|--------|
+| `Nombre RDV confirmés` | RDV | G.16 — proxy parent_rendez_vous_id (→ remplacer par flag_confirme) |
+| `Taux RDV confirmés` | RDV | G.17 — DIVIDE G.16/G.14 |
+
+#### Mesures supprimées (orphelines)
+`test_Taux réalisation RDV N-1`, `test_Evolution RDV vs N-1`, `test_Evolution RDV affichage`, `Nombre mandataires actifs new`
+
+#### Tables supprimées
+`KPI_Status` — orpheline, jamais utilisée dans le rapport
+
+#### Mesures améliorées
+- `[Nombre mandataires actifs]` et `[Nombre mandataires inactifs]` : `TODAY()` hardcodé → `COALESCE(MAX(dim_date[Date]), TODAY())` — sensibles aux slicers de date
+
+#### Relations ajoutées
+- `fact_alertes[mandataire_id]` → `dim_mandataire[mandataire_id]`
+- `fact_alertes[agence_id]` → `dim_agence[agence_id]`
+- `fact_alertes[date_analyse]` → `dim_date[Date]`
+
+#### Réorganisation des folders
+- 13 mesures → folder `Développement Réseau` (formation/candidats, hors scope pilotage)
+- 10 mesures → folder `Pilotage Commercial - Analytique` (variantes avancées)
+
+#### Architecture fact_affaires / budget_affaires confirmée
+- `fact_affaires` : DATATABLE vide → cible **Fabric Direct Lake** (`gold.fact_affaires`)
+- `budget_affaires` : DATATABLE vide → cible **Excel → Dataflow Gen2 → `gold.budget_affaires`**
+- Annotations BIM incluent le template partition Direct Lake exact (JSON prêt à copier)
+
+---
+
+### Report (report.json) — 711 visual containers
+
+#### Bugs corrigés
+- RDV page : carte x=628 avait label "Nombre RDV Confirmés" mais mesure "Nombre rendez-vous réalisés" → mesure corrigée → `Nombre RDV confirmés`
+- Alertes page : texte "fact_alertes absente du modèle" → "opérationnelle (DAX calculée)"
+- 4 labels BIM status "absent" sur les alertes → "BIM OK"
+- 14 labels "BIM absent" → "BIM placeholder" (mesures existent, données pending)
+- Alertes : "Alerte Réseau — À créer" → "BIM OK" (Niveau Alerte Réseau + Couleur Alerte Réseau existent)
+- Accueil : 4× "fact_alertes — Source: À créer" → "fact_alertes — opérationnelle (DAX)"
+
+#### Nouveaux visuels câblés
+| Page | Mesures ajoutées | Position |
+|------|-----------------|----------|
+| Rendez-vous | G.12 hebdo, G.17 taux confirmés, G.19 taux domicile, G.20 nb visio, G.21 nb domicile | y=1075 |
+| Performance | G.1 ventes, G.25 var N-1 %, G.26 var MTD-1 %, Libellé N-1, Libellé MTD-1 | y=860 |
+| Réseau MIA | G.9 non productifs, G.11 non rétro | y=700 (dans le panel focus) |
+| Réseau MIA - Tableau | G.9 non productifs, G.11 non rétro | y=700 |
+
+#### Couverture mesures
+- v1.0.0 : 27 mesures actives dans le rapport
+- v1.1.0 : **40 mesures actives** (+13)
+
+---
+
+### Statut global v1.1.0
+
+| Indicateur | Valeur |
+|-----------|--------|
+| Tables BIM | 27 |
+| Mesures totales | 72 |
+| Relations | 21 |
+| Mesures actives dans rapport | 40/72 |
+| KPIs Excel couverts (avec données) | 13/29 |
+| KPIs Excel en placeholder (données pending) | 16/29 |
+| Pages rapport | 8 |
+| Visuels total | 711 |
