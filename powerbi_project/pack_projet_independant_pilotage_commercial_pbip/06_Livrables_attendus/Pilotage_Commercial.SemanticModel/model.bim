@@ -752,7 +752,8 @@
               "schemaName": "gold"
             }
           }
-        ]
+        ],
+        "isHidden": true
       },
       {
         "name": "glossaire_indicateurs",
@@ -921,7 +922,8 @@
               "schemaName": "gold"
             }
           }
-        ]
+        ],
+        "isHidden": true
       },
       {
         "name": "dim_motif_depart_formation",
@@ -968,7 +970,8 @@
               "schemaName": "gold"
             }
           }
-        ]
+        ],
+        "isHidden": true
       },
       {
         "name": "dim_charge_developpement_reseau",
@@ -1029,7 +1032,8 @@
               "schemaName": "gold"
             }
           }
-        ]
+        ],
+        "isHidden": true
       },
       {
         "name": "dim_type_canal",
@@ -1076,7 +1080,8 @@
               "schemaName": "gold"
             }
           }
-        ]
+        ],
+        "isHidden": true
       },
       {
         "name": "dim_candidat",
@@ -1338,7 +1343,8 @@
               "schemaName": "gold"
             }
           }
-        ]
+        ],
+        "isHidden": true
       },
       {
         "name": "dim_agence",
@@ -1532,7 +1538,8 @@
               "schemaName": "gold"
             }
           }
-        ]
+        ],
+        "isHidden": true
       },
       {
         "name": "fact_activite_mandataire",
@@ -1762,7 +1769,8 @@
                 "name": "PBI_FormatHint",
                 "value": "{\"isGeneralNumber\":true}"
               }
-            ]
+            ],
+            "isHidden": true
           },
           {
             "name": "Nombre journées découverte réalisées",
@@ -1775,7 +1783,8 @@
             ],
             "formatString": "#,0",
             "displayFolder": "Développement Réseau",
-            "lineageTag": "dd2cf03b-bd5c-4fe4-b9e5-755dcd717c39"
+            "lineageTag": "dd2cf03b-bd5c-4fe4-b9e5-755dcd717c39",
+            "isHidden": true
           },
           {
             "name": "Nombre inscrits formation initiale",
@@ -1788,7 +1797,8 @@
             ],
             "formatString": "#,0",
             "displayFolder": "Développement Réseau",
-            "lineageTag": "41e65574-72ed-4ba2-8820-1119f5a2bcaf"
+            "lineageTag": "41e65574-72ed-4ba2-8820-1119f5a2bcaf",
+            "isHidden": true
           },
           {
             "name": "Nombre mandataires ayant passé l'examen",
@@ -1801,7 +1811,8 @@
             ],
             "formatString": "#,0",
             "displayFolder": "Développement Réseau",
-            "lineageTag": "3f4202fe-c4ee-4423-93b0-93f81ee5d71f"
+            "lineageTag": "3f4202fe-c4ee-4423-93b0-93f81ee5d71f",
+            "isHidden": true
           },
           {
             "name": "Nombre mandataires ayant réussi l'examen",
@@ -1814,7 +1825,8 @@
             ],
             "formatString": "#,0",
             "displayFolder": "Développement Réseau",
-            "lineageTag": "baf15877-ef57-461f-8177-0a83234839ef"
+            "lineageTag": "baf15877-ef57-461f-8177-0a83234839ef",
+            "isHidden": true
           },
           {
             "name": "Année présence mandataire dans le groupe",
@@ -1841,7 +1853,8 @@
             ],
             "formatString": "0",
             "displayFolder": "Développement Réseau",
-            "lineageTag": "f1293a55-cf04-4efd-a64a-e689c478df02"
+            "lineageTag": "f1293a55-cf04-4efd-a64a-e689c478df02",
+            "isHidden": true
           },
           {
             "name": "Année présence mandataire dans agence",
@@ -1878,7 +1891,8 @@
             ],
             "formatString": "0",
             "displayFolder": "Développement Réseau",
-            "lineageTag": "cf333a45-5b4b-44fc-97d9-04b543b68dbf"
+            "lineageTag": "cf333a45-5b4b-44fc-97d9-04b543b68dbf",
+            "isHidden": true
           },
           {
             "name": "Nombre mandataires rétrocommissionnés",
@@ -1971,14 +1985,16 @@
                 "name": "PBI_FormatHint",
                 "value": "{\"isGeneralNumber\":true}"
               }
-            ]
+            ],
+            "isHidden": true
           },
           {
             "name": "Nombre candidats",
             "expression": "DISTINCTCOUNT(fact_parcours_candidat[candidat_id])",
             "formatString": "0",
             "displayFolder": "Développement Réseau",
-            "lineageTag": "5281ae76-c1be-455f-a237-ff2429906d44"
+            "lineageTag": "5281ae76-c1be-455f-a237-ff2429906d44",
+            "isHidden": true
           },
           {
             "name": "Nombre candidats intégrés",
@@ -1990,7 +2006,8 @@
             ],
             "formatString": "0",
             "displayFolder": "Développement Réseau",
-            "lineageTag": "eb4cfb39-202c-4921-8039-91656e0fac3d"
+            "lineageTag": "eb4cfb39-202c-4921-8039-91656e0fac3d",
+            "isHidden": true
           },
           {
             "name": "Taux intégration candidats",
@@ -2009,7 +2026,8 @@
                 "name": "PBI_FormatHint",
                 "value": "{\"isGeneralNumber\":true}"
               }
-            ]
+            ],
+            "isHidden": true
           },
           {
             "name": "Moyenne age candidats",
@@ -2034,7 +2052,8 @@
                 "name": "PBI_FormatHint",
                 "value": "{\"isGeneralNumber\":true}"
               }
-            ]
+            ],
+            "isHidden": true
           },
           {
             "name": "Taux de succès à l'examen (%)",
@@ -2047,7 +2066,8 @@
             ],
             "formatString": "0.0%;-0.0%;0.0%",
             "displayFolder": "Développement Réseau",
-            "lineageTag": "8be560d9-7bbf-40cd-9eea-8908e794936e"
+            "lineageTag": "8be560d9-7bbf-40cd-9eea-8908e794936e",
+            "isHidden": true
           },
           {
             "name": "Nombre rendez-vous réalisés en visioconférence",
