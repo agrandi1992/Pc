@@ -1,0 +1,418 @@
+/*
+Pilotage Commercial — Option C v2
+DAX complémentaire pour cards KPI fusionnées : valeur, N-1, MTD-1, budget, couleurs, alertes, field parameters.
+
+À adapter aux noms réels de colonnes une fois fact_affaires, budget_affaires et fact_alertes créées.
+Les mesures BIM OK doivent réutiliser le modèle existant : _Indicateurs[...].
+*/
+
+/* =========================================================
+   1. TABLES CIBLES À CRÉER SI ABSENTES
+   ========================================================= */
+
+-- fact_affaires cible minimale :
+-- affaire_id, date_affaire, mandataire_id, agence_id, produit_id, assureur_id,
+-- statut_affaire, montant_affaire, montant_retrocommission, flag_produite,
+-- flag_instance, flag_commissionnee, evenement, apporteur
+
+-- budget_affaires cible minimale :
+-- date_budget, agence_id, produit_id, assureur_id, budget_affaires_nombre, budget_affaires_euro, budget_retrocommission
+
+-- fact_alertes cible minimale :
+-- alerte_id, date_analyse, date_detection, niveau_priorite, categorie_alerte,
+-- kpi_concerne, valeur_actuelle, seuil_alerte, ecart, agence_id, mandataire_id,
+-- impact_metier, recommandation, statut_alerte
+
+
+/* =========================================================
+   2. MESURES AFFAIRES À CRÉER
+   ========================================================= */
+
+Nombre affaires produites =
+CALCULATE(
+    DISTINCTCOUNT(fact_affaires[affaire_id]),
+    fact_affaires[flag_produite] = TRUE()
+)
+
+Volume affaires produites =
+CALCULATE(
+    SUM(fact_affaires[montant_affaire]),
+    fact_affaires[flag_produite] = TRUE()
+)
+
+Volume affaires en instance =
+CALCULATE(
+    SUM(fact_affaires[montant_affaire]),
+    fact_affaires[flag_instance] = TRUE()
+)
+
+Volume affaires commissionnées =
+CALCULATE(
+    SUM(fact_affaires[montant_affaire]),
+    fact_affaires[flag_commissionnee] = TRUE()
+)
+
+Montant rétrocommission affaires =
+SUM(fact_affaires[montant_retrocommission])
+
+Montant moyen rétrocommission affaires =
+DIVIDE(
+    [Montant rétrocommission affaires],
+    CALCULATE(DISTINCTCOUNT(fact_affaires[affaire_id]), fact_affaires[flag_commissionnee] = TRUE())
+)
+
+Budget N affaires nombre =
+SUM(budget_affaires[budget_affaires_nombre])
+
+Budget N volume affaires =
+SUM(budget_affaires[budget_affaires_euro])
+
+Budget N rétrocommission =
+SUM(budget_affaires[budget_retrocommission])
+
+Taux atteinte Budget N Volume =
+DIVIDE([Volume affaires produites], [Budget N volume affaires])
+
+Taux atteinte Budget N Nombre =
+DIVIDE([Nombre affaires produites], [Budget N affaires nombre])
+
+
+/* =========================================================
+   3. MESURES RÉSEAU À CRÉER OU RÉUTILISER
+   ========================================================= */
+
+-- BIM OK existant : _Indicateurs[Nombre mandataires actifs]
+-- BIM OK existant : _Indicateurs[Nombre mandataires inactifs]
+-- BIM OK existant : _Indicateurs[Nombre mandataires rétrocommissionnés]
+-- BIM OK existant : _Indicateurs[Montant moyen de rétrocommission]
+
+Nombre MIA oriasés =
+DISTINCTCOUNT(dim_mandataire[numero_orias])
+
+Nombre mandataires productifs =
+CALCULATE(
+    DISTINCTCOUNT(fact_affaires[mandataire_id]),
+    fact_affaires[flag_produite] = TRUE()
+)
+
+Nombre mandataires non productifs =
+[_Indicateurs Nombre mandataires actifs Alias] - [Nombre mandataires productifs]
+
+Nombre mandataires non rétrocommissionnés =
+[_Indicateurs Nombre mandataires actifs Alias] - [_Indicateurs Nombre mandataires rétrocommissionnés Alias]
+
+_Indicateurs Nombre mandataires actifs Alias =
+_Indicateurs[Nombre mandataires actifs]
+
+_Indicateurs Nombre mandataires inactifs Alias =
+_Indicateurs[Nombre mandataires inactifs]
+
+_Indicateurs Nombre mandataires rétrocommissionnés Alias =
+_Indicateurs[Nombre mandataires rétrocommissionnés]
+
+Taux mandataires actifs =
+DIVIDE(
+    [_Indicateurs Nombre mandataires actifs Alias],
+    [_Indicateurs Nombre mandataires actifs Alias] + [_Indicateurs Nombre mandataires inactifs Alias]
+)
+
+
+/* =========================================================
+   4. MESURES RDV EXISTANTES À RÉUTILISER
+   ========================================================= */
+
+RDV prévus =
+_Indicateurs[Nombre rendez-vous prévus]
+
+RDV réalisés =
+_Indicateurs[Nombre rendez-vous réalisés]
+
+Taux réalisation RDV =
+_Indicateurs[Taux réalisation de rendez-vous]
+
+RDV réalisés visio =
+_Indicateurs[Nombre rendez-vous réalisés en visioconférence]
+
+RDV réalisés domicile =
+_Indicateurs[Nombre rendez-vous réalisés à domicile]
+
+Taux RDV visio =
+_Indicateurs[Taux rendez vous réalisés en visioconférence]
+
+Taux RDV domicile =
+_Indicateurs[Taux rendez-vous faits à domicile]
+
+
+/* =========================================================
+   5. MESURES GÉNÉRIQUES CARD : N-1, MTD-1, BUDGET
+   À dupliquer par KPI ou à intégrer dans calculation group.
+   ========================================================= */
+
+Volume affaires produites N-1 =
+CALCULATE(
+    [Volume affaires produites],
+    SAMEPERIODLASTYEAR('Date'[Date])
+)
+
+Variation Volume affaires vs N-1 % =
+DIVIDE([Volume affaires produites] - [Volume affaires produites N-1], [Volume affaires produites N-1])
+
+Volume affaires produites MTD-1 =
+CALCULATE(
+    [Volume affaires produites],
+    DATEADD('Date'[Date], -1, MONTH)
+)
+
+Variation Volume affaires vs MTD-1 % =
+DIVIDE([Volume affaires produites] - [Volume affaires produites MTD-1], [Volume affaires produites MTD-1])
+
+Libellé Variation Volume vs N-1 =
+VAR v = [Variation Volume affaires vs N-1 %]
+RETURN
+SWITCH(
+    TRUE(),
+    ISBLANK(v), "Vs N-1 —",
+    v >= 0, "▲ Vs N-1 " & FORMAT(v, "+0.0%;-0.0%"),
+    "▼ Vs N-1 " & FORMAT(v, "+0.0%;-0.0%")
+)
+
+Libellé Variation Volume vs MTD-1 =
+VAR v = [Variation Volume affaires vs MTD-1 %]
+RETURN
+SWITCH(
+    TRUE(),
+    ISBLANK(v), "Vs MTD-1 —",
+    v >= 0, "▲ Vs MTD-1 " & FORMAT(v, "+0.0%;-0.0%"),
+    "▼ Vs MTD-1 " & FORMAT(v, "+0.0%;-0.0%")
+)
+
+
+/* =========================================================
+   6. COULEURS CONDITIONNELLES POUR CARDS
+   ========================================================= */
+
+CF Variation Fond =
+VAR v = SELECTEDMEASURE()
+RETURN
+SWITCH(
+    TRUE(),
+    ISBLANK(v), "#EAF3FF",
+    v >= 0, "#EAF7EF",
+    v > -0.10, "#FFF3E8",
+    "#FFF1F2"
+)
+
+CF Variation Texte =
+VAR v = SELECTEDMEASURE()
+RETURN
+SWITCH(
+    TRUE(),
+    ISBLANK(v), "#0A4E97",
+    v >= 0, "#198754",
+    v > -0.10, "#E67E22",
+    "#D71920"
+)
+
+CF Budget Fill =
+VAR v = [Taux atteinte Budget N Volume]
+RETURN
+SWITCH(
+    TRUE(),
+    ISBLANK(v), "#E8EEF5",
+    v >= 1, "#198754",
+    v >= 0.8, "#E67E22",
+    "#D71920"
+)
+
+CF BIM Badge Fond =
+VAR statut = SELECTEDVALUE('KPI_Status'[Statut BIM])
+RETURN
+SWITCH(
+    TRUE(),
+    statut = "BIM OK", "#EAF7EF",
+    statut = "BIM partiel", "#FFF3E8",
+    statut = "BIM absent", "#FFF1F2",
+    "#EAF3FF"
+)
+
+CF BIM Badge Texte =
+VAR statut = SELECTEDVALUE('KPI_Status'[Statut BIM])
+RETURN
+SWITCH(
+    TRUE(),
+    statut = "BIM OK", "#198754",
+    statut = "BIM partiel", "#E67E22",
+    statut = "BIM absent", "#D71920",
+    "#0A4E97"
+)
+
+
+/* =========================================================
+   7. LARGEUR BARRE BUDGET POUR CARD
+   ========================================================= */
+
+Budget Bar Width Px =
+VAR taux = [Taux atteinte Budget N Volume]
+VAR maxWidth = 251
+VAR capped = MIN(taux, 1.2)
+RETURN
+ROUND(maxWidth * capped, 0)
+
+Budget Label Card =
+VAR taux = [Taux atteinte Budget N Volume]
+RETURN
+"Budget N  |  " & IF(ISBLANK(taux), "—", FORMAT(taux, "0%"))
+
+
+/* =========================================================
+   8. ALERTES ET RECOMMANDATIONS
+   ========================================================= */
+
+Niveau Alerte Volume =
+VAR v = [Variation Volume affaires vs N-1 %]
+RETURN
+SWITCH(
+    TRUE(),
+    ISBLANK(v), "INFO",
+    v < -0.20, "CRITIQUE",
+    v < -0.10, "HAUTE",
+    v < 0, "MOYENNE",
+    "OK"
+)
+
+Recommandation Volume =
+VAR v = [Variation Volume affaires vs N-1 %]
+RETURN
+SWITCH(
+    TRUE(),
+    ISBLANK(v), "Donnée insuffisante : vérifier l’alimentation fact_affaires.",
+    v < -0.10, "Identifier les agences contributrices au recul et déclencher un plan de relance.",
+    v < 0, "Surveiller la trajectoire et challenger les zones en retrait.",
+    "Sécuriser l’atterrissage."
+)
+
+Niveau Alerte RDV =
+VAR t = [Taux réalisation RDV]
+RETURN
+SWITCH(
+    TRUE(),
+    ISBLANK(t), "INFO",
+    t < 0.50, "CRITIQUE",
+    t < 0.70, "HAUTE",
+    t < 0.85, "MOYENNE",
+    "OK"
+)
+
+Niveau Alerte Réseau =
+VAR t = [Taux mandataires actifs]
+RETURN
+SWITCH(
+    TRUE(),
+    ISBLANK(t), "INFO",
+    t < 0.60, "CRITIQUE",
+    t < 0.80, "HAUTE",
+    t < 0.90, "MOYENNE",
+    "OK"
+)
+
+Nb alertes critiques =
+CALCULATE(
+    COUNTROWS(fact_alertes),
+    fact_alertes[niveau_priorite] = "CRITIQUE",
+    fact_alertes[statut_alerte] <> "Cloturee"
+)
+
+Nb alertes hautes =
+CALCULATE(
+    COUNTROWS(fact_alertes),
+    fact_alertes[niveau_priorite] = "HAUTE",
+    fact_alertes[statut_alerte] <> "Cloturee"
+)
+
+Nb alertes moyennes =
+CALCULATE(
+    COUNTROWS(fact_alertes),
+    fact_alertes[niveau_priorite] = "MOYENNE",
+    fact_alertes[statut_alerte] <> "Cloturee"
+)
+
+Nb alertes ouvertes =
+CALCULATE(
+    COUNTROWS(fact_alertes),
+    fact_alertes[statut_alerte] <> "Cloturee"
+)
+
+
+/* =========================================================
+   9. TABLES DE COMPARAISON DE MOIS
+   ========================================================= */
+
+Mois Reference =
+SELECTCOLUMNS(
+    VALUES('Date'[Mois Annee]),
+    "Mois Reference", 'Date'[Mois Annee]
+)
+
+Mois Compare =
+SELECTCOLUMNS(
+    VALUES('Date'[Mois Annee]),
+    "Mois Compare", 'Date'[Mois Annee]
+)
+
+Volume affaires Mois Reference =
+VAR m = SELECTEDVALUE('Mois Reference'[Mois Reference])
+RETURN
+CALCULATE([Volume affaires produites], TREATAS({m}, 'Date'[Mois Annee]))
+
+Volume affaires Mois Compare =
+VAR m = SELECTEDVALUE('Mois Compare'[Mois Compare])
+RETURN
+CALCULATE([Volume affaires produites], TREATAS({m}, 'Date'[Mois Annee]))
+
+Écart affaires mois comparés =
+[Volume affaires Mois Compare] - [Volume affaires Mois Reference]
+
+Écart affaires mois comparés % =
+DIVIDE([Écart affaires mois comparés], [Volume affaires Mois Reference])
+
+Libellé écart mois =
+VAR ref = SELECTEDVALUE('Mois Reference'[Mois Reference], "Mois ref")
+VAR comp = SELECTEDVALUE('Mois Compare'[Mois Compare], "Mois comp")
+VAR ecart = [Écart affaires mois comparés %]
+RETURN
+comp & " vs " & ref & " : " & IF(ISBLANK(ecart), "—", FORMAT(ecart, "+0.0%;-0.0%"))
+
+
+/* =========================================================
+   10. FIELD PARAMETERS
+   ========================================================= */
+
+FP_Axe_Organisation = {
+    ("Agence", NAMEOF('dim_agence'[agence]), 0),
+    ("Centre d'affaires", NAMEOF('dim_agence'[centre_affaires]), 1),
+    ("Région", NAMEOF('dim_agence'[region]), 2),
+    ("Secteur", NAMEOF('dim_agence'[secteur]), 3),
+    ("Mandataire", NAMEOF('dim_mandataire'[mandataire]), 4)
+}
+
+FP_Axe_Reseau = {
+    ("Région", NAMEOF('dim_agence'[region]), 0),
+    ("Agence", NAMEOF('dim_agence'[agence]), 1),
+    ("Centre d'affaires", NAMEOF('dim_agence'[centre_affaires]), 2),
+    ("Raison sociale", NAMEOF('dim_agence'[raison_sociale]), 3)
+}
+
+FP_Axe_RDV = {
+    ("Type de rendez-vous", NAMEOF('dim_type_rdv'[type_rdv]), 0),
+    ("Canal de rendez-vous", NAMEOF('fact_rendez_vous_client'[canal_rdv]), 1),
+    ("Statut rendez-vous", NAMEOF('fact_rendez_vous_client'[statut_rdv]), 2),
+    ("Motif rendez-vous", NAMEOF('fact_rendez_vous_client'[motif_rdv]), 3)
+}
+
+FP_Metric_Performance = {
+    ("Volume d’affaires produites", NAMEOF([Volume affaires produites]), 0),
+    ("Volume d’affaires en instance", NAMEOF([Volume affaires en instance]), 1),
+    ("Volume d’affaires commissionnées", NAMEOF([Volume affaires commissionnées]), 2),
+    ("Montant moyen de rétrocommission", NAMEOF(_Indicateurs[Montant moyen de rétrocommission]), 3),
+    ("Taux atteinte Budget N Volume", NAMEOF([Taux atteinte Budget N Volume]), 4)
+}

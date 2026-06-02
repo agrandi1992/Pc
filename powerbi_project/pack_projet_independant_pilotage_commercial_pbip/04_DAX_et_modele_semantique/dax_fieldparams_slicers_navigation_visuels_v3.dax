@@ -1,0 +1,340 @@
+
+/* ============================================================
+   Pilotage Commercial - DAX / Field parameters / Slicers v3
+   Objectif : compléter la spécification Power BI avec les
+   objets nécessaires au menu, slicers, field parameters, cards
+   fusionnées, mise en forme conditionnelle et bookmarks.
+   ============================================================ */
+
+
+/* ------------------------------------------------------------
+   1. TABLES DÉCONNECTÉES - Période et comparaison de mois
+   ------------------------------------------------------------ */
+
+Periode_Affichage =
+DATATABLE(
+    "Periode", STRING,
+    "Ordre", INTEGER,
+    {
+        {"Jour", 1},
+        {"Semaine", 2},
+        {"Mois", 3},
+        {"Trimestre", 4},
+        {"Année", 5}
+    }
+)
+
+Mois_Reference =
+SELECTCOLUMNS(
+    'Dim_Date',
+    "Mois", 'Dim_Date'[Mois Nom],
+    "MoisNum", 'Dim_Date'[Mois Num]
+)
+
+Mois_Compare =
+SELECTCOLUMNS(
+    'Dim_Date',
+    "Mois", 'Dim_Date'[Mois Nom],
+    "MoisNum", 'Dim_Date'[Mois Num]
+)
+
+
+/* ------------------------------------------------------------
+   2. FIELD PARAMETERS - à créer via Modeling > New parameter
+   Adapter les noms de tables/colonnes au modèle réel.
+   ------------------------------------------------------------ */
+
+/*
+FP_Axe_Organisation = {
+    ("Agence", NAMEOF('dim_agence'[agence]), 0),
+    ("Centre d'affaires", NAMEOF('dim_centre_affaires'[centre_affaires]), 1),
+    ("Région", NAMEOF('dim_region'[region]), 2),
+    ("Secteur", NAMEOF('dim_secteur'[secteur]), 3),
+    ("Mandataire", NAMEOF('dim_mandataire'[mandataire]), 4),
+    ("Raison sociale", NAMEOF('dim_agence'[raison_sociale]), 5)
+}
+
+FP_Axe_Activite = {
+    ("Type de rendez-vous", NAMEOF('dim_type_rdv'[libelle_type_rendez_vous]), 0),
+    ("Canal de rendez-vous", NAMEOF('dim_canal_rdv'[canal_rendez_vous]), 1),
+    ("Statut rendez-vous", NAMEOF('dim_statut_rdv'[statut_rendez_vous]), 2),
+    ("Motif rendez-vous", NAMEOF('dim_motif_rdv'[motif_rendez_vous]), 3)
+}
+
+FP_Axe_Affaires = {
+    ("Agence", NAMEOF('dim_agence'[agence]), 0),
+    ("Centre d'affaires", NAMEOF('dim_centre_affaires'[centre_affaires]), 1),
+    ("Région", NAMEOF('dim_region'[region]), 2),
+    ("Secteur", NAMEOF('dim_secteur'[secteur]), 3),
+    ("Mandataire", NAMEOF('dim_mandataire'[mandataire]), 4)
+}
+
+FP_Axe_Reseau = {
+    ("Région", NAMEOF('dim_region'[region]), 0),
+    ("Agence", NAMEOF('dim_agence'[agence]), 1),
+    ("Centre d'affaires", NAMEOF('dim_centre_affaires'[centre_affaires]), 2),
+    ("Raison sociale", NAMEOF('dim_agence'[raison_sociale]), 3)
+}
+
+FP_Axe_RDV = {
+    ("Type de rendez-vous", NAMEOF('dim_type_rdv'[libelle_type_rendez_vous]), 0),
+    ("Canal de rendez-vous", NAMEOF('dim_canal_rdv'[canal_rendez_vous]), 1),
+    ("Statut rendez-vous", NAMEOF('dim_statut_rdv'[statut_rendez_vous]), 2),
+    ("Motif rendez-vous", NAMEOF('dim_motif_rdv'[motif_rendez_vous]), 3)
+}
+
+FP_Metric_Performance = {
+    ("Volume d'affaires produites", NAMEOF('_Mesures Affaires'[Volume affaires produites]), 0),
+    ("Volume d'affaires en instance", NAMEOF('_Mesures Affaires'[Volume affaires en instance]), 1),
+    ("Volume d'affaires commissionnées", NAMEOF('_Mesures Affaires'[Volume affaires commissionnées]), 2),
+    ("Montant moyen de rétrocommission", NAMEOF('_Indicateurs'[Montant moyen de rétrocommission]), 3),
+    ("Taux atteinte Budget N Volume", NAMEOF('_Mesures Budget'[Taux atteinte Budget N Volume]), 4)
+}
+*/
+
+
+/* ------------------------------------------------------------
+   3. MESURES AFFAIRES - nécessitent fact_affaires
+   ------------------------------------------------------------ */
+
+Nombre affaires produites =
+COUNTROWS(
+    FILTER(
+        'fact_affaires',
+        'fact_affaires'[statut_affaire] = "Produite"
+    )
+)
+
+Volume affaires produites =
+CALCULATE(
+    SUM('fact_affaires'[montant_affaire]),
+    'fact_affaires'[statut_affaire] = "Produite"
+)
+
+Volume affaires en instance =
+CALCULATE(
+    SUM('fact_affaires'[montant_affaire]),
+    'fact_affaires'[statut_affaire] = "Instance"
+)
+
+Volume affaires commissionnées =
+CALCULATE(
+    SUM('fact_affaires'[montant_affaire]),
+    'fact_affaires'[statut_affaire] = "Commissionnée"
+)
+
+Budget N Volume Affaires =
+SUM('budget_affaires'[budget_affaires_euro])
+
+Budget N Affaires Nombre =
+SUM('budget_affaires'[budget_affaires_nombre])
+
+Taux atteinte Budget N Volume =
+DIVIDE(
+    [Volume affaires produites],
+    [Budget N Volume Affaires]
+)
+
+
+/* ------------------------------------------------------------
+   4. MESURES VARIATION CARD
+   ------------------------------------------------------------ */
+
+KPI Variation Vs N-1 % =
+VAR CurrentValue = SELECTEDMEASURE()
+VAR PreviousYearValue =
+    CALCULATE(
+        SELECTEDMEASURE(),
+        SAMEPERIODLASTYEAR('Dim_Date'[Date])
+    )
+RETURN
+DIVIDE(CurrentValue - PreviousYearValue, PreviousYearValue)
+
+KPI Variation Vs MTD-1 % =
+VAR CurrentValue = SELECTEDMEASURE()
+VAR PreviousMTD =
+    CALCULATE(
+        SELECTEDMEASURE(),
+        DATEADD('Dim_Date'[Date], -1, MONTH)
+    )
+RETURN
+DIVIDE(CurrentValue - PreviousMTD, PreviousMTD)
+
+Couleur Variation =
+VAR v = [KPI Variation Vs N-1 %]
+RETURN
+SWITCH(
+    TRUE(),
+    ISBLANK(v), "#0A4E97",
+    v < 0, "#D71920",
+    v = 0, "#0A4E97",
+    v > 0, "#198754"
+)
+
+Fond Variation =
+VAR v = [KPI Variation Vs N-1 %]
+RETURN
+SWITCH(
+    TRUE(),
+    ISBLANK(v), "#EAF3FF",
+    v < 0, "#FFF1F2",
+    v = 0, "#EAF3FF",
+    v > 0, "#EAF7EF"
+)
+
+Couleur Budget =
+VAR taux = [Taux atteinte Budget N Volume]
+RETURN
+SWITCH(
+    TRUE(),
+    ISBLANK(taux), "#0A4E97",
+    taux >= 1, "#198754",
+    taux >= 0.85, "#E67E22",
+    "#D71920"
+)
+
+
+/* ------------------------------------------------------------
+   5. RÉSEAU MIA
+   ------------------------------------------------------------ */
+
+Nombre MIA Oriasés =
+DISTINCTCOUNT('dim_mandataire'[numero_orias])
+
+Nombre MIA Productifs =
+CALCULATE(
+    DISTINCTCOUNT('dim_mandataire'[mandataire_id]),
+    FILTER(
+        'fact_affaires',
+        [Nombre affaires produites] > 0
+    )
+)
+
+Nombre MIA Non Productifs =
+[Nombre mandataires actifs] - [Nombre MIA Productifs]
+
+Nombre mandataires non rétrocommissionnés =
+[Nombre mandataires actifs] - [Nombre mandataires rétrocommissionnés]
+
+Taux Mandataires Actifs =
+DIVIDE(
+    [Nombre mandataires actifs],
+    [Nombre mandataires actifs] + [Nombre mandataires inactifs]
+)
+
+
+/* ------------------------------------------------------------
+   6. RDV
+   ------------------------------------------------------------ */
+
+Nombre RDV hebdomadaire moyen =
+DIVIDE(
+    [Nombre rendez-vous réalisés],
+    DISTINCTCOUNT('Dim_Date'[Semaine Annee])
+)
+
+
+/* ------------------------------------------------------------
+   7. ALERTES
+   ------------------------------------------------------------ */
+
+Nombre Alertes Critiques =
+CALCULATE(
+    COUNTROWS('fact_alertes'),
+    'fact_alertes'[niveau_priorite] = "CRITIQUE",
+    'fact_alertes'[statut_alerte] <> "Cloturee"
+)
+
+Nombre Alertes Hautes =
+CALCULATE(
+    COUNTROWS('fact_alertes'),
+    'fact_alertes'[niveau_priorite] = "HAUTE",
+    'fact_alertes'[statut_alerte] <> "Cloturee"
+)
+
+Nombre Alertes Moyennes =
+CALCULATE(
+    COUNTROWS('fact_alertes'),
+    'fact_alertes'[niveau_priorite] = "MOYENNE",
+    'fact_alertes'[statut_alerte] <> "Cloturee"
+)
+
+Nombre Alertes Ouvertes =
+CALCULATE(
+    COUNTROWS('fact_alertes'),
+    'fact_alertes'[statut_alerte] <> "Cloturee"
+)
+
+Niveau Alerte Volume =
+VAR variation = [KPI Variation Vs N-1 %]
+RETURN
+SWITCH(
+    TRUE(),
+    ISBLANK(variation), "INFO",
+    variation < -0.20, "CRITIQUE",
+    variation < -0.10, "HAUTE",
+    variation < 0, "MOYENNE",
+    "OK"
+)
+
+Niveau Alerte RDV =
+VAR taux = [Taux réalisation de rendez-vous]
+RETURN
+SWITCH(
+    TRUE(),
+    ISBLANK(taux), "INFO",
+    taux < 0.50, "CRITIQUE",
+    taux < 0.70, "HAUTE",
+    taux < 0.85, "MOYENNE",
+    "OK"
+)
+
+Niveau Alerte Réseau =
+VAR taux = [Taux Mandataires Actifs]
+RETURN
+SWITCH(
+    TRUE(),
+    ISBLANK(taux), "INFO",
+    taux < 0.60, "CRITIQUE",
+    taux < 0.80, "HAUTE",
+    taux < 0.90, "MOYENNE",
+    "OK"
+)
+
+Couleur Alerte =
+VAR niveau = SELECTEDVALUE('fact_alertes'[niveau_priorite], [Niveau Alerte Volume])
+RETURN
+SWITCH(
+    niveau,
+    "CRITIQUE", "#D71920",
+    "HAUTE", "#E67E22",
+    "MOYENNE", "#F1C40F",
+    "OK", "#198754",
+    "#0A4E97"
+)
+
+Recommandation Volume =
+VAR variation = [KPI Variation Vs N-1 %]
+RETURN
+SWITCH(
+    TRUE(),
+    ISBLANK(variation), "Données insuffisantes pour qualifier la trajectoire.",
+    variation < -0.10, "Identifier les agences contributrices au recul et déclencher un plan de relance.",
+    variation < 0, "Surveiller la trajectoire et challenger les zones en retrait.",
+    "Sécuriser l’atterrissage."
+)
+
+
+/* ------------------------------------------------------------
+   8. BOOKMARKS À CRÉER MANUELLEMENT
+   ------------------------------------------------------------
+
+BM_Reseau_Table_Fermee :
+- Groupe G06_Table_Detail_Reseau masqué
+- Bouton texte : Afficher le tableau
+
+BM_Reseau_Table_Ouverte :
+- Groupe G06_Table_Detail_Reseau visible
+- Bouton texte : Masquer le tableau
+
+   ------------------------------------------------------------ */

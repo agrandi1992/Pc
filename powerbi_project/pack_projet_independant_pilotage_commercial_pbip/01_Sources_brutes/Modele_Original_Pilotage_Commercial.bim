@@ -1,0 +1,2937 @@
+{
+  "name": "sml_smart_data_corporate_reporting",
+  "id": "602d3e8d-78fe-4f39-af9c-47b39fcb164f",
+  "compatibilityLevel": 1604,
+  "model": {
+    "culture": "en-US",
+    "dataAccessOptions": {
+      "legacyRedirects": true,
+      "returnErrorValuesAsNull": true
+    },
+    "defaultPowerBIDataSourceVersion": "powerBI_V3",
+    "sourceQueryCulture": "en-US",
+    "tables": [
+      {
+        "name": "dim_date",
+        "lineageTag": "891d4892-9245-477a-a29e-62db5104cbcc",
+        "columns": [
+          {
+            "type": "calculatedTableColumn",
+            "name": "Date",
+            "dataType": "dateTime",
+            "isNameInferred": true,
+            "isDataTypeInferred": true,
+            "sourceColumn": "[Date]",
+            "formatString": "General Date",
+            "lineageTag": "f9eeabc4-a8ca-4884-b4b3-f6d7b34cda37",
+            "summarizeBy": "none",
+            "variations": [
+              {
+                "name": "Variation",
+                "relationship": "6484d00f-9d27-4743-aeff-0af22fc65bf4",
+                "defaultHierarchy": {
+                  "table": "LocalDateTable_608a5c4d-d6d2-474e-a494-6c6b82f0fc3c",
+                  "hierarchy": "Date Hierarchy"
+                },
+                "isDefault": true
+              }
+            ],
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "calculatedTableColumn",
+            "name": "annee",
+            "dataType": "int64",
+            "isNameInferred": true,
+            "isDataTypeInferred": true,
+            "sourceColumn": "[annee]",
+            "formatString": "0",
+            "lineageTag": "978652c6-cb30-47e5-ba0a-9f858adf6385",
+            "summarizeBy": "sum",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "calculatedTableColumn",
+            "name": "annee_mois",
+            "dataType": "string",
+            "isNameInferred": true,
+            "isDataTypeInferred": true,
+            "sourceColumn": "[annee_mois]",
+            "lineageTag": "6ec7a209-4e8b-45d4-b212-13a3114867f8",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "calculatedTableColumn",
+            "name": "numero_mois",
+            "dataType": "int64",
+            "isNameInferred": true,
+            "isDataTypeInferred": true,
+            "sourceColumn": "[numero_mois]",
+            "formatString": "0",
+            "lineageTag": "62d9a31b-e108-406b-911a-bc56157d151e",
+            "summarizeBy": "sum",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "calculatedTableColumn",
+            "name": "nom_du_mois",
+            "dataType": "string",
+            "isNameInferred": true,
+            "isDataTypeInferred": true,
+            "sourceColumn": "[nom_du_mois]",
+            "lineageTag": "2e2a56ab-2dca-4ca8-acd8-16781b685750",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "calculatedTableColumn",
+            "name": "mois_court",
+            "dataType": "string",
+            "isNameInferred": true,
+            "isDataTypeInferred": true,
+            "sourceColumn": "[mois_court]",
+            "lineageTag": "5dc58ece-08c9-4a61-a341-e042a4b40e7b",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "calculatedTableColumn",
+            "name": "trimestre",
+            "dataType": "string",
+            "isNameInferred": true,
+            "isDataTypeInferred": true,
+            "sourceColumn": "[trimestre]",
+            "lineageTag": "bf696565-ec27-4ba8-aca3-180e5cebbfea",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "calculatedTableColumn",
+            "name": "numero_de_la_semaine",
+            "dataType": "int64",
+            "isNameInferred": true,
+            "isDataTypeInferred": true,
+            "sourceColumn": "[numero_de_la_semaine]",
+            "formatString": "0",
+            "lineageTag": "ff1fcf0c-1049-47f1-af2a-a91a91d6ab7c",
+            "summarizeBy": "sum",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "calculatedTableColumn",
+            "name": "numero_du_jour_de_la_semaine",
+            "dataType": "int64",
+            "isNameInferred": true,
+            "isDataTypeInferred": true,
+            "sourceColumn": "[numero_du_jour_de_la_semaine]",
+            "formatString": "0",
+            "lineageTag": "2895d1d5-8ad4-41ed-92b5-b6f0ade194f9",
+            "summarizeBy": "sum",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "calculatedTableColumn",
+            "name": "jour_de_la_semaine",
+            "dataType": "string",
+            "isNameInferred": true,
+            "isDataTypeInferred": true,
+            "sourceColumn": "[jour_de_la_semaine]",
+            "lineageTag": "675689cd-cd99-4c21-9e20-4746fc3a90ba",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "calculatedTableColumn",
+            "name": "weekend",
+            "dataType": "boolean",
+            "isNameInferred": false,
+            "isDataTypeInferred": true,
+            "sourceColumn": "[Weekend]",
+            "formatString": "\"TRUE\";\"TRUE\";\"FALSE\"",
+            "lineageTag": "21e1dc10-7397-4709-b39f-94aadaa72326",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "calculatedTableColumn",
+            "name": "date_id",
+            "dataType": "int64",
+            "isNameInferred": true,
+            "isDataTypeInferred": true,
+            "sourceColumn": "[date_id]",
+            "formatString": "0",
+            "lineageTag": "1e0a61cc-cc5c-4e96-a9da-517adfc3adc8",
+            "summarizeBy": "sum",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          }
+        ],
+        "partitions": [
+          {
+            "name": "dim_date",
+            "mode": "import",
+            "source": {
+              "type": "calculated",
+              "expression": [
+                "",
+                "VAR MinDate = DATE ( 2020, 1, 1 )",
+                "VAR MaxDate = TODAY ()",
+                "RETURN",
+                "ADDCOLUMNS ( CALENDAR ( MinDate, MaxDate ),",
+                "\"date_id\", YEAR ( [Date] ) * 10000 + MONTH ( [Date] ) * 100 + DAY ( [Date] ),",
+                "\"annee\", YEAR ( [Date] ),",
+                "\"annee_mois\", FORMAT ( [Date], \"YYYY-MM\" ),",
+                "\"numero_mois\", MONTH ( [Date] ),",
+                "\"nom_du_mois\", FORMAT ( [Date], \"MMMM\" ),",
+                "\"mois_court\", FORMAT ( [Date], \"MMM\" ),",
+                "\"trimestre\", \"Q\" & FORMAT ( [Date], \"Q\" ),",
+                "\"numero_de_la_semaine\", WEEKNUM ( [Date], 2 ),",
+                "\"numero_du_jour_de_la_semaine\", WEEKDAY ( [Date], 2 ),",
+                "\"jour_de_la_semaine\", FORMAT ( [Date], \"DDDD\" ),",
+                "\"weekend\", IF ( WEEKDAY ( [Date], 2 ) >= 6, TRUE (), FALSE () )",
+                ")"
+              ]
+            }
+          }
+        ],
+        "annotations": [
+          {
+            "name": "PBI_Id",
+            "value": "bafdfad88afd4fa2ba51953bbe2b86f3"
+          }
+        ]
+      },
+      {
+        "name": "DateTableTemplate_40f8e67e-c9f0-4e13-ad4f-6e840fdbf357",
+        "isHidden": true,
+        "isPrivate": true,
+        "lineageTag": "43cd1826-2586-436f-b115-89bb49e241e0",
+        "columns": [
+          {
+            "type": "calculatedTableColumn",
+            "name": "Date",
+            "dataType": "dateTime",
+            "isNameInferred": true,
+            "isHidden": true,
+            "sourceColumn": "[Date]",
+            "formatString": "General Date",
+            "lineageTag": "b7614d3b-dbf9-42d7-9f8b-ade5aa69263e",
+            "dataCategory": "PaddedDateTableDates",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              }
+            ]
+          },
+          {
+            "type": "calculated",
+            "name": "Year",
+            "dataType": "int64",
+            "isHidden": true,
+            "expression": "YEAR([Date])",
+            "formatString": "0",
+            "lineageTag": "57b9a6d3-6865-4588-b52d-5a15c1ddb05e",
+            "dataCategory": "Years",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              },
+              {
+                "name": "TemplateId",
+                "value": "Year"
+              }
+            ]
+          },
+          {
+            "type": "calculated",
+            "name": "MonthNo",
+            "dataType": "int64",
+            "isHidden": true,
+            "expression": "MONTH([Date])",
+            "formatString": "0",
+            "lineageTag": "5f10da82-de00-4482-971e-ab0cbff2e6ca",
+            "dataCategory": "MonthOfYear",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              },
+              {
+                "name": "TemplateId",
+                "value": "MonthNumber"
+              }
+            ]
+          },
+          {
+            "type": "calculated",
+            "name": "Month",
+            "dataType": "string",
+            "isHidden": true,
+            "expression": "FORMAT([Date], \"MMMM\")",
+            "sortByColumn": "MonthNo",
+            "lineageTag": "541a02bd-cf06-4a90-a088-2dcad50c88a3",
+            "dataCategory": "Months",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              },
+              {
+                "name": "TemplateId",
+                "value": "Month"
+              }
+            ]
+          },
+          {
+            "type": "calculated",
+            "name": "QuarterNo",
+            "dataType": "int64",
+            "isHidden": true,
+            "expression": "INT(([MonthNo] + 2) / 3)",
+            "formatString": "0",
+            "lineageTag": "4bc53ab1-b2f1-4fa5-9d31-3a91013f039b",
+            "dataCategory": "QuarterOfYear",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              },
+              {
+                "name": "TemplateId",
+                "value": "QuarterNumber"
+              }
+            ]
+          },
+          {
+            "type": "calculated",
+            "name": "Quarter",
+            "dataType": "string",
+            "isHidden": true,
+            "expression": "\"Qtr \" & [QuarterNo]",
+            "sortByColumn": "QuarterNo",
+            "lineageTag": "1814fe31-f64f-4d9d-8771-8ace2315919f",
+            "dataCategory": "Quarters",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              },
+              {
+                "name": "TemplateId",
+                "value": "Quarter"
+              }
+            ]
+          },
+          {
+            "type": "calculated",
+            "name": "Day",
+            "dataType": "int64",
+            "isHidden": true,
+            "expression": "DAY([Date])",
+            "formatString": "0",
+            "lineageTag": "926d1a9f-734d-423e-b572-c21dcf4b5798",
+            "dataCategory": "DayOfMonth",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              },
+              {
+                "name": "TemplateId",
+                "value": "Day"
+              }
+            ]
+          }
+        ],
+        "partitions": [
+          {
+            "name": "DateTableTemplate_40f8e67e-c9f0-4e13-ad4f-6e840fdbf357",
+            "mode": "import",
+            "source": {
+              "type": "calculated",
+              "expression": "Calendar(Date(2015,1,1), Date(2015,1,1))"
+            }
+          }
+        ],
+        "hierarchies": [
+          {
+            "name": "Date Hierarchy",
+            "lineageTag": "12d23a38-5887-4335-b0ad-8b61bc212ce0",
+            "levels": [
+              {
+                "name": "Year",
+                "ordinal": 0,
+                "column": "Year",
+                "lineageTag": "a6add4b9-1771-487a-8e5a-153014213116"
+              },
+              {
+                "name": "Quarter",
+                "ordinal": 1,
+                "column": "Quarter",
+                "lineageTag": "7202fa76-337f-4d61-a7bb-756e4a9bf98e"
+              },
+              {
+                "name": "Month",
+                "ordinal": 2,
+                "column": "Month",
+                "lineageTag": "0ee7c889-4489-4cb5-98e3-8fb2772859f1"
+              },
+              {
+                "name": "Day",
+                "ordinal": 3,
+                "column": "Day",
+                "lineageTag": "35248b11-7ee8-415a-bd43-f936d5bfe693"
+              }
+            ],
+            "annotations": [
+              {
+                "name": "TemplateId",
+                "value": "DateHierarchy"
+              }
+            ]
+          }
+        ],
+        "annotations": [
+          {
+            "name": "__PBI_TemplateDateTable",
+            "value": "true"
+          },
+          {
+            "name": "DefaultItem",
+            "value": "DateHierarchy"
+          }
+        ]
+      },
+      {
+        "name": "LocalDateTable_608a5c4d-d6d2-474e-a494-6c6b82f0fc3c",
+        "isHidden": true,
+        "showAsVariationsOnly": true,
+        "lineageTag": "afafa457-0987-4a62-8b6b-9f54f239164f",
+        "columns": [
+          {
+            "type": "calculatedTableColumn",
+            "name": "Date",
+            "dataType": "dateTime",
+            "isNameInferred": true,
+            "isHidden": true,
+            "sourceColumn": "[Date]",
+            "formatString": "General Date",
+            "lineageTag": "306c96f4-f68c-467b-85a6-b67ce896a2c9",
+            "dataCategory": "PaddedDateTableDates",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              }
+            ]
+          },
+          {
+            "type": "calculated",
+            "name": "Year",
+            "dataType": "int64",
+            "isHidden": true,
+            "expression": "YEAR([Date])",
+            "formatString": "0",
+            "lineageTag": "770561a6-27fb-4508-8f9b-d23d28b3f4be",
+            "dataCategory": "Years",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              },
+              {
+                "name": "TemplateId",
+                "value": "Year"
+              }
+            ]
+          },
+          {
+            "type": "calculated",
+            "name": "MonthNo",
+            "dataType": "int64",
+            "isHidden": true,
+            "expression": "MONTH([Date])",
+            "formatString": "0",
+            "lineageTag": "c35f8106-b8ee-4e06-809f-18f5da0528fd",
+            "dataCategory": "MonthOfYear",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              },
+              {
+                "name": "TemplateId",
+                "value": "MonthNumber"
+              }
+            ]
+          },
+          {
+            "type": "calculated",
+            "name": "Month",
+            "dataType": "string",
+            "isHidden": true,
+            "expression": "FORMAT([Date], \"MMMM\")",
+            "sortByColumn": "MonthNo",
+            "lineageTag": "3104f51c-436f-4a30-9611-80c84a36863b",
+            "dataCategory": "Months",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              },
+              {
+                "name": "TemplateId",
+                "value": "Month"
+              }
+            ]
+          },
+          {
+            "type": "calculated",
+            "name": "QuarterNo",
+            "dataType": "int64",
+            "isHidden": true,
+            "expression": "INT(([MonthNo] + 2) / 3)",
+            "formatString": "0",
+            "lineageTag": "6f413c46-81c4-4d32-8fcd-a3c5fd967055",
+            "dataCategory": "QuarterOfYear",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              },
+              {
+                "name": "TemplateId",
+                "value": "QuarterNumber"
+              }
+            ]
+          },
+          {
+            "type": "calculated",
+            "name": "Quarter",
+            "dataType": "string",
+            "isHidden": true,
+            "expression": "\"Qtr \" & [QuarterNo]",
+            "sortByColumn": "QuarterNo",
+            "lineageTag": "c4737d24-b50d-4b97-aff0-a741372fe786",
+            "dataCategory": "Quarters",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              },
+              {
+                "name": "TemplateId",
+                "value": "Quarter"
+              }
+            ]
+          },
+          {
+            "type": "calculated",
+            "name": "Day",
+            "dataType": "int64",
+            "isHidden": true,
+            "expression": "DAY([Date])",
+            "formatString": "0",
+            "lineageTag": "bb157e2d-c8bc-44ab-9766-bdb19a35d94c",
+            "dataCategory": "DayOfMonth",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              },
+              {
+                "name": "TemplateId",
+                "value": "Day"
+              }
+            ]
+          }
+        ],
+        "partitions": [
+          {
+            "name": "LocalDateTable_608a5c4d-d6d2-474e-a494-6c6b82f0fc3c",
+            "mode": "import",
+            "source": {
+              "type": "calculated",
+              "expression": "Calendar(Date(Year(MIN('dim_date'[Date])), 1, 1), Date(Year(MAX('dim_date'[Date])), 12, 31))"
+            }
+          }
+        ],
+        "hierarchies": [
+          {
+            "name": "Date Hierarchy",
+            "lineageTag": "a652ef7d-10df-4474-b1dd-ce65989729cf",
+            "levels": [
+              {
+                "name": "Year",
+                "ordinal": 0,
+                "column": "Year",
+                "lineageTag": "a1bb345a-2910-4289-a103-cd257ba0c5fe"
+              },
+              {
+                "name": "Quarter",
+                "ordinal": 1,
+                "column": "Quarter",
+                "lineageTag": "f26c73ee-20f1-43fc-9574-8afa0708bd5e"
+              },
+              {
+                "name": "Month",
+                "ordinal": 2,
+                "column": "Month",
+                "lineageTag": "be3bd005-20bf-4109-ae66-d0628af3b63e"
+              },
+              {
+                "name": "Day",
+                "ordinal": 3,
+                "column": "Day",
+                "lineageTag": "991d35ed-58bf-4024-a851-da127e2b8e63"
+              }
+            ],
+            "annotations": [
+              {
+                "name": "TemplateId",
+                "value": "DateHierarchy"
+              }
+            ]
+          }
+        ],
+        "annotations": [
+          {
+            "name": "__PBI_LocalDateTable",
+            "value": "true"
+          }
+        ]
+      },
+      {
+        "name": "fact_affectation_mandataire",
+        "lineageTag": "f52eb9a9-16e3-4f47-929d-c40ba218d63e",
+        "sourceLineageTag": "[gold].[fact_affectation_mandataire]",
+        "columns": [
+          {
+            "name": "mandataire_id",
+            "dataType": "string",
+            "sourceColumn": "mandataire_id",
+            "lineageTag": "a0b40581-040e-4268-b498-3e4df3c0f982",
+            "sourceLineageTag": "mandataire_id",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "agence_id",
+            "dataType": "string",
+            "sourceColumn": "agence_id",
+            "lineageTag": "93b91713-1215-4b63-bd77-1a23ccd53f2b",
+            "sourceLineageTag": "agence_id",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "date_entree",
+            "dataType": "dateTime",
+            "sourceColumn": "date_entree",
+            "formatString": "General Date",
+            "lineageTag": "deef14e8-9be4-4467-bc97-a2472740a16a",
+            "sourceLineageTag": "date_entree",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "date_sortie",
+            "dataType": "dateTime",
+            "sourceColumn": "date_sortie",
+            "formatString": "General Date",
+            "lineageTag": "376c260e-4b0d-43db-8ed2-ebcaf2e00519",
+            "sourceLineageTag": "date_sortie",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          }
+        ],
+        "partitions": [
+          {
+            "name": "fact_affectation_mandataire",
+            "mode": "directLake",
+            "source": {
+              "type": "entity",
+              "entityName": "fact_affectation_mandataire",
+              "expressionSource": "DirectLake - lh_gold",
+              "schemaName": "gold"
+            }
+          }
+        ]
+      },
+      {
+        "name": "glossaire_indicateurs",
+        "lineageTag": "cd23083b-1fe5-43e0-b4f5-3b58ffd27c02",
+        "sourceLineageTag": "[gold].[glossaire_indicateurs]",
+        "columns": [
+          {
+            "name": "perimetre",
+            "dataType": "string",
+            "sourceColumn": "perimetre",
+            "lineageTag": "e24e7e1e-3211-4835-836e-352b821423f0",
+            "sourceLineageTag": "perimetre",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "indicateur",
+            "dataType": "string",
+            "sourceColumn": "indicateur",
+            "lineageTag": "7e9bfa12-8a8f-44ee-8861-4ff42f361c18",
+            "sourceLineageTag": "indicateur",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "definition",
+            "dataType": "string",
+            "sourceColumn": "definition",
+            "lineageTag": "ebb73903-927e-4e2b-a534-45fe2876412e",
+            "sourceLineageTag": "definition",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          }
+        ],
+        "partitions": [
+          {
+            "name": "glossaire_indicateurs",
+            "mode": "directLake",
+            "source": {
+              "type": "entity",
+              "entityName": "glossaire_indicateurs",
+              "expressionSource": "DirectLake - lh_gold",
+              "schemaName": "gold"
+            }
+          }
+        ]
+      },
+      {
+        "name": "dim_type_rendez_vous_client",
+        "lineageTag": "b1600e9e-1390-442a-a89e-85e7136d58ee",
+        "sourceLineageTag": "[gold].[dim_type_rendez_vous_client]",
+        "columns": [
+          {
+            "name": "type_rendez_vous_client_id",
+            "dataType": "string",
+            "sourceColumn": "type_rendez_vous_client_id",
+            "lineageTag": "41b8dadc-59e6-4d58-a6db-ad524c9116e4",
+            "sourceLineageTag": "type_rendez_vous_client_id",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "libelle_type_rendez_vous",
+            "dataType": "string",
+            "sourceColumn": "libelle_type_rendez_vous",
+            "lineageTag": "c3b3d508-8c78-432c-be32-3bfd8b8e3cae",
+            "sourceLineageTag": "libelle_type_rendez_vous",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          }
+        ],
+        "partitions": [
+          {
+            "name": "dim_type_rendez_vous_client",
+            "mode": "directLake",
+            "source": {
+              "type": "entity",
+              "entityName": "dim_type_rendez_vous_client",
+              "expressionSource": "DirectLake - lh_gold",
+              "schemaName": "gold"
+            }
+          }
+        ]
+      },
+      {
+        "name": "dim_niveau_etude",
+        "lineageTag": "d21475c9-c686-413f-9311-1ef990a66e19",
+        "sourceLineageTag": "[gold].[dim_niveau_etude]",
+        "columns": [
+          {
+            "name": "niveau_etude_id",
+            "dataType": "string",
+            "sourceColumn": "niveau_etude_id",
+            "lineageTag": "78d228e2-b3a8-46cc-818a-407f6c2d9a35",
+            "sourceLineageTag": "niveau_etude_id",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "libelle_niveau_etude",
+            "dataType": "string",
+            "sourceColumn": "libelle_niveau_etude",
+            "lineageTag": "d82bb05c-ef60-4aaf-aafb-ac98b4f7e2d2",
+            "sourceLineageTag": "libelle_niveau_etude",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "niveau_etude_groupe",
+            "dataType": "string",
+            "sourceColumn": "niveau_etude_groupe",
+            "lineageTag": "c318d9f0-a8f7-4e37-b1bd-48bb8c41cb48",
+            "sourceLineageTag": "niveau_etude_groupe",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          }
+        ],
+        "partitions": [
+          {
+            "name": "dim_niveau_etude",
+            "mode": "directLake",
+            "source": {
+              "type": "entity",
+              "entityName": "dim_niveau_etude",
+              "expressionSource": "DirectLake - lh_gold",
+              "schemaName": "gold"
+            }
+          }
+        ]
+      },
+      {
+        "name": "dim_motif_depart_formation",
+        "lineageTag": "718e1f94-111b-44b6-92b9-4b608779fd9b",
+        "sourceLineageTag": "[gold].[dim_motif_depart_formation]",
+        "columns": [
+          {
+            "name": "motif_depart_formation_id",
+            "dataType": "string",
+            "sourceColumn": "motif_depart_formation_id",
+            "lineageTag": "22e5b47e-0cc2-4272-83c2-7b7752bdda11",
+            "sourceLineageTag": "motif_depart_formation_id",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "libelle_raison_depart",
+            "dataType": "string",
+            "sourceColumn": "libelle_raison_depart",
+            "lineageTag": "1a108a4a-bc6f-4faa-b4f7-3adf1f63f22b",
+            "sourceLineageTag": "libelle_raison_depart",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          }
+        ],
+        "partitions": [
+          {
+            "name": "dim_motif_depart_formation",
+            "mode": "directLake",
+            "source": {
+              "type": "entity",
+              "entityName": "dim_motif_depart_formation",
+              "expressionSource": "DirectLake - lh_gold",
+              "schemaName": "gold"
+            }
+          }
+        ]
+      },
+      {
+        "name": "dim_charge_developpement_reseau",
+        "lineageTag": "22b32397-7d7c-4fd0-acf5-d9804f59b7b4",
+        "sourceLineageTag": "[gold].[dim_charge_developpement_reseau]",
+        "columns": [
+          {
+            "name": "charge_developpement_id",
+            "dataType": "string",
+            "sourceColumn": "charge_developpement_id",
+            "lineageTag": "b3f7855e-58c1-40ca-8412-8ad2e89393fd",
+            "sourceLineageTag": "charge_developpement_id",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "nom",
+            "dataType": "string",
+            "sourceColumn": "nom",
+            "lineageTag": "93ba30ee-8611-48f8-80d1-8fc8943bec0c",
+            "sourceLineageTag": "nom",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "prenom",
+            "dataType": "string",
+            "sourceColumn": "prenom",
+            "lineageTag": "ed79750c-80b8-4e6d-960a-cba2293f6a60",
+            "sourceLineageTag": "prenom",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          }
+        ],
+        "partitions": [
+          {
+            "name": "dim_charge_developpement_reseau",
+            "mode": "directLake",
+            "source": {
+              "type": "entity",
+              "entityName": "dim_charge_developpement_reseau",
+              "expressionSource": "DirectLake - lh_gold",
+              "schemaName": "gold"
+            }
+          }
+        ]
+      },
+      {
+        "name": "dim_type_canal",
+        "lineageTag": "a8aa16a9-0bf2-4c27-a8b9-6f80f02bb1fa",
+        "sourceLineageTag": "[gold].[dim_type_canal]",
+        "columns": [
+          {
+            "name": "type_canal_id",
+            "dataType": "string",
+            "sourceColumn": "type_canal_id",
+            "lineageTag": "287f4f9c-ed46-4519-bae3-bcdf49d0cb31",
+            "sourceLineageTag": "type_canal_id",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "libelle_type_canal",
+            "dataType": "string",
+            "sourceColumn": "libelle_type_canal",
+            "lineageTag": "815f83b5-4c42-4692-b5f5-ad67c51b00de",
+            "sourceLineageTag": "libelle_type_canal",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          }
+        ],
+        "partitions": [
+          {
+            "name": "dim_type_canal",
+            "mode": "directLake",
+            "source": {
+              "type": "entity",
+              "entityName": "dim_type_canal",
+              "expressionSource": "DirectLake - lh_gold",
+              "schemaName": "gold"
+            }
+          }
+        ]
+      },
+      {
+        "name": "dim_candidat",
+        "lineageTag": "847e3943-e485-42a7-a71d-9e05c663403e",
+        "sourceLineageTag": "[gold].[dim_candidat]",
+        "columns": [
+          {
+            "name": "candidat_id",
+            "dataType": "string",
+            "sourceColumn": "candidat_id",
+            "lineageTag": "3bb05045-da81-4be1-aaf3-6fccf1474521",
+            "sourceLineageTag": "candidat_id",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "mandataire_recommandataire_id",
+            "dataType": "string",
+            "sourceColumn": "mandataire_recommandataire_id",
+            "lineageTag": "d5c2aec8-6207-436f-b4bd-14dddd37d0cb",
+            "sourceLineageTag": "mandataire_recommandataire_id",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "mandataire_referent_id",
+            "dataType": "string",
+            "sourceColumn": "mandataire_referent_id",
+            "lineageTag": "ab5aa753-eef4-404d-a251-932e8a36c4cd",
+            "sourceLineageTag": "mandataire_referent_id",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "charge_developpement_id",
+            "dataType": "string",
+            "sourceColumn": "charge_developpement_id",
+            "lineageTag": "6dc4c1bb-5e01-4477-8113-b8171938800f",
+            "sourceLineageTag": "charge_developpement_id",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "agence_id",
+            "dataType": "string",
+            "sourceColumn": "agence_id",
+            "lineageTag": "b3f3340f-6589-45f4-b33a-0ae768e04d8d",
+            "sourceLineageTag": "agence_id",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "type_canal_id",
+            "dataType": "string",
+            "sourceColumn": "type_canal_id",
+            "lineageTag": "78eedd72-3c29-41d4-90ce-b80586f77291",
+            "sourceLineageTag": "type_canal_id",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "niveau_etude_id",
+            "dataType": "string",
+            "sourceColumn": "niveau_etude_id",
+            "lineageTag": "cc8db8d6-0f3b-4fb5-9fad-45c3c1c1f09d",
+            "sourceLineageTag": "niveau_etude_id",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "date_creation_candidat",
+            "dataType": "dateTime",
+            "sourceColumn": "date_creation_candidat",
+            "formatString": "General Date",
+            "lineageTag": "79e159c3-4689-44b4-ae5b-82eff1274387",
+            "sourceLineageTag": "date_creation_candidat",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "date_naissance_candidat",
+            "dataType": "dateTime",
+            "sourceColumn": "date_naissance_candidat",
+            "formatString": "General Date",
+            "lineageTag": "e49ca587-ed7b-4cdd-bc64-33fc0260cd23",
+            "sourceLineageTag": "date_naissance_candidat",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "sexe",
+            "dataType": "string",
+            "sourceColumn": "sexe",
+            "lineageTag": "04bca973-9c4e-4af5-bb65-65a2bb1a9285",
+            "sourceLineageTag": "sexe",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "ville",
+            "dataType": "string",
+            "sourceColumn": "ville",
+            "lineageTag": "09e1c039-4c00-4f4e-a8ae-7e4d1a645b2c",
+            "sourceLineageTag": "ville",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "code_postal",
+            "dataType": "string",
+            "sourceColumn": "code_postal",
+            "lineageTag": "c8e7e43a-58d1-4601-88ae-402d3256c3c5",
+            "sourceLineageTag": "code_postal",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "date_recommandation",
+            "dataType": "dateTime",
+            "sourceColumn": "date_recommandation",
+            "formatString": "General Date",
+            "lineageTag": "ba95a1dd-59c3-45ef-af23-003795e2c444",
+            "sourceLineageTag": "date_recommandation",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "statut_candidat_id",
+            "dataType": "string",
+            "sourceColumn": "statut_candidat_id",
+            "lineageTag": "e5418fcd-b808-47b5-bc88-76568e2c8ac7",
+            "sourceLineageTag": "statut_candidat_id",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "age",
+            "dataType": "int64",
+            "sourceColumn": "age",
+            "formatString": "0",
+            "lineageTag": "0c037aba-bc78-41fc-b5dd-37fc11317fee",
+            "sourceLineageTag": "age",
+            "summarizeBy": "sum",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "tranche_age",
+            "dataType": "string",
+            "sourceColumn": "tranche_age",
+            "lineageTag": "a00f1963-c625-4496-9c3a-f91534a3e571",
+            "sourceLineageTag": "tranche_age",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "ordre_tranche_age",
+            "dataType": "int64",
+            "sourceColumn": "ordre_tranche_age",
+            "formatString": "0",
+            "lineageTag": "93e9d595-c642-4a49-a3a4-6878207a5f46",
+            "sourceLineageTag": "ordre_tranche_age",
+            "summarizeBy": "sum",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          }
+        ],
+        "partitions": [
+          {
+            "name": "dim_candidat",
+            "mode": "directLake",
+            "source": {
+              "type": "entity",
+              "entityName": "dim_candidat",
+              "expressionSource": "DirectLake - lh_gold",
+              "schemaName": "gold"
+            }
+          }
+        ]
+      },
+      {
+        "name": "dim_agence",
+        "lineageTag": "3b834782-7dbd-4010-bf4a-03cea99e3ea1",
+        "sourceLineageTag": "[gold].[dim_agence]",
+        "columns": [
+          {
+            "name": "agence_id",
+            "dataType": "string",
+            "sourceColumn": "agence_id",
+            "lineageTag": "8c2b2c91-ad4a-4f07-aaf1-4eeaa629a6c7",
+            "sourceLineageTag": "agence_id",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "mandataire_responsable_id",
+            "dataType": "string",
+            "sourceColumn": "mandataire_responsable_id",
+            "lineageTag": "b8b0af2c-3be3-40a6-a9fb-74af56ff6f71",
+            "sourceLineageTag": "mandataire_responsable_id",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "raison_sociale",
+            "dataType": "string",
+            "sourceColumn": "raison_sociale",
+            "lineageTag": "5d81ac34-205d-4110-bde7-e2732192ecd0",
+            "sourceLineageTag": "raison_sociale",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "adresse_agence",
+            "dataType": "string",
+            "sourceColumn": "adresse_agence",
+            "lineageTag": "19957ee5-981a-447c-bb34-f40d5de37a38",
+            "sourceLineageTag": "adresse_agence",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "ville_agence",
+            "dataType": "string",
+            "sourceColumn": "ville_agence",
+            "lineageTag": "68989cac-ae5c-4917-ab8d-33a032328613",
+            "sourceLineageTag": "ville_agence",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "code_postal_agence",
+            "dataType": "string",
+            "sourceColumn": "code_postal_agence",
+            "lineageTag": "e223b990-22a3-4706-bb0c-6420eeeed67b",
+            "sourceLineageTag": "code_postal_agence",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          }
+        ],
+        "partitions": [
+          {
+            "name": "dim_agence",
+            "mode": "directLake",
+            "source": {
+              "type": "entity",
+              "entityName": "dim_agence",
+              "expressionSource": "DirectLake - lh_gold",
+              "schemaName": "gold"
+            }
+          }
+        ]
+      },
+      {
+        "name": "fact_parcours_candidat",
+        "lineageTag": "daf4a990-9d60-4372-a31f-6fe10bd3f584",
+        "sourceLineageTag": "[gold].[fact_parcours_candidat]",
+        "columns": [
+          {
+            "name": "candidat_id",
+            "dataType": "string",
+            "sourceColumn": "candidat_id",
+            "lineageTag": "82a1d530-82c7-4536-b63a-517335d46e44",
+            "sourceLineageTag": "candidat_id",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "etape_parcours_id",
+            "dataType": "string",
+            "sourceColumn": "etape_parcours_id",
+            "lineageTag": "b1819437-f79c-4fdb-a225-d05cbde232c0",
+            "sourceLineageTag": "etape_parcours_id",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "date_etape_parcours",
+            "dataType": "dateTime",
+            "sourceColumn": "date_etape_parcours",
+            "formatString": "General Date",
+            "lineageTag": "4414821e-bd8c-4c87-b03c-2425fed19883",
+            "sourceLineageTag": "date_etape_parcours",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "score_examen",
+            "dataType": "int64",
+            "sourceColumn": "score_examen",
+            "formatString": "0",
+            "lineageTag": "1eb76a60-81f3-45ab-91f5-c6205deb41c1",
+            "sourceLineageTag": "score_examen",
+            "summarizeBy": "sum",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "motif_depart_formation_id",
+            "dataType": "string",
+            "sourceColumn": "motif_depart_formation_id",
+            "lineageTag": "a870ba88-a0b8-4ebc-bacb-1f97270acdab",
+            "sourceLineageTag": "motif_depart_formation_id",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          }
+        ],
+        "partitions": [
+          {
+            "name": "fact_parcours_candidat",
+            "mode": "directLake",
+            "source": {
+              "type": "entity",
+              "entityName": "fact_parcours_candidat",
+              "expressionSource": "DirectLake - lh_gold",
+              "schemaName": "gold"
+            }
+          }
+        ]
+      },
+      {
+        "name": "fact_activite_mandataire",
+        "lineageTag": "975df5cb-8ffc-44ea-b05d-518915f13852",
+        "sourceLineageTag": "[gold].[fact_activite_mandataire]",
+        "columns": [
+          {
+            "name": "mandataire_id",
+            "dataType": "string",
+            "sourceColumn": "mandataire_id",
+            "lineageTag": "a3504866-4d80-4b1a-9959-d5be63429117",
+            "sourceLineageTag": "mandataire_id",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "agence_id",
+            "dataType": "string",
+            "sourceColumn": "agence_id",
+            "lineageTag": "ad0292a1-2cf3-48c4-b22f-204a73a91891",
+            "sourceLineageTag": "agence_id",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "date_connexion",
+            "dataType": "dateTime",
+            "sourceColumn": "date_connexion",
+            "formatString": "General Date",
+            "lineageTag": "b3cd7941-3a77-436d-9602-e17d58d4b1b8",
+            "sourceLineageTag": "date_connexion",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "flag_connexion",
+            "dataType": "int64",
+            "sourceColumn": "flag_connexion",
+            "formatString": "0",
+            "lineageTag": "a57466f4-2491-4243-b7ea-4c8eda8b1059",
+            "sourceLineageTag": "flag_connexion",
+            "summarizeBy": "sum",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          }
+        ],
+        "partitions": [
+          {
+            "name": "fact_activite_mandataire",
+            "mode": "directLake",
+            "source": {
+              "type": "entity",
+              "entityName": "fact_activite_mandataire",
+              "expressionSource": "DirectLake - lh_gold",
+              "schemaName": "gold"
+            }
+          }
+        ],
+        "measures": [
+          {
+            "name": "Flag mandataire actif",
+            "expression": [
+              "",
+              "VAR DateContexteMax =",
+              "    MAX(dim_date[date])",
+              "VAR DateLimite =",
+              "    DateContexteMax - 30",
+              "",
+              "VAR NbConnexions =",
+              "    CALCULATE(",
+              "        DISTINCTCOUNT(fact_activite_mandataire[date_connexion]),",
+              "        fact_activite_mandataire[flag_connexion] = 1,",
+              "        fact_activite_mandataire[date_connexion] >= DateLimite,",
+              "        fact_activite_mandataire[date_connexion] <= DateContexteMax",
+              "    )",
+              "",
+              "RETURN",
+              "IF(NbConnexions > 0, \"Actif\", \"Inactif\")"
+            ],
+            "lineageTag": "ac2ee2df-0cd1-4494-963d-ce6ff8ed1dc1",
+            "changedProperties": [
+              {
+                "property": "Name"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "_Indicateurs",
+        "lineageTag": "aceac64d-589e-41ce-841d-56e859ed91f2",
+        "columns": [
+          {
+            "type": "calculatedTableColumn",
+            "name": "kpi",
+            "dataType": "int64",
+            "isNameInferred": true,
+            "isDataTypeInferred": true,
+            "sourceColumn": "[kpi]",
+            "formatString": "0",
+            "displayFolder": "Développement Réseau",
+            "lineageTag": "ef57d553-4904-4bff-85ed-27ba8fad9408",
+            "summarizeBy": "sum",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          }
+        ],
+        "partitions": [
+          {
+            "name": "_Indicateurs",
+            "mode": "import",
+            "source": {
+              "type": "calculated",
+              "expression": "Row(\"kpi\", BLANK())"
+            }
+          }
+        ],
+        "measures": [
+          {
+            "name": "Nombre rendez-vous prévus",
+            "expression": [
+              "",
+              "DISTINCTCOUNT ( bridge_rendez_vous_mandataire[rendez_vous_id] )"
+            ],
+            "formatString": "#,0",
+            "displayFolder": "Pilotage Commercial",
+            "lineageTag": "8c67fdf8-3c11-4686-8f4d-6f12b4d6ef1a"
+          },
+          {
+            "name": "Nombre rendez-vous réalisés",
+            "expression": [
+              "",
+              "CALCULATE(",
+              "    DISTINCTCOUNT ( bridge_rendez_vous_mandataire[rendez_vous_id] ),",
+              "    fact_rendez_vous_client[flag_rendez_vous_realise] = TRUE()",
+              ")",
+              ""
+            ],
+            "formatString": "#,0",
+            "displayFolder": "Pilotage Commercial",
+            "lineageTag": "6190be98-4886-43e1-80f3-71bda7888272"
+          },
+          {
+            "name": "Taux réalisation de rendez-vous",
+            "expression": "DIVIDE([Nombre rendez-vous réalisés],[Nombre rendez-vous prévus],0)",
+            "formatString": "0%;-0%;0%",
+            "displayFolder": "Pilotage Commercial",
+            "lineageTag": "00e833f8-e1dc-4096-a965-75b6d4ee1fe9"
+          },
+          {
+            "name": "Nombre mandataires actifs",
+            "expression": [
+              "",
+              "VAR DateLimite = TODAY() - 30",
+              "RETURN",
+              "CALCULATE(",
+              "    DISTINCTCOUNT(fact_activite_mandataire[mandataire_id]),",
+              "    fact_activite_mandataire[flag_connexion] = 1,",
+              "    fact_activite_mandataire[date_connexion] >= DateLimite",
+              ")"
+            ],
+            "displayFolder": "Pilotage Commercial",
+            "lineageTag": "a74c07da-3566-4e43-95a6-dbe9a4ff73fd",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ]
+          },
+          {
+            "name": "Nombre mandataires inactifs",
+            "expression": [
+              "",
+              "VAR DateLimite = TODAY() - 30",
+              "RETURN",
+              "CALCULATE(",
+              "    DISTINCTCOUNT(fact_activite_mandataire[mandataire_id]),",
+              "    NOT (",
+              "        fact_activite_mandataire[flag_connexion] = 1",
+              "            && fact_activite_mandataire[date_connexion] >= DateLimite",
+              "    )",
+              ")"
+            ],
+            "formatString": "#,0",
+            "displayFolder": "Pilotage Commercial",
+            "lineageTag": "7d7cc140-2dbd-484c-a4cc-d408bf56636c"
+          },
+          {
+            "name": "Nombre entretiens réalisés",
+            "expression": [
+              "",
+              "CALCULATE(",
+              "    DISTINCTCOUNT( fact_parcours_candidat[candidat_id] ),",
+              "    fact_parcours_candidat[etape_parcours_id] = \"Rendez-vous Suivi\"",
+              ")"
+            ],
+            "displayFolder": "Pilotage Commercial",
+            "lineageTag": "27d8c737-5abf-4143-a86a-d27c578c3224",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ]
+          },
+          {
+            "name": "Nombre journées découverte réalisées",
+            "expression": [
+              "",
+              "CALCULATE(",
+              "    DISTINCTCOUNT( fact_parcours_candidat[candidat_id] ),",
+              "    fact_parcours_candidat[etape_parcours_id] = \"Journée découverte\"",
+              ")"
+            ],
+            "formatString": "#,0",
+            "displayFolder": "Développement Réseau",
+            "lineageTag": "dd2cf03b-bd5c-4fe4-b9e5-755dcd717c39"
+          },
+          {
+            "name": "Nombre inscrits formation initiale",
+            "expression": [
+              "",
+              "CALCULATE(",
+              "    DISTINCTCOUNT(fact_parcours_candidat[candidat_id]),",
+              "    fact_parcours_candidat[etape_parcours_id] = \"Inscrit Formation\"",
+              ")"
+            ],
+            "formatString": "#,0",
+            "displayFolder": "Développement Réseau",
+            "lineageTag": "41e65574-72ed-4ba2-8820-1119f5a2bcaf"
+          },
+          {
+            "name": "Nombre mandataires ayant passé l'examen",
+            "expression": [
+              "",
+              "CALCULATE(",
+              "    DISTINCTCOUNT( fact_parcours_candidat[candidat_id] ),",
+              "    fact_parcours_candidat[score_examen] > 0",
+              ")"
+            ],
+            "formatString": "#,0",
+            "displayFolder": "Développement Réseau",
+            "lineageTag": "3f4202fe-c4ee-4423-93b0-93f81ee5d71f"
+          },
+          {
+            "name": "Nombre mandataires ayant réussi l'examen",
+            "expression": [
+              "",
+              "CALCULATE(",
+              "    DISTINCTCOUNT( fact_parcours_candidat[candidat_id] ),",
+              "    fact_parcours_candidat[score_examen] > 50",
+              ")"
+            ],
+            "formatString": "#,0",
+            "displayFolder": "Développement Réseau",
+            "lineageTag": "baf15877-ef57-461f-8177-0a83234839ef"
+          },
+          {
+            "name": "Année présence mandataire dans le groupe",
+            "expression": [
+              "",
+              "VAR DateEntreeMin =",
+              "    CALCULATE(",
+              "        MIN ( fact_affectation_mandataire[date_entree] ),",
+              "        ALLEXCEPT(",
+              "            fact_affectation_mandataire,",
+              "            fact_affectation_mandataire[mandataire_id]",
+              "        )",
+              "    )",
+              "",
+              "VAR DateReference =",
+              "    MAX ( dim_date[Date] )",
+              "",
+              "RETURN",
+              "IF(",
+              "    NOT ISBLANK ( DateEntreeMin ) && NOT ISBLANK ( DateReference ),",
+              "    DATEDIFF( DateEntreeMin, DateReference, YEAR )",
+              ")",
+              ""
+            ],
+            "formatString": "0",
+            "displayFolder": "Pilotage Commercial",
+            "lineageTag": "f1293a55-cf04-4efd-a64a-e689c478df02"
+          },
+          {
+            "name": "Année présence mandataire dans agence",
+            "expression": [
+              "",
+              "VAR DateEntreeMin =",
+              "    CALCULATE(",
+              "        MIN( 'fact_affectation_mandataire'[date_entree] ),",
+              "        ALLEXCEPT(",
+              "            'fact_affectation_mandataire',",
+              "            'fact_affectation_mandataire'[mandataire_id],",
+              "            'fact_affectation_mandataire'[agence_id]",
+              "        )",
+              "    )",
+              " ",
+              "-- Date de référence = fin de l'année sélectionnée (ou TODAY() si aucun filtre)",
+              "VAR AnneeSelectionnee =",
+              "    SELECTEDVALUE( dim_date[annee])",
+              " ",
+              "VAR DateReference =",
+              "    IF(",
+              "        NOT ISBLANK( AnneeSelectionnee ),",
+              "        DATE( AnneeSelectionnee, 12, 31 ),",
+              "        TODAY()",
+              "    )",
+              " VAR agenceSelectionne =",
+              "    SELECTEDVALUE (dim_agence[raison_sociale])",
+              "    ",
+              "RETURN",
+              "IF(",
+              "    NOT ISBLANK( DateEntreeMin ),",
+              "    DATEDIFF( DateEntreeMin, DateReference, YEAR )",
+              ")"
+            ],
+            "formatString": "0",
+            "displayFolder": "Pilotage Commercial",
+            "lineageTag": "cf333a45-5b4b-44fc-97d9-04b543b68dbf"
+          },
+          {
+            "name": "Nombre mandataires rétrocommissionnés",
+            "expression": [
+              "",
+              "CALCULATE(",
+              "    DISTINCTCOUNT ( dim_mandataire[mandataire_id] ),",
+              "    fact_rendez_vous_client[commission_realise] > 0",
+              ")"
+            ],
+            "formatString": "0",
+            "displayFolder": "Pilotage Commercial",
+            "lineageTag": "9b648af1-f1c6-4f2a-a4ae-ba5b5b59498a"
+          },
+          {
+            "name": "Montant moyen de rétrocommission",
+            "expression": [
+              "",
+              "AVERAGE(fact_rendez_vous_client[montant_realise])"
+            ],
+            "formatString": "\\$#,0;(\\$#,0);\\$#,0",
+            "displayFolder": "Pilotage Commercial",
+            "lineageTag": "a360af64-734e-468d-8db5-2a7d47ae50a5",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"currencyCulture\":\"en-US\"}"
+              }
+            ]
+          },
+          {
+            "name": "Moyenne Taux Réalisation de rendez-vous",
+            "expression": [
+              "",
+              "AVERAGEX(",
+              "    VALUES ( dim_mandataire[mandataire_id] ),",
+              "    [Taux réalisation de rendez-vous]",
+              ")"
+            ],
+            "displayFolder": "Pilotage Commercial",
+            "lineageTag": "f5a48a34-fd79-469d-afa2-e6159dd87021",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ]
+          },
+          {
+            "name": "Ecart Taux Réalisation",
+            "expression": [
+              "",
+              "DIVIDE([Taux réalisation de rendez-vous] - [Moyenne Taux Réalisation de rendez-vous],[Moyenne Taux Réalisation de rendez-vous],0)",
+              ""
+            ],
+            "formatString": "0.0%;-0.0%;0.0%",
+            "displayFolder": "Pilotage Commercial",
+            "lineageTag": "4cc66dc5-adb6-4be9-be82-66e4d4ea2836"
+          },
+          {
+            "name": "Couleur Ecart Taux Réalisation",
+            "expression": [
+              "",
+              "IF(",
+              "    [Ecart Taux Réalisation] > 0,",
+              "    \"#C49669\",   -- vert",
+              "    IF(",
+              "        [Ecart Taux Réalisation] < 0,",
+              "        \"#000000\", -- rouge",
+              "        \"#666666\"  -- gris neutre",
+              "    )",
+              ")"
+            ],
+            "displayFolder": "Pilotage Commercial",
+            "lineageTag": "c7247f50-d351-4033-8aee-eaeea6049967"
+          },
+          {
+            "name": "Moyenne année présence mandataire dans le groupe",
+            "expression": [
+              "",
+              "AVERAGEX(",
+              "    VALUES('fact_affectation_mandataire'[mandataire_id]),",
+              "    [Année présence mandataire dans le groupe]",
+              ")"
+            ],
+            "displayFolder": "Pilotage Commercial",
+            "lineageTag": "515842b2-7e91-4c72-a503-452bac3b6976",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ]
+          },
+          {
+            "name": "Nombre candidats",
+            "expression": "DISTINCTCOUNT(fact_parcours_candidat[candidat_id])",
+            "formatString": "0",
+            "displayFolder": "Développement Réseau",
+            "lineageTag": "5281ae76-c1be-455f-a237-ff2429906d44"
+          },
+          {
+            "name": "Nombre candidats intégrés",
+            "expression": [
+              "CALCULATE(",
+              "    DISTINCTCOUNT( fact_parcours_candidat[candidat_id] ),",
+              "    fact_parcours_candidat[score_examen] > 50",
+              ")"
+            ],
+            "formatString": "0",
+            "displayFolder": "Développement Réseau",
+            "lineageTag": "eb4cfb39-202c-4921-8039-91656e0fac3d"
+          },
+          {
+            "name": "Taux intégration candidats",
+            "expression": [
+              "",
+              "DIVIDE(",
+              "    [Nombre candidats intégrés],",
+              "    [Nombre candidats],",
+              "    0",
+              ")"
+            ],
+            "displayFolder": "Développement Réseau",
+            "lineageTag": "ba777612-1fc3-491e-8455-c9d7ff974edd",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ]
+          },
+          {
+            "name": "Moyenne age candidats",
+            "expression": [
+              "",
+              "COALESCE(",
+              "    AVERAGEX(",
+              "        FILTER(",
+              "            'dim_candidat',",
+              "            NOT ISBLANK('dim_candidat'[age])",
+              "                && 'dim_candidat'[age] >= 0",
+              "        ),",
+              "        'dim_candidat'[age]",
+              "    ),",
+              "    0",
+              ")"
+            ],
+            "displayFolder": "Développement Réseau",
+            "lineageTag": "278732dd-ce67-4873-9789-388a6ea1c5a7",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ]
+          },
+          {
+            "name": "Taux de succès à l'examen (%)",
+            "expression": [
+              "",
+              "DIVIDE(",
+              "    [Nombre mandataires ayant réussi l'examen],",
+              "    [Nombre mandataires ayant passé l'examen]",
+              ")"
+            ],
+            "formatString": "0.0%;-0.0%;0.0%",
+            "displayFolder": "Développement Réseau",
+            "lineageTag": "8be560d9-7bbf-40cd-9eea-8908e794936e"
+          },
+          {
+            "name": "Nombre rendez-vous réalisés en visioconférence",
+            "expression": [
+              "",
+              "CALCULATE(",
+              "    COUNT(bridge_rendez_vous_mandataire[rendez_vous_id]),",
+              "    'fact_rendez_vous_client'[flag_rendez_vous_realise] = TRUE(),",
+              "    'fact_rendez_vous_client'[flag_visio] = TRUE()",
+              ")"
+            ],
+            "formatString": "0",
+            "displayFolder": "Pilotage Commercial",
+            "lineageTag": "4a0c1d29-4183-454f-8dbf-30f4e5274de5"
+          },
+          {
+            "name": "Nombre rendez-vous réalisés à domicile",
+            "expression": [
+              "",
+              "CALCULATE(",
+              "    COUNT(bridge_rendez_vous_mandataire[rendez_vous_id]),",
+              "    'fact_rendez_vous_client'[flag_rendez_vous_realise] = TRUE(),",
+              "    'fact_rendez_vous_client'[flag_visio] = FALSE()",
+              ")",
+              ""
+            ],
+            "formatString": "0",
+            "displayFolder": "Pilotage Commercial",
+            "lineageTag": "dd8f6759-9e88-4ce5-9c31-2b051360a91a"
+          },
+          {
+            "name": "Taux rendez vous réalisés en visioconférence",
+            "expression": [
+              "",
+              "DIVIDE(",
+              "    [Nombre rendez-vous réalisés en visioconférence],",
+              "    [Nombre rendez-vous réalisés],",
+              "    0",
+              ")"
+            ],
+            "displayFolder": "Pilotage Commercial",
+            "lineageTag": "da326aa4-ab42-4e7d-a469-4db908d8735a",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ]
+          },
+          {
+            "name": "Taux rendez-vous faits à domicile",
+            "expression": [
+              "",
+              "",
+              "DIVIDE(",
+              "    [Nombre rendez-vous réalisés à domicile],",
+              "    [Nombre rendez-vous réalisés],",
+              "    0",
+              ")"
+            ],
+            "displayFolder": "Pilotage Commercial",
+            "lineageTag": "3f7608ee-e27a-4c1b-9a4c-45e73e91d42e",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ]
+          },
+          {
+            "name": "Nombre RDV prévus (par type mandataire)",
+            "expression": [
+              "",
+              "CALCULATE(",
+              "    DISTINCTCOUNT ( bridge_rendez_vous_mandataire[rendez_vous_id] ),",
+              "    bridge_rendez_vous_mandataire[mandataire_id] <> 0",
+              ")"
+            ],
+            "formatString": "0",
+            "displayFolder": "Pilotage Commercial",
+            "lineageTag": "0e9467c6-73a2-4608-939a-8f72a0d06a84"
+          },
+          {
+            "name": "Nombre RDV réalisés (par type mandataire)",
+            "expression": [
+              "",
+              "CALCULATE(",
+              "    DISTINCTCOUNT ( bridge_rendez_vous_mandataire[rendez_vous_id] ),",
+              "    bridge_rendez_vous_mandataire[mandataire_id] <> 0,",
+              "    fact_rendez_vous_client[flag_rendez_vous_realise] = TRUE()",
+              ")"
+            ],
+            "formatString": "0",
+            "displayFolder": "Pilotage Commercial",
+            "lineageTag": "1593dbbc-562a-4a8e-8781-bc0f01e0a1d7"
+          },
+          {
+            "name": "Taux réalisation RDV (par type mandataire)",
+            "expression": [
+              "",
+              "DIVIDE(",
+              "    [Nombre RDV réalisés (par type mandataire)],",
+              "    [Nombre RDV prévus (par type mandataire)]",
+              ")"
+            ],
+            "displayFolder": "Pilotage Commercial",
+            "lineageTag": "1ba2835e-e887-4358-872c-5be219075d03",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ]
+          },
+          {
+            "name": "Nombre RDV prévus (agence)",
+            "expression": [
+              "",
+              "VAR AgenceCourante =",
+              "    SELECTEDVALUE ( dim_agence[agence_id] )",
+              "RETURN",
+              "CALCULATE (",
+              "    DISTINCTCOUNT ( fact_rendez_vous_client[rendez_vous_id] ),",
+              "    FILTER (",
+              "        bridge_rendez_vous_mandataire,",
+              "        bridge_rendez_vous_mandataire[role_mandataire] = \"PRINCIPAL\"",
+              "            && bridge_rendez_vous_mandataire[mandataire_id] <> 0",
+              "    ),",
+              "    FILTER (",
+              "        fact_affectation_mandataire,",
+              "        fact_affectation_mandataire[agence_id] = AgenceCourante",
+              "            && fact_affectation_mandataire[date_entree]",
+              "                <= MAX ( fact_rendez_vous_client[date_rendez_vous_client] )",
+              "            && (",
+              "                ISBLANK ( fact_affectation_mandataire[date_sortie] )",
+              "                || fact_affectation_mandataire[date_sortie]",
+              "                    >= MIN ( fact_rendez_vous_client[date_rendez_vous_client] )",
+              "            )",
+              "    )",
+              ")",
+              ""
+            ],
+            "formatString": "0",
+            "displayFolder": "Pilotage Commercial",
+            "lineageTag": "991ab623-e24e-4679-9e27-7a5e7bebf26b"
+          },
+          {
+            "name": "Nombre RDV réalisés (agence)",
+            "expression": [
+              "",
+              "VAR AgenceCourante =",
+              "    SELECTEDVALUE ( dim_agence[agence_id] )",
+              "RETURN",
+              "CALCULATE (",
+              "    DISTINCTCOUNT ( fact_rendez_vous_client[rendez_vous_id] ),",
+              "    fact_rendez_vous_client[flag_rendez_vous_realise] = TRUE(),",
+              "    FILTER (",
+              "        bridge_rendez_vous_mandataire,",
+              "        bridge_rendez_vous_mandataire[role_mandataire] = \"PRINCIPAL\"",
+              "            && bridge_rendez_vous_mandataire[mandataire_id] <> 0",
+              "    ),",
+              "    FILTER (",
+              "        fact_affectation_mandataire,",
+              "        fact_affectation_mandataire[agence_id] = AgenceCourante",
+              "            && fact_affectation_mandataire[date_entree]",
+              "                <= MAX ( fact_rendez_vous_client[date_rendez_vous_client] )",
+              "            && (",
+              "                ISBLANK ( fact_affectation_mandataire[date_sortie] )",
+              "                || fact_affectation_mandataire[date_sortie]",
+              "                    >= MIN ( fact_rendez_vous_client[date_rendez_vous_client] )",
+              "            )",
+              "    )",
+              ")"
+            ],
+            "formatString": "0",
+            "displayFolder": "Pilotage Commercial",
+            "lineageTag": "aa9939dd-d6f0-4ad9-90c4-725979984cf9"
+          },
+          {
+            "name": "Nombre mandataires actifs new",
+            "expression": [
+              "",
+              "VAR DateContexteMax =",
+              "    MAX ( dim_date[date] )",
+              "VAR DateLimite =",
+              "    DateContexteMax - 30",
+              "RETURN",
+              "CALCULATE (",
+              "    DISTINCTCOUNT ( fact_activite_mandataire[mandataire_id] ),",
+              "    fact_activite_mandataire[flag_connexion] = 1,",
+              "    fact_activite_mandataire[date_connexion] >= DateLimite,",
+              "    fact_activite_mandataire[date_connexion] <= DateContexteMax",
+              ")"
+            ],
+            "formatString": "0",
+            "displayFolder": "Pilotage Commercial",
+            "lineageTag": "1b762a1a-aa1e-4e6b-8b81-79bb230d308a"
+          },
+          {
+            "name": "Nombre mandataires rétrocommissionnés N-1",
+            "expression": [
+              "",
+              "CALCULATE (",
+              "    [Nombre mandataires rétrocommissionnés],",
+              "    SAMEPERIODLASTYEAR ( dim_date[date] )",
+              ")",
+              "    "
+            ],
+            "formatString": "0",
+            "displayFolder": "Pilotage Commercial",
+            "lineageTag": "ba468911-e26a-4a57-8bd5-5a69afcbaa41"
+          },
+          {
+            "name": "Évolution mandataires rétro vs N-1 (%)",
+            "expression": [
+              "",
+              "VAR N = [Nombre mandataires rétrocommissionnés]",
+              "VAR N_1 = [Nombre mandataires rétrocommissionnés N-1]",
+              "RETURN",
+              "IF (",
+              "    NOT ISBLANK ( N_1 ),",
+              "    DIVIDE ( N - N_1, N_1 )",
+              ")"
+            ],
+            "displayFolder": "Pilotage Commercial",
+            "lineageTag": "9d9fddbf-05d2-44cf-8596-9946474777f7",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ]
+          },
+          {
+            "name": "test_Taux réalisation RDV N-1",
+            "expression": [
+              "",
+              "CALCULATE(",
+              "    [Taux réalisation de rendez-vous],",
+              "    SAMEPERIODLASTYEAR(dim_date[Date])",
+              ")"
+            ],
+            "displayFolder": "Pilotage Commercial",
+            "lineageTag": "5fff2a8b-dca5-4fe3-88be-82862785f64e",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ]
+          },
+          {
+            "name": "test_Evolution RDV vs N-1",
+            "expression": [
+              "",
+              "[Taux réalisation de rendez-vous] - [test_Taux réalisation RDV N-1]"
+            ],
+            "displayFolder": "Pilotage Commercial",
+            "lineageTag": "2cac7937-2b46-42c8-9e56-4c0f17673b9d",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ]
+          },
+          {
+            "name": "test_Evolution RDV affichage",
+            "expression": [
+              "",
+              "VAR val = [test_Evolution RDV vs N-1]",
+              "RETURN ",
+              "IF(",
+              "    val >= 0,",
+              "    \"+\" & FORMAT(val, \"0%\"),",
+              "    FORMAT(val, \"0%\")",
+              ") & \" versus N-1\""
+            ],
+            "displayFolder": "Pilotage Commercial",
+            "lineageTag": "7f36e078-f5b4-49ac-abc9-d529214c0326"
+          },
+          {
+            "name": "Montant rétrocommission",
+            "expression": [
+              "",
+              "VAR Montant =",
+              "    CALCULATE(",
+              "        SUM(fact_rendez_vous_client[montant_realise]),",
+              "        fact_rendez_vous_client[commission_realise] > 0",
+              "    )",
+              "",
+              "RETURN COALESCE(Montant, 0)"
+            ],
+            "formatString": "0",
+            "displayFolder": "Pilotage Commercial",
+            "lineageTag": "3054123f-0e2a-440c-ad88-fc6ff3deb340"
+          }
+        ],
+        "annotations": [
+          {
+            "name": "PBI_Id",
+            "value": "37cc82f1df8e40a6b05b11fa14f58f8f"
+          },
+          {
+            "name": "436ba87b-9c83-4389-a31b-ebd06a36be98",
+            "value": "{\"Expression\":\"\"}"
+          }
+        ]
+      },
+      {
+        "name": "bridge_rendez_vous_mandataire",
+        "lineageTag": "d4465e80-bd8d-49a3-8d48-160f9feccd52",
+        "sourceLineageTag": "[gold].[bridge_rendez_vous_mandataire]",
+        "columns": [
+          {
+            "name": "rendez_vous_id",
+            "dataType": "string",
+            "sourceColumn": "rendez_vous_id",
+            "lineageTag": "2c60ae8a-3f71-43a3-b17c-802aa3b17c0f",
+            "sourceLineageTag": "rendez_vous_id",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "mandataire_id",
+            "dataType": "string",
+            "sourceColumn": "mandataire_id",
+            "lineageTag": "737624e7-890f-4ea6-b96c-7c12d5baa7c7",
+            "sourceLineageTag": "mandataire_id",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "role_mandataire",
+            "dataType": "string",
+            "sourceColumn": "role_mandataire",
+            "lineageTag": "9f4eeab6-c20d-407e-9eb4-eda6f9191325",
+            "sourceLineageTag": "role_mandataire",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          }
+        ],
+        "partitions": [
+          {
+            "name": "bridge_rendez_vous_mandataire",
+            "mode": "directLake",
+            "source": {
+              "type": "entity",
+              "entityName": "bridge_rendez_vous_mandataire",
+              "expressionSource": "DirectLake - lh_gold",
+              "schemaName": "gold"
+            }
+          }
+        ]
+      },
+      {
+        "name": "fact_rendez_vous_client",
+        "lineageTag": "579d75cd-d76b-4b0f-a4b7-70fcab1dab4a",
+        "sourceLineageTag": "[gold].[fact_rendez_vous_client]",
+        "columns": [
+          {
+            "name": "rendez_vous_id",
+            "dataType": "string",
+            "sourceColumn": "rendez_vous_id",
+            "lineageTag": "068f2f01-4524-409e-9e4c-88c4249be3f4",
+            "sourceLineageTag": "rendez_vous_id",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "contact_id",
+            "dataType": "string",
+            "sourceColumn": "contact_id",
+            "lineageTag": "164fad46-c496-496c-8e15-bdb5df4e2b7e",
+            "sourceLineageTag": "contact_id",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "parent_rendez_vous_id",
+            "dataType": "string",
+            "sourceColumn": "parent_rendez_vous_id",
+            "lineageTag": "e4b1eaed-8873-4c5b-a5e5-92160b5cc741",
+            "sourceLineageTag": "parent_rendez_vous_id",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "type_rendez_vous_id",
+            "dataType": "string",
+            "sourceColumn": "type_rendez_vous_id",
+            "lineageTag": "952c32a3-5796-42b6-ba08-ca27990befd0",
+            "sourceLineageTag": "type_rendez_vous_id",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "date_pose_rendez_vous",
+            "dataType": "dateTime",
+            "sourceColumn": "date_pose_rendez_vous",
+            "formatString": "General Date",
+            "lineageTag": "573ea7f2-58c0-4807-8123-b94836a05eeb",
+            "sourceLineageTag": "date_pose_rendez_vous",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "date_rendez_vous_client",
+            "dataType": "dateTime",
+            "sourceColumn": "date_rendez_vous_client",
+            "formatString": "General Date",
+            "lineageTag": "03df44ed-e083-4486-bfb5-af87ea50e331",
+            "sourceLineageTag": "date_rendez_vous_client",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "flag_rendez_vous_realise",
+            "dataType": "boolean",
+            "sourceColumn": "flag_rendez_vous_realise",
+            "formatString": "\"TRUE\";\"TRUE\";\"FALSE\"",
+            "lineageTag": "f8a9c079-7a9a-48db-af1e-9b612e5bbefd",
+            "sourceLineageTag": "flag_rendez_vous_realise",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "flag_visio",
+            "dataType": "boolean",
+            "sourceColumn": "flag_visio",
+            "formatString": "\"TRUE\";\"TRUE\";\"FALSE\"",
+            "lineageTag": "59b39ad8-ac4c-4f0b-aaab-ac7ed81acfdf",
+            "sourceLineageTag": "flag_visio",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "montant_prescrit",
+            "dataType": "int64",
+            "sourceColumn": "montant_prescrit",
+            "formatString": "0",
+            "lineageTag": "30c7b9d5-9470-416d-af6e-8b2b4cd1b420",
+            "sourceLineageTag": "montant_prescrit",
+            "summarizeBy": "sum",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "montant_realise",
+            "dataType": "int64",
+            "sourceColumn": "montant_realise",
+            "formatString": "0",
+            "lineageTag": "b1985796-5698-4182-9a06-83d7a85785c2",
+            "sourceLineageTag": "montant_realise",
+            "summarizeBy": "sum",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "commission_realise",
+            "dataType": "int64",
+            "sourceColumn": "commission_realise",
+            "formatString": "0",
+            "lineageTag": "cfd8f9d7-961f-4d55-b2b0-fc349f3f2400",
+            "sourceLineageTag": "commission_realise",
+            "summarizeBy": "sum",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "nombre_mandataires_presents",
+            "dataType": "int64",
+            "sourceColumn": "nombre_mandataires_presents",
+            "formatString": "0",
+            "lineageTag": "000bb398-1453-46db-b62a-146fe3e99850",
+            "sourceLineageTag": "nombre_mandataires_presents",
+            "summarizeBy": "sum",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          }
+        ],
+        "partitions": [
+          {
+            "name": "fact_rendez_vous_client",
+            "mode": "directLake",
+            "source": {
+              "type": "entity",
+              "entityName": "fact_rendez_vous_client",
+              "expressionSource": "DirectLake - lh_gold",
+              "schemaName": "gold"
+            }
+          }
+        ],
+        "measures": [
+          {
+            "name": "Flag rétrocommissionné",
+            "expression": [
+              "",
+              "VAR DateContexteMax =",
+              "    MAX(dim_date[date])",
+              "VAR DateContexteMin =",
+              "    MIN(dim_date[date])",
+              "",
+              "VAR NbCommissions =",
+              "    CALCULATE(",
+              "        COUNTROWS(fact_rendez_vous_client),",
+              "        fact_rendez_vous_client[commission_realise] > 0,",
+              "        fact_rendez_vous_client[date_rendez_vous_client] >= DateContexteMin,",
+              "        fact_rendez_vous_client[date_rendez_vous_client] <= DateContexteMax",
+              "    )",
+              "",
+              "RETURN",
+              "IF(NbCommissions > 0, \"Rétrocommissionné\", \"Non rétrocommissionné\")"
+            ],
+            "lineageTag": "c0b3924b-c8fe-4bd2-848d-4728f657f552",
+            "changedProperties": [
+              {
+                "property": "Name"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "dim_mandataire",
+        "lineageTag": "41f506ac-1859-4c9f-ac09-1ad0c5e18331",
+        "sourceLineageTag": "[gold].[dim_mandataire]",
+        "columns": [
+          {
+            "name": "mandataire_id",
+            "dataType": "string",
+            "sourceColumn": "mandataire_id",
+            "lineageTag": "ed5f0a94-0636-4d9f-b562-f9becf5f4d16",
+            "sourceLineageTag": "mandataire_id",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "candidat_id",
+            "dataType": "string",
+            "sourceColumn": "candidat_id",
+            "lineageTag": "b59ce7c9-d80e-4876-bf65-f54bb9e8387a",
+            "sourceLineageTag": "candidat_id",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "sexe",
+            "dataType": "string",
+            "sourceColumn": "sexe",
+            "lineageTag": "8f674779-f165-4f6f-828f-a207cfdf6bbf",
+            "sourceLineageTag": "sexe",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "date_naissance",
+            "dataType": "dateTime",
+            "sourceColumn": "date_naissance",
+            "formatString": "General Date",
+            "lineageTag": "8e889093-b3f0-4fb9-9938-454b5bd8d9ea",
+            "sourceLineageTag": "date_naissance",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "numero_orias",
+            "dataType": "string",
+            "sourceColumn": "numero_orias",
+            "lineageTag": "019b2d3f-4028-4ca5-943f-8b270c1f2728",
+            "sourceLineageTag": "numero_orias",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "date_passage_mia",
+            "dataType": "dateTime",
+            "sourceColumn": "date_passage_mia",
+            "formatString": "General Date",
+            "lineageTag": "9090c465-1aba-46e5-a4b3-7e566bec3405",
+            "sourceLineageTag": "date_passage_mia",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          }
+        ],
+        "partitions": [
+          {
+            "name": "dim_mandataire",
+            "mode": "directLake",
+            "source": {
+              "type": "entity",
+              "entityName": "dim_mandataire",
+              "expressionSource": "DirectLake - lh_gold",
+              "schemaName": "gold"
+            }
+          }
+        ]
+      }
+    ],
+    "relationships": [
+      {
+        "name": "6484d00f-9d27-4743-aeff-0af22fc65bf4",
+        "fromTable": "dim_date",
+        "fromColumn": "Date",
+        "toTable": "LocalDateTable_608a5c4d-d6d2-474e-a494-6c6b82f0fc3c",
+        "toColumn": "Date",
+        "joinOnDateBehavior": "datePartOnly"
+      },
+      {
+        "name": "be891e18-b4b0-8bbc-7a76-e94d065b945f",
+        "fromTable": "fact_parcours_candidat",
+        "fromColumn": "candidat_id",
+        "toTable": "dim_candidat",
+        "toColumn": "candidat_id",
+        "relyOnReferentialIntegrity": true
+      },
+      {
+        "name": "23358951-ae5d-0314-da6f-89acd1c81655",
+        "fromTable": "dim_candidat",
+        "fromColumn": "charge_developpement_id",
+        "toTable": "dim_charge_developpement_reseau",
+        "toColumn": "charge_developpement_id",
+        "relyOnReferentialIntegrity": true
+      },
+      {
+        "name": "420f0ba2-5a5a-8c85-976b-e92a06f4858c",
+        "fromTable": "dim_candidat",
+        "fromColumn": "niveau_etude_id",
+        "toTable": "dim_niveau_etude",
+        "toColumn": "niveau_etude_id",
+        "relyOnReferentialIntegrity": true
+      },
+      {
+        "name": "1c7f8cfd-b705-220f-955c-0ef296b40b4d",
+        "fromTable": "dim_candidat",
+        "fromColumn": "type_canal_id",
+        "toTable": "dim_type_canal",
+        "toColumn": "type_canal_id",
+        "relyOnReferentialIntegrity": true
+      },
+      {
+        "name": "b11afc35-5bcf-a30a-a864-0d4e5b6f66eb",
+        "fromTable": "fact_affectation_mandataire",
+        "fromColumn": "mandataire_id",
+        "toTable": "dim_charge_developpement_reseau",
+        "toColumn": "charge_developpement_id",
+        "relyOnReferentialIntegrity": true
+      },
+      {
+        "name": "ad8c1425-9723-5a02-fc72-707028615133",
+        "fromTable": "fact_affectation_mandataire",
+        "fromColumn": "agence_id",
+        "toTable": "dim_agence",
+        "toColumn": "agence_id",
+        "relyOnReferentialIntegrity": true
+      },
+      {
+        "name": "677579c9-e148-536c-4ba3-97efd94c7aa5",
+        "fromTable": "fact_parcours_candidat",
+        "fromColumn": "date_etape_parcours",
+        "toTable": "dim_date",
+        "toColumn": "Date"
+      },
+      {
+        "name": "92a81051-dc31-28dc-4fae-140b6448d118",
+        "fromTable": "fact_affectation_mandataire",
+        "fromColumn": "date_entree",
+        "toTable": "dim_date",
+        "toColumn": "Date"
+      },
+      {
+        "name": "03832773-bd3d-a25e-5f91-3d177508c7d4",
+        "fromTable": "fact_parcours_candidat",
+        "fromColumn": "motif_depart_formation_id",
+        "toTable": "dim_motif_depart_formation",
+        "toColumn": "motif_depart_formation_id",
+        "relyOnReferentialIntegrity": true
+      },
+      {
+        "name": "173d5c16-0f44-e802-390a-edbc0a3918a8",
+        "fromTable": "fact_activite_mandataire",
+        "fromColumn": "agence_id",
+        "toTable": "dim_agence",
+        "toColumn": "agence_id",
+        "relyOnReferentialIntegrity": true
+      },
+      {
+        "name": "4dc1dc2e-7dc4-3c66-c9d4-9f9144f4bcd5",
+        "fromTable": "fact_activite_mandataire",
+        "fromColumn": "date_connexion",
+        "toTable": "dim_date",
+        "toColumn": "Date"
+      },
+      {
+        "name": "624be68c-7e71-8ae7-c996-234544ed7f46",
+        "fromTable": "dim_candidat",
+        "fromColumn": "agence_id",
+        "toTable": "dim_agence",
+        "toColumn": "agence_id"
+      },
+      {
+        "name": "8db085bb-40de-820b-342a-42aa6b221b7e",
+        "fromTable": "fact_rendez_vous_client",
+        "fromColumn": "date_rendez_vous_client",
+        "toTable": "dim_date",
+        "toColumn": "Date"
+      },
+      {
+        "name": "62133543-53a7-f5d1-f8b5-96aa095078ea",
+        "fromTable": "fact_rendez_vous_client",
+        "fromColumn": "type_rendez_vous_id",
+        "toTable": "dim_type_rendez_vous_client",
+        "toColumn": "type_rendez_vous_client_id"
+      },
+      {
+        "name": "c22d72ee-8b7b-719b-826d-e071a3cad9e8",
+        "fromTable": "bridge_rendez_vous_mandataire",
+        "fromColumn": "mandataire_id",
+        "toTable": "dim_mandataire",
+        "toColumn": "mandataire_id"
+      },
+      {
+        "name": "785a335b-36b9-c3c9-7159-b0bb6f02da58",
+        "toCardinality": "many",
+        "fromTable": "bridge_rendez_vous_mandataire",
+        "fromColumn": "rendez_vous_id",
+        "toTable": "fact_rendez_vous_client",
+        "toColumn": "rendez_vous_id"
+      },
+      {
+        "name": "fbf45a2e-6367-5cf1-b0d5-fb14412fea9a",
+        "fromTable": "fact_activite_mandataire",
+        "fromColumn": "mandataire_id",
+        "toTable": "dim_mandataire",
+        "toColumn": "mandataire_id"
+      }
+    ],
+    "expressions": [
+      {
+        "name": "DirectLake - lh_gold",
+        "kind": "m",
+        "expression": [
+          "let",
+          "    Source = AzureStorage.DataLake(\"https://onelake.dfs.fabric.microsoft.com/dd7829ed-a0a0-4855-8fb3-d77a15545239/4cf4ebd0-a2d4-4539-a775-a9a852dd6fe0\", [HierarchicalNavigation=true])",
+          "in",
+          "    Source"
+        ],
+        "lineageTag": "3db0ccf6-2b7e-4106-97a4-f67975a5668b",
+        "annotations": [
+          {
+            "name": "PBI_IncludeFutureArtifacts",
+            "value": "False"
+          },
+          {
+            "name": "PBI_RemovedChildren",
+            "value": "[{\"remoteItemId\":{\"analysisServicesObject\":{\"sourceName\":null,\"sourceLineageTag\":\"[silver].[activite_mandataire]\"}},\"objectType\":\"Table\"},{\"remoteItemId\":{\"analysisServicesObject\":{\"sourceName\":null,\"sourceLineageTag\":\"[silver].[reference_type_canal]\"}},\"objectType\":\"Table\"},{\"remoteItemId\":{\"analysisServicesObject\":{\"sourceName\":null,\"sourceLineageTag\":\"[silver].[rendez_vous_entretien]\"}},\"objectType\":\"Table\"},{\"remoteItemId\":{\"analysisServicesObject\":{\"sourceName\":null,\"sourceLineageTag\":\"[silver].[compartiment]\"}},\"objectType\":\"Table\"},{\"remoteItemId\":{\"analysisServicesObject\":{\"sourceName\":null,\"sourceLineageTag\":\"[silver].[rendez_vous_client]\"}},\"objectType\":\"Table\"},{\"remoteItemId\":{\"analysisServicesObject\":{\"sourceName\":null,\"sourceLineageTag\":\"[silver].[contrat]\"}},\"objectType\":\"Table\"},{\"remoteItemId\":{\"analysisServicesObject\":{\"sourceName\":null,\"sourceLineageTag\":\"[silver].[journee_decouverte]\"}},\"objectType\":\"Table\"},{\"remoteItemId\":{\"analysisServicesObject\":{\"sourceName\":null,\"sourceLineageTag\":\"[silver].[mouvement]\"}},\"objectType\":\"Table\"},{\"remoteItemId\":{\"analysisServicesObject\":{\"sourceName\":null,\"sourceLineageTag\":\"[silver].[calendrier_formation]\"}},\"objectType\":\"Table\"},{\"remoteItemId\":{\"analysisServicesObject\":{\"sourceName\":null,\"sourceLineageTag\":\"[silver].[reference_niveau_etude]\"}},\"objectType\":\"Table\"},{\"remoteItemId\":{\"analysisServicesObject\":{\"sourceName\":null,\"sourceLineageTag\":\"[dbo].[sys_dq_metrics]\"}},\"objectType\":\"Table\"},{\"remoteItemId\":{\"analysisServicesObject\":{\"sourceName\":null,\"sourceLineageTag\":\"[silver].[ordre]\"}},\"objectType\":\"Table\"},{\"remoteItemId\":{\"analysisServicesObject\":{\"sourceName\":null,\"sourceLineageTag\":\"[silver].[mandataire]\"}},\"objectType\":\"Table\"},{\"remoteItemId\":{\"analysisServicesObject\":{\"sourceName\":null,\"sourceLineageTag\":\"[silver].[reference_liste_support]\"}},\"objectType\":\"Table\"},{\"remoteItemId\":{\"analysisServicesObject\":{\"sourceName\":null,\"sourceLineageTag\":\"[silver].[rendez_vous_candidat]\"}},\"objectType\":\"Table\"},{\"remoteItemId\":{\"analysisServicesObject\":{\"sourceName\":null,\"sourceLineageTag\":\"[silver].[processing_penelop_personne]\"}},\"objectType\":\"Table\"},{\"remoteItemId\":{\"analysisServicesObject\":{\"sourceName\":null,\"sourceLineageTag\":\"[silver].[candidat]\"}},\"objectType\":\"Table\"},{\"remoteItemId\":{\"analysisServicesObject\":{\"sourceName\":null,\"sourceLineageTag\":\"[silver].[reference_motif_depart_formation]\"}},\"objectType\":\"Table\"},{\"remoteItemId\":{\"analysisServicesObject\":{\"sourceName\":null,\"sourceLineageTag\":\"[silver].[reference_role_mandataire]\"}},\"objectType\":\"Table\"},{\"remoteItemId\":{\"analysisServicesObject\":{\"sourceName\":null,\"sourceLineageTag\":\"[silver].[charge_developpement]\"}},\"objectType\":\"Table\"},{\"remoteItemId\":{\"analysisServicesObject\":{\"sourceName\":null,\"sourceLineageTag\":\"[silver].[formation]\"}},\"objectType\":\"Table\"},{\"remoteItemId\":{\"analysisServicesObject\":{\"sourceName\":null,\"sourceLineageTag\":\"[silver].[reference_type_rendez_vous]\"}},\"objectType\":\"Table\"},{\"remoteItemId\":{\"analysisServicesObject\":{\"sourceName\":null,\"sourceLineageTag\":\"[silver].[affectation_mandataire]\"}},\"objectType\":\"Table\"},{\"remoteItemId\":{\"analysisServicesObject\":{\"sourceName\":null,\"sourceLineageTag\":\"[silver].[reference_agence]\"}},\"objectType\":\"Table\"},{\"remoteItemId\":{\"analysisServicesObject\":{\"sourceName\":null,\"sourceLineageTag\":\"[silver].[support_contrat]\"}},\"objectType\":\"Table\"},{\"remoteItemId\":{\"analysisServicesObject\":{\"sourceName\":null,\"sourceLineageTag\":\"[silver].[reference_statut_candidat]\"}},\"objectType\":\"Table\"}]"
+          }
+        ]
+      }
+    ],
+    "annotations": [
+      {
+        "name": "PBI_QueryOrder",
+        "value": "[\"DirectLake - lh_gold\"]"
+      },
+      {
+        "name": "__PBI_TimeIntelligenceEnabled",
+        "value": "1"
+      },
+      {
+        "name": "__LastRPTime",
+        "value": "134237411738223611"
+      },
+      {
+        "name": "PBI_ProTooling",
+        "value": "[\"DirectLakeOnOneLakeInWeb\",\"WebModelingEdit\"]"
+      },
+      {
+        "name": "TabularEditor_SerializeOptions",
+        "value": "{\"IgnoreInferredObjects\":true,\"IgnoreInferredProperties\":true,\"IgnoreTimestamps\":true,\"SplitMultilineStrings\":true,\"PrefixFilenames\":false,\"LocalTranslations\":false,\"LocalPerspectives\":false,\"SortArrays\":false,\"LocalRelationships\":false,\"Levels\":[\"Data Sources\",\"Shared Expressions\",\"Perspectives\",\"Relationships\",\"Roles\",\"Tables\",\"Tables/Columns\",\"Tables/Hierarchies\",\"Tables/Measures\",\"Tables/Partitions\",\"Tables/Calculation Items\",\"Translations\"]}"
+      },
+      {
+        "name": "__TEdtr",
+        "value": "1"
+      }
+    ]
+  }
+}

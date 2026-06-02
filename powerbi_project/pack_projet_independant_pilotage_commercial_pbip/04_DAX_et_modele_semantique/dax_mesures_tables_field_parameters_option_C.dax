@@ -1,0 +1,439 @@
+
+/* =====================================================================================
+PILOTAGE COMMERCIAL — OPTION C
+DAX / FIELD PARAMETERS / TABLES CIBLES
+Version générée pour compléter le modèle BIM existant.
+À coller de préférence via Tabular Editor, ou à recréer manuellement dans Power BI.
+===================================================================================== */
+
+/* -------------------------------------------------------------------------------------
+1) TABLES PHYSIQUES À INTÉGRER DANS LA COUCHE GOLD / MODÈLE
+--------------------------------------------------------------------------------------
+fact_affaires — table à créer dans la couche Gold puis importer dans le modèle :
+- affaire_id
+- mandataire_id
+- agence_id
+- produit_id
+- assureur_id
+- apporteur_id
+- evenement_id
+- date_affaire
+- statut_affaire : Produite / Instance / Commissionnée / Annulée
+- montant_affaire
+- montant_retroc
+- nombre_ventes_partage
+- flag_produite
+- flag_instance
+- flag_commissionnee
+
+budget_affaires — table à intégrer :
+- budget_id
+- date_budget
+- agence_id
+- produit_id
+- assureur_id
+- budget_affaires_nombre
+- budget_affaires_euro
+- budget_retroc_euro
+
+fact_alertes — table cible :
+- alerte_id
+- date_analyse
+- date_detection
+- niveau_priorite : CRITIQUE / HAUTE / MOYENNE / INFO
+- categorie_alerte : Volume / RDV / Réseau / Budget
+- kpi_concerne
+- valeur_actuelle
+- seuil_alerte
+- ecart
+- agence_id
+- mandataire_id
+- impact_metier
+- recommandation
+- statut_alerte : Ouverte / En cours / Cloturee
+------------------------------------------------------------------------------------- */
+
+
+/* -------------------------------------------------------------------------------------
+2) MESURES AFFAIRES — À CRÉER SUR _Indicateurs OU DANS UN DOSSIER 01. Affaires
+------------------------------------------------------------------------------------- */
+
+Nombre ventes =
+COALESCE ( SUM ( fact_affaires[nombre_ventes_partage] ), 0 )
+
+Nombre affaires produites =
+COALESCE (
+    CALCULATE (
+        DISTINCTCOUNT ( fact_affaires[affaire_id] ),
+        fact_affaires[flag_produite] = TRUE ()
+    ),
+    0
+)
+
+Volume affaires produites =
+COALESCE (
+    CALCULATE (
+        SUM ( fact_affaires[montant_affaire] ),
+        fact_affaires[flag_produite] = TRUE ()
+    ),
+    0
+)
+
+Nombre affaires en instance =
+COALESCE (
+    CALCULATE (
+        DISTINCTCOUNT ( fact_affaires[affaire_id] ),
+        fact_affaires[flag_instance] = TRUE ()
+    ),
+    0
+)
+
+Volume affaires en instance =
+COALESCE (
+    CALCULATE (
+        SUM ( fact_affaires[montant_affaire] ),
+        fact_affaires[flag_instance] = TRUE ()
+    ),
+    0
+)
+
+Nombre affaires commissionnées =
+COALESCE (
+    CALCULATE (
+        DISTINCTCOUNT ( fact_affaires[affaire_id] ),
+        fact_affaires[flag_commissionnee] = TRUE ()
+    ),
+    0
+)
+
+Volume affaires commissionnées =
+COALESCE (
+    CALCULATE (
+        SUM ( fact_affaires[montant_affaire] ),
+        fact_affaires[flag_commissionnee] = TRUE ()
+    ),
+    0
+)
+
+Budget affaires en nombre =
+COALESCE ( SUM ( budget_affaires[budget_affaires_nombre] ), 0 )
+
+Budget affaires en euro =
+COALESCE ( SUM ( budget_affaires[budget_affaires_euro] ), 0 )
+
+Budget rétrocommission en euro =
+COALESCE ( SUM ( budget_affaires[budget_retroc_euro] ), 0 )
+
+Taux atteinte Budget N Volume =
+DIVIDE ( [Volume affaires produites], [Budget affaires en euro], 0 )
+
+Volume affaires produites N-1 =
+CALCULATE (
+    [Volume affaires produites],
+    SAMEPERIODLASTYEAR ( dim_date[Date] )
+)
+
+Variation vs N-1 Volume Affaires =
+[Volume affaires produites] - [Volume affaires produites N-1]
+
+Variation vs N-1 Volume Affaires (%) =
+DIVIDE (
+    [Variation vs N-1 Volume Affaires],
+    [Volume affaires produites N-1],
+    0
+)
+
+Volume affaires produites MTD-1 =
+CALCULATE (
+    [Volume affaires produites],
+    DATEADD ( dim_date[Date], -1, MONTH )
+)
+
+Variation vs MTD-1 Volume Affaires =
+[Volume affaires produites] - [Volume affaires produites MTD-1]
+
+Variation vs MTD-1 Volume Affaires (%) =
+DIVIDE (
+    [Variation vs MTD-1 Volume Affaires],
+    [Volume affaires produites MTD-1],
+    0
+)
+
+
+/* -------------------------------------------------------------------------------------
+3) MESURES RÉSEAU MIA — À CRÉER / COMPLÉTER
+------------------------------------------------------------------------------------- */
+
+Nombre MIA oriasés =
+COALESCE (
+    CALCULATE (
+        DISTINCTCOUNT ( dim_mandataire[mandataire_id] ),
+        NOT ISBLANK ( dim_mandataire[numero_orias] )
+    ),
+    0
+)
+
+Nombre MIA productifs =
+COALESCE (
+    CALCULATE (
+        DISTINCTCOUNT ( fact_affaires[mandataire_id] ),
+        fact_affaires[flag_produite] = TRUE ()
+    ),
+    0
+)
+
+Nombre MIA non productifs =
+MAX ( [Nombre mandataires actifs] - [Nombre MIA productifs], 0 )
+
+Nombre mandataires non rétrocommissionnés =
+MAX ( [Nombre mandataires actifs] - [Nombre mandataires rétrocommissionnés], 0 )
+
+Taux mandataires actifs =
+DIVIDE (
+    [Nombre mandataires actifs],
+    [Nombre mandataires actifs] + [Nombre mandataires inactifs],
+    0
+)
+
+Montant rétrocommission moyen corrigé =
+AVERAGEX (
+    VALUES ( dim_mandataire[mandataire_id] ),
+    [Montant rétrocommission]
+)
+
+
+/* -------------------------------------------------------------------------------------
+4) MESURES RDV COMPLÉMENTAIRES
+------------------------------------------------------------------------------------- */
+
+Nombre RDV hebdomadaire moyen =
+VAR NbSemaines =
+    DISTINCTCOUNT ( dim_date[numero_de_la_semaine] )
+RETURN
+DIVIDE ( [Nombre rendez-vous réalisés], NbSemaines, 0 )
+
+Nombre RDV confirmés =
+CALCULATE (
+    [Nombre rendez-vous prévus],
+    -- Adapter ce filtre si une colonne statut_rdv existe dans la source
+    KEEPFILTERS ( fact_rendez_vous_client[flag_rendez_vous_realise] IN { TRUE (), FALSE () } )
+)
+
+Taux RDV Visio / Domicile =
+VAR Visio = [Taux rendez vous réalisés en visioconférence]
+VAR Domicile = [Taux rendez-vous faits à domicile]
+RETURN
+FORMAT ( Visio, "0.0%" ) & " / " & FORMAT ( Domicile, "0.0%" )
+
+
+/* -------------------------------------------------------------------------------------
+5) ALERTES ET RECOMMANDATIONS
+------------------------------------------------------------------------------------- */
+
+Niveau Alerte Volume =
+VAR VarPct = [Variation vs N-1 Volume Affaires (%)]
+RETURN
+SWITCH (
+    TRUE (),
+    ISBLANK ( VarPct ), "NON DISPONIBLE",
+    VarPct < -0.20, "CRITIQUE",
+    VarPct < -0.10, "HAUTE",
+    VarPct < 0, "MOYENNE",
+    "CONFORME"
+)
+
+Couleur Alerte Volume =
+SWITCH (
+    [Niveau Alerte Volume],
+    "CRITIQUE", "#D71920",
+    "HAUTE", "#E67E22",
+    "MOYENNE", "#F1C40F",
+    "CONFORME", "#198754",
+    "#667085"
+)
+
+Niveau Alerte RDV =
+VAR Taux = [Taux réalisation de rendez-vous]
+RETURN
+SWITCH (
+    TRUE (),
+    ISBLANK ( Taux ), "NON DISPONIBLE",
+    Taux < 0.50, "CRITIQUE",
+    Taux < 0.70, "HAUTE",
+    Taux < 0.85, "MOYENNE",
+    "CONFORME"
+)
+
+Couleur Alerte RDV =
+SWITCH (
+    [Niveau Alerte RDV],
+    "CRITIQUE", "#D71920",
+    "HAUTE", "#E67E22",
+    "MOYENNE", "#F1C40F",
+    "CONFORME", "#198754",
+    "#667085"
+)
+
+Niveau Alerte Réseau =
+VAR Taux = [Taux mandataires actifs]
+RETURN
+SWITCH (
+    TRUE (),
+    ISBLANK ( Taux ), "NON DISPONIBLE",
+    Taux < 0.60, "CRITIQUE",
+    Taux < 0.80, "HAUTE",
+    Taux < 0.90, "MOYENNE",
+    "CONFORME"
+)
+
+Couleur Alerte Réseau =
+SWITCH (
+    [Niveau Alerte Réseau],
+    "CRITIQUE", "#D71920",
+    "HAUTE", "#E67E22",
+    "MOYENNE", "#F1C40F",
+    "CONFORME", "#198754",
+    "#667085"
+)
+
+Recommandation Volume =
+VAR VarPct = [Variation vs N-1 Volume Affaires (%)]
+RETURN
+SWITCH (
+    TRUE (),
+    ISBLANK ( VarPct ), "Donnée volume affaires indisponible : intégrer fact_affaires.",
+    VarPct < -0.10, "Identifier les agences contributrices au recul et déclencher un plan de relance.",
+    VarPct < 0, "Surveiller la trajectoire et challenger les zones en retrait.",
+    "Sécuriser l’atterrissage."
+)
+
+Nombre Alertes Critiques =
+COALESCE (
+    CALCULATE (
+        COUNTROWS ( fact_alertes ),
+        fact_alertes[niveau_priorite] = "CRITIQUE",
+        fact_alertes[statut_alerte] <> "Cloturee"
+    ),
+    0
+)
+
+Nombre Alertes Hautes =
+COALESCE (
+    CALCULATE (
+        COUNTROWS ( fact_alertes ),
+        fact_alertes[niveau_priorite] = "HAUTE",
+        fact_alertes[statut_alerte] <> "Cloturee"
+    ),
+    0
+)
+
+Nombre Alertes Moyennes =
+COALESCE (
+    CALCULATE (
+        COUNTROWS ( fact_alertes ),
+        fact_alertes[niveau_priorite] = "MOYENNE",
+        fact_alertes[statut_alerte] <> "Cloturee"
+    ),
+    0
+)
+
+Nombre Alertes Ouvertes =
+COALESCE (
+    CALCULATE (
+        COUNTROWS ( fact_alertes ),
+        fact_alertes[statut_alerte] <> "Cloturee"
+    ),
+    0
+)
+
+
+/* -------------------------------------------------------------------------------------
+6) TABLES DÉCONNECTÉES POUR COMPARAISON DE MOIS
+------------------------------------------------------------------------------------- */
+
+Mois Référence =
+SELECTCOLUMNS (
+    dim_date,
+    "Date", dim_date[Date],
+    "Année Mois", dim_date[annee_mois],
+    "Mois", dim_date[nom_du_mois]
+)
+
+Mois Comparé =
+SELECTCOLUMNS (
+    dim_date,
+    "Date", dim_date[Date],
+    "Année Mois", dim_date[annee_mois],
+    "Mois", dim_date[nom_du_mois]
+)
+
+Volume affaires mois référence =
+VAR MoisRef =
+    SELECTEDVALUE ( 'Mois Référence'[Année Mois] )
+RETURN
+CALCULATE (
+    [Volume affaires produites],
+    TREATAS ( { MoisRef }, dim_date[annee_mois] )
+)
+
+Volume affaires mois comparé =
+VAR MoisComp =
+    SELECTEDVALUE ( 'Mois Comparé'[Année Mois] )
+RETURN
+CALCULATE (
+    [Volume affaires produites],
+    TREATAS ( { MoisComp }, dim_date[annee_mois] )
+)
+
+Écart affaires mois comparé vs référence =
+[Volume affaires mois comparé] - [Volume affaires mois référence]
+
+Écart affaires mois comparé vs référence (%) =
+DIVIDE (
+    [Écart affaires mois comparé vs référence],
+    [Volume affaires mois référence],
+    0
+)
+
+
+/* -------------------------------------------------------------------------------------
+7) FIELD PARAMETERS — VERSION CIBLE
+Attention : les colonnes Région / Secteur / Centre d'affaires doivent exister.
+Si elles ne sont pas dans dim_agence aujourd’hui, créer dim_organisation ou enrichir dim_agence.
+------------------------------------------------------------------------------------- */
+
+FP_Axe_Organisation =
+{
+    ( "Agence", NAMEOF ( dim_agence[raison_sociale] ), 0 ),
+    ( "Ville agence", NAMEOF ( dim_agence[ville_agence] ), 1 ),
+    ( "Mandataire", NAMEOF ( dim_mandataire[mandataire_id] ), 2 )
+    -- Ajouter après enrichissement :
+    -- ( "Région", NAMEOF ( dim_organisation[region] ), 3 ),
+    -- ( "Centre d'affaires", NAMEOF ( dim_organisation[centre_affaires] ), 4 ),
+    -- ( "Secteur", NAMEOF ( dim_organisation[secteur] ), 5 )
+}
+
+FP_Axe_RDV =
+{
+    ( "Type de rendez-vous", NAMEOF ( dim_type_rendez_vous_client[libelle_type_rendez_vous] ), 0 ),
+    ( "Canal de rendez-vous", NAMEOF ( dim_type_canal[libelle_type_canal] ), 1 )
+    -- Ajouter si disponible :
+    -- ( "Statut rendez-vous", NAMEOF ( dim_statut_rendez_vous[libelle_statut] ), 2 ),
+    -- ( "Motif rendez-vous", NAMEOF ( dim_motif_rendez_vous[libelle_motif] ), 3 )
+}
+
+FP_Axe_Reseau =
+{
+    ( "Agence", NAMEOF ( dim_agence[raison_sociale] ), 0 ),
+    ( "Ville agence", NAMEOF ( dim_agence[ville_agence] ), 1 ),
+    ( "Mandataire", NAMEOF ( dim_mandataire[mandataire_id] ), 2 )
+}
+
+FP_Metric_Performance =
+{
+    ( "Volume d’affaires produites", NAMEOF ( _Indicateurs[Volume affaires produites] ), 0 ),
+    ( "Volume d’affaires en instance", NAMEOF ( _Indicateurs[Volume affaires en instance] ), 1 ),
+    ( "Volume d’affaires commissionnées", NAMEOF ( _Indicateurs[Volume affaires commissionnées] ), 2 ),
+    ( "Montant moyen de rétrocommission", NAMEOF ( _Indicateurs[Montant moyen de rétrocommission] ), 3 ),
+    ( "Taux atteinte Budget N Volume", NAMEOF ( _Indicateurs[Taux atteinte Budget N Volume] ), 4 )
+}
