@@ -84,36 +84,42 @@ Aucune action requise — fonctionne avec les données actuelles.
 
 ---
 
-### `fact_affaires` — CIBLE : Microsoft Fabric 🔵
-**Statut actuel :** DATATABLE vide (structure prête, 13 colonnes).  
-**Cible de déploiement :** Fabric Lakehouse (Delta Parquet via OneLake) ou Fabric Warehouse.  
-**Développement :** Prévu ultérieurement — la table sera développée et publiée dans un espace de travail Fabric.
+### `fact_affaires` — CIBLE : Fabric Direct Lake 🔵
+**Statut actuel :** DATATABLE vide (placeholder, structure 13 colonnes prête).  
+**Architecture :** Toutes les tables existantes du modèle utilisent Direct Lake (`mode: directLake`, `type: entity`, `schemaName: gold`). `fact_affaires` doit suivre la même architecture.  
+**Lakehouse cible :** workspace `dd7829ed-a0a0-4855-8fb3-d77a15545239` / item `4cf4ebd0-a2d4-4539-a775-a9a852dd6fe0` / schema `gold`
 
 **Colonnes :** affaire_id, date_affaire, mandataire_id, agence_id, produit_id, assureur_id, statut_affaire, montant_affaire, montant_retrocommission, nombre_ventes_partage, flag_produite, flag_instance, flag_commissionnee
 
-**Le jour J (connexion Fabric) :**
-1. Dans Power BI Desktop → Transform Data → remplacer la table calculée par une source Fabric (OneLake ou SQL Endpoint du Warehouse)
-2. Changer `mode` de `calculated` vers `import` (ou `directLake` si le workspace Fabric le supporte)
-3. Créer les relations :
-   - `fact_affaires[mandataire_id]` → `dim_mandataire[mandataire_id]`
-   - `fact_affaires[agence_id]` → `dim_agence[agence_id]`
-   - `fact_affaires[date_affaire]` → `dim_date[Date]`
-4. Republier vers le workspace Fabric
+**Le jour J :**
+1. Créer la table Delta `gold.fact_affaires` dans le Lakehouse (pipeline Fabric ou notebook Spark)
+2. Dans le semantic model : supprimer le DATATABLE calculé
+3. Ajouter la partition Direct Lake (même structure que toutes les autres tables du modèle) :
+   ```json
+   { "name": "fact_affaires", "mode": "directLake",
+     "source": { "type": "entity", "entityName": "fact_affaires",
+                 "expressionSource": "DirectLake - lh_gold", "schemaName": "gold" } }
+   ```
+4. Créer les 3 relations : `mandataire_id → dim_mandataire`, `agence_id → dim_agence`, `date_affaire → dim_date`
+5. Republier
 
 ---
 
-### `budget_affaires` — CIBLE : Excel 📄
-**Statut actuel :** DATATABLE vide (structure prête, 8 colonnes).  
-**Cible de déploiement :** Fichier Excel — import Power Query.  
-**Disponibilité :** Fichier source non disponible à ce jour.
+### `budget_affaires` — CIBLE : Excel → Fabric Dataflow Gen2 → Direct Lake 📄→🔵
+**Statut actuel :** DATATABLE vide (placeholder, structure 8 colonnes prête).  
+**⚠️ Ne pas connecter l'Excel directement au semantic model** : forcerait un fallback Import qui casse l'architecture Direct Lake.  
+**Architecture correcte :** Excel → **Dataflow Gen2 Fabric** → `gold.budget_affaires` dans le Lakehouse → partition Direct Lake (même que toutes les autres tables).
 
-**Colonnes attendues dans l'Excel :** budget_id, date_budget, agence_id, produit_id, assureur_id, budget_affaires_nombre, budget_affaires_euro, budget_retrocommission
+**Colonnes attendues :** budget_id, date_budget, agence_id, produit_id, assureur_id, budget_affaires_nombre, budget_affaires_euro, budget_retrocommission
 
 **Quand le fichier Excel est disponible :**
-1. Dans Power BI Desktop → Get Data → Excel → sélectionner le fichier
-2. Mapper les colonnes ci-dessus (renommer si nécessaire via Power Query)
-3. Supprimer la table calculée vide et la remplacer par la requête Power Query
-4. Créer les relations :
-   - `budget_affaires[agence_id]` → `dim_agence[agence_id]`
-   - `budget_affaires[date_budget]` → `dim_date[Date]`
+1. Dans Fabric : créer un **Dataflow Gen2** → source = fichier Excel (SharePoint/OneDrive/upload) → destination = `gold.budget_affaires` dans le Lakehouse
+2. Dans le semantic model : supprimer le DATATABLE calculé
+3. Ajouter la partition Direct Lake :
+   ```json
+   { "name": "budget_affaires", "mode": "directLake",
+     "source": { "type": "entity", "entityName": "budget_affaires",
+                 "expressionSource": "DirectLake - lh_gold", "schemaName": "gold" } }
+   ```
+4. Créer les 2 relations : `agence_id → dim_agence`, `date_budget → dim_date`
 5. Republier
