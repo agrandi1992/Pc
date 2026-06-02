@@ -75,23 +75,45 @@ Ces mesures ont été ajoutées pour enrichir l'analyse et supporter les alertes
 
 ---
 
-## Tables manquantes — Plan d'intégration
+## Tables — Plan d'intégration et cibles de déploiement
 
-### `fact_affaires`
-**Colonnes attendues :** affaire_id, date_affaire, mandataire_id, agence_id, produit_id, assureur_id, statut_affaire, montant_affaire, montant_retrocommission, nombre_ventes_partage, flag_produite, flag_instance, flag_commissionnee  
-**Relations à créer :**
-- `fact_affaires[mandataire_id]` → `dim_mandataire[mandataire_id]`
-- `fact_affaires[agence_id]` → `dim_agence[agence_id]`
-- `fact_affaires[date_affaire]` → `dim_date[Date]`
+### `fact_alertes` — OPÉRATIONNELLE ✅
+**Statut :** Table calculée DAX générée à chaque refresh depuis les données existantes.  
+**Conditions implémentées :** G.13 (taux RDV < 66% → CRITIQUE), G.14 (prévus/semaine), G.15 (réalisés/semaine), G.18 (taux visio > 33% → HAUTE).  
+Aucune action requise — fonctionne avec les données actuelles.
 
-### `budget_affaires`
-**Colonnes attendues :** budget_id, date_budget, agence_id, produit_id, assureur_id, budget_affaires_nombre, budget_affaires_euro, budget_retrocommission  
-**Relations à créer :**
-- `budget_affaires[agence_id]` → `dim_agence[agence_id]`
-- `budget_affaires[date_budget]` → `dim_date[Date]`
+---
 
-### `fact_alertes`
-**Colonnes attendues :** alerte_id, date_analyse, date_detection, niveau_priorite, categorie_alerte, kpi_concerne, valeur_actuelle, seuil_alerte, ecart, agence_id, mandataire_id, impact_metier, recommandation, statut_alerte  
-**Relations à créer :**
-- `fact_alertes[agence_id]` → `dim_agence[agence_id]`
-- `fact_alertes[mandataire_id]` → `dim_mandataire[mandataire_id]`
+### `fact_affaires` — CIBLE : Microsoft Fabric 🔵
+**Statut actuel :** DATATABLE vide (structure prête, 13 colonnes).  
+**Cible de déploiement :** Fabric Lakehouse (Delta Parquet via OneLake) ou Fabric Warehouse.  
+**Développement :** Prévu ultérieurement — la table sera développée et publiée dans un espace de travail Fabric.
+
+**Colonnes :** affaire_id, date_affaire, mandataire_id, agence_id, produit_id, assureur_id, statut_affaire, montant_affaire, montant_retrocommission, nombre_ventes_partage, flag_produite, flag_instance, flag_commissionnee
+
+**Le jour J (connexion Fabric) :**
+1. Dans Power BI Desktop → Transform Data → remplacer la table calculée par une source Fabric (OneLake ou SQL Endpoint du Warehouse)
+2. Changer `mode` de `calculated` vers `import` (ou `directLake` si le workspace Fabric le supporte)
+3. Créer les relations :
+   - `fact_affaires[mandataire_id]` → `dim_mandataire[mandataire_id]`
+   - `fact_affaires[agence_id]` → `dim_agence[agence_id]`
+   - `fact_affaires[date_affaire]` → `dim_date[Date]`
+4. Republier vers le workspace Fabric
+
+---
+
+### `budget_affaires` — CIBLE : Excel 📄
+**Statut actuel :** DATATABLE vide (structure prête, 8 colonnes).  
+**Cible de déploiement :** Fichier Excel — import Power Query.  
+**Disponibilité :** Fichier source non disponible à ce jour.
+
+**Colonnes attendues dans l'Excel :** budget_id, date_budget, agence_id, produit_id, assureur_id, budget_affaires_nombre, budget_affaires_euro, budget_retrocommission
+
+**Quand le fichier Excel est disponible :**
+1. Dans Power BI Desktop → Get Data → Excel → sélectionner le fichier
+2. Mapper les colonnes ci-dessus (renommer si nécessaire via Power Query)
+3. Supprimer la table calculée vide et la remplacer par la requête Power Query
+4. Créer les relations :
+   - `budget_affaires[agence_id]` → `dim_agence[agence_id]`
+   - `budget_affaires[date_budget]` → `dim_date[Date]`
+5. Republier
