@@ -811,8 +811,7 @@
               "type": "entity",
               "entityName": "glossaire_indicateurs",
               "expressionSource": "DirectLake - lh_gold",
-              "schemaName": "gold",
-              "expression": ""
+              "schemaName": "gold"
             }
           }
         ]
