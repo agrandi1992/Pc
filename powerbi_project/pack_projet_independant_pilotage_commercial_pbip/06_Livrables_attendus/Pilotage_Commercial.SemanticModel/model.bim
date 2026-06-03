@@ -2966,28 +2966,6 @@
       {
         "name": "fact_affaires",
         "lineageTag": "ffac198d-dc61-4733-8a1a-8908bce0635f",
-        "mode": "calculated",
-        "calculatedTableExpression": {
-          "kind": "calculated",
-          "expression": [
-            "DATATABLE(",
-            "    \"affaire_id\", STRING,",
-            "    \"date_affaire\", DATETIME,",
-            "    \"mandataire_id\", STRING,",
-            "    \"agence_id\", STRING,",
-            "    \"produit_id\", STRING,",
-            "    \"assureur_id\", STRING,",
-            "    \"statut_affaire\", STRING,",
-            "    \"montant_affaire\", CURRENCY,",
-            "    \"montant_retrocommission\", CURRENCY,",
-            "    \"nombre_ventes_partage\", INTEGER,",
-            "    \"flag_produite\", BOOLEAN,",
-            "    \"flag_instance\", BOOLEAN,",
-            "    \"flag_commissionnee\", BOOLEAN,",
-            "    {}",
-            ")"
-          ]
-        },
         "columns": [
           {
             "type": "calculatedTableColumn",
@@ -3150,28 +3128,37 @@
             "name": "SCHEMA_COLS",
             "value": "affaire_id, date_affaire, mandataire_id, agence_id, produit_id, assureur_id, statut_affaire, montant_affaire, montant_retrocommission, nombre_ventes_partage, flag_produite, flag_instance, flag_commissionnee"
           }
+        ],
+        "partitions": [
+          {
+            "name": "fact_affaires",
+            "source": {
+              "type": "calculated",
+              "expression": [
+                "DATATABLE(",
+                "    \"affaire_id\", STRING,",
+                "    \"date_affaire\", DATETIME,",
+                "    \"mandataire_id\", STRING,",
+                "    \"agence_id\", STRING,",
+                "    \"produit_id\", STRING,",
+                "    \"assureur_id\", STRING,",
+                "    \"statut_affaire\", STRING,",
+                "    \"montant_affaire\", CURRENCY,",
+                "    \"montant_retrocommission\", CURRENCY,",
+                "    \"nombre_ventes_partage\", INTEGER,",
+                "    \"flag_produite\", BOOLEAN,",
+                "    \"flag_instance\", BOOLEAN,",
+                "    \"flag_commissionnee\", BOOLEAN,",
+                "    {}",
+                ")"
+              ]
+            }
+          }
         ]
       },
       {
         "name": "budget_affaires",
         "lineageTag": "a060012d-c014-4c73-994b-dc3c0602369f",
-        "mode": "calculated",
-        "calculatedTableExpression": {
-          "kind": "calculated",
-          "expression": [
-            "DATATABLE(",
-            "    \"budget_id\", STRING,",
-            "    \"date_budget\", DATETIME,",
-            "    \"agence_id\", STRING,",
-            "    \"produit_id\", STRING,",
-            "    \"assureur_id\", STRING,",
-            "    \"budget_affaires_nombre\", INTEGER,",
-            "    \"budget_affaires_euro\", CURRENCY,",
-            "    \"budget_retrocommission\", CURRENCY,",
-            "    {}",
-            ")"
-          ]
-        },
         "columns": [
           {
             "type": "calculatedTableColumn",
@@ -3288,148 +3275,32 @@
             "name": "SCHEMA_COLS",
             "value": "budget_id, date_budget, agence_id, produit_id, assureur_id, budget_affaires_nombre, budget_affaires_euro, budget_retrocommission"
           }
+        ],
+        "partitions": [
+          {
+            "name": "budget_affaires",
+            "source": {
+              "type": "calculated",
+              "expression": [
+                "DATATABLE(",
+                "    \"budget_id\", STRING,",
+                "    \"date_budget\", DATETIME,",
+                "    \"agence_id\", STRING,",
+                "    \"produit_id\", STRING,",
+                "    \"assureur_id\", STRING,",
+                "    \"budget_affaires_nombre\", INTEGER,",
+                "    \"budget_affaires_euro\", CURRENCY,",
+                "    \"budget_retrocommission\", CURRENCY,",
+                "    {}",
+                ")"
+              ]
+            }
+          }
         ]
       },
       {
         "name": "fact_alertes",
         "lineageTag": "332a73e1-b532-4c86-afa4-025db8b93450",
-        "mode": "calculated",
-        "calculatedTableExpression": {
-          "kind": "calculated",
-          "expression": [
-            "// fact_alertes : table calculée — génère des alertes à partir des conditions KPI Excel",
-            "VAR _DateAnalyse = TODAY()",
-            "",
-            "// Statistiques RDV par mandataire",
-            "VAR _Stats =",
-            "    ADDCOLUMNS(",
-            "        FILTER(",
-            "            ALL(dim_mandataire[mandataire_id]),",
-            "            CALCULATE(COUNTROWS(bridge_rendez_vous_mandataire)) > 0",
-            "        ),",
-            "        \"@nb_prevus\",",
-            "            CALCULATE(DISTINCTCOUNT(bridge_rendez_vous_mandataire[rendez_vous_id])),",
-            "        \"@nb_realises\",",
-            "            CALCULATE(",
-            "                DISTINCTCOUNT(bridge_rendez_vous_mandataire[rendez_vous_id]),",
-            "                CROSSFILTER(bridge_rendez_vous_mandataire[rendez_vous_id], fact_rendez_vous_client[rendez_vous_id], BOTH),",
-            "                fact_rendez_vous_client[flag_rendez_vous_realise] = TRUE()",
-            "            ),",
-            "        \"@nb_visio\",",
-            "            CALCULATE(",
-            "                DISTINCTCOUNT(bridge_rendez_vous_mandataire[rendez_vous_id]),",
-            "                CROSSFILTER(bridge_rendez_vous_mandataire[rendez_vous_id], fact_rendez_vous_client[rendez_vous_id], BOTH),",
-            "                fact_rendez_vous_client[flag_rendez_vous_realise] = TRUE(),",
-            "                fact_rendez_vous_client[flag_visio] = TRUE()",
-            "            ),",
-            "        \"@nb_semaines\",",
-            "            CALCULATE(",
-            "                DISTINCTCOUNTX(dim_date, dim_date[annee] * 100 + dim_date[numero_de_la_semaine]),",
-            "                CROSSFILTER(bridge_rendez_vous_mandataire[rendez_vous_id], fact_rendez_vous_client[rendez_vous_id], BOTH),",
-            "                CROSSFILTER(fact_rendez_vous_client[date_rendez_vous_client], dim_date[Date], BOTH)",
-            "            ),",
-            "        \"@agence_id\",",
-            "            CALCULATE(FIRSTNONBLANK(fact_activite_mandataire[agence_id], 1))",
-            "    )",
-            "",
-            "// Métriques dérivées",
-            "VAR _Metrics =",
-            "    ADDCOLUMNS(",
-            "        _Stats,",
-            "        \"@taux_realisation\",    DIVIDE([@nb_realises], [@nb_prevus], 0),",
-            "        \"@rdv_prevus_semaine\",  DIVIDE([@nb_prevus],   IF([@nb_semaines] > 0, [@nb_semaines], 1), 0),",
-            "        \"@rdv_realises_semaine\",DIVIDE([@nb_realises], IF([@nb_semaines] > 0, [@nb_semaines], 1), 0),",
-            "        \"@taux_visio\",          DIVIDE([@nb_visio],    IF([@nb_realises] > 0, [@nb_realises],  1), 0)",
-            "    )",
-            "",
-            "// G.13 : taux réalisation RDV < 66% → CRITIQUE",
-            "VAR _Alertes_G13 =",
-            "    SELECTCOLUMNS(",
-            "        FILTER(_Metrics, [@nb_prevus] > 0 && [@taux_realisation] < 0.66),",
-            "        \"alerte_id\",      \"G13-\" & [mandataire_id] & \"-\" & FORMAT(_DateAnalyse, \"YYYYMMDD\"),",
-            "        \"date_analyse\",   _DateAnalyse,",
-            "        \"date_detection\", _DateAnalyse,",
-            "        \"niveau_priorite\",\"CRITIQUE\",",
-            "        \"categorie_alerte\",\"RDV\",",
-            "        \"kpi_concerne\",   \"G.13 - Taux réalisation de rendez-vous\",",
-            "        \"valeur_actuelle\",[@taux_realisation],",
-            "        \"seuil_alerte\",   0.66,",
-            "        \"ecart\",          [@taux_realisation] - 0.66,",
-            "        \"agence_id\",      [@agence_id],",
-            "        \"mandataire_id\",  [mandataire_id],",
-            "        \"impact_metier\",  \"Taux de réalisation RDV insuffisant\",",
-            "        \"recommandation\", \"Relancer les mandataires avec un taux de réalisation RDV inférieur à 66%\",",
-            "        \"statut_alerte\",  \"Ouverte\"",
-            "    )",
-            "",
-            "// G.14 : RDV prévus/semaine — seuil bas 15 (CRITIQUE) / haut 18 (HAUTE)",
-            "VAR _Alertes_G14 =",
-            "    SELECTCOLUMNS(",
-            "        FILTER(_Metrics, [@nb_prevus] > 0 && [@rdv_prevus_semaine] < 18),",
-            "        \"alerte_id\",      \"G14-\" & [mandataire_id] & \"-\" & FORMAT(_DateAnalyse, \"YYYYMMDD\"),",
-            "        \"date_analyse\",   _DateAnalyse,",
-            "        \"date_detection\", _DateAnalyse,",
-            "        \"niveau_priorite\",IF([@rdv_prevus_semaine] < 15, \"CRITIQUE\", \"HAUTE\"),",
-            "        \"categorie_alerte\",\"RDV\",",
-            "        \"kpi_concerne\",   \"G.14 - Nombre rendez-vous prévus\",",
-            "        \"valeur_actuelle\",[@rdv_prevus_semaine],",
-            "        \"seuil_alerte\",   IF([@rdv_prevus_semaine] < 15, 15.0, 18.0),",
-            "        \"ecart\",          [@rdv_prevus_semaine] - IF([@rdv_prevus_semaine] < 15, 15.0, 18.0),",
-            "        \"agence_id\",      [@agence_id],",
-            "        \"mandataire_id\",  [mandataire_id],",
-            "        \"impact_metier\",  \"Volume de RDV planifiés insuffisant\",",
-            "        \"recommandation\", IF([@rdv_prevus_semaine] < 15,",
-            "            \"Urgence : moins de 15 RDV prévus/semaine — renforcer la prospection\",",
-            "            \"Surveiller : objectif 18 RDV prévus/semaine non atteint\"),",
-            "        \"statut_alerte\",  \"Ouverte\"",
-            "    )",
-            "",
-            "// G.15 : RDV réalisés/semaine — seuil bas 12 (CRITIQUE) / haut 15 (HAUTE)",
-            "VAR _Alertes_G15 =",
-            "    SELECTCOLUMNS(",
-            "        FILTER(_Metrics, [@nb_realises] > 0 && [@rdv_realises_semaine] < 15),",
-            "        \"alerte_id\",      \"G15-\" & [mandataire_id] & \"-\" & FORMAT(_DateAnalyse, \"YYYYMMDD\"),",
-            "        \"date_analyse\",   _DateAnalyse,",
-            "        \"date_detection\", _DateAnalyse,",
-            "        \"niveau_priorite\",IF([@rdv_realises_semaine] < 12, \"CRITIQUE\", \"HAUTE\"),",
-            "        \"categorie_alerte\",\"RDV\",",
-            "        \"kpi_concerne\",   \"G.15 - Nombre rendez-vous réalisés\",",
-            "        \"valeur_actuelle\",[@rdv_realises_semaine],",
-            "        \"seuil_alerte\",   IF([@rdv_realises_semaine] < 12, 12.0, 15.0),",
-            "        \"ecart\",          [@rdv_realises_semaine] - IF([@rdv_realises_semaine] < 12, 12.0, 15.0),",
-            "        \"agence_id\",      [@agence_id],",
-            "        \"mandataire_id\",  [mandataire_id],",
-            "        \"impact_metier\",  \"Volume de RDV réalisés insuffisant\",",
-            "        \"recommandation\", IF([@rdv_realises_semaine] < 12,",
-            "            \"Urgence : moins de 12 RDV réalisés/semaine\",",
-            "            \"Surveiller : objectif 15 RDV réalisés/semaine non atteint\"),",
-            "        \"statut_alerte\",  \"Ouverte\"",
-            "    )",
-            "",
-            "// G.18 : taux visio > 33% par mandataire → HAUTE",
-            "VAR _Alertes_G18 =",
-            "    SELECTCOLUMNS(",
-            "        FILTER(_Metrics, [@nb_realises] > 0 && [@taux_visio] > 0.33),",
-            "        \"alerte_id\",      \"G18-\" & [mandataire_id] & \"-\" & FORMAT(_DateAnalyse, \"YYYYMMDD\"),",
-            "        \"date_analyse\",   _DateAnalyse,",
-            "        \"date_detection\", _DateAnalyse,",
-            "        \"niveau_priorite\",\"HAUTE\",",
-            "        \"categorie_alerte\",\"RDV Visio\",",
-            "        \"kpi_concerne\",   \"G.18 - Taux rendez-vous en visioconférence\",",
-            "        \"valeur_actuelle\",[@taux_visio],",
-            "        \"seuil_alerte\",   0.33,",
-            "        \"ecart\",          [@taux_visio] - 0.33,",
-            "        \"agence_id\",      [@agence_id],",
-            "        \"mandataire_id\",  [mandataire_id],",
-            "        \"impact_metier\",  \"Sur-représentation des RDV en visioconférence\",",
-            "        \"recommandation\", \"Rééquilibrer en faveur des RDV physiques (domicile) — alerter le centre d'affaires\",",
-            "        \"statut_alerte\",  \"Ouverte\"",
-            "    )",
-            "",
-            "RETURN",
-            "UNION(_Alertes_G13, _Alertes_G14, _Alertes_G15, _Alertes_G18)"
-          ]
-        },
         "columns": [
           {
             "type": "calculatedTableColumn",
@@ -3579,28 +3450,152 @@
             "name": "PBI_ResultType",
             "value": "Table"
           }
+        ],
+        "partitions": [
+          {
+            "name": "fact_alertes",
+            "source": {
+              "type": "calculated",
+              "expression": [
+                "// fact_alertes : table calculée — génère des alertes à partir des conditions KPI Excel",
+                "VAR _DateAnalyse = TODAY()",
+                "",
+                "// Statistiques RDV par mandataire",
+                "VAR _Stats =",
+                "    ADDCOLUMNS(",
+                "        FILTER(",
+                "            ALL(dim_mandataire[mandataire_id]),",
+                "            CALCULATE(COUNTROWS(bridge_rendez_vous_mandataire)) > 0",
+                "        ),",
+                "        \"@nb_prevus\",",
+                "            CALCULATE(DISTINCTCOUNT(bridge_rendez_vous_mandataire[rendez_vous_id])),",
+                "        \"@nb_realises\",",
+                "            CALCULATE(",
+                "                DISTINCTCOUNT(bridge_rendez_vous_mandataire[rendez_vous_id]),",
+                "                CROSSFILTER(bridge_rendez_vous_mandataire[rendez_vous_id], fact_rendez_vous_client[rendez_vous_id], BOTH),",
+                "                fact_rendez_vous_client[flag_rendez_vous_realise] = TRUE()",
+                "            ),",
+                "        \"@nb_visio\",",
+                "            CALCULATE(",
+                "                DISTINCTCOUNT(bridge_rendez_vous_mandataire[rendez_vous_id]),",
+                "                CROSSFILTER(bridge_rendez_vous_mandataire[rendez_vous_id], fact_rendez_vous_client[rendez_vous_id], BOTH),",
+                "                fact_rendez_vous_client[flag_rendez_vous_realise] = TRUE(),",
+                "                fact_rendez_vous_client[flag_visio] = TRUE()",
+                "            ),",
+                "        \"@nb_semaines\",",
+                "            CALCULATE(",
+                "                DISTINCTCOUNTX(dim_date, dim_date[annee] * 100 + dim_date[numero_de_la_semaine]),",
+                "                CROSSFILTER(bridge_rendez_vous_mandataire[rendez_vous_id], fact_rendez_vous_client[rendez_vous_id], BOTH),",
+                "                CROSSFILTER(fact_rendez_vous_client[date_rendez_vous_client], dim_date[Date], BOTH)",
+                "            ),",
+                "        \"@agence_id\",",
+                "            CALCULATE(FIRSTNONBLANK(fact_activite_mandataire[agence_id], 1))",
+                "    )",
+                "",
+                "// Métriques dérivées",
+                "VAR _Metrics =",
+                "    ADDCOLUMNS(",
+                "        _Stats,",
+                "        \"@taux_realisation\",    DIVIDE([@nb_realises], [@nb_prevus], 0),",
+                "        \"@rdv_prevus_semaine\",  DIVIDE([@nb_prevus],   IF([@nb_semaines] > 0, [@nb_semaines], 1), 0),",
+                "        \"@rdv_realises_semaine\",DIVIDE([@nb_realises], IF([@nb_semaines] > 0, [@nb_semaines], 1), 0),",
+                "        \"@taux_visio\",          DIVIDE([@nb_visio],    IF([@nb_realises] > 0, [@nb_realises],  1), 0)",
+                "    )",
+                "",
+                "// G.13 : taux réalisation RDV < 66% → CRITIQUE",
+                "VAR _Alertes_G13 =",
+                "    SELECTCOLUMNS(",
+                "        FILTER(_Metrics, [@nb_prevus] > 0 && [@taux_realisation] < 0.66),",
+                "        \"alerte_id\",      \"G13-\" & [mandataire_id] & \"-\" & FORMAT(_DateAnalyse, \"YYYYMMDD\"),",
+                "        \"date_analyse\",   _DateAnalyse,",
+                "        \"date_detection\", _DateAnalyse,",
+                "        \"niveau_priorite\",\"CRITIQUE\",",
+                "        \"categorie_alerte\",\"RDV\",",
+                "        \"kpi_concerne\",   \"G.13 - Taux réalisation de rendez-vous\",",
+                "        \"valeur_actuelle\",[@taux_realisation],",
+                "        \"seuil_alerte\",   0.66,",
+                "        \"ecart\",          [@taux_realisation] - 0.66,",
+                "        \"agence_id\",      [@agence_id],",
+                "        \"mandataire_id\",  [mandataire_id],",
+                "        \"impact_metier\",  \"Taux de réalisation RDV insuffisant\",",
+                "        \"recommandation\", \"Relancer les mandataires avec un taux de réalisation RDV inférieur à 66%\",",
+                "        \"statut_alerte\",  \"Ouverte\"",
+                "    )",
+                "",
+                "// G.14 : RDV prévus/semaine — seuil bas 15 (CRITIQUE) / haut 18 (HAUTE)",
+                "VAR _Alertes_G14 =",
+                "    SELECTCOLUMNS(",
+                "        FILTER(_Metrics, [@nb_prevus] > 0 && [@rdv_prevus_semaine] < 18),",
+                "        \"alerte_id\",      \"G14-\" & [mandataire_id] & \"-\" & FORMAT(_DateAnalyse, \"YYYYMMDD\"),",
+                "        \"date_analyse\",   _DateAnalyse,",
+                "        \"date_detection\", _DateAnalyse,",
+                "        \"niveau_priorite\",IF([@rdv_prevus_semaine] < 15, \"CRITIQUE\", \"HAUTE\"),",
+                "        \"categorie_alerte\",\"RDV\",",
+                "        \"kpi_concerne\",   \"G.14 - Nombre rendez-vous prévus\",",
+                "        \"valeur_actuelle\",[@rdv_prevus_semaine],",
+                "        \"seuil_alerte\",   IF([@rdv_prevus_semaine] < 15, 15.0, 18.0),",
+                "        \"ecart\",          [@rdv_prevus_semaine] - IF([@rdv_prevus_semaine] < 15, 15.0, 18.0),",
+                "        \"agence_id\",      [@agence_id],",
+                "        \"mandataire_id\",  [mandataire_id],",
+                "        \"impact_metier\",  \"Volume de RDV planifiés insuffisant\",",
+                "        \"recommandation\", IF([@rdv_prevus_semaine] < 15,",
+                "            \"Urgence : moins de 15 RDV prévus/semaine — renforcer la prospection\",",
+                "            \"Surveiller : objectif 18 RDV prévus/semaine non atteint\"),",
+                "        \"statut_alerte\",  \"Ouverte\"",
+                "    )",
+                "",
+                "// G.15 : RDV réalisés/semaine — seuil bas 12 (CRITIQUE) / haut 15 (HAUTE)",
+                "VAR _Alertes_G15 =",
+                "    SELECTCOLUMNS(",
+                "        FILTER(_Metrics, [@nb_realises] > 0 && [@rdv_realises_semaine] < 15),",
+                "        \"alerte_id\",      \"G15-\" & [mandataire_id] & \"-\" & FORMAT(_DateAnalyse, \"YYYYMMDD\"),",
+                "        \"date_analyse\",   _DateAnalyse,",
+                "        \"date_detection\", _DateAnalyse,",
+                "        \"niveau_priorite\",IF([@rdv_realises_semaine] < 12, \"CRITIQUE\", \"HAUTE\"),",
+                "        \"categorie_alerte\",\"RDV\",",
+                "        \"kpi_concerne\",   \"G.15 - Nombre rendez-vous réalisés\",",
+                "        \"valeur_actuelle\",[@rdv_realises_semaine],",
+                "        \"seuil_alerte\",   IF([@rdv_realises_semaine] < 12, 12.0, 15.0),",
+                "        \"ecart\",          [@rdv_realises_semaine] - IF([@rdv_realises_semaine] < 12, 12.0, 15.0),",
+                "        \"agence_id\",      [@agence_id],",
+                "        \"mandataire_id\",  [mandataire_id],",
+                "        \"impact_metier\",  \"Volume de RDV réalisés insuffisant\",",
+                "        \"recommandation\", IF([@rdv_realises_semaine] < 12,",
+                "            \"Urgence : moins de 12 RDV réalisés/semaine\",",
+                "            \"Surveiller : objectif 15 RDV réalisés/semaine non atteint\"),",
+                "        \"statut_alerte\",  \"Ouverte\"",
+                "    )",
+                "",
+                "// G.18 : taux visio > 33% par mandataire → HAUTE",
+                "VAR _Alertes_G18 =",
+                "    SELECTCOLUMNS(",
+                "        FILTER(_Metrics, [@nb_realises] > 0 && [@taux_visio] > 0.33),",
+                "        \"alerte_id\",      \"G18-\" & [mandataire_id] & \"-\" & FORMAT(_DateAnalyse, \"YYYYMMDD\"),",
+                "        \"date_analyse\",   _DateAnalyse,",
+                "        \"date_detection\", _DateAnalyse,",
+                "        \"niveau_priorite\",\"HAUTE\",",
+                "        \"categorie_alerte\",\"RDV Visio\",",
+                "        \"kpi_concerne\",   \"G.18 - Taux rendez-vous en visioconférence\",",
+                "        \"valeur_actuelle\",[@taux_visio],",
+                "        \"seuil_alerte\",   0.33,",
+                "        \"ecart\",          [@taux_visio] - 0.33,",
+                "        \"agence_id\",      [@agence_id],",
+                "        \"mandataire_id\",  [mandataire_id],",
+                "        \"impact_metier\",  \"Sur-représentation des RDV en visioconférence\",",
+                "        \"recommandation\", \"Rééquilibrer en faveur des RDV physiques (domicile) — alerter le centre d'affaires\",",
+                "        \"statut_alerte\",  \"Ouverte\"",
+                "    )",
+                "",
+                "RETURN",
+                "UNION(_Alertes_G13, _Alertes_G14, _Alertes_G15, _Alertes_G18)"
+              ]
+            }
+          }
         ]
       },
       {
         "name": "Periode_Affichage",
         "lineageTag": "6ad5e16e-c033-46df-8dba-2f9bec559f16",
-        "mode": "calculated",
-        "calculatedTableExpression": {
-          "kind": "calculated",
-          "expression": [
-            "DATATABLE(",
-            "    \"Periode\", STRING,",
-            "    \"Ordre\", INTEGER,",
-            "    {",
-            "        {\"Jour\", 1},",
-            "        {\"Semaine\", 2},",
-            "        {\"Mois\", 3},",
-            "        {\"Trimestre\", 4},",
-            "        {\"Ann\\u00e9e\", 5}",
-            "    }",
-            ")"
-          ]
-        },
         "columns": [
           {
             "type": "calculatedTableColumn",
@@ -3628,27 +3623,32 @@
             "name": "PBI_ResultType",
             "value": "Table"
           }
+        ],
+        "partitions": [
+          {
+            "name": "Periode_Affichage",
+            "source": {
+              "type": "calculated",
+              "expression": [
+                "DATATABLE(",
+                "    \"Periode\", STRING,",
+                "    \"Ordre\", INTEGER,",
+                "    {",
+                "        {\"Jour\", 1},",
+                "        {\"Semaine\", 2},",
+                "        {\"Mois\", 3},",
+                "        {\"Trimestre\", 4},",
+                "        {\"Ann\\u00e9e\", 5}",
+                "    }",
+                ")"
+              ]
+            }
+          }
         ]
       },
       {
         "name": "FP_Axe_Organisation",
         "lineageTag": "e69939a1-c666-43cd-81e6-2ee411658828",
-        "mode": "calculated",
-        "calculatedTableExpression": {
-          "kind": "calculated",
-          "expression": [
-            "SELECTCOLUMNS(",
-            "    {",
-            "        (1, \"Agence\", NAMEOF(dim_agence[raison_sociale])),",
-            "        (2, \"Ville Agence\", NAMEOF(dim_agence[ville_agence])),",
-            "        (3, \"Mandataire\", NAMEOF(dim_mandataire[mandataire_id]))",
-            "    },",
-            "    \"Ordre\", [Value1],",
-            "    \"FP_Axe_Organisation\", [Value2],",
-            "    \"FP_Axe_Organisation Fields\", [Value3]",
-            ")"
-          ]
-        },
         "columns": [
           {
             "type": "calculatedTableColumn",
@@ -3691,27 +3691,31 @@
             "name": "PBI_NavigationStepName",
             "value": "Navigation"
           }
+        ],
+        "partitions": [
+          {
+            "name": "FP_Axe_Organisation",
+            "source": {
+              "type": "calculated",
+              "expression": [
+                "SELECTCOLUMNS(",
+                "    {",
+                "        (1, \"Agence\", NAMEOF(dim_agence[raison_sociale])),",
+                "        (2, \"Ville Agence\", NAMEOF(dim_agence[ville_agence])),",
+                "        (3, \"Mandataire\", NAMEOF(dim_mandataire[mandataire_id]))",
+                "    },",
+                "    \"Ordre\", [Value1],",
+                "    \"FP_Axe_Organisation\", [Value2],",
+                "    \"FP_Axe_Organisation Fields\", [Value3]",
+                ")"
+              ]
+            }
+          }
         ]
       },
       {
         "name": "FP_Axe_Reseau",
         "lineageTag": "1ed78ba3-2646-4627-8010-49e6aecbdeac",
-        "mode": "calculated",
-        "calculatedTableExpression": {
-          "kind": "calculated",
-          "expression": [
-            "SELECTCOLUMNS(",
-            "    {",
-            "        (1, \"Agence\", NAMEOF(dim_agence[raison_sociale])),",
-            "        (2, \"Ville Agence\", NAMEOF(dim_agence[ville_agence])),",
-            "        (3, \"Mandataire\", NAMEOF(dim_mandataire[mandataire_id]))",
-            "    },",
-            "    \"Ordre\", [Value1],",
-            "    \"FP_Axe_Reseau\", [Value2],",
-            "    \"FP_Axe_Reseau Fields\", [Value3]",
-            ")"
-          ]
-        },
         "columns": [
           {
             "type": "calculatedTableColumn",
@@ -3754,26 +3758,31 @@
             "name": "PBI_NavigationStepName",
             "value": "Navigation"
           }
+        ],
+        "partitions": [
+          {
+            "name": "FP_Axe_Reseau",
+            "source": {
+              "type": "calculated",
+              "expression": [
+                "SELECTCOLUMNS(",
+                "    {",
+                "        (1, \"Agence\", NAMEOF(dim_agence[raison_sociale])),",
+                "        (2, \"Ville Agence\", NAMEOF(dim_agence[ville_agence])),",
+                "        (3, \"Mandataire\", NAMEOF(dim_mandataire[mandataire_id]))",
+                "    },",
+                "    \"Ordre\", [Value1],",
+                "    \"FP_Axe_Reseau\", [Value2],",
+                "    \"FP_Axe_Reseau Fields\", [Value3]",
+                ")"
+              ]
+            }
+          }
         ]
       },
       {
         "name": "FP_Axe_RDV",
         "lineageTag": "48c5c6de-9991-4dca-a878-a64cd60075dd",
-        "mode": "calculated",
-        "calculatedTableExpression": {
-          "kind": "calculated",
-          "expression": [
-            "SELECTCOLUMNS(",
-            "    {",
-            "        (1, \"Type de rendez-vous\", NAMEOF(dim_type_rendez_vous_client[libelle_type_rendez_vous])),",
-            "        (2, \"Canal\", NAMEOF(fact_rendez_vous_client[type_rendez_vous_id]))",
-            "    },",
-            "    \"Ordre\", [Value1],",
-            "    \"FP_Axe_RDV\", [Value2],",
-            "    \"FP_Axe_RDV Fields\", [Value3]",
-            ")"
-          ]
-        },
         "columns": [
           {
             "type": "calculatedTableColumn",
@@ -3816,23 +3825,30 @@
             "name": "PBI_NavigationStepName",
             "value": "Navigation"
           }
+        ],
+        "partitions": [
+          {
+            "name": "FP_Axe_RDV",
+            "source": {
+              "type": "calculated",
+              "expression": [
+                "SELECTCOLUMNS(",
+                "    {",
+                "        (1, \"Type de rendez-vous\", NAMEOF(dim_type_rendez_vous_client[libelle_type_rendez_vous])),",
+                "        (2, \"Canal\", NAMEOF(fact_rendez_vous_client[type_rendez_vous_id]))",
+                "    },",
+                "    \"Ordre\", [Value1],",
+                "    \"FP_Axe_RDV\", [Value2],",
+                "    \"FP_Axe_RDV Fields\", [Value3]",
+                ")"
+              ]
+            }
+          }
         ]
       },
       {
         "name": "Mois_Reference",
         "lineageTag": "d4748a67-4180-4769-a195-36ef9b0a0146",
-        "mode": "calculated",
-        "calculatedTableExpression": {
-          "kind": "calculated",
-          "expression": [
-            "SELECTCOLUMNS(",
-            "    dim_date,",
-            "    \"Date\", dim_date[Date],",
-            "    \"Ann\\u00e9e Mois\", dim_date[annee_mois],",
-            "    \"Mois\", dim_date[nom_du_mois]",
-            ")"
-          ]
-        },
         "columns": [
           {
             "type": "calculatedTableColumn",
@@ -3871,23 +3887,27 @@
             "name": "PBI_ResultType",
             "value": "Table"
           }
+        ],
+        "partitions": [
+          {
+            "name": "Mois_Reference",
+            "source": {
+              "type": "calculated",
+              "expression": [
+                "SELECTCOLUMNS(",
+                "    dim_date,",
+                "    \"Date\", dim_date[Date],",
+                "    \"Ann\\u00e9e Mois\", dim_date[annee_mois],",
+                "    \"Mois\", dim_date[nom_du_mois]",
+                ")"
+              ]
+            }
+          }
         ]
       },
       {
         "name": "Mois_Compare",
         "lineageTag": "aeb0f371-6f26-4e88-83ea-018b3d9e2d87",
-        "mode": "calculated",
-        "calculatedTableExpression": {
-          "kind": "calculated",
-          "expression": [
-            "SELECTCOLUMNS(",
-            "    dim_date,",
-            "    \"Date\", dim_date[Date],",
-            "    \"Ann\\u00e9e Mois\", dim_date[annee_mois],",
-            "    \"Mois\", dim_date[nom_du_mois]",
-            ")"
-          ]
-        },
         "columns": [
           {
             "type": "calculatedTableColumn",
@@ -3925,6 +3945,22 @@
           {
             "name": "PBI_ResultType",
             "value": "Table"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Mois_Compare",
+            "source": {
+              "type": "calculated",
+              "expression": [
+                "SELECTCOLUMNS(",
+                "    dim_date,",
+                "    \"Date\", dim_date[Date],",
+                "    \"Ann\\u00e9e Mois\", dim_date[annee_mois],",
+                "    \"Mois\", dim_date[nom_du_mois]",
+                ")"
+              ]
+            }
           }
         ]
       }
