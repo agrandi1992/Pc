@@ -176,15 +176,6 @@
         },
         {
           "x": 34,
-          "y": 317,
-          "z": 2,
-          "width": 267,
-          "height": 18,
-          "config": "{\"name\": \"KPI_1_LBL\", \"layouts\": [{\"id\": 0, \"position\": {\"x\": 34, \"y\": 317, \"z\": 2, \"height\": 18, \"width\": 267, \"tabOrder\": 2}}], \"singleVisual\": {\"visualType\": \"textbox\", \"objects\": {\"general\": [{\"properties\": {\"paragraphs\": [{\"textRuns\": [{\"value\": \"Volume d'affaires produites\", \"textStyle\": {\"bold\": false, \"fontFamily\": \"Segoe UI\", \"fontSize\": \"9pt\", \"color\": {\"solid\": {\"color\": {\"expr\": {\"Literal\": {\"Value\": \"'#667085'\"}}}}}, \"fontWeight\": \"Normal\"}}], \"horizontalTextAlignment\": \"Left\"}]}}]}}}",
-          "filters": "[]"
-        },
-        {
-          "x": 34,
           "y": 377,
           "z": 4,
           "width": 120,
@@ -248,15 +239,6 @@
         },
         {
           "x": 331,
-          "y": 317,
-          "z": 2,
-          "width": 267,
-          "height": 18,
-          "config": "{\"name\": \"KPI_2_LBL\", \"layouts\": [{\"id\": 0, \"position\": {\"x\": 331, \"y\": 317, \"z\": 2, \"height\": 18, \"width\": 267, \"tabOrder\": 2}}], \"singleVisual\": {\"visualType\": \"textbox\", \"objects\": {\"general\": [{\"properties\": {\"paragraphs\": [{\"textRuns\": [{\"value\": \"Volume d'affaires en instance\", \"textStyle\": {\"bold\": false, \"fontFamily\": \"Segoe UI\", \"fontSize\": \"9pt\", \"color\": {\"solid\": {\"color\": {\"expr\": {\"Literal\": {\"Value\": \"'#667085'\"}}}}}, \"fontWeight\": \"Normal\"}}], \"horizontalTextAlignment\": \"Left\"}]}}]}}}",
-          "filters": "[]"
-        },
-        {
-          "x": 331,
           "y": 377,
           "z": 4,
           "width": 120,
@@ -316,15 +298,6 @@
           "width": 4,
           "height": 147,
           "config": "{\"name\": \"KPI_3_LEFT\", \"layouts\": [{\"id\": 0, \"position\": {\"x\": 614, \"y\": 305, \"z\": 1, \"height\": 147, \"width\": 4, \"tabOrder\": 1}}], \"singleVisual\": {\"visualType\": \"shape\", \"objects\": {\"line\": [{\"properties\": {\"strokeWidth\": {\"expr\": {\"Literal\": {\"Value\": \"0D\"}}}}, \"selector\": {\"id\": \"default\"}}], \"fill\": [{\"properties\": {\"fillColor\": {\"solid\": {\"color\": {\"expr\": {\"Literal\": {\"Value\": \"'#0A4E97'\"}}}}}, \"show\": {\"expr\": {\"Literal\": {\"Value\": \"true\"}}}}, \"selector\": {\"id\": \"default\"}}]}, \"drillFilterOtherVisuals\": true}}",
-          "filters": "[]"
-        },
-        {
-          "x": 628,
-          "y": 317,
-          "z": 2,
-          "width": 267,
-          "height": 18,
-          "config": "{\"name\": \"KPI_3_LBL\", \"layouts\": [{\"id\": 0, \"position\": {\"x\": 628, \"y\": 317, \"z\": 2, \"height\": 18, \"width\": 267, \"tabOrder\": 2}}], \"singleVisual\": {\"visualType\": \"textbox\", \"objects\": {\"general\": [{\"properties\": {\"paragraphs\": [{\"textRuns\": [{\"value\": \"Volume d'affaires commissionnées\", \"textStyle\": {\"bold\": false, \"fontFamily\": \"Segoe UI\", \"fontSize\": \"9pt\", \"color\": {\"solid\": {\"color\": {\"expr\": {\"Literal\": {\"Value\": \"'#667085'\"}}}}}, \"fontWeight\": \"Normal\"}}], \"horizontalTextAlignment\": \"Left\"}]}}]}}}",
           "filters": "[]"
         },
         {
@@ -1118,15 +1091,6 @@
           "height": 190,
           "config": "{\"name\": \"CHART_REPT_BG\", \"layouts\": [{\"id\": 0, \"position\": {\"x\": 775, \"y\": 878, \"z\": 0, \"height\": 190, \"width\": 745, \"tabOrder\": 0}}], \"singleVisual\": {\"visualType\": \"shape\", \"objects\": {\"line\": [{\"properties\": {\"strokeWidth\": {\"expr\": {\"Literal\": {\"Value\": \"0D\"}}}}, \"selector\": {\"id\": \"default\"}}], \"fill\": [{\"properties\": {\"fillColor\": {\"solid\": {\"color\": {\"expr\": {\"Literal\": {\"Value\": \"'#FFFFFF'\"}}}}}, \"show\": {\"expr\": {\"Literal\": {\"Value\": \"true\"}}}}, \"selector\": {\"id\": \"default\"}}], \"rotation\": [{\"properties\": {\"rx\": {\"expr\": {\"Literal\": {\"Value\": \"8D\"}}}, \"ry\": {\"expr\": {\"Literal\": {\"Value\": \"8D\"}}}}, \"selector\": {\"id\": \"default\"}}]}, \"drillFilterOtherVisuals\": true}}",
           "filters": "[]"
-        },
-        {
-          "x": 790,
-          "y": 886,
-          "z": 10,
-          "width": 400,
-          "height": 22,
-          "config": "{\"name\": \"CHART_REPT_TIT\", \"layouts\": [{\"id\": 0, \"position\": {\"x\": 790, \"y\": 886, \"z\": 10, \"height\": 22, \"width\": 400, \"tabOrder\": 10}}], \"singleVisual\": {\"visualType\": \"textbox\", \"objects\": {\"general\": [{\"properties\": {\"paragraphs\": [{\"textRuns\": [{\"value\": \"Répartition des affaires commissionnées\", \"textStyle\": {\"bold\": true, \"fontFamily\": \"Segoe UI\", \"fontSize\": \"11pt\", \"color\": {\"solid\": {\"color\": {\"expr\": {\"Literal\": {\"Value\": \"'#1E293B'\"}}}}}, \"fontWeight\": \"Bold\"}}], \"horizontalTextAlignment\": \"Left\"}]}}]}}}",
-          "filters": "[]"
         }
       ]
     },
@@ -1304,15 +1268,6 @@
         },
         {
           "x": 34,
-          "y": 317,
-          "z": 2,
-          "width": 267,
-          "height": 18,
-          "config": "{\"name\": \"KPI_1_LBL\", \"layouts\": [{\"id\": 0, \"position\": {\"x\": 34, \"y\": 317, \"z\": 2, \"height\": 18, \"width\": 267, \"tabOrder\": 2}}], \"singleVisual\": {\"visualType\": \"textbox\", \"objects\": {\"general\": [{\"properties\": {\"paragraphs\": [{\"textRuns\": [{\"value\": \"Volume d'affaires produites\", \"textStyle\": {\"bold\": false, \"fontFamily\": \"Segoe UI\", \"fontSize\": \"9pt\", \"color\": {\"solid\": {\"color\": {\"expr\": {\"Literal\": {\"Value\": \"'#667085'\"}}}}}, \"fontWeight\": \"Normal\"}}], \"horizontalTextAlignment\": \"Left\"}]}}]}}}",
-          "filters": "[]"
-        },
-        {
-          "x": 34,
           "y": 377,
           "z": 4,
           "width": 120,
@@ -1376,15 +1331,6 @@
         },
         {
           "x": 331,
-          "y": 317,
-          "z": 2,
-          "width": 267,
-          "height": 18,
-          "config": "{\"name\": \"KPI_2_LBL\", \"layouts\": [{\"id\": 0, \"position\": {\"x\": 331, \"y\": 317, \"z\": 2, \"height\": 18, \"width\": 267, \"tabOrder\": 2}}], \"singleVisual\": {\"visualType\": \"textbox\", \"objects\": {\"general\": [{\"properties\": {\"paragraphs\": [{\"textRuns\": [{\"value\": \"Volume d'affaires en instance\", \"textStyle\": {\"bold\": false, \"fontFamily\": \"Segoe UI\", \"fontSize\": \"9pt\", \"color\": {\"solid\": {\"color\": {\"expr\": {\"Literal\": {\"Value\": \"'#667085'\"}}}}}, \"fontWeight\": \"Normal\"}}], \"horizontalTextAlignment\": \"Left\"}]}}]}}}",
-          "filters": "[]"
-        },
-        {
-          "x": 331,
           "y": 377,
           "z": 4,
           "width": 120,
@@ -1444,15 +1390,6 @@
           "width": 4,
           "height": 157,
           "config": "{\"name\": \"KPI_3_LEFT\", \"layouts\": [{\"id\": 0, \"position\": {\"x\": 614, \"y\": 305, \"z\": 1, \"height\": 157, \"width\": 4, \"tabOrder\": 1}}], \"singleVisual\": {\"visualType\": \"shape\", \"objects\": {\"line\": [{\"properties\": {\"strokeWidth\": {\"expr\": {\"Literal\": {\"Value\": \"0D\"}}}}, \"selector\": {\"id\": \"default\"}}], \"fill\": [{\"properties\": {\"fillColor\": {\"solid\": {\"color\": {\"expr\": {\"Literal\": {\"Value\": \"'#0A4E97'\"}}}}}, \"show\": {\"expr\": {\"Literal\": {\"Value\": \"true\"}}}}, \"selector\": {\"id\": \"default\"}}]}, \"drillFilterOtherVisuals\": true}}",
-          "filters": "[]"
-        },
-        {
-          "x": 628,
-          "y": 317,
-          "z": 2,
-          "width": 267,
-          "height": 18,
-          "config": "{\"name\": \"KPI_3_LBL\", \"layouts\": [{\"id\": 0, \"position\": {\"x\": 628, \"y\": 317, \"z\": 2, \"height\": 18, \"width\": 267, \"tabOrder\": 2}}], \"singleVisual\": {\"visualType\": \"textbox\", \"objects\": {\"general\": [{\"properties\": {\"paragraphs\": [{\"textRuns\": [{\"value\": \"Vol. d'affaires commissionnées\", \"textStyle\": {\"bold\": false, \"fontFamily\": \"Segoe UI\", \"fontSize\": \"9pt\", \"color\": {\"solid\": {\"color\": {\"expr\": {\"Literal\": {\"Value\": \"'#667085'\"}}}}}, \"fontWeight\": \"Normal\"}}], \"horizontalTextAlignment\": \"Left\"}]}}]}}}",
           "filters": "[]"
         },
         {
