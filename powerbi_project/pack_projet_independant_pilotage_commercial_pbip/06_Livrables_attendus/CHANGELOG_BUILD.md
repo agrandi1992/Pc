@@ -284,3 +284,72 @@
 | KPIs Excel en placeholder (données pending) | 16/29 |
 | Pages rapport | 8 |
 | Visuels total | 712 |
+
+---
+
+## [1.3.0] — 2026-06-03 — Qualité, navigation, audit complet
+
+### BIM — Semantic Model
+
+| Action | Détail |
+|--------|--------|
+| Fix | `Flag mandataire actif` + `Flag rétrocommissionné` : isHidden=true, folder `Pilotage Commercial - Réseau` — mesures utilitaires orphelines non référencées |
+
+### Report (report.json)
+
+#### Navigation — câblage complet (58/60 boutons)
+
+| Action | Détail |
+|--------|--------|
+| Ajout action | 56 boutons de navigation (7×8 pages) câblés avec `PAGE_NAVIGATION` → section cible |
+| Ajout action | Bouton "Afficher le tableau" Réseau MIA → ReportSection04B |
+| Ajout action | Bouton "Afficher le tableau" Réseau MIA - Tableau → ReportSection04 |
+| Non câblé | 2 boutons Glossaire (Indicateurs/Définitions) : nécessitent des bookmarks |
+
+#### Étiquettes obsolètes — nettoyage complet
+
+| Localisation | Avant | Après |
+|-------------|-------|-------|
+| Accueil (1034,518) | "À créer" | "BIM OK" (Niveau Alerte Réseau opérationnel) |
+| Accueil (530,634/696/758/820) ×4 | "À créer" | "BIM OK" (fact_alertes opérationnelle) |
+| Alertes (47,513) | "fact_affaires absente (opérationnel le jour J)" | "données pending (Day J)" |
+
+#### Canvas — hauteurs pages corrigées
+
+| Page | Avant | Après | Raison |
+|------|-------|-------|--------|
+| Réseau MIA | 1080px | 1560px | barChart à y=1276 hors canvas |
+| Réseau MIA - Tableau | 1080px | 1800px | tableEx à y=1572 hors canvas |
+| Rendez-vous | 1080px | 1160px | cards G.12/G.17-G.21 à y=1093 |
+
+#### Table Alertes — colonnes métier
+
+| Action | Détail |
+|--------|--------|
+| Suppression | `alerte_id` — identifiant technique sans valeur métier |
+| Ajout | `dim_agence[raison_sociale]` — agence concernée par l'alerte |
+| Ajout | `fact_alertes[mandataire_id]` — mandataire concerné |
+
+#### Vérifications — aucun défaut trouvé
+
+- ✓ Aucun visuel ne référence une table cachée
+- ✓ Tous les slicers correctement câblés (source alias = entité résolue)
+- ✓ Aucune mesure orpheline sans folder
+- ✓ Glossaire → `gold.glossaire_indicateurs` Direct Lake opérationnel
+- ✓ fact_alertes DAX : 131 lignes, UNION de 4 alertes (G.13/G.14/G.15/G.18)
+
+### Statut global v1.3.0
+
+| Indicateur | Valeur |
+|-----------|--------|
+| Tables BIM | 27 (9 cachées) |
+| Mesures totales | 74 (59 visibles, 15 cachées) |
+| Relations | 21 |
+| Mesures actives dans rapport | 39/59 |
+| KPIs Excel couverts (avec données) | 13/29 |
+| KPIs Excel en placeholder (données pending) | 16/29 |
+| Pages rapport | 8 |
+| Visuels total | 712 |
+| Boutons navigation câblés | 58/60 |
+| Visuals hors canvas | 0 |
+| Étiquettes obsolètes | 0 |
