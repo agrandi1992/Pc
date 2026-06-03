@@ -6,8 +6,5 @@
         "path": "Pilotage_Commercial.Report"
       }
     }
-  ],
-  "settings": {
-    "enableTmdlSaveMode": false
-  }
+  ]
 }
