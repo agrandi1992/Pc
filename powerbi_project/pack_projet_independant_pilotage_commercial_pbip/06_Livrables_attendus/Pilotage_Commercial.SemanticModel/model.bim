@@ -1643,7 +1643,9 @@
               {
                 "property": "Name"
               }
-            ]
+            ],
+            "displayFolder": "Pilotage Commercial - Réseau",
+            "isHidden": true
           }
         ]
       },
@@ -2850,7 +2852,9 @@
               {
                 "property": "Name"
               }
-            ]
+            ],
+            "displayFolder": "Pilotage Commercial - Réseau",
+            "isHidden": true
           }
         ]
       },
