@@ -2328,6 +2328,12 @@
             "formatString": "#,0.0"
           },
           {
+            "name": "Niveau Alerte Volume",
+            "expression": "VAR RDV_Semaine = [Nombre RDV hebdomadaire moyen]\nRETURN SWITCH(TRUE(),\n    ISBLANK(RDV_Semaine), \"NON DISPONIBLE\",\n    RDV_Semaine < 12, \"CRITIQUE\",\n    RDV_Semaine < 15, \"HAUTE\",\n    RDV_Semaine < 18, \"MOYENNE\",\n    \"CONFORME\")",
+            "displayFolder": "Pilotage Commercial - Alertes",
+            "lineageTag": "b2c05d6a-87e7-47b9-86a7-7619d6d88791"
+          },
+          {
             "name": "Couleur Alerte Volume",
             "expression": "SWITCH([Niveau Alerte Volume],\n    \"CRITIQUE\", \"#D71920\",\n    \"HAUTE\", \"#E67E22\",\n    \"MOYENNE\", \"#F1C40F\",\n    \"CONFORME\", \"#198754\",\n    \"#667085\")",
             "displayFolder": "Pilotage Commercial - Alertes",
