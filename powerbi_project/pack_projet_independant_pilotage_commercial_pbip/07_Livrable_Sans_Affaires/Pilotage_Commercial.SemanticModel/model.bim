@@ -2388,6 +2388,52 @@
               "DIVIDE([Nombre RDV confirmés], [Nombre rendez-vous prévus], 0)"
             ],
             "formatString": "0.0%"
+          },
+          {
+            "name": "Priorité Alerte Maximale",
+            "expression": "VAR rdv    = SWITCH([Niveau Alerte RDV],    \"CRITIQUE\", 3, \"HAUTE\", 2, \"MOYENNE\", 1, 0)\nVAR volume = SWITCH([Niveau Alerte Volume], \"CRITIQUE\", 3, \"HAUTE\", 2, \"MOYENNE\", 1, 0)\nVAR maxS   = MAX(rdv, volume)\nRETURN SWITCH(maxS, 3, \"CRITIQUE\", 2, \"HAUTE\", 1, \"MOYENNE\", \"CONFORME\")",
+            "displayFolder": "Pilotage Commercial - Alertes",
+            "lineageTag": "a1b2c3d4-0001-0001-0001-000000000001"
+          },
+          {
+            "name": "Nombre Alertes Critiques",
+            "expression": "COUNTROWS(\n    FILTER(\n        VALUES(dim_mandataire[mandataire_id]),\n        [Niveau Alerte RDV]    = \"CRITIQUE\"\n        || [Niveau Alerte Volume] = \"CRITIQUE\"\n    )\n)",
+            "displayFolder": "Pilotage Commercial - Alertes",
+            "lineageTag": "b0f2bbf8-2a07-46f3-a346-87a59a6140ee",
+            "formatString": "#,0"
+          },
+          {
+            "name": "Nombre Alertes Hautes",
+            "expression": "COUNTROWS(\n    FILTER(\n        VALUES(dim_mandataire[mandataire_id]),\n        [Niveau Alerte RDV]    = \"HAUTE\"\n        || [Niveau Alerte Volume] = \"HAUTE\"\n    )\n)",
+            "displayFolder": "Pilotage Commercial - Alertes",
+            "lineageTag": "d241149d-ef73-4ca9-981d-1ac33db089c7",
+            "formatString": "#,0"
+          },
+          {
+            "name": "Nombre Alertes Moyennes",
+            "expression": "COUNTROWS(\n    FILTER(\n        VALUES(dim_mandataire[mandataire_id]),\n        [Niveau Alerte RDV]    = \"MOYENNE\"\n        || [Niveau Alerte Volume] = \"MOYENNE\"\n    )\n)",
+            "displayFolder": "Pilotage Commercial - Alertes",
+            "lineageTag": "689c1016-e50d-49ea-a5e0-fda5a0c7a020",
+            "formatString": "#,0"
+          },
+          {
+            "name": "Nombre Alertes Ouvertes",
+            "expression": "COUNTROWS(\n    FILTER(\n        VALUES(dim_mandataire[mandataire_id]),\n        [Priorité Alerte Maximale] <> \"CONFORME\"\n    )\n)",
+            "displayFolder": "Pilotage Commercial - Alertes",
+            "lineageTag": "32e234f2-4983-4d5b-8b60-21fab1eb2393",
+            "formatString": "#,0"
+          },
+          {
+            "name": "Recommandation Alerte RDV",
+            "expression": "VAR Taux = [Taux réalisation de rendez-vous]\nRETURN SWITCH([Niveau Alerte RDV],\n    \"CRITIQUE\", \"Taux \" & FORMAT(Taux, \"0%\") & \" — relancer immédiatement les RDV non honorés\",\n    \"HAUTE\",    \"Taux \" & FORMAT(Taux, \"0%\") & \" — suivre et accompagner ce mandataire\",\n    \"MOYENNE\",  \"Taux \" & FORMAT(Taux, \"0%\") & \" — encourager la planification des RDV\",\n    BLANK()\n)",
+            "displayFolder": "Pilotage Commercial - Alertes",
+            "lineageTag": "a1b2c3d4-0002-0002-0002-000000000002"
+          },
+          {
+            "name": "Recommandation Alerte Volume",
+            "expression": "VAR RDV_Sem = [Nombre RDV hebdomadaire moyen]\nRETURN SWITCH([Niveau Alerte Volume],\n    \"CRITIQUE\", FORMAT(RDV_Sem, \"0.0\") & \" RDV/sem — renforcer la prospection en urgence (objectif : 12+)\",\n    \"HAUTE\",    FORMAT(RDV_Sem, \"0.0\") & \" RDV/sem — objectif 15/semaine non atteint\",\n    \"MOYENNE\",  FORMAT(RDV_Sem, \"0.0\") & \" RDV/sem — objectif 18 prévus/semaine non atteint\",\n    BLANK()\n)",
+            "displayFolder": "Pilotage Commercial - Alertes",
+            "lineageTag": "a1b2c3d4-0003-0003-0003-000000000003"
           }
         ],
         "annotations": [
