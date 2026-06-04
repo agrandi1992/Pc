@@ -3824,30 +3824,6 @@
         "fromColumn": "mandataire_id",
         "toTable": "dim_mandataire",
         "toColumn": "mandataire_id"
-      },
-      {
-        "name": "51d3b9c2-347d-4e34-a41f-b5c4c5ded267",
-        "fromTable": "fact_alertes",
-        "fromColumn": "mandataire_id",
-        "toTable": "dim_mandataire",
-        "toColumn": "mandataire_id",
-        "crossFilteringBehavior": "oneDirection"
-      },
-      {
-        "name": "15cb7270-f84c-49a2-b37f-523883899a46",
-        "fromTable": "fact_alertes",
-        "fromColumn": "agence_id",
-        "toTable": "dim_agence",
-        "toColumn": "agence_id",
-        "crossFilteringBehavior": "oneDirection"
-      },
-      {
-        "name": "0a66ccbb-4930-4753-82e6-43338270734f",
-        "fromTable": "fact_alertes",
-        "fromColumn": "date_analyse",
-        "toTable": "dim_date",
-        "toColumn": "Date",
-        "crossFilteringBehavior": "oneDirection"
       }
     ],
     "expressions": [
