@@ -1426,6 +1426,79 @@
               "expression": "let\n    Source = #table(\n        type table [agence_id = text, mandataire_responsable_id = text, raison_sociale = text,\n                    adresse_agence = text, ville_agence = text, code_postal_agence = text],\n        {\n            {\"AGE001\", \"MAN001\", \"Cap Paris 8\",    \"12 Rue du Faubourg Saint-Honoré\", \"Paris\",     \"75008\"},\n            {\"AGE002\", \"MAN002\", \"Cap Lyon Centre\", \"5 Place Bellecour\",               \"Lyon\",      \"69002\"},\n            {\"AGE003\", \"MAN003\", \"Cap Marseille\",   \"10 La Canebière\",                 \"Marseille\", \"13001\"},\n            {\"AGE004\", \"MAN004\", \"Cap Bordeaux\",    \"25 Cours de l'Intendance\",        \"Bordeaux\",  \"33000\"},\n            {\"AGE005\", \"MAN005\", \"Cap Nantes\",      \"3 Rue du Calvaire\",               \"Nantes\",    \"44000\"}\n        }\n    )\nin Source"
             }
           }
+        ],
+        "measures": [
+          {
+            "name": "Nombre mandataires actifs",
+            "expression": [
+              "VAR DateContexte = COALESCE(MAX(dim_date[Date]), TODAY())",
+              "VAR DateLimite = DateContexte - 30",
+              "RETURN",
+              "CALCULATE(",
+              "    DISTINCTCOUNT(fact_activite_mandataire[mandataire_id]),",
+              "    fact_activite_mandataire[flag_connexion] = 1,",
+              "    fact_activite_mandataire[date_connexion] >= DateLimite,",
+              "    fact_activite_mandataire[date_connexion] <= DateContexte",
+              ")"
+            ],
+            "formatString": ""
+          },
+          {
+            "name": "Nombre mandataires inactifs",
+            "expression": [
+              "VAR DateContexte = COALESCE(MAX(dim_date[Date]), TODAY())",
+              "VAR DateLimite = DateContexte - 30",
+              "RETURN",
+              "CALCULATE(",
+              "    DISTINCTCOUNT(fact_activite_mandataire[mandataire_id]),",
+              "    NOT(",
+              "        fact_activite_mandataire[flag_connexion] = 1",
+              "            && fact_activite_mandataire[date_connexion] >= DateLimite",
+              "            && fact_activite_mandataire[date_connexion] <= DateContexte",
+              "    )",
+              ")"
+            ],
+            "formatString": "#,0"
+          },
+          {
+            "name": "Nombre mandataires rétrocommissionnés",
+            "expression": [
+              "CALCULATE(",
+              "    DISTINCTCOUNT ( dim_mandataire[mandataire_id] ),",
+              "    fact_rendez_vous_client[commission_realise] > 0",
+              ")"
+            ],
+            "formatString": "0"
+          },
+          {
+            "name": "Nombre rendez-vous prévus",
+            "expression": [
+              "DISTINCTCOUNT ( bridge_rendez_vous_mandataire[rendez_vous_id] )"
+            ],
+            "formatString": "#,0"
+          },
+          {
+            "name": "Nombre rendez-vous réalisés",
+            "expression": [
+              "CALCULATE(",
+              "    DISTINCTCOUNT ( bridge_rendez_vous_mandataire[rendez_vous_id] ),",
+              "    fact_rendez_vous_client[flag_rendez_vous_realise] = TRUE()",
+              ")"
+            ],
+            "formatString": "#,0"
+          },
+          {
+            "name": "Montant rétrocommission",
+            "expression": [
+              "VAR Montant =",
+              "    CALCULATE(",
+              "        SUM(fact_rendez_vous_client[montant_realise]),",
+              "        fact_rendez_vous_client[commission_realise] > 0",
+              "    )",
+              "RETURN COALESCE(Montant, 0)"
+            ],
+            "formatString": "0"
+          }
         ]
       },
       {
@@ -3465,6 +3538,11 @@
                 "value": "Automatic"
               }
             ]
+          },
+          {
+            "name": "agence_id",
+            "dataType": "string",
+            "sourceColumn": "agence_id"
           }
         ],
         "partitions": [
@@ -3473,7 +3551,7 @@
             "mode": "import",
             "source": {
               "type": "m",
-              "expression": "let\n    Source = #table(\n        type table [affaire_id = text, client_id = text, contrat_id = text, produit_id = text,\n                    etat_affaire_id = text, date_saisie_administrative = date,\n                    type_affaire = text, collecte = Int64.Type, periodicite = text,\n                    chiffre_affaires = Int64.Type, flag_pu = Int64.Type, flag_cross_selling = logical],\n        {\n            {\"AFF001\",\"CLI001\",\"CTR001\",\"PRD001\",\"ETA001\",#date(2024,1,15),\"Versement Initial\",    1,\"Unique\",    45000, 1, false},\n            {\"AFF002\",\"CLI002\",\"CTR002\",\"PRD002\",\"ETA001\",#date(2024,1,22),\"Versement Initial\",    1,\"Mensuel\",   12000, 1, false},\n            {\"AFF003\",\"CLI003\",\"CTR003\",\"PRD003\",\"ETA002\",#date(2024,2,5), \"Versement Complémentaire\",1,\"Unique\", 30000, 0, false},\n            {\"AFF004\",\"CLI004\",\"CTR004\",\"PRD001\",\"ETA001\",#date(2024,2,18),\"Versement Initial\",    1,\"Unique\",    80000, 1, true},\n            {\"AFF005\",\"CLI005\",\"CTR005\",\"PRD004\",\"ETA003\",#date(2024,3,3), \"Versement Initial\",    1,\"Trimestriel\",25000,0, false},\n            {\"AFF006\",\"CLI006\",\"CTR006\",\"PRD002\",\"ETA001\",#date(2024,3,20),\"Versement Initial\",    1,\"Mensuel\",   18000, 1, false},\n            {\"AFF007\",\"CLI007\",\"CTR007\",\"PRD005\",\"ETA001\",#date(2024,4,8), \"Versement Initial\",    1,\"Unique\",    55000, 1, true},\n            {\"AFF008\",\"CLI008\",\"CTR008\",\"PRD001\",\"ETA002\",#date(2024,4,25),\"Versement Complémentaire\",1,\"Unique\", 22000, 0, false},\n            {\"AFF009\",\"CLI009\",\"CTR009\",\"PRD003\",\"ETA001\",#date(2024,5,12),\"Versement Initial\",    1,\"Unique\",    40000, 1, false},\n            {\"AFF010\",\"CLI010\",\"CTR010\",\"PRD001\",\"ETA001\",#date(2024,5,28),\"Versement Initial\",    1,\"Mensuel\",   15000, 1, false},\n            {\"AFF011\",\"CLI001\",\"CTR011\",\"PRD002\",\"ETA001\",#date(2024,6,10),\"Versement Initial\",    1,\"Unique\",    60000, 1, false},\n            {\"AFF012\",\"CLI002\",\"CTR012\",\"PRD004\",\"ETA002\",#date(2024,6,25),\"Versement Complémentaire\",1,\"Unique\", 8000,  0, false},\n            {\"AFF013\",\"CLI003\",\"CTR013\",\"PRD001\",\"ETA001\",#date(2024,7,14),\"Versement Initial\",    1,\"Unique\",    95000, 1, true},\n            {\"AFF014\",\"CLI004\",\"CTR014\",\"PRD005\",\"ETA001\",#date(2024,7,30),\"Versement Initial\",    1,\"Mensuel\",   20000, 1, false},\n            {\"AFF015\",\"CLI005\",\"CTR015\",\"PRD002\",\"ETA001\",#date(2024,8,16),\"Versement Initial\",    1,\"Unique\",    35000, 1, false},\n            {\"AFF016\",\"CLI006\",\"CTR016\",\"PRD003\",\"ETA003\",#date(2024,8,28),\"Versement Complémentaire\",1,\"Unique\", 12000, 0, false},\n            {\"AFF017\",\"CLI007\",\"CTR017\",\"PRD001\",\"ETA001\",#date(2024,9,5), \"Versement Initial\",    1,\"Unique\",    70000, 1, false},\n            {\"AFF018\",\"CLI008\",\"CTR018\",\"PRD004\",\"ETA001\",#date(2024,9,22),\"Versement Initial\",    1,\"Mensuel\",   16000, 1, true},\n            {\"AFF019\",\"CLI009\",\"CTR019\",\"PRD001\",\"ETA002\",#date(2024,10,8),\"Versement Complémentaire\",1,\"Unique\", 28000, 0, false},\n            {\"AFF020\",\"CLI010\",\"CTR020\",\"PRD002\",\"ETA001\",#date(2024,10,25),\"Versement Initial\",   1,\"Unique\",    50000, 1, false},\n            {\"AFF021\",\"CLI001\",\"CTR021\",\"PRD005\",\"ETA001\",#date(2024,11,12),\"Versement Initial\",   1,\"Unique\",    42000, 1, false},\n            {\"AFF022\",\"CLI002\",\"CTR022\",\"PRD001\",\"ETA001\",#date(2024,11,28),\"Versement Initial\",   1,\"Mensuel\",   19000, 1, false},\n            {\"AFF023\",\"CLI003\",\"CTR023\",\"PRD003\",\"ETA001\",#date(2024,12,10),\"Versement Initial\",   1,\"Unique\",    88000, 1, true},\n            {\"AFF024\",\"CLI004\",\"CTR024\",\"PRD002\",\"ETA002\",#date(2024,12,20),\"Versement Complémentaire\",1,\"Unique\",5000,  0, false},\n            {\"AFF025\",\"CLI001\",\"CTR025\",\"PRD001\",\"ETA001\",#date(2023,3,15),\"Versement Initial\",    1,\"Unique\",    38000, 1, false},\n            {\"AFF026\",\"CLI002\",\"CTR026\",\"PRD002\",\"ETA001\",#date(2023,6,22),\"Versement Initial\",    1,\"Mensuel\",   14000, 1, false},\n            {\"AFF027\",\"CLI003\",\"CTR027\",\"PRD001\",\"ETA001\",#date(2023,9,8), \"Versement Initial\",    1,\"Unique\",    65000, 1, false},\n            {\"AFF028\",\"CLI004\",\"CTR028\",\"PRD004\",\"ETA001\",#date(2023,12,3),\"Versement Initial\",    1,\"Unique\",    32000, 1, false}\n        }\n    )\nin Source"
+              "expression": "let\n    Source = #table(\n        type table [affaire_id = text, client_id = text, contrat_id = text, produit_id = text,\n                    etat_affaire_id = text, date_saisie_administrative = date,\n                    type_affaire = text, collecte = Int64.Type, periodicite = text,\n                    chiffre_affaires = Int64.Type, flag_pu = Int64.Type, flag_cross_selling = logical, agence_id = text],\n        {\n            {\"AFF001\",\"CLI001\",\"CTR001\",\"PRD001\",\"ETA001\",#date(2024,1,15),\"Versement Initial\",    1,\"Unique\",    45000, 1, false, \"AGE001\"},\n            {\"AFF002\",\"CLI002\",\"CTR002\",\"PRD002\",\"ETA001\",#date(2024,1,22),\"Versement Initial\",    1,\"Mensuel\",   12000, 1, false, \"AGE002\"},\n            {\"AFF003\",\"CLI003\",\"CTR003\",\"PRD003\",\"ETA002\",#date(2024,2,5), \"Versement Complémentaire\",1,\"Unique\", 30000, 0, false, \"AGE001\"},\n            {\"AFF004\",\"CLI004\",\"CTR004\",\"PRD001\",\"ETA001\",#date(2024,2,18),\"Versement Initial\",    1,\"Unique\",    80000, 1, true, \"AGE001\"},\n            {\"AFF005\",\"CLI005\",\"CTR005\",\"PRD004\",\"ETA003\",#date(2024,3,3), \"Versement Initial\",    1,\"Trimestriel\",25000,0, false, \"AGE002\"},\n            {\"AFF006\",\"CLI006\",\"CTR006\",\"PRD002\",\"ETA001\",#date(2024,3,20),\"Versement Initial\",    1,\"Mensuel\",   18000, 1, false, \"AGE002\"},\n            {\"AFF007\",\"CLI007\",\"CTR007\",\"PRD005\",\"ETA001\",#date(2024,4,8), \"Versement Initial\",    1,\"Unique\",    55000, 1, true, \"AGE003\"},\n            {\"AFF008\",\"CLI008\",\"CTR008\",\"PRD001\",\"ETA002\",#date(2024,4,25),\"Versement Complémentaire\",1,\"Unique\", 22000, 0, false, \"AGE003\"},\n            {\"AFF009\",\"CLI009\",\"CTR009\",\"PRD003\",\"ETA001\",#date(2024,5,12),\"Versement Initial\",    1,\"Unique\",    40000, 1, false, \"AGE004\"},\n            {\"AFF010\",\"CLI010\",\"CTR010\",\"PRD001\",\"ETA001\",#date(2024,5,28),\"Versement Initial\",    1,\"Mensuel\",   15000, 1, false, \"AGE004\"},\n            {\"AFF011\",\"CLI001\",\"CTR011\",\"PRD002\",\"ETA001\",#date(2024,6,10),\"Versement Initial\",    1,\"Unique\",    60000, 1, false, \"AGE001\"},\n            {\"AFF012\",\"CLI002\",\"CTR012\",\"PRD004\",\"ETA002\",#date(2024,6,25),\"Versement Complémentaire\",1,\"Unique\", 8000,  0, false, \"AGE002\"},\n            {\"AFF013\",\"CLI003\",\"CTR013\",\"PRD001\",\"ETA001\",#date(2024,7,14),\"Versement Initial\",    1,\"Unique\",    95000, 1, true, \"AGE001\"},\n            {\"AFF014\",\"CLI004\",\"CTR014\",\"PRD005\",\"ETA001\",#date(2024,7,30),\"Versement Initial\",    1,\"Mensuel\",   20000, 1, false, \"AGE003\"},\n            {\"AFF015\",\"CLI005\",\"CTR015\",\"PRD002\",\"ETA001\",#date(2024,8,16),\"Versement Initial\",    1,\"Unique\",    35000, 1, false, \"AGE004\"},\n            {\"AFF016\",\"CLI006\",\"CTR016\",\"PRD003\",\"ETA003\",#date(2024,8,28),\"Versement Complémentaire\",1,\"Unique\", 12000, 0, false, \"AGE005\"},\n            {\"AFF017\",\"CLI007\",\"CTR017\",\"PRD001\",\"ETA001\",#date(2024,9,5), \"Versement Initial\",    1,\"Unique\",    70000, 1, false, \"AGE001\"},\n            {\"AFF018\",\"CLI008\",\"CTR018\",\"PRD004\",\"ETA001\",#date(2024,9,22),\"Versement Initial\",    1,\"Mensuel\",   16000, 1, true, \"AGE002\"},\n            {\"AFF019\",\"CLI009\",\"CTR019\",\"PRD001\",\"ETA002\",#date(2024,10,8),\"Versement Complémentaire\",1,\"Unique\", 28000, 0, false, \"AGE003\"},\n            {\"AFF020\",\"CLI010\",\"CTR020\",\"PRD002\",\"ETA001\",#date(2024,10,25),\"Versement Initial\",   1,\"Unique\",    50000, 1, false, \"AGE004\"},\n            {\"AFF021\",\"CLI001\",\"CTR021\",\"PRD005\",\"ETA001\",#date(2024,11,12),\"Versement Initial\",   1,\"Unique\",    42000, 1, false, \"AGE005\"},\n            {\"AFF022\",\"CLI002\",\"CTR022\",\"PRD001\",\"ETA001\",#date(2024,11,28),\"Versement Initial\",   1,\"Mensuel\",   19000, 1, false, \"AGE001\"},\n            {\"AFF023\",\"CLI003\",\"CTR023\",\"PRD003\",\"ETA001\",#date(2024,12,10),\"Versement Initial\",   1,\"Unique\",    88000, 1, true, \"AGE002\"},\n            {\"AFF024\",\"CLI004\",\"CTR024\",\"PRD002\",\"ETA002\",#date(2024,12,20),\"Versement Complémentaire\",1,\"Unique\",5000,  0, false, \"AGE003\"},\n            {\"AFF025\",\"CLI001\",\"CTR025\",\"PRD001\",\"ETA001\",#date(2023,3,15),\"Versement Initial\",    1,\"Unique\",    38000, 1, false, \"AGE001\"},\n            {\"AFF026\",\"CLI002\",\"CTR026\",\"PRD002\",\"ETA001\",#date(2023,6,22),\"Versement Initial\",    1,\"Mensuel\",   14000, 1, false, \"AGE002\"},\n            {\"AFF027\",\"CLI003\",\"CTR027\",\"PRD001\",\"ETA001\",#date(2023,9,8), \"Versement Initial\",    1,\"Unique\",    65000, 1, false, \"AGE001\"},\n            {\"AFF028\",\"CLI004\",\"CTR028\",\"PRD004\",\"ETA001\",#date(2023,12,3),\"Versement Initial\",    1,\"Unique\",    32000, 1, false, \"AGE004\"}\n        }\n    )\nin Source"
             }
           }
         ]
@@ -3529,6 +3607,61 @@
             "source": {
               "type": "m",
               "expression": "let\n    Source = #table(\n        type table [produit_id = text, libelle_produit = text, libelle_gamme_produit = text],\n        {\n            {\"PRD001\", \"Assurance Vie Multisupport\", \"Épargne\"},\n            {\"PRD002\", \"PER Individuel\",              \"Retraite\"},\n            {\"PRD003\", \"SCPI Rendement\",              \"Immobilier\"},\n            {\"PRD004\", \"Assurance Vie Euros\",         \"Épargne\"},\n            {\"PRD005\", \"PER Entreprise\",              \"Retraite\"}\n        }\n    )\nin Source"
+            }
+          }
+        ]
+      },
+      {
+        "name": "fact_alertes",
+        "columns": [
+          {
+            "name": "alerte_id",
+            "dataType": "string",
+            "sourceColumn": "alerte_id"
+          },
+          {
+            "name": "mandataire_id",
+            "dataType": "string",
+            "sourceColumn": "mandataire_id"
+          },
+          {
+            "name": "kpi_concerne",
+            "dataType": "string",
+            "sourceColumn": "kpi_concerne"
+          },
+          {
+            "name": "niveau_priorite",
+            "dataType": "string",
+            "sourceColumn": "niveau_priorite"
+          },
+          {
+            "name": "statut_alerte",
+            "dataType": "string",
+            "sourceColumn": "statut_alerte"
+          },
+          {
+            "name": "valeur_actuelle",
+            "dataType": "double",
+            "sourceColumn": "valeur_actuelle"
+          },
+          {
+            "name": "recommandation",
+            "dataType": "string",
+            "sourceColumn": "recommandation"
+          },
+          {
+            "name": "date_alerte",
+            "dataType": "dateTime",
+            "sourceColumn": "date_alerte"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "fact_alertes",
+            "mode": "import",
+            "source": {
+              "type": "m",
+              "expression": "let\n    Source = #table(\n        type table [alerte_id = text, mandataire_id = text, kpi_concerne = text,\n                    niveau_priorite = text, statut_alerte = text,\n                    valeur_actuelle = number, recommandation = text,\n                    date_alerte = date],\n        {\n            {\"ALT001\",\"MAN005\",\"Volume affaires\",   \"CRITIQUE\",\"Ouverte\",  -0.25,\"Lancer une campagne de relance commerciale immédiate.\",      #date(2024,11,1)},\n            {\"ALT002\",\"MAN007\",\"Taux RDV\",          \"HAUTE\",   \"Ouverte\",   0.42,\"Planifier des RDV de suivi avec les clients en attente.\",    #date(2024,11,5)},\n            {\"ALT003\",\"MAN005\",\"Taux RDV\",          \"HAUTE\",   \"En cours\",  0.45,\"Relancer les prospects non contactés depuis 30 jours.\",      #date(2024,11,8)},\n            {\"ALT004\",\"MAN003\",\"Réseau\",            \"MOYENNE\", \"Ouverte\",   0.75,\"Vérifier l'activité plateforme du mandataire.\",              #date(2024,11,10)},\n            {\"ALT005\",\"MAN002\",\"Volume affaires\",   \"MOYENNE\", \"Résolue\",  -0.08,\"Objectif partiellement atteint, maintenir l'effort.\",        #date(2024,10,20)},\n            {\"ALT006\",\"MAN001\",\"Taux RDV\",          \"CONFORME\",\"Résolue\",   0.90,\"Taux excellent, continuer sur cette lancée.\",                #date(2024,10,15)},\n            {\"ALT007\",\"MAN008\",\"Volume affaires\",   \"HAUTE\",   \"Ouverte\",  -0.15,\"Analyser le pipeline et identifier les opportunités.\",       #date(2024,11,12)},\n            {\"ALT008\",\"MAN004\",\"Réseau\",            \"CRITIQUE\",\"En cours\",  0.55,\"Réactiver le compte sur la plateforme de formation.\",        #date(2024,11,3)}\n        }\n    )\nin Source"
             }
           }
         ]
@@ -3689,6 +3822,20 @@
         "toColumn": "produit_id",
         "crossFilteringBehavior": "automatic",
         "isActive": true
+      },
+      {
+        "name": "fact_alertes_mandataire",
+        "fromTable": "fact_alertes",
+        "fromColumn": "mandataire_id",
+        "toTable": "dim_mandataire",
+        "toColumn": "mandataire_id"
+      },
+      {
+        "name": "fact_affaire_agence",
+        "fromTable": "fact_affaire",
+        "fromColumn": "agence_id",
+        "toTable": "dim_agence",
+        "toColumn": "agence_id"
       }
     ],
     "expressions": [
