@@ -2894,11 +2894,12 @@
             ]
           },
           {
-            "name": "numero_orias",
-            "dataType": "string",
-            "sourceColumn": "numero_orias",
-            "lineageTag": "019b2d3f-4028-4ca5-943f-8b270c1f2728",
-            "sourceLineageTag": "numero_orias",
+            "name": "date_passage_mia",
+            "dataType": "dateTime",
+            "sourceColumn": "date_passage_mia",
+            "formatString": "General Date",
+            "lineageTag": "9090c465-1aba-46e5-a4b3-7e566bec3405",
+            "sourceLineageTag": "date_passage_mia",
             "summarizeBy": "none",
             "annotations": [
               {
@@ -2908,13 +2909,37 @@
             ]
           },
           {
-            "name": "date_passage_mia",
-            "dataType": "dateTime",
-            "sourceColumn": "date_passage_mia",
-            "formatString": "General Date",
-            "lineageTag": "9090c465-1aba-46e5-a4b3-7e566bec3405",
-            "sourceLineageTag": "date_passage_mia",
+            "name": "nom_mandataire",
+            "dataType": "string",
+            "lineageTag": "nom_mandataire",
             "summarizeBy": "none",
+            "sourceColumn": "nom_mandataire",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "prenom_mandataire",
+            "dataType": "string",
+            "lineageTag": "prenom_mandataire",
+            "summarizeBy": "none",
+            "sourceColumn": "prenom_mandataire",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "flag_present",
+            "dataType": "boolean",
+            "lineageTag": "flag_present",
+            "summarizeBy": "none",
+            "sourceColumn": "flag_present",
             "annotations": [
               {
                 "name": "SummarizationSetBy",
