@@ -2923,6 +2923,11 @@
                 "value": "Automatic"
               }
             ]
+          },
+          {
+            "name": "statut_mandataire",
+            "dataType": "string",
+            "sourceColumn": "statut_mandataire"
           }
         ],
         "partitions": [
@@ -2931,7 +2936,7 @@
             "mode": "import",
             "source": {
               "type": "m",
-              "expression": "let\n    Source = #table(\n        type table [mandataire_id = text, candidat_id = text, nom_mandataire = text,\n                    prenom_mandataire = text, sexe = text, date_naissance = date,\n                    date_passage_mia = date, flag_present = logical],\n        {\n            {\"MAN001\", \"CAN001\", \"Dupont\",  \"Jean\",    \"M\", #date(1980,3,15), #date(2018,6,1),  true},\n            {\"MAN002\", \"CAN002\", \"Martin\",  \"Marie\",   \"F\", #date(1985,7,22), #date(2019,1,15), true},\n            {\"MAN003\", \"CAN003\", \"Bernard\", \"Paul\",    \"M\", #date(1978,11,8), #date(2017,9,1),  true},\n            {\"MAN004\", \"CAN004\", \"Petit\",   \"Sophie\",  \"F\", #date(1990,4,3),  #date(2021,3,1),  true},\n            {\"MAN005\", \"CAN005\", \"Durand\",  \"Thomas\",  \"M\", #date(1983,9,17), #date(2020,7,15), false},\n            {\"MAN006\", \"CAN006\", \"Leroy\",   \"Camille\", \"F\", #date(1992,1,25), #date(2022,2,1),  true},\n            {\"MAN007\", \"CAN007\", \"Moreau\",  \"Lucas\",   \"M\", #date(1975,6,10), #date(2016,4,1),  true},\n            {\"MAN008\", \"CAN008\", \"Simon\",   \"Emma\",    \"F\", #date(1988,12,5), #date(2020,11,1), true}\n        }\n    )\nin Source"
+              "expression": "let\n    Source = #table(\n        type table [mandataire_id = text, candidat_id = text, nom_mandataire = text,\n                    prenom_mandataire = text, sexe = text, date_naissance = date,\n                    date_passage_mia = date, flag_present = logical, statut_mandataire = text],\n        {\n            {\"MAN001\", \"CAN001\", \"Dupont\",  \"Jean\",    \"M\", #date(1980,3,15), #date(2018,6,1),  true,  \"Actif\"},\n            {\"MAN002\", \"CAN002\", \"Martin\",  \"Marie\",   \"F\", #date(1985,7,22), #date(2019,1,15), true,  \"Actif\"},\n            {\"MAN003\", \"CAN003\", \"Bernard\", \"Paul\",    \"M\", #date(1978,11,8), #date(2017,9,1),  true,  \"Actif\"},\n            {\"MAN004\", \"CAN004\", \"Petit\",   \"Sophie\",  \"F\", #date(1990,4,3),  #date(2021,3,1),  true,  \"Actif\"},\n            {\"MAN005\", \"CAN005\", \"Durand\",  \"Thomas\",  \"M\", #date(1983,9,17), #date(2020,7,15), false, \"Inactif\"},\n            {\"MAN006\", \"CAN006\", \"Leroy\",   \"Camille\", \"F\", #date(1992,1,25), #date(2022,2,1),  true,  \"Actif\"},\n            {\"MAN007\", \"CAN007\", \"Moreau\",  \"Lucas\",   \"M\", #date(1975,6,10), #date(2016,4,1),  true,  \"Actif\"},\n            {\"MAN008\", \"CAN008\", \"Simon\",   \"Emma\",    \"F\", #date(1988,12,5), #date(2020,11,1), true,  \"Actif\"}\n        }\n    )\nin Source"
             }
           }
         ]
