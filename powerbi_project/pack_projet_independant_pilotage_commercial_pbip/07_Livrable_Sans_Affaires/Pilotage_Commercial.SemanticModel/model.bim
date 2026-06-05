@@ -2329,15 +2329,13 @@
           },
           {
             "name": "Niveau Alerte Volume",
-            "expression": "VAR RDV_Semaine = [Nombre RDV hebdomadaire moyen]\nRETURN SWITCH(TRUE(),\n    ISBLANK(RDV_Semaine), \"NON DISPONIBLE\",\n    RDV_Semaine < 12, \"CRITIQUE\",\n    RDV_Semaine < 15, \"HAUTE\",\n    RDV_Semaine < 18, \"MOYENNE\",\n    \"CONFORME\")",
-            "displayFolder": "Pilotage Commercial - Alertes",
-            "lineageTag": "b2c05d6a-87e7-47b9-86a7-7619d6d88791"
+            "expression": "VAR VarPct = [Variation vs N-1 Volume Affaires (%)]\nRETURN SWITCH(TRUE(),\n    ISBLANK(VarPct), \"NON DISPONIBLE\",\n    VarPct < -0.20, \"CRITIQUE\",\n    VarPct < -0.10, \"HAUTE\",\n    VarPct < 0, \"MOYENNE\",\n    \"CONFORME\")",
+            "lineageTag": "Niveau Alerte Volume"
           },
           {
             "name": "Couleur Alerte Volume",
             "expression": "SWITCH([Niveau Alerte Volume],\n    \"CRITIQUE\", \"#D71920\",\n    \"HAUTE\", \"#E67E22\",\n    \"MOYENNE\", \"#F1C40F\",\n    \"CONFORME\", \"#198754\",\n    \"#667085\")",
-            "displayFolder": "Pilotage Commercial - Alertes",
-            "lineageTag": "b31b8623-4955-4eee-9e77-25fcd401d3b3"
+            "lineageTag": "Couleur Alerte Volume"
           },
           {
             "name": "Niveau Alerte RDV",
@@ -2431,9 +2429,108 @@
           },
           {
             "name": "Recommandation Alerte Volume",
-            "expression": "VAR RDV_Sem = [Nombre RDV hebdomadaire moyen]\nRETURN SWITCH([Niveau Alerte Volume],\n    \"CRITIQUE\", FORMAT(RDV_Sem, \"0.0\") & \" RDV/sem — renforcer la prospection en urgence (objectif : 12+)\",\n    \"HAUTE\",    FORMAT(RDV_Sem, \"0.0\") & \" RDV/sem — objectif 15/semaine non atteint\",\n    \"MOYENNE\",  FORMAT(RDV_Sem, \"0.0\") & \" RDV/sem — objectif 18 prévus/semaine non atteint\",\n    BLANK()\n)",
-            "displayFolder": "Pilotage Commercial - Alertes",
-            "lineageTag": "a1b2c3d4-0003-0003-0003-000000000003"
+            "expression": "VAR Var = [Variation vs N-1 Volume Affaires (%)]\nRETURN SWITCH([Niveau Alerte Volume],\n    \"CRITIQUE\", \"Volume affaires \" & FORMAT(Var, \"0%\") & \" vs N-1 — action commerciale urgente\",\n    \"HAUTE\",    \"Volume affaires \" & FORMAT(Var, \"0%\") & \" vs N-1 — surveiller la tendance\",\n    \"MOYENNE\",  \"Volume affaires légèrement en baisse \" & FORMAT(Var, \"0%\") & \" vs N-1\",\n    BLANK()\n)",
+            "lineageTag": "Recommandation Alerte Volume"
+          },
+          {
+            "name": "Nombre ventes",
+            "expression": "COALESCE(SUM(fact_affaire[collecte]), 0)",
+            "lineageTag": "Nombre ventes"
+          },
+          {
+            "name": "Nombre affaires produites",
+            "expression": "COALESCE(CALCULATE(DISTINCTCOUNT(fact_affaire[affaire_id]), reference_etat_affaire[libelle_etat_affaire] = \"Produite\"), 0)",
+            "lineageTag": "Nombre affaires produites"
+          },
+          {
+            "name": "Volume affaires produites",
+            "expression": "COALESCE(CALCULATE(SUM(fact_affaire[chiffre_affaires]), reference_etat_affaire[libelle_etat_affaire] = \"Produite\"), 0)",
+            "lineageTag": "Volume affaires produites"
+          },
+          {
+            "name": "Nombre affaires en instance",
+            "expression": "COALESCE(CALCULATE(DISTINCTCOUNT(fact_affaire[affaire_id]), reference_etat_affaire[libelle_etat_affaire] = \"En instance\"), 0)",
+            "lineageTag": "Nombre affaires en instance"
+          },
+          {
+            "name": "Volume affaires en instance",
+            "expression": "COALESCE(CALCULATE(SUM(fact_affaire[chiffre_affaires]), reference_etat_affaire[libelle_etat_affaire] = \"En instance\"), 0)",
+            "lineageTag": "Volume affaires en instance"
+          },
+          {
+            "name": "Nombre affaires commissionnées",
+            "expression": "COALESCE(CALCULATE(DISTINCTCOUNT(fact_affaire[affaire_id]), reference_etat_affaire[libelle_etat_affaire] = \"Commissionnée\"), 0)",
+            "lineageTag": "Nombre affaires commissionnées"
+          },
+          {
+            "name": "Volume affaires commissionnées",
+            "expression": "COALESCE(CALCULATE(SUM(fact_affaire[chiffre_affaires]), reference_etat_affaire[libelle_etat_affaire] = \"Commissionnée\"), 0)",
+            "lineageTag": "Volume affaires commissionnées"
+          },
+          {
+            "name": "Budget affaires en nombre",
+            "expression": "BLANK()",
+            "lineageTag": "Budget affaires en nombre"
+          },
+          {
+            "name": "Budget affaires en euro",
+            "expression": "BLANK()",
+            "lineageTag": "Budget affaires en euro"
+          },
+          {
+            "name": "Taux atteinte Budget N Volume",
+            "expression": "DIVIDE([Volume affaires produites], [Budget affaires en euro], 0)",
+            "lineageTag": "Taux atteinte Budget N Volume"
+          },
+          {
+            "name": "Volume affaires produites N-1",
+            "expression": "CALCULATE([Volume affaires produites], SAMEPERIODLASTYEAR(dim_date[Date]))",
+            "lineageTag": "Volume affaires produites N-1"
+          },
+          {
+            "name": "Variation vs N-1 Volume Affaires (%)",
+            "expression": "DIVIDE([Volume affaires produites] - [Volume affaires produites N-1], [Volume affaires produites N-1], 0)",
+            "lineageTag": "Variation vs N-1 Volume Affaires (%)"
+          },
+          {
+            "name": "Volume affaires produites MTD-1",
+            "expression": "CALCULATE([Volume affaires produites], DATEADD(dim_date[Date], -1, MONTH))",
+            "lineageTag": "Volume affaires produites MTD-1"
+          },
+          {
+            "name": "Variation vs MTD-1 Volume Affaires (%)",
+            "expression": "DIVIDE([Volume affaires produites] - [Volume affaires produites MTD-1], [Volume affaires produites MTD-1], 0)",
+            "lineageTag": "Variation vs MTD-1 Volume Affaires (%)"
+          },
+          {
+            "name": "Nombre mandataires productifs",
+            "expression": "COALESCE(CALCULATE(DISTINCTCOUNT(fact_affaire[contrat_id]), reference_etat_affaire[libelle_etat_affaire] = \"Produite\"), 0)",
+            "lineageTag": "Nombre mandataires productifs"
+          },
+          {
+            "name": "Nombre mandataires non productifs",
+            "expression": "MAX([Nombre mandataires actifs] - [Nombre mandataires productifs], 0)",
+            "lineageTag": "Nombre mandataires non productifs"
+          },
+          {
+            "name": "CF Variation Texte Volume",
+            "expression": "SWITCH(TRUE(),\n    ISBLANK([Variation vs N-1 Volume Affaires (%)]), \"#0A4E97\",\n    [Variation vs N-1 Volume Affaires (%)] >= 0, \"#198754\",\n    [Variation vs N-1 Volume Affaires (%)] > -0.10, \"#E67E22\",\n    \"#D71920\")",
+            "lineageTag": "CF Variation Texte Volume"
+          },
+          {
+            "name": "CF Budget Fill Volume",
+            "expression": "SWITCH(TRUE(),\n    ISBLANK([Taux atteinte Budget N Volume]), \"#E8EEF5\",\n    [Taux atteinte Budget N Volume] >= 1, \"#198754\",\n    [Taux atteinte Budget N Volume] >= 0.8, \"#E67E22\",\n    \"#D71920\")",
+            "lineageTag": "CF Budget Fill Volume"
+          },
+          {
+            "name": "Libellé Variation Volume vs N-1",
+            "expression": "VAR v = [Variation vs N-1 Volume Affaires (%)]\nRETURN SWITCH(TRUE(),\n    ISBLANK(v), \"Vs N-1 —\",\n    v >= 0, \"▲ Vs N-1 \" & FORMAT(v, \"+0.0%;-0.0%\"),\n    \"▼ Vs N-1 \" & FORMAT(v, \"+0.0%;-0.0%\"))",
+            "lineageTag": "Libellé Variation Volume vs N-1"
+          },
+          {
+            "name": "Libellé Variation Volume vs MTD-1",
+            "expression": "VAR v = [Variation vs MTD-1 Volume Affaires (%)]\nRETURN SWITCH(TRUE(),\n    ISBLANK(v), \"Vs MTD-1 —\",\n    v >= 0, \"▲ Vs MTD-1 \" & FORMAT(v, \"+0.0%;-0.0%\"),\n    \"▼ Vs MTD-1 \" & FORMAT(v, \"+0.0%;-0.0%\"))",
+            "lineageTag": "Libellé Variation Volume vs MTD-1"
           }
         ],
         "annotations": [
@@ -3209,6 +3306,294 @@
             }
           }
         ]
+      },
+      {
+        "name": "fact_affaire",
+        "lineageTag": "fact_affaire",
+        "columns": [
+          {
+            "name": "affaire_id",
+            "dataType": "string",
+            "lineageTag": "affaire_id",
+            "summarizeBy": "none",
+            "sourceColumn": "affaire_id",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "client_id",
+            "dataType": "string",
+            "lineageTag": "client_id",
+            "summarizeBy": "none",
+            "sourceColumn": "client_id",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "contrat_id",
+            "dataType": "string",
+            "lineageTag": "contrat_id",
+            "summarizeBy": "none",
+            "sourceColumn": "contrat_id",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "produit_id",
+            "dataType": "string",
+            "lineageTag": "produit_id",
+            "summarizeBy": "none",
+            "sourceColumn": "produit_id",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "etat_affaire_id",
+            "dataType": "string",
+            "lineageTag": "etat_affaire_id",
+            "summarizeBy": "none",
+            "sourceColumn": "etat_affaire_id",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "date_saisie_administrative",
+            "dataType": "dateTime",
+            "lineageTag": "date_saisie_administrative",
+            "summarizeBy": "none",
+            "sourceColumn": "date_saisie_administrative",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "type_affaire",
+            "dataType": "string",
+            "lineageTag": "type_affaire",
+            "summarizeBy": "none",
+            "sourceColumn": "type_affaire",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "collecte",
+            "dataType": "int64",
+            "lineageTag": "collecte",
+            "summarizeBy": "none",
+            "sourceColumn": "collecte",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "periodicite",
+            "dataType": "string",
+            "lineageTag": "periodicite",
+            "summarizeBy": "none",
+            "sourceColumn": "periodicite",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "chiffre_affaires",
+            "dataType": "int64",
+            "lineageTag": "chiffre_affaires",
+            "summarizeBy": "none",
+            "sourceColumn": "chiffre_affaires",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "flag_pu",
+            "dataType": "int64",
+            "lineageTag": "flag_pu",
+            "summarizeBy": "none",
+            "sourceColumn": "flag_pu",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "flag_cross_selling",
+            "dataType": "boolean",
+            "lineageTag": "flag_cross_selling",
+            "summarizeBy": "none",
+            "sourceColumn": "flag_cross_selling",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          }
+        ],
+        "partitions": [
+          {
+            "name": "fact_affaire",
+            "mode": "directLake",
+            "source": {
+              "type": "entity",
+              "entityName": "fact_affaire",
+              "expressionSource": "DirectLake - lh_gold",
+              "schemaName": "gold"
+            }
+          }
+        ]
+      },
+      {
+        "name": "reference_etat_affaire",
+        "lineageTag": "reference_etat_affaire",
+        "columns": [
+          {
+            "name": "surrogate_key",
+            "dataType": "string",
+            "lineageTag": "surrogate_key",
+            "summarizeBy": "none",
+            "sourceColumn": "surrogate_key",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "source_system_id",
+            "dataType": "int64",
+            "lineageTag": "source_system_id",
+            "summarizeBy": "none",
+            "sourceColumn": "source_system_id",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "libelle_etat_affaire",
+            "dataType": "string",
+            "lineageTag": "libelle_etat_affaire",
+            "summarizeBy": "none",
+            "sourceColumn": "libelle_etat_affaire",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          }
+        ],
+        "partitions": [
+          {
+            "name": "reference_etat_affaire",
+            "mode": "directLake",
+            "source": {
+              "type": "entity",
+              "entityName": "reference_etat_affaire",
+              "expressionSource": "DirectLake - lh_gold",
+              "schemaName": "silver"
+            }
+          }
+        ]
+      },
+      {
+        "name": "dim_produit",
+        "lineageTag": "dim_produit",
+        "columns": [
+          {
+            "name": "produit_id",
+            "dataType": "string",
+            "lineageTag": "produit_id",
+            "summarizeBy": "none",
+            "sourceColumn": "produit_id",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "libelle_produit",
+            "dataType": "string",
+            "lineageTag": "libelle_produit",
+            "summarizeBy": "none",
+            "sourceColumn": "libelle_produit",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "libelle_gamme_produit",
+            "dataType": "string",
+            "lineageTag": "libelle_gamme_produit",
+            "summarizeBy": "none",
+            "sourceColumn": "libelle_gamme_produit",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          }
+        ],
+        "partitions": [
+          {
+            "name": "dim_produit",
+            "mode": "directLake",
+            "source": {
+              "type": "entity",
+              "entityName": "dim_produit",
+              "expressionSource": "DirectLake - lh_gold",
+              "schemaName": "gold"
+            }
+          }
+        ]
       }
     ],
     "relationships": [
@@ -3347,6 +3732,34 @@
         "fromColumn": "mandataire_id",
         "toTable": "dim_mandataire",
         "toColumn": "mandataire_id"
+      },
+      {
+        "name": "fact_affaire_date_saisie_administrative_to_dim_date_Date",
+        "fromTable": "fact_affaire",
+        "fromColumn": "date_saisie_administrative",
+        "toTable": "dim_date",
+        "toColumn": "Date",
+        "crossFilteringBehavior": "automatic",
+        "isActive": true,
+        "joinOnDateBehavior": "datePartOnly"
+      },
+      {
+        "name": "fact_affaire_etat_affaire_id_to_reference_etat_affaire_surrogate_key",
+        "fromTable": "fact_affaire",
+        "fromColumn": "etat_affaire_id",
+        "toTable": "reference_etat_affaire",
+        "toColumn": "surrogate_key",
+        "crossFilteringBehavior": "automatic",
+        "isActive": true
+      },
+      {
+        "name": "fact_affaire_produit_id_to_dim_produit_produit_id",
+        "fromTable": "fact_affaire",
+        "fromColumn": "produit_id",
+        "toTable": "dim_produit",
+        "toColumn": "produit_id",
+        "crossFilteringBehavior": "automatic",
+        "isActive": true
       }
     ],
     "expressions": [
