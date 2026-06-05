@@ -2531,6 +2531,11 @@
             "name": "Libellé Variation Volume vs MTD-1",
             "expression": "VAR v = [Variation vs MTD-1 Volume Affaires (%)]\nRETURN SWITCH(TRUE(),\n    ISBLANK(v), \"Vs MTD-1 —\",\n    v >= 0, \"▲ Vs MTD-1 \" & FORMAT(v, \"+0.0%;-0.0%\"),\n    \"▼ Vs MTD-1 \" & FORMAT(v, \"+0.0%;-0.0%\"))",
             "lineageTag": "Libellé Variation Volume vs MTD-1"
+          },
+          {
+            "name": "Recommandation Volume",
+            "expression": "VAR VarPct = [Variation vs N-1 Volume Affaires (%)]\nRETURN SWITCH(TRUE(),\n    ISBLANK(VarPct), \"Données volume affaires indisponibles.\",\n    VarPct < -0.10, \"Identifier les agences en recul et déclencher un plan de relance.\",\n    VarPct < 0, \"Surveiller la trajectoire et challenger les zones en retrait.\",\n    \"Sécuriser l'atterrissage.\")",
+            "lineageTag": "Recommandation Volume"
           }
         ],
         "annotations": [
