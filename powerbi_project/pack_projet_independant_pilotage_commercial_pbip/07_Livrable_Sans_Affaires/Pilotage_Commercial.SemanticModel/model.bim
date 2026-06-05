@@ -2439,32 +2439,32 @@
           },
           {
             "name": "Nombre affaires produites",
-            "expression": "COALESCE(CALCULATE(DISTINCTCOUNT(fact_affaire[affaire_id]), reference_etat_affaire[libelle_etat_affaire] = \"Produite\"), 0)",
+            "expression": "COALESCE(CALCULATE(DISTINCTCOUNT(fact_affaire[affaire_id]), fact_affaire[flag_pu] = 1), 0)",
             "lineageTag": "Nombre affaires produites"
           },
           {
             "name": "Volume affaires produites",
-            "expression": "COALESCE(CALCULATE(SUM(fact_affaire[chiffre_affaires]), reference_etat_affaire[libelle_etat_affaire] = \"Produite\"), 0)",
+            "expression": "COALESCE(CALCULATE(SUM(fact_affaire[chiffre_affaires]), fact_affaire[flag_pu] = 1), 0)",
             "lineageTag": "Volume affaires produites"
           },
           {
             "name": "Nombre affaires en instance",
-            "expression": "COALESCE(CALCULATE(DISTINCTCOUNT(fact_affaire[affaire_id]), reference_etat_affaire[libelle_etat_affaire] = \"En instance\"), 0)",
+            "expression": "COALESCE(CALCULATE(DISTINCTCOUNT(fact_affaire[affaire_id]), fact_affaire[flag_pu] = 0), 0)",
             "lineageTag": "Nombre affaires en instance"
           },
           {
             "name": "Volume affaires en instance",
-            "expression": "COALESCE(CALCULATE(SUM(fact_affaire[chiffre_affaires]), reference_etat_affaire[libelle_etat_affaire] = \"En instance\"), 0)",
+            "expression": "COALESCE(CALCULATE(SUM(fact_affaire[chiffre_affaires]), fact_affaire[flag_pu] = 0), 0)",
             "lineageTag": "Volume affaires en instance"
           },
           {
             "name": "Nombre affaires commissionnées",
-            "expression": "COALESCE(CALCULATE(DISTINCTCOUNT(fact_affaire[affaire_id]), reference_etat_affaire[libelle_etat_affaire] = \"Commissionnée\"), 0)",
+            "expression": "BLANK()",
             "lineageTag": "Nombre affaires commissionnées"
           },
           {
             "name": "Volume affaires commissionnées",
-            "expression": "COALESCE(CALCULATE(SUM(fact_affaire[chiffre_affaires]), reference_etat_affaire[libelle_etat_affaire] = \"Commissionnée\"), 0)",
+            "expression": "BLANK()",
             "lineageTag": "Volume affaires commissionnées"
           },
           {
@@ -2504,7 +2504,7 @@
           },
           {
             "name": "Nombre mandataires productifs",
-            "expression": "COALESCE(CALCULATE(DISTINCTCOUNT(fact_affaire[contrat_id]), reference_etat_affaire[libelle_etat_affaire] = \"Produite\"), 0)",
+            "expression": "COALESCE(CALCULATE(DISTINCTCOUNT(fact_affaire[contrat_id]), fact_affaire[flag_pu] = 1), 0)",
             "lineageTag": "Nombre mandataires productifs"
           },
           {
@@ -3482,63 +3482,6 @@
         ]
       },
       {
-        "name": "reference_etat_affaire",
-        "lineageTag": "reference_etat_affaire",
-        "columns": [
-          {
-            "name": "surrogate_key",
-            "dataType": "string",
-            "lineageTag": "surrogate_key",
-            "summarizeBy": "none",
-            "sourceColumn": "surrogate_key",
-            "annotations": [
-              {
-                "name": "SummarizationSetBy",
-                "value": "Automatic"
-              }
-            ]
-          },
-          {
-            "name": "source_system_id",
-            "dataType": "int64",
-            "lineageTag": "source_system_id",
-            "summarizeBy": "none",
-            "sourceColumn": "source_system_id",
-            "annotations": [
-              {
-                "name": "SummarizationSetBy",
-                "value": "Automatic"
-              }
-            ]
-          },
-          {
-            "name": "libelle_etat_affaire",
-            "dataType": "string",
-            "lineageTag": "libelle_etat_affaire",
-            "summarizeBy": "none",
-            "sourceColumn": "libelle_etat_affaire",
-            "annotations": [
-              {
-                "name": "SummarizationSetBy",
-                "value": "Automatic"
-              }
-            ]
-          }
-        ],
-        "partitions": [
-          {
-            "name": "reference_etat_affaire",
-            "mode": "directLake",
-            "source": {
-              "type": "entity",
-              "entityName": "reference_etat_affaire",
-              "expressionSource": "DirectLake - lh_gold",
-              "schemaName": "silver"
-            }
-          }
-        ]
-      },
-      {
         "name": "dim_produit",
         "lineageTag": "dim_produit",
         "columns": [
@@ -3742,15 +3685,6 @@
         "crossFilteringBehavior": "automatic",
         "isActive": true,
         "joinOnDateBehavior": "datePartOnly"
-      },
-      {
-        "name": "fact_affaire_etat_affaire_id_to_reference_etat_affaire_surrogate_key",
-        "fromTable": "fact_affaire",
-        "fromColumn": "etat_affaire_id",
-        "toTable": "reference_etat_affaire",
-        "toColumn": "surrogate_key",
-        "crossFilteringBehavior": "automatic",
-        "isActive": true
       },
       {
         "name": "fact_affaire_produit_id_to_dim_produit_produit_id",
