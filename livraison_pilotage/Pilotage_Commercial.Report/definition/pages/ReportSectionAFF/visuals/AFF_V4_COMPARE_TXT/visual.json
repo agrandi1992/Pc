@@ -2,46 +2,105 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.7.0/schema.json",
   "name": "AFF_V4_COMPARE_TXT",
   "position": {
-    "x": 1085.87,
-    "y": 43.78,
-    "z": 64,
-    "width": 245.33,
-    "height": 17.08,
-    "tabOrder": 64
+    "x": 253.87,
+    "y": 195,
+    "z": 61,
+    "width": 300,
+    "height": 24,
+    "tabOrder": 61
   },
-  "parentGroupName": "GRP_HEADER",
+  "parentGroupName": "GRP_KPI",
   "visual": {
-    "visualType": "textbox",
+    "visualType": "card",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Indicateurs"
+                    }
+                  },
+                  "Property": "Libellé Comparaison"
+                }
+              },
+              "queryRef": "_Indicateurs.Libellé Comparaison"
+            }
+          ]
+        }
+      }
+    },
     "objects": {
-      "general": [
+      "labels": [
         {
           "properties": {
-            "paragraphs": [
-              {
-                "textRuns": [
-                  {
-                    "value": "Choix période de comparaison : Mars 2025  🗓",
-                    "textStyle": {
-                      "bold": true,
-                      "fontFamily": "Montserrat, Arial",
-                      "fontSize": "8pt",
-                      "color": {
-                        "solid": {
-                          "color": {
-                            "expr": {
-                              "Literal": {
-                                "Value": "'#051E73'"
-                              }
-                            }
-                          }
-                        }
-                      }
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "dataLabel": [
+        {
+          "properties": {
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "'8pt'"
+                }
+              }
+            },
+            "color": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#051E73'"
                     }
                   }
-                ],
-                "horizontalTextAlignment": "Center"
+                }
               }
-            ]
+            },
+            "fontFamily": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Montserrat, Arial'"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "background": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "border": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
           }
         }
       ]

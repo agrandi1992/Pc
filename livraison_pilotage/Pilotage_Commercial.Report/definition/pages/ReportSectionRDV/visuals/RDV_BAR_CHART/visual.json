@@ -22,14 +22,13 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "dim_date"
+                      "Entity": "FP_Axe_RDV"
                     }
                   },
-                  "Property": "mois_court"
+                  "Property": "FP_Axe_RDV Fields"
                 }
               },
-              "queryRef": "dim_date.mois_court",
-              "active": true
+              "queryRef": "FP_Axe_RDV.FP_Axe_RDV Fields"
             }
           ]
         },

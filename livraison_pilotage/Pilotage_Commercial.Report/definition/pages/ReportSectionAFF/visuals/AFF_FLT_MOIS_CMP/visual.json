@@ -1,53 +1,53 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.7.0/schema.json",
-  "name": "AFF_COMP_TEXT",
+  "name": "AFF_FLT_MOIS_CMP",
   "position": {
-    "x": 253.87,
-    "y": 195,
-    "z": 60,
-    "width": 380,
-    "height": 24,
-    "tabOrder": 60
+    "x": 160,
+    "y": 104,
+    "z": 202,
+    "width": 140,
+    "height": 28,
+    "tabOrder": 202
   },
-  "parentGroupName": "GRP_KPI",
+  "parentGroupName": "GRP_FILTERS",
   "visual": {
-    "visualType": "card",
+    "visualType": "slicer",
     "query": {
       "queryState": {
         "Values": {
           "projections": [
             {
               "field": {
-                "Measure": {
+                "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "_Indicateurs"
+                      "Entity": "Mois_Compare"
                     }
                   },
-                  "Property": "Libellé Comparaison"
+                  "Property": "Mois"
                 }
               },
-              "queryRef": "_Indicateurs.Libellé Comparaison"
+              "queryRef": "Mois_Compare.Mois"
             }
           ]
         }
       }
     },
     "objects": {
-      "labels": [
+      "data": [
         {
           "properties": {
-            "show": {
+            "mode": {
               "expr": {
                 "Literal": {
-                  "Value": "false"
+                  "Value": "'Dropdown'"
                 }
               }
             }
           }
         }
       ],
-      "dataLabel": [
+      "header": [
         {
           "properties": {
             "fontSize": {
@@ -57,7 +57,7 @@
                 }
               }
             },
-            "color": {
+            "fontColor": {
               "solid": {
                 "color": {
                   "expr": {
@@ -68,10 +68,41 @@
                 }
               }
             },
-            "fontFamily": {
+            "bold": {
               "expr": {
                 "Literal": {
-                  "Value": "'Montserrat, Arial'"
+                  "Value": "true"
+                }
+              }
+            },
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "items": [
+        {
+          "properties": {
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "'8pt'"
+                }
+              }
+            },
+            "fontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#374151'"
+                    }
+                  }
                 }
               }
             }
@@ -79,19 +110,6 @@
         }
       ],
       "background": [
-        {
-          "properties": {
-            "show": {
-              "expr": {
-                "Literal": {
-                  "Value": "false"
-                }
-              }
-            }
-          }
-        }
-      ],
-      "border": [
         {
           "properties": {
             "show": {

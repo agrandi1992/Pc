@@ -1,7 +1,7 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/page/2.0.0/schema.json",
   "name": "ReportSectionRES",
-  "displayName": "réseau MIA et géographie",
+  "displayName": "Réseau MIA & géographie",
   "displayOption": "FitToPage",
   "height": 961,
   "width": 1536,

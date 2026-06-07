@@ -22,14 +22,13 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "dim_agence"
+                      "Entity": "FP_Axe_Reseau"
                     }
                   },
-                  "Property": "raison_sociale"
+                  "Property": "FP_Axe_Reseau Fields"
                 }
               },
-              "queryRef": "dim_agence.raison_sociale",
-              "active": true
+              "queryRef": "FP_Axe_Reseau.FP_Axe_Reseau Fields"
             }
           ]
         },
