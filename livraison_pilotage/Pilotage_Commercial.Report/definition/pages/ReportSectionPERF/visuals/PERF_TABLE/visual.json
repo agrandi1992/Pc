@@ -228,6 +228,51 @@
             }
           }
         }
+      ],
+      "values": [
+        {
+          "selector": {
+            "metadata": {
+              "queryRef": "_Indicateurs.Taux atteinte Budget N Volume"
+            }
+          },
+          "properties": {
+            "backColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_Indicateurs"
+                        }
+                      },
+                      "Property": "CF Fond Taux Budget"
+                    }
+                  }
+                }
+              }
+            },
+            "fontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#1F2937'"
+                    }
+                  }
+                }
+              }
+            },
+            "bold": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
       ]
     }
   }

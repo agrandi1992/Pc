@@ -97,10 +97,10 @@
                       "Entity": "_Indicateurs"
                     }
                   },
-                  "Property": "Nombre affaires produites"
+                  "Property": "Nombre affaires en instance"
                 }
               },
-              "queryRef": "_Indicateurs.Nombre affaires produites"
+              "queryRef": "_Indicateurs.Nombre affaires en instance"
             }
           ]
         }

@@ -2583,6 +2583,45 @@
             "name": "Recommandation Volume",
             "expression": "VAR VarPct = [Variation vs N-1 Volume Affaires (%)]\nRETURN SWITCH(TRUE(),\n    ISBLANK(VarPct), \"Données volume affaires indisponibles.\",\n    VarPct < -0.10, \"Identifier les agences en recul et déclencher un plan de relance.\",\n    VarPct < 0, \"Surveiller la trajectoire et challenger les zones en retrait.\",\n    \"Sécuriser l'atterrissage.\")",
             "lineageTag": "Recommandation Volume"
+          },
+          {
+            "name": "CF Fond Tile Taux RDV",
+            "expression": [
+              "",
+              "SWITCH(TRUE(),",
+              "    ISBLANK([Taux réalisation de rendez-vous]), \"#FFFFFF\",",
+              "    [Taux réalisation de rendez-vous] >= 0.62, \"#D1FAE5\",",
+              "    [Taux réalisation de rendez-vous] >= 0.40, \"#FEF3C7\",",
+              "    \"#FEE2E2\"",
+              ")"
+            ],
+            "formatString": ""
+          },
+          {
+            "name": "CF Valeur Taux RDV",
+            "expression": [
+              "",
+              "SWITCH(TRUE(),",
+              "    ISBLANK([Taux réalisation de rendez-vous]), \"#051E73\",",
+              "    [Taux réalisation de rendez-vous] >= 0.62, \"#00B050\",",
+              "    [Taux réalisation de rendez-vous] >= 0.40, \"#D97706\",",
+              "    \"#F05062\"",
+              ")"
+            ],
+            "formatString": ""
+          },
+          {
+            "name": "CF Fond Taux Budget",
+            "expression": [
+              "",
+              "SWITCH(TRUE(),",
+              "    ISBLANK([Taux atteinte Budget N Volume]), \"#FFFFFF\",",
+              "    [Taux atteinte Budget N Volume] >= 1, \"#D1FAE5\",",
+              "    [Taux atteinte Budget N Volume] >= 0.8, \"#FEF3C7\",",
+              "    \"#FEE2E2\"",
+              ")"
+            ],
+            "formatString": ""
           }
         ],
         "annotations": [

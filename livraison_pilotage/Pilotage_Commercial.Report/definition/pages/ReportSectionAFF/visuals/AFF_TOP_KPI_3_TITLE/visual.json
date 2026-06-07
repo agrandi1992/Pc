@@ -20,7 +20,7 @@
               {
                 "textRuns": [
                   {
-                    "value": "Nombre d’envois auto",
+                    "value": "Nombre d’affaires en instance",
                     "textStyle": {
                       "bold": true,
                       "fontFamily": "Montserrat, Arial",
