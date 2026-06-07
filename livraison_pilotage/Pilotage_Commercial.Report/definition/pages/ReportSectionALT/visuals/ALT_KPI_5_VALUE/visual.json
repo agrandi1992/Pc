@@ -97,10 +97,10 @@
                       "Entity": "_Indicateurs"
                     }
                   },
-                  "Property": "Nombre Alertes Ouvertes"
+                  "Property": "Nb Alertes DAX Total"
                 }
               },
-              "queryRef": "_Indicateurs.Nombre Alertes Ouvertes"
+              "queryRef": "_Indicateurs.Nb Alertes DAX Total"
             }
           ]
         }

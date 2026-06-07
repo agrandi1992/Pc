@@ -97,10 +97,10 @@
                       "Entity": "_Indicateurs"
                     }
                   },
-                  "Property": "Nombre Alertes Moyennes"
+                  "Property": "Nb Domaines Moyennes"
                 }
               },
-              "queryRef": "_Indicateurs.Nombre Alertes Moyennes"
+              "queryRef": "_Indicateurs.Nb Domaines Moyennes"
             }
           ]
         }

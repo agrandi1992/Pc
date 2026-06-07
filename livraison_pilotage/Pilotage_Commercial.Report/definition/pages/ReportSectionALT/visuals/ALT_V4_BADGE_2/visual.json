@@ -19,7 +19,7 @@
             "strokeWidth": {
               "expr": {
                 "Literal": {
-                  "Value": "0"
+                  "Value": "2"
                 }
               }
             },
@@ -28,7 +28,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#EAF7EF'"
+                      "Value": "'#F1C40F'"
                     }
                   }
                 }
@@ -47,8 +47,13 @@
               "solid": {
                 "color": {
                   "expr": {
-                    "Literal": {
-                      "Value": "'#EAF7EF'"
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_Indicateurs"
+                        }
+                      },
+                      "Property": "CF Fond KPI Moyenne"
                     }
                   }
                 }

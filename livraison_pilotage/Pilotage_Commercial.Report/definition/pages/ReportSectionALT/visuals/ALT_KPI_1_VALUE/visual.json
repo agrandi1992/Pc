@@ -97,10 +97,10 @@
                       "Entity": "_Indicateurs"
                     }
                   },
-                  "Property": "Nombre Alertes Critiques"
+                  "Property": "Nb Domaines Critiques"
                 }
               },
-              "queryRef": "_Indicateurs.Nombre Alertes Critiques"
+              "queryRef": "_Indicateurs.Nb Domaines Critiques"
             }
           ]
         }

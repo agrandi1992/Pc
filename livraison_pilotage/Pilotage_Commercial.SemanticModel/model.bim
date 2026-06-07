@@ -2622,6 +2622,155 @@
               ")"
             ],
             "formatString": ""
+          },
+          {
+            "name": "Nb Domaines Critiques",
+            "expression": [
+              "VAR v = IF([Niveau Alerte Volume] = \"CRITIQUE\", 1, 0)",
+              "VAR r = IF([Niveau Alerte RDV]    = \"CRITIQUE\", 1, 0)",
+              "VAR n = IF([Niveau Alerte Réseau] = \"CRITIQUE\", 1, 0)",
+              "RETURN v + r + n"
+            ],
+            "formatString": "0"
+          },
+          {
+            "name": "Nb Domaines Hautes",
+            "expression": [
+              "VAR v = IF([Niveau Alerte Volume] = \"HAUTE\", 1, 0)",
+              "VAR r = IF([Niveau Alerte RDV]    = \"HAUTE\", 1, 0)",
+              "VAR n = IF([Niveau Alerte Réseau] = \"HAUTE\", 1, 0)",
+              "RETURN v + r + n"
+            ],
+            "formatString": "0"
+          },
+          {
+            "name": "Nb Domaines Moyennes",
+            "expression": [
+              "VAR v = IF([Niveau Alerte Volume] = \"MOYENNE\", 1, 0)",
+              "VAR r = IF([Niveau Alerte RDV]    = \"MOYENNE\", 1, 0)",
+              "VAR n = IF([Niveau Alerte Réseau] = \"MOYENNE\", 1, 0)",
+              "RETURN v + r + n"
+            ],
+            "formatString": "0"
+          },
+          {
+            "name": "Nb Domaines Conformes",
+            "expression": [
+              "VAR v = IF([Niveau Alerte Volume] = \"CONFORME\", 1, 0)",
+              "VAR r = IF([Niveau Alerte RDV]    = \"CONFORME\", 1, 0)",
+              "VAR n = IF([Niveau Alerte Réseau] = \"CONFORME\", 1, 0)",
+              "RETURN v + r + n"
+            ],
+            "formatString": "0"
+          },
+          {
+            "name": "Nb Alertes DAX Total",
+            "expression": "[Nb Domaines Critiques] + [Nb Domaines Hautes] + [Nb Domaines Moyennes]",
+            "formatString": "0"
+          },
+          {
+            "name": "Alerte Niveau par Domaine",
+            "expression": [
+              "VAR dom = SELECTEDVALUE(dim_alerte_domaine[domaine], \"\")",
+              "RETURN SWITCH(dom,",
+              "    \"Volume\",  [Niveau Alerte Volume],",
+              "    \"RDV\",     [Niveau Alerte RDV],",
+              "    \"Réseau\",  [Niveau Alerte Réseau],",
+              "    BLANK())"
+            ]
+          },
+          {
+            "name": "Alerte Valeur par Domaine",
+            "expression": [
+              "VAR dom = SELECTEDVALUE(dim_alerte_domaine[domaine], \"\")",
+              "RETURN SWITCH(dom,",
+              "    \"Volume\",",
+              "        VAR v = [Variation vs N-1 Volume Affaires (%)]",
+              "        RETURN IF(ISBLANK(v), \"N/A\", FORMAT(v, \"+0%;-0%;0%\")),",
+              "    \"RDV\",",
+              "        VAR r = [Taux réalisation de rendez-vous]",
+              "        RETURN IF(ISBLANK(r), \"N/A\", FORMAT(r, \"0.0%\")),",
+              "    \"Réseau\",",
+              "        VAR n = [Taux mandataires actifs]",
+              "        RETURN IF(ISBLANK(n), \"N/A\", FORMAT(n, \"0.0%\")),",
+              "    BLANK())"
+            ]
+          },
+          {
+            "name": "Alerte Recommandation par Domaine",
+            "expression": [
+              "VAR dom = SELECTEDVALUE(dim_alerte_domaine[domaine], \"\")",
+              "RETURN SWITCH(dom,",
+              "    \"Volume\",  [Recommandation Alerte Volume],",
+              "    \"RDV\",     [Recommandation Alerte RDV],",
+              "    \"Réseau\",  SWITCH([Niveau Alerte Réseau],",
+              "        \"CRITIQUE\", \"Réseau \" & FORMAT([Taux mandataires actifs],\"0%\") & \" actifs — mobilisation réseau urgente\",",
+              "        \"HAUTE\",    \"Réseau \" & FORMAT([Taux mandataires actifs],\"0%\") & \" actifs — renforcer les activations\",",
+              "        \"MOYENNE\",  \"Réseau \" & FORMAT([Taux mandataires actifs],\"0%\") & \" actifs — surveiller les inactifs\",",
+              "        \"CONFORME\", \"Réseau nominal — maintenir la dynamique\",",
+              "        \"Données non disponibles\"),",
+              "    BLANK())"
+            ]
+          },
+          {
+            "name": "CF Couleur Niveau Domaine",
+            "expression": [
+              "SWITCH([Alerte Niveau par Domaine],",
+              "    \"CRITIQUE\", \"#D71920\",",
+              "    \"HAUTE\",    \"#E67E22\",",
+              "    \"MOYENNE\",  \"#F1C40F\",",
+              "    \"CONFORME\", \"#198754\",",
+              "    \"#667085\")"
+            ]
+          },
+          {
+            "name": "CF Fond Niveau Domaine",
+            "expression": [
+              "SWITCH([Alerte Niveau par Domaine],",
+              "    \"CRITIQUE\", \"#FEE2E2\",",
+              "    \"HAUTE\",    \"#FEF3C7\",",
+              "    \"MOYENNE\",  \"#FEFCE8\",",
+              "    \"CONFORME\", \"#D1FAE5\",",
+              "    \"#F6F7FB\")"
+            ]
+          },
+          {
+            "name": "CF Fond KPI Critique",
+            "expression": "IF([Nb Domaines Critiques] > 0, \"#FEE2E2\", \"#FFFFFF\")"
+          },
+          {
+            "name": "CF Fond KPI Haute",
+            "expression": "IF([Nb Domaines Hautes] > 0, \"#FEF3C7\", \"#FFFFFF\")"
+          },
+          {
+            "name": "CF Fond KPI Moyenne",
+            "expression": "IF([Nb Domaines Moyennes] > 0, \"#FEFCE8\", \"#FFFFFF\")"
+          },
+          {
+            "name": "CF Fond KPI Conforme",
+            "expression": "IF([Nb Domaines Conformes] > 0, \"#D1FAE5\", \"#FFFFFF\")"
+          },
+          {
+            "name": "CF Icone Alerte Domaine",
+            "expression": [
+              "SWITCH([Alerte Niveau par Domaine],",
+              "    \"CRITIQUE\", \"🔴\",",
+              "    \"HAUTE\",    \"🟠\",",
+              "    \"MOYENNE\",  \"🟡\",",
+              "    \"CONFORME\", \"🟢\",",
+              "    \"⚪\")"
+            ]
+          },
+          {
+            "name": "CF Texte Niveau Domaine",
+            "expression": [
+              "SWITCH([Alerte Niveau par Domaine],",
+              "    \"CRITIQUE\", \"#D71920\",",
+              "    \"HAUTE\",    \"#92400E\",",
+              "    \"MOYENNE\",  \"#78350F\",",
+              "    \"CONFORME\", \"#065F46\",",
+              "    \"#374151\")"
+            ]
           }
         ],
         "annotations": [
@@ -3841,6 +3990,52 @@
           {
             "name": "PBI_ResultType",
             "value": "Table"
+          }
+        ]
+      },
+      {
+        "name": "dim_alerte_domaine",
+        "columns": [
+          {
+            "name": "domaine_id",
+            "dataType": "int64",
+            "sourceColumn": "domaine_id"
+          },
+          {
+            "name": "domaine",
+            "dataType": "string",
+            "sourceColumn": "domaine"
+          },
+          {
+            "name": "kpi_label",
+            "dataType": "string",
+            "sourceColumn": "kpi_label"
+          },
+          {
+            "name": "icone",
+            "dataType": "string",
+            "sourceColumn": "icone"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "dim_alerte_domaine",
+            "mode": "import",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #table(",
+                "        type table [domaine_id = Int64.Type, domaine = text, kpi_label = text, icone = text],",
+                "        {",
+                "            {1, \"Volume\",  \"Volume d'affaires\",    \"📊\"},",
+                "            {2, \"RDV\",     \"Rendez-vous\",           \"📅\"},",
+                "            {3, \"Réseau\",  \"Réseau mandataires\",    \"👥\"}",
+                "        }",
+                "    )",
+                "in Source"
+              ]
+            }
           }
         ]
       }

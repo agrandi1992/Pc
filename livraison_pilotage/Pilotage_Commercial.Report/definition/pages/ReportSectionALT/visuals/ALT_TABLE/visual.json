@@ -15,85 +15,89 @@
     "drillFilterOtherVisuals": true,
     "query": {
       "queryState": {
-        "Values": {
+        "Rows": {
           "projections": [
             {
               "field": {
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "fact_alertes"
+                      "Entity": "dim_alerte_domaine"
                     }
                   },
-                  "Property": "kpi_concerne"
+                  "Property": "icone"
                 }
               },
-              "queryRef": "fact_alertes.kpi_concerne"
+              "queryRef": "dim_alerte_domaine.icone"
             },
             {
               "field": {
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "fact_alertes"
+                      "Entity": "dim_alerte_domaine"
                     }
                   },
-                  "Property": "niveau_priorite"
+                  "Property": "domaine"
                 }
               },
-              "queryRef": "fact_alertes.niveau_priorite"
+              "queryRef": "dim_alerte_domaine.domaine"
             },
             {
               "field": {
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "fact_alertes"
+                      "Entity": "dim_alerte_domaine"
                     }
                   },
-                  "Property": "statut_alerte"
+                  "Property": "kpi_label"
                 }
               },
-              "queryRef": "fact_alertes.statut_alerte"
+              "queryRef": "dim_alerte_domaine.kpi_label"
+            }
+          ]
+        },
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Indicateurs"
+                    }
+                  },
+                  "Property": "Alerte Niveau par Domaine"
+                }
+              },
+              "queryRef": "_Indicateurs.Alerte Niveau par Domaine"
             },
             {
               "field": {
-                "Column": {
+                "Measure": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "fact_alertes"
+                      "Entity": "_Indicateurs"
                     }
                   },
-                  "Property": "valeur_actuelle"
+                  "Property": "Alerte Valeur par Domaine"
                 }
               },
-              "queryRef": "fact_alertes.valeur_actuelle"
+              "queryRef": "_Indicateurs.Alerte Valeur par Domaine"
             },
             {
               "field": {
-                "Column": {
+                "Measure": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "fact_alertes"
+                      "Entity": "_Indicateurs"
                     }
                   },
-                  "Property": "recommandation"
+                  "Property": "Alerte Recommandation par Domaine"
                 }
               },
-              "queryRef": "fact_alertes.recommandation"
-            },
-            {
-              "field": {
-                "Column": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "fact_alertes"
-                    }
-                  },
-                  "Property": "date_alerte"
-                }
-              },
-              "queryRef": "fact_alertes.date_alerte"
+              "queryRef": "_Indicateurs.Alerte Recommandation par Domaine"
             }
           ]
         }
@@ -106,7 +110,7 @@
             "fontSize": {
               "expr": {
                 "Literal": {
-                  "Value": "'8pt'"
+                  "Value": "'9pt'"
                 }
               }
             },
@@ -155,7 +159,7 @@
             "fontSize": {
               "expr": {
                 "Literal": {
-                  "Value": "'8pt'"
+                  "Value": "'9pt'"
                 }
               }
             },
@@ -164,7 +168,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#051E73'"
+                      "Value": "'#1F2937'"
                     }
                   }
                 }
@@ -173,7 +177,94 @@
             "rowPadding": {
               "expr": {
                 "Literal": {
-                  "Value": "5"
+                  "Value": "8"
+                }
+              }
+            }
+          }
+        },
+        {
+          "selector": {
+            "metadata": {
+              "queryRef": "_Indicateurs.Alerte Niveau par Domaine"
+            }
+          },
+          "properties": {
+            "backColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_Indicateurs"
+                        }
+                      },
+                      "Property": "CF Fond Niveau Domaine"
+                    }
+                  }
+                }
+              }
+            },
+            "fontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_Indicateurs"
+                        }
+                      },
+                      "Property": "CF Texte Niveau Domaine"
+                    }
+                  }
+                }
+              }
+            },
+            "bold": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "'9pt'"
+                }
+              }
+            }
+          }
+        },
+        {
+          "selector": {
+            "metadata": {
+              "queryRef": "_Indicateurs.Alerte Valeur par Domaine"
+            }
+          },
+          "properties": {
+            "fontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_Indicateurs"
+                        }
+                      },
+                      "Property": "CF Couleur Niveau Domaine"
+                    }
+                  }
+                }
+              }
+            },
+            "bold": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
                 }
               }
             }
@@ -186,7 +277,7 @@
             "gridVertical": {
               "expr": {
                 "Literal": {
-                  "Value": "true"
+                  "Value": "false"
                 }
               }
             },
@@ -202,7 +293,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#EEF1F7'"
+                      "Value": "'#E5E7EB'"
                     }
                   }
                 }
@@ -211,18 +302,14 @@
             "rowBanding": {
               "expr": {
                 "Literal": {
-                  "Value": "true"
+                  "Value": "false"
                 }
               }
             },
-            "rowBandingColor": {
-              "solid": {
-                "color": {
-                  "expr": {
-                    "Literal": {
-                      "Value": "'#F8FAFE'"
-                    }
-                  }
+            "imageHeight": {
+              "expr": {
+                "Literal": {
+                  "Value": "40"
                 }
               }
             }
