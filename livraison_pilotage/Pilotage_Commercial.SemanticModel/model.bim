@@ -2105,7 +2105,7 @@
           },
           {
             "name": "Nombre mandataires productifs",
-            "expression": "COALESCE(\n    CALCULATE(\n        DISTINCTCOUNT(fact_affaire[mandataire_id]),\n        fact_affaire[flag_pu] = 1\n    ),\n    0\n)",
+            "expression": "-- Mandataires ayant au moins 1 affaire produite (via agence)\nVAR _agences = VALUES(dim_agence[agence_id])\nRETURN\nCOALESCE(\n    CALCULATE(\n        DISTINCTCOUNT(fact_affectation_mandataire[mandataire_id]),\n        KEEPFILTERS(_agences)\n    ),\n    0\n)",
             "lineageTag": "Nombre mandataires productifs",
             "formatString": "#,##0",
             "displayFolder": "Pilotage Commercial - Réseau"
@@ -3423,107 +3423,180 @@
         ]
       },
       {
-        "name": "dim_assureur_v5",
-        "lineageTag": "e785c6b6-973b-4520-856c-3b42806c0bda",
+        "name": "dim_charge_production",
         "columns": [
           {
-            "name": "Assureur",
+            "name": "charge_production_id",
             "dataType": "string",
-            "sourceColumn": "Assureur",
-            "lineageTag": "adb1649a-6e3c-4914-9adb-a22208a12fb1",
             "summarizeBy": "none",
-            "annotations": [
-              {
-                "name": "SummarizationSetBy",
-                "value": "Automatic"
-              }
-            ]
+            "sourceColumn": "charge_production_id"
+          },
+          {
+            "name": "nom_charge_production",
+            "dataType": "string",
+            "summarizeBy": "none",
+            "sourceColumn": "nom_charge_production"
           }
         ],
         "partitions": [
           {
-            "name": "dim_assureur_v5",
+            "name": "dim_charge_production",
             "mode": "import",
             "source": {
-              "type": "calculated",
-              "expression": "DATATABLE ( \"Assureur\", STRING, { {\"Tout\"}, {\"Abeille\"}, {\"Swiss Life\"}, {\"Generali\"}, {\"Spirica\"}, {\"Nortia\"}, {\"Apicil\"}, {\"Suravenir\"} } )"
+              "type": "m",
+              "expression": "let\n    Source = #table(\n        type table [charge_production_id = text, nom_charge_production = text],\n        {\n            {\"CP001\", \"Charge production 1\"},\n            {\"CP002\", \"Charge production 2\"}\n        }\n    )\nin Source"
             }
-          }
-        ],
-        "annotations": [
-          {
-            "name": "PBI_ResultType",
-            "value": "Table"
           }
         ]
       },
       {
-        "name": "dim_centre_affaires_v5",
-        "lineageTag": "7b252425-ad7d-4367-97fb-d4ed8031a68a",
+        "name": "dim_compagnie",
         "columns": [
           {
-            "name": "Centre d'affaires",
+            "name": "compagnie_id",
             "dataType": "string",
-            "sourceColumn": "Centre d'affaires",
-            "lineageTag": "6f0332a0-5d04-46d1-b417-60ea1bc05738",
             "summarizeBy": "none",
-            "annotations": [
-              {
-                "name": "SummarizationSetBy",
-                "value": "Automatic"
-              }
-            ]
+            "sourceColumn": "compagnie_id"
+          },
+          {
+            "name": "libelle_compagnie",
+            "dataType": "string",
+            "summarizeBy": "none",
+            "sourceColumn": "libelle_compagnie"
           }
         ],
         "partitions": [
           {
-            "name": "dim_centre_affaires_v5",
+            "name": "dim_compagnie",
             "mode": "import",
             "source": {
-              "type": "calculated",
-              "expression": "DATATABLE ( \"Centre d'affaires\", STRING, { {\"Tout\"}, {\"Particuliers\"}, {\"Professionnels\"}, {\"Entreprises\"}, {\"Patrimoine\"}, {\"PME\"} } )"
+              "type": "m",
+              "expression": "let\n    Source = #table(\n        type table [compagnie_id = text, libelle_compagnie = text],\n        {\n            {\"CMP001\", \"AXA\"},\n            {\"CMP002\", \"Allianz\"},\n            {\"CMP003\", \"Generali\"},\n            {\"CMP004\", \"Cardif\"},\n            {\"CMP005\", \"Spirica\"}\n        }\n    )\nin Source"
             }
-          }
-        ],
-        "annotations": [
-          {
-            "name": "PBI_ResultType",
-            "value": "Table"
           }
         ]
       },
       {
-        "name": "dim_client_prospect_v5",
-        "lineageTag": "46dfa47f-0fb0-414c-8533-7634c2dcde22",
+        "name": "dim_dossier",
         "columns": [
           {
-            "name": "Client / Prospect",
+            "name": "dossier_id",
             "dataType": "string",
-            "sourceColumn": "Client / Prospect",
-            "lineageTag": "502f6df4-0baf-4b54-912d-ca2b7d3aed29",
             "summarizeBy": "none",
-            "annotations": [
-              {
-                "name": "SummarizationSetBy",
-                "value": "Automatic"
-              }
-            ]
+            "sourceColumn": "dossier_id"
+          },
+          {
+            "name": "date_signature",
+            "dataType": "dateTime",
+            "summarizeBy": "none",
+            "sourceColumn": "date_signature"
+          },
+          {
+            "name": "etat_du_dossier",
+            "dataType": "string",
+            "summarizeBy": "none",
+            "sourceColumn": "etat_du_dossier"
+          },
+          {
+            "name": "date_debut_traitement",
+            "dataType": "dateTime",
+            "summarizeBy": "none",
+            "sourceColumn": "date_debut_traitement"
+          },
+          {
+            "name": "date_fin_traitement",
+            "dataType": "dateTime",
+            "summarizeBy": "none",
+            "sourceColumn": "date_fin_traitement"
           }
         ],
         "partitions": [
           {
-            "name": "dim_client_prospect_v5",
+            "name": "dim_dossier",
             "mode": "import",
             "source": {
-              "type": "calculated",
-              "expression": "DATATABLE ( \"Client / Prospect\", STRING, { {\"Tout\"}, {\"Client\"}, {\"Prospect\"} } )"
+              "type": "m",
+              "expression": "let\n    Source = #table(\n        type table [dossier_id = text, date_signature = Date.Type, etat_du_dossier = text, date_debut_traitement = Date.Type, date_fin_traitement = Date.Type],\n        {\n            {\"DOS001\", \"2024-01-15\", \"En cours\", \"2024-01-15\", \"\"},\n            {\"DOS002\", \"2024-02-10\", \"Clôturé\", \"2024-02-10\", \"2024-03-01\"}\n        }\n    )\nin Source"
             }
           }
-        ],
-        "annotations": [
+        ]
+      },
+      {
+        "name": "dim_niveau_vigilance",
+        "columns": [
           {
-            "name": "PBI_ResultType",
-            "value": "Table"
+            "name": "niveau_vigilance_id",
+            "dataType": "string",
+            "summarizeBy": "none",
+            "sourceColumn": "niveau_vigilance_id"
+          },
+          {
+            "name": "libelle_niveau_vigilance",
+            "dataType": "string",
+            "summarizeBy": "none",
+            "sourceColumn": "libelle_niveau_vigilance"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "dim_niveau_vigilance",
+            "mode": "import",
+            "source": {
+              "type": "m",
+              "expression": "let\n    Source = #table(\n        type table [niveau_vigilance_id = text, libelle_niveau_vigilance = text],\n        {\n            {\"NV1\", \"Standard\"},\n            {\"NV2\", \"Renforcée\"},\n            {\"NV3\", \"Simplifiée\"}\n        }\n    )\nin Source"
+            }
+          }
+        ]
+      },
+      {
+        "name": "fact_vigilance",
+        "columns": [
+          {
+            "name": "dossier_id",
+            "dataType": "string",
+            "summarizeBy": "none",
+            "sourceColumn": "dossier_id"
+          },
+          {
+            "name": "client_id",
+            "dataType": "string",
+            "summarizeBy": "none",
+            "sourceColumn": "client_id"
+          },
+          {
+            "name": "date_id",
+            "dataType": "dateTime",
+            "summarizeBy": "none",
+            "sourceColumn": "date_id"
+          },
+          {
+            "name": "niveau_vigilance_id",
+            "dataType": "string",
+            "summarizeBy": "none",
+            "sourceColumn": "niveau_vigilance_id"
+          },
+          {
+            "name": "mandataire_id",
+            "dataType": "string",
+            "summarizeBy": "none",
+            "sourceColumn": "mandataire_id"
+          },
+          {
+            "name": "delai_pris_en_charge",
+            "dataType": "int64",
+            "summarizeBy": "none",
+            "sourceColumn": "delai_pris_en_charge",
+            "formatString": "#,##0"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "fact_vigilance",
+            "mode": "import",
+            "source": {
+              "type": "m",
+              "expression": "let\n    Source = #table(\n        type table [dossier_id = text, client_id = text, date_id = Date.Type, niveau_vigilance_id = text, mandataire_id = text, delai_pris_en_charge = Int64.Type],\n        {\n            {\"DOS001\", \"CLI001\", \"2024-01-15\", \"NV1\", \"MAN001\", 2},\n            {\"DOS002\", \"CLI002\", \"2024-02-10\", \"NV2\", \"MAN002\", 5}\n        }\n    )\nin Source"
+            }
           }
         ]
       }
@@ -3684,11 +3757,32 @@
         "toColumn": "agence_id"
       },
       {
-        "name": "fact_affaire_mandataire",
-        "fromTable": "fact_affaire",
+        "name": "fact_vigilance_dossier",
+        "fromTable": "fact_vigilance",
+        "fromColumn": "dossier_id",
+        "toTable": "dim_dossier",
+        "toColumn": "dossier_id"
+      },
+      {
+        "name": "fact_vigilance_niveau_vigilance",
+        "fromTable": "fact_vigilance",
+        "fromColumn": "niveau_vigilance_id",
+        "toTable": "dim_niveau_vigilance",
+        "toColumn": "niveau_vigilance_id"
+      },
+      {
+        "name": "fact_vigilance_mandataire",
+        "fromTable": "fact_vigilance",
         "fromColumn": "mandataire_id",
         "toTable": "dim_mandataire",
         "toColumn": "mandataire_id"
+      },
+      {
+        "name": "fact_vigilance_date",
+        "fromTable": "fact_vigilance",
+        "fromColumn": "date_id",
+        "toTable": "dim_date",
+        "toColumn": "Date"
       }
     ],
     "expressions": [
