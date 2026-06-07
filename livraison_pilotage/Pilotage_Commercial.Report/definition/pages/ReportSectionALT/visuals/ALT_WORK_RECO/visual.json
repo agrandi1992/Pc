@@ -1,13 +1,13 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.7.0/schema.json",
-  "name": "ALT_WORK_2",
+  "name": "ALT_WORK_RECO",
   "position": {
-    "x": 1226.67,
-    "y": 533.89,
-    "z": 52,
-    "width": 256.0,
-    "height": 60.0,
-    "tabOrder": 52
+    "x": 1205.33,
+    "y": 808.83,
+    "z": 53,
+    "width": 309.33,
+    "height": 50,
+    "tabOrder": 53
   },
   "parentGroupName": "GRP_CHARTS",
   "visual": {
@@ -24,10 +24,10 @@
                       "Entity": "_Indicateurs"
                     }
                   },
-                  "Property": "Niveau Alerte RDV"
+                  "Property": "Recommandation Principale"
                 }
               },
-              "queryRef": "_Indicateurs.Niveau Alerte RDV"
+              "queryRef": "_Indicateurs.Recommandation Principale"
             }
           ]
         }
@@ -47,57 +47,14 @@
             "fontSize": {
               "expr": {
                 "Literal": {
-                  "Value": "'11pt'"
+                  "Value": "'7pt'"
                 }
               }
             },
             "bold": {
               "expr": {
                 "Literal": {
-                  "Value": "true"
-                }
-              }
-            },
-            "fontFamily": {
-              "expr": {
-                "Literal": {
-                  "Value": "'Segoe UI Semibold, Segoe UI, sans-serif'"
-                }
-              }
-            },
-            "color": {
-              "solid": {
-                "color": {
-                  "expr": {
-                    "Measure": {
-                      "Expression": {
-                        "SourceRef": {
-                          "Entity": "_Indicateurs"
-                        }
-                      },
-                      "Property": "Couleur Alerte RDV"
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      ],
-      "categoryLabels": [
-        {
-          "properties": {
-            "show": {
-              "expr": {
-                "Literal": {
-                  "Value": "true"
-                }
-              }
-            },
-            "fontSize": {
-              "expr": {
-                "Literal": {
-                  "Value": "'8pt'"
+                  "Value": "false"
                 }
               }
             },
@@ -118,6 +75,26 @@
                   }
                 }
               }
+            },
+            "wordWrap": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "categoryLabels": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
             }
           }
         }
@@ -136,13 +113,8 @@
               "solid": {
                 "color": {
                   "expr": {
-                    "Measure": {
-                      "Expression": {
-                        "SourceRef": {
-                          "Entity": "_Indicateurs"
-                        }
-                      },
-                      "Property": "CF Fond Alerte RDV"
+                    "Literal": {
+                      "Value": "'#FFF8E7'"
                     }
                   }
                 }
@@ -173,7 +145,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#E6EBFA'"
+                      "Value": "'#F59E0B'"
                     }
                   }
                 }
@@ -182,7 +154,7 @@
             "radius": {
               "expr": {
                 "Literal": {
-                  "Value": "10"
+                  "Value": "8"
                 }
               }
             }
@@ -195,7 +167,32 @@
             "show": {
               "expr": {
                 "Literal": {
-                  "Value": "false"
+                  "Value": "true"
+                }
+              }
+            },
+            "titleText": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Action recommandée'"
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "'8pt'"
+                }
+              }
+            },
+            "fontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#92400E'"
+                    }
+                  }
                 }
               }
             }
@@ -204,5 +201,5 @@
       ]
     }
   },
-  "cornerRadius": 10
+  "cornerRadius": 8
 }

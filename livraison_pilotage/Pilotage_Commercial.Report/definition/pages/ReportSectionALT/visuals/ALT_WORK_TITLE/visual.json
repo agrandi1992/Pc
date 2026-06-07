@@ -20,10 +20,10 @@
               {
                 "textRuns": [
                   {
-                    "value": "Diffusion & suivi des alertes",
+                    "value": "État des alertes par domaine",
                     "textStyle": {
                       "bold": true,
-                      "fontSize": "11pt",
+                      "fontSize": "10pt",
                       "fontFamily": "Segoe UI Semibold, Segoe UI, sans-serif",
                       "color": {
                         "solid": {

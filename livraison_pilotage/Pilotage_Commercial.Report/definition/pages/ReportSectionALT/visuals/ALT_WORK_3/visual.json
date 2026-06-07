@@ -6,94 +6,203 @@
     "y": 629.99,
     "z": 52,
     "width": 256.0,
-    "height": 58.73,
+    "height": 60.0,
     "tabOrder": 52
   },
   "parentGroupName": "GRP_CHARTS",
   "visual": {
-    "visualType": "textbox",
+    "visualType": "card",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Indicateurs"
+                    }
+                  },
+                  "Property": "Niveau Alerte Réseau"
+                }
+              },
+              "queryRef": "_Indicateurs.Niveau Alerte Réseau"
+            }
+          ]
+        }
+      }
+    },
     "objects": {
-      "general": [
+      "labels": [
         {
           "properties": {
-            "paragraphs": [
-              {
-                "textRuns": [
-                  {
-                    "value": "▪  Suivi des actions",
-                    "textStyle": {
-                      "bold": true,
-                      "fontSize": "9pt",
-                      "fontFamily": "Segoe UI Semibold, Segoe UI, sans-serif",
-                      "color": {
-                        "solid": {
-                          "color": {
-                            "expr": {
-                              "Literal": {
-                                "Value": "'#051E73'"
-                              }
-                            }
-                          }
-                        }
-                      }
-                    }
-                  }
-                ],
-                "horizontalTextAlignment": "Left"
-              },
-              {
-                "textRuns": [
-                  {
-                    "value": "Tableau de bord des actions correctives",
-                    "textStyle": {
-                      "bold": false,
-                      "fontSize": "8pt",
-                      "fontFamily": "Segoe UI, sans-serif",
-                      "color": {
-                        "solid": {
-                          "color": {
-                            "expr": {
-                              "Literal": {
-                                "Value": "'#374151'"
-                              }
-                            }
-                          }
-                        }
-                      }
-                    }
-                  }
-                ],
-                "horizontalTextAlignment": "Left"
-              },
-              {
-                "textRuns": [
-                  {
-                    "value": "Pilotage des mesures correctives par agence.",
-                    "textStyle": {
-                      "bold": false,
-                      "fontSize": "7pt",
-                      "fontFamily": "Segoe UI, sans-serif",
-                      "color": {
-                        "solid": {
-                          "color": {
-                            "expr": {
-                              "Literal": {
-                                "Value": "'#6B7280'"
-                              }
-                            }
-                          }
-                        }
-                      }
-                    }
-                  }
-                ],
-                "horizontalTextAlignment": "Left"
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
               }
-            ]
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "'11pt'"
+                }
+              }
+            },
+            "bold": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "fontFamily": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Segoe UI Semibold, Segoe UI, sans-serif'"
+                }
+              }
+            },
+            "color": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_Indicateurs"
+                        }
+                      },
+                      "Property": "Couleur Alerte Réseau"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "categoryLabels": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "'8pt'"
+                }
+              }
+            },
+            "fontFamily": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Segoe UI, sans-serif'"
+                }
+              }
+            },
+            "color": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#374151'"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "background": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "color": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_Indicateurs"
+                        }
+                      },
+                      "Property": "CF Fond Alerte Réseau"
+                    }
+                  }
+                }
+              }
+            },
+            "transparency": {
+              "expr": {
+                "Literal": {
+                  "Value": "0"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "border": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "color": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#E6EBFA'"
+                    }
+                  }
+                }
+              }
+            },
+            "radius": {
+              "expr": {
+                "Literal": {
+                  "Value": "10"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
           }
         }
       ]
     }
   },
-  "cornerRadius": 8
+  "cornerRadius": 10
 }

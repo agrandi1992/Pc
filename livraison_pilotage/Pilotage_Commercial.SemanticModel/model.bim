@@ -2380,6 +2380,18 @@
             "expression": "DIVIDE([Collecte Mois Référence] - [Collecte Mois Comparé], [Collecte Mois Comparé], 0)",
             "formatString": "+0.0%;-0.0%;0%",
             "displayFolder": "Pilotage Commercial - Comparaison"
+          },
+          {
+            "name": "Recommandation Alerte Réseau",
+            "expression": "VAR Taux = [Taux mandataires actifs]\nRETURN SWITCH([Niveau Alerte Réseau],\n    \"CRITIQUE\", \"Taux \" & FORMAT(Taux, \"0%\") & \" — mobiliser les responsables réseau\",\n    \"HAUTE\",    \"Taux \" & FORMAT(Taux, \"0%\") & \" — intensifier l'animation du réseau\",\n    \"MOYENNE\",  \"Taux \" & FORMAT(Taux, \"0%\") & \" — surveiller et accompagner les mandataires\",\n    \"CONFORME\", \"Taux \" & FORMAT(Taux, \"0%\") & \" — maintenir les bonnes pratiques réseau\",\n    \"Données réseau MIA indisponibles.\")",
+            "formatString": "",
+            "displayFolder": "Pilotage Commercial - Alertes"
+          },
+          {
+            "name": "Recommandation Principale",
+            "expression": "-- Retourne la recommandation du domaine le plus critique\nVAR _prio = [Priorité Alerte Maximale]\nRETURN\nSWITCH(\n    TRUE(),\n    _prio >= 3, [Recommandation Alerte Volume],\n    _prio >= 2 && [Niveau Alerte RDV] IN {\"CRITIQUE\", \"HAUTE\"}, [Recommandation Alerte RDV],\n    _prio >= 1 && [Niveau Alerte Réseau] IN {\"CRITIQUE\", \"HAUTE\"}, [Recommandation Alerte Réseau],\n    \"Tous les indicateurs sont conformes.\"\n)",
+            "formatString": "",
+            "displayFolder": "Pilotage Commercial - Alertes"
           }
         ],
         "annotations": [
