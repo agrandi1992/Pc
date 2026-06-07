@@ -15,89 +15,59 @@
     "drillFilterOtherVisuals": true,
     "query": {
       "queryState": {
-        "Rows": {
-          "projections": [
-            {
-              "field": {
-                "Column": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "dim_alerte_domaine"
-                    }
-                  },
-                  "Property": "icone"
-                }
-              },
-              "queryRef": "dim_alerte_domaine.icone"
-            },
-            {
-              "field": {
-                "Column": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "dim_alerte_domaine"
-                    }
-                  },
-                  "Property": "domaine"
-                }
-              },
-              "queryRef": "dim_alerte_domaine.domaine"
-            },
-            {
-              "field": {
-                "Column": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "dim_alerte_domaine"
-                    }
-                  },
-                  "Property": "kpi_label"
-                }
-              },
-              "queryRef": "dim_alerte_domaine.kpi_label"
-            }
-          ]
-        },
         "Values": {
           "projections": [
             {
               "field": {
-                "Measure": {
+                "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "_Indicateurs"
+                      "Entity": "fact_alertes"
                     }
                   },
-                  "Property": "Alerte Niveau par Domaine"
+                  "Property": "kpi_concerne"
                 }
               },
-              "queryRef": "_Indicateurs.Alerte Niveau par Domaine"
+              "queryRef": "fact_alertes.kpi_concerne"
             },
             {
               "field": {
-                "Measure": {
+                "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "_Indicateurs"
+                      "Entity": "fact_alertes"
                     }
                   },
-                  "Property": "Alerte Valeur par Domaine"
+                  "Property": "niveau_priorite"
                 }
               },
-              "queryRef": "_Indicateurs.Alerte Valeur par Domaine"
+              "queryRef": "fact_alertes.niveau_priorite"
             },
             {
               "field": {
-                "Measure": {
+                "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "_Indicateurs"
+                      "Entity": "fact_alertes"
                     }
                   },
-                  "Property": "Alerte Recommandation par Domaine"
+                  "Property": "statut_alerte"
                 }
               },
-              "queryRef": "_Indicateurs.Alerte Recommandation par Domaine"
+              "queryRef": "fact_alertes.statut_alerte"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fact_alertes"
+                    }
+                  },
+                  "Property": "valeur_actuelle"
+                }
+              },
+              "queryRef": "fact_alertes.valeur_actuelle"
             }
           ]
         }
@@ -186,76 +156,193 @@
         {
           "selector": {
             "metadata": {
-              "queryRef": "_Indicateurs.Alerte Niveau par Domaine"
+              "queryRef": "fact_alertes.niveau_priorite"
             }
           },
           "properties": {
+            "fontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#FFFFFF'"
+                    }
+                  }
+                }
+              }
+            },
             "backColor": {
               "solid": {
                 "color": {
                   "expr": {
-                    "Measure": {
-                      "Expression": {
-                        "SourceRef": {
-                          "Entity": "_Indicateurs"
+                    "ConditionalFormatting": {
+                      "Default": {
+                        "ForeColor": {
+                          "solid": {
+                            "color": {
+                              "expr": {
+                                "Literal": {
+                                  "Value": "'#667085'"
+                                }
+                              }
+                            }
+                          }
                         }
                       },
-                      "Property": "CF Fond Niveau Domaine"
-                    }
-                  }
-                }
-              }
-            },
-            "fontColor": {
-              "solid": {
-                "color": {
-                  "expr": {
-                    "Measure": {
-                      "Expression": {
-                        "SourceRef": {
-                          "Entity": "_Indicateurs"
+                      "Conditions": [
+                        {
+                          "Condition": {
+                            "In": {
+                              "Expressions": [
+                                {
+                                  "Column": {
+                                    "Expression": {
+                                      "SourceRef": {
+                                        "Entity": "fact_alertes"
+                                      }
+                                    },
+                                    "Property": "niveau_priorite"
+                                  }
+                                }
+                              ],
+                              "Values": [
+                                [
+                                  {
+                                    "Literal": {
+                                      "Value": "'CRITIQUE'"
+                                    }
+                                  }
+                                ]
+                              ]
+                            }
+                          },
+                          "ForeColor": {
+                            "solid": {
+                              "color": {
+                                "expr": {
+                                  "Literal": {
+                                    "Value": "'#D71920'"
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "Condition": {
+                            "In": {
+                              "Expressions": [
+                                {
+                                  "Column": {
+                                    "Expression": {
+                                      "SourceRef": {
+                                        "Entity": "fact_alertes"
+                                      }
+                                    },
+                                    "Property": "niveau_priorite"
+                                  }
+                                }
+                              ],
+                              "Values": [
+                                [
+                                  {
+                                    "Literal": {
+                                      "Value": "'HAUTE'"
+                                    }
+                                  }
+                                ]
+                              ]
+                            }
+                          },
+                          "ForeColor": {
+                            "solid": {
+                              "color": {
+                                "expr": {
+                                  "Literal": {
+                                    "Value": "'#E67E22'"
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "Condition": {
+                            "In": {
+                              "Expressions": [
+                                {
+                                  "Column": {
+                                    "Expression": {
+                                      "SourceRef": {
+                                        "Entity": "fact_alertes"
+                                      }
+                                    },
+                                    "Property": "niveau_priorite"
+                                  }
+                                }
+                              ],
+                              "Values": [
+                                [
+                                  {
+                                    "Literal": {
+                                      "Value": "'MOYENNE'"
+                                    }
+                                  }
+                                ]
+                              ]
+                            }
+                          },
+                          "ForeColor": {
+                            "solid": {
+                              "color": {
+                                "expr": {
+                                  "Literal": {
+                                    "Value": "'#F1C40F'"
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "Condition": {
+                            "In": {
+                              "Expressions": [
+                                {
+                                  "Column": {
+                                    "Expression": {
+                                      "SourceRef": {
+                                        "Entity": "fact_alertes"
+                                      }
+                                    },
+                                    "Property": "niveau_priorite"
+                                  }
+                                }
+                              ],
+                              "Values": [
+                                [
+                                  {
+                                    "Literal": {
+                                      "Value": "'CONFORME'"
+                                    }
+                                  }
+                                ]
+                              ]
+                            }
+                          },
+                          "ForeColor": {
+                            "solid": {
+                              "color": {
+                                "expr": {
+                                  "Literal": {
+                                    "Value": "'#198754'"
+                                  }
+                                }
+                              }
+                            }
+                          }
                         }
-                      },
-                      "Property": "CF Texte Niveau Domaine"
-                    }
-                  }
-                }
-              }
-            },
-            "bold": {
-              "expr": {
-                "Literal": {
-                  "Value": "true"
-                }
-              }
-            },
-            "fontSize": {
-              "expr": {
-                "Literal": {
-                  "Value": "'9pt'"
-                }
-              }
-            }
-          }
-        },
-        {
-          "selector": {
-            "metadata": {
-              "queryRef": "_Indicateurs.Alerte Valeur par Domaine"
-            }
-          },
-          "properties": {
-            "fontColor": {
-              "solid": {
-                "color": {
-                  "expr": {
-                    "Measure": {
-                      "Expression": {
-                        "SourceRef": {
-                          "Entity": "_Indicateurs"
-                        }
-                      },
-                      "Property": "CF Couleur Niveau Domaine"
+                      ]
                     }
                   }
                 }
@@ -303,13 +390,6 @@
               "expr": {
                 "Literal": {
                   "Value": "false"
-                }
-              }
-            },
-            "imageHeight": {
-              "expr": {
-                "Literal": {
-                  "Value": "40"
                 }
               }
             }
