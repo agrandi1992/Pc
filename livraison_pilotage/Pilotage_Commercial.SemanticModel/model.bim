@@ -3640,6 +3640,69 @@
             "value": "Table"
           }
         ]
+      },
+      {
+        "name": "dim_assureur_v5",
+        "columns": [
+          {
+            "name": "Assureur",
+            "dataType": "string",
+            "summarizeBy": "none",
+            "sourceColumn": "Assureur"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "dim_assureur_v5",
+            "mode": "import",
+            "source": {
+              "type": "m",
+              "expression": "let\n    Source = #table(\n        type table [Assureur = text],\n        {\n            {\"AXA\"}, {\"Allianz\"}, {\"Generali\"}, {\"Cardif\"}, {\"Spirica\"}\n        }\n    )\nin Source"
+            }
+          }
+        ]
+      },
+      {
+        "name": "dim_centre_affaires_v5",
+        "columns": [
+          {
+            "name": "Centre d'affaires",
+            "dataType": "string",
+            "summarizeBy": "none",
+            "sourceColumn": "Centre d'affaires"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "dim_centre_affaires_v5",
+            "mode": "import",
+            "source": {
+              "type": "m",
+              "expression": "let\n    Source = #table(\n        type table [#\"Centre d'affaires\" = text],\n        {\n            {\"Paris\"}, {\"Lyon\"}, {\"Marseille\"}, {\"Bordeaux\"}, {\"Nantes\"}\n        }\n    )\nin Source"
+            }
+          }
+        ]
+      },
+      {
+        "name": "dim_client_prospect_v5",
+        "columns": [
+          {
+            "name": "Client / Prospect",
+            "dataType": "string",
+            "summarizeBy": "none",
+            "sourceColumn": "Client / Prospect"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "dim_client_prospect_v5",
+            "mode": "import",
+            "source": {
+              "type": "m",
+              "expression": "let\n    Source = #table(\n        type table [#\"Client / Prospect\" = text],\n        {\n            {\"Client\"}, {\"Prospect\"}\n        }\n    )\nin Source"
+            }
+          }
+        ]
       }
     ],
     "relationships": [
