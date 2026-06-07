@@ -2420,34 +2420,6 @@
             "lineageTag": "a1b2c3d4-0001-0001-0001-000000000001"
           },
           {
-            "name": "Nombre Alertes Critiques",
-            "expression": "COALESCE(CALCULATE(COUNTROWS(fact_alertes), fact_alertes[niveau_priorite] = \"CRITIQUE\"), 0)",
-            "displayFolder": "04. Alertes",
-            "lineageTag": "b0f2bbf8-2a07-46f3-a346-87a59a6140ee",
-            "formatString": "0"
-          },
-          {
-            "name": "Nombre Alertes Hautes",
-            "expression": "COALESCE(CALCULATE(COUNTROWS(fact_alertes), fact_alertes[niveau_priorite] = \"HAUTE\"), 0)",
-            "displayFolder": "04. Alertes",
-            "lineageTag": "d241149d-ef73-4ca9-981d-1ac33db089c7",
-            "formatString": "0"
-          },
-          {
-            "name": "Nombre Alertes Moyennes",
-            "expression": "COALESCE(CALCULATE(COUNTROWS(fact_alertes), fact_alertes[niveau_priorite] = \"MOYENNE\"), 0)",
-            "displayFolder": "04. Alertes",
-            "lineageTag": "689c1016-e50d-49ea-a5e0-fda5a0c7a020",
-            "formatString": "0"
-          },
-          {
-            "name": "Nombre Alertes Ouvertes",
-            "expression": "COALESCE(CALCULATE(COUNTROWS(fact_alertes), fact_alertes[statut_alerte] <> \"Résolue\"), 0)",
-            "displayFolder": "04. Alertes",
-            "lineageTag": "32e234f2-4983-4d5b-8b60-21fab1eb2393",
-            "formatString": "0"
-          },
-          {
             "name": "Recommandation Alerte RDV",
             "expression": "VAR Taux = [Taux réalisation de rendez-vous]\nRETURN SWITCH([Niveau Alerte RDV],\n    \"CRITIQUE\", \"Taux \" & FORMAT(Taux, \"0%\") & \" — relancer immédiatement les RDV non honorés\",\n    \"HAUTE\",    \"Taux \" & FORMAT(Taux, \"0%\") & \" — suivre et accompagner ce mandataire\",\n    \"MOYENNE\",  \"Taux \" & FORMAT(Taux, \"0%\") & \" — encourager la planification des RDV\",\n    BLANK()\n)",
             "displayFolder": "Pilotage Commercial - Alertes",
@@ -3746,61 +3718,6 @@
         ]
       },
       {
-        "name": "fact_alertes",
-        "columns": [
-          {
-            "name": "alerte_id",
-            "dataType": "string",
-            "sourceColumn": "alerte_id"
-          },
-          {
-            "name": "mandataire_id",
-            "dataType": "string",
-            "sourceColumn": "mandataire_id"
-          },
-          {
-            "name": "kpi_concerne",
-            "dataType": "string",
-            "sourceColumn": "kpi_concerne"
-          },
-          {
-            "name": "niveau_priorite",
-            "dataType": "string",
-            "sourceColumn": "niveau_priorite"
-          },
-          {
-            "name": "statut_alerte",
-            "dataType": "string",
-            "sourceColumn": "statut_alerte"
-          },
-          {
-            "name": "valeur_actuelle",
-            "dataType": "double",
-            "sourceColumn": "valeur_actuelle"
-          },
-          {
-            "name": "recommandation",
-            "dataType": "string",
-            "sourceColumn": "recommandation"
-          },
-          {
-            "name": "date_alerte",
-            "dataType": "dateTime",
-            "sourceColumn": "date_alerte"
-          }
-        ],
-        "partitions": [
-          {
-            "name": "fact_alertes",
-            "mode": "import",
-            "source": {
-              "type": "m",
-              "expression": "let\n    Source = #table(\n        type table [alerte_id = text, mandataire_id = text, kpi_concerne = text,\n                    niveau_priorite = text, statut_alerte = text,\n                    valeur_actuelle = number, recommandation = text,\n                    date_alerte = date],\n        {\n            {\"ALT001\",\"MAN005\",\"Volume affaires\",   \"CRITIQUE\",\"Ouverte\",  -0.25,\"Lancer une campagne de relance commerciale immédiate.\",      #date(2024,11,1)},\n            {\"ALT002\",\"MAN007\",\"Taux RDV\",          \"HAUTE\",   \"Ouverte\",   0.42,\"Planifier des RDV de suivi avec les clients en attente.\",    #date(2024,11,5)},\n            {\"ALT003\",\"MAN005\",\"Taux RDV\",          \"HAUTE\",   \"En cours\",  0.45,\"Relancer les prospects non contactés depuis 30 jours.\",      #date(2024,11,8)},\n            {\"ALT004\",\"MAN003\",\"Réseau\",            \"MOYENNE\", \"Ouverte\",   0.75,\"Vérifier l'activité plateforme du mandataire.\",              #date(2024,11,10)},\n            {\"ALT005\",\"MAN002\",\"Volume affaires\",   \"MOYENNE\", \"Résolue\",  -0.08,\"Objectif partiellement atteint, maintenir l'effort.\",        #date(2024,10,20)},\n            {\"ALT006\",\"MAN001\",\"Taux RDV\",          \"CONFORME\",\"Résolue\",   0.90,\"Taux excellent, continuer sur cette lancée.\",                #date(2024,10,15)},\n            {\"ALT007\",\"MAN008\",\"Volume affaires\",   \"HAUTE\",   \"Ouverte\",  -0.15,\"Analyser le pipeline et identifier les opportunités.\",       #date(2024,11,12)},\n            {\"ALT008\",\"MAN004\",\"Réseau\",            \"CRITIQUE\",\"En cours\",  0.55,\"Réactiver le compte sur la plateforme de formation.\",        #date(2024,11,3)}\n        }\n    )\nin Source"
-            }
-          }
-        ]
-      },
-      {
         "name": "dim_assureur_v5",
         "lineageTag": "e785c6b6-973b-4520-856c-3b42806c0bda",
         "columns": [
@@ -4061,13 +3978,6 @@
         "toColumn": "produit_id",
         "crossFilteringBehavior": "automatic",
         "isActive": true
-      },
-      {
-        "name": "fact_alertes_mandataire",
-        "fromTable": "fact_alertes",
-        "fromColumn": "mandataire_id",
-        "toTable": "dim_mandataire",
-        "toColumn": "mandataire_id"
       },
       {
         "name": "fact_affaire_agence",
