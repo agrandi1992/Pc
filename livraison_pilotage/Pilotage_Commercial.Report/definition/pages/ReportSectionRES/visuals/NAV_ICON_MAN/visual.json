@@ -16,32 +16,13 @@
       "general": [
         {
           "properties": {
-            "paragraphs": [
-              {
-                "textRuns": [
-                  {
-                    "value": "♙",
-                    "textStyle": {
-                      "bold": false,
-                      "fontFamily": "Montserrat, Arial",
-                      "fontSize": "13pt",
-                      "color": {
-                        "solid": {
-                          "color": {
-                            "expr": {
-                              "Literal": {
-                                "Value": "'#FFFFFF'"
-                              }
-                            }
-                          }
-                        }
-                      }
-                    }
-                  }
-                ],
-                "horizontalTextAlignment": "Center"
+            "visible": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
               }
-            ]
+            }
           }
         }
       ]

@@ -20,17 +20,17 @@
               {
                 "textRuns": [
                   {
-                    "value": "synthèse des volumes d’affaires, rendez-vous et réseau MIA",
+                    "value": "Synthèse affaires, réseau et réseau MIA",
                     "textStyle": {
                       "bold": false,
-                      "fontFamily": "Montserrat, Arial",
-                      "fontSize": "12pt",
+                      "fontSize": "9pt",
+                      "fontFamily": "Segoe UI Semibold, Segoe UI, sans-serif",
                       "color": {
                         "solid": {
                           "color": {
                             "expr": {
                               "Literal": {
-                                "Value": "'#737D91'"
+                                "Value": "'#6B7280'"
                               }
                             }
                           }

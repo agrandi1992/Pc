@@ -20,17 +20,17 @@
               {
                 "textRuns": [
                   {
-                    "value": "pilotage des prévus, réalisés et qualité des rendez-vous",
+                    "value": "Pilotage des prises et qualité des rendez-vous",
                     "textStyle": {
                       "bold": false,
-                      "fontFamily": "Montserrat, Arial",
-                      "fontSize": "12pt",
+                      "fontSize": "9pt",
+                      "fontFamily": "Segoe UI Semibold, Segoe UI, sans-serif",
                       "color": {
                         "solid": {
                           "color": {
                             "expr": {
                               "Literal": {
-                                "Value": "'#737D91'"
+                                "Value": "'#6B7280'"
                               }
                             }
                           }

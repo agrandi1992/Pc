@@ -22,9 +22,9 @@
                   {
                     "value": "Performance",
                     "textStyle": {
-                      "bold": true,
-                      "fontFamily": "Montserrat, Arial",
+                      "bold": false,
                       "fontSize": "9pt",
+                      "fontFamily": "Segoe UI, sans-serif",
                       "color": {
                         "solid": {
                           "color": {
@@ -39,7 +39,7 @@
                     }
                   }
                 ],
-                "horizontalTextAlignment": "Left"
+                "horizontalTextAlignment": "Center"
               }
             ]
           }

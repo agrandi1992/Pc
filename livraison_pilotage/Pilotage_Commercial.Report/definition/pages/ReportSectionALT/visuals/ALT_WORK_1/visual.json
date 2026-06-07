@@ -20,11 +20,11 @@
               {
                 "textRuns": [
                   {
-                    "value": "▶ Détection automatique",
+                    "value": "●  Détection automatique",
                     "textStyle": {
-                      "bold": false,
-                      "fontFamily": "Montserrat, Arial",
-                      "fontSize": "8pt",
+                      "bold": true,
+                      "fontSize": "9pt",
+                      "fontFamily": "Segoe UI Semibold, Segoe UI, sans-serif",
                       "color": {
                         "solid": {
                           "color": {
@@ -47,14 +47,14 @@
                     "value": "Surveillance des seuils KPI",
                     "textStyle": {
                       "bold": false,
-                      "fontFamily": "Montserrat, Arial",
                       "fontSize": "8pt",
+                      "fontFamily": "Segoe UI, sans-serif",
                       "color": {
                         "solid": {
                           "color": {
                             "expr": {
                               "Literal": {
-                                "Value": "'#051E73'"
+                                "Value": "'#374151'"
                               }
                             }
                           }
@@ -71,14 +71,14 @@
                     "value": "Calcul en temps réel dès dépassement de seuil.",
                     "textStyle": {
                       "bold": false,
-                      "fontFamily": "Montserrat, Arial",
-                      "fontSize": "8pt",
+                      "fontSize": "7pt",
+                      "fontFamily": "Segoe UI, sans-serif",
                       "color": {
                         "solid": {
                           "color": {
                             "expr": {
                               "Literal": {
-                                "Value": "'#051E73'"
+                                "Value": "'#6B7280'"
                               }
                             }
                           }
@@ -94,5 +94,6 @@
         }
       ]
     }
-  }
+  },
+  "cornerRadius": 8
 }

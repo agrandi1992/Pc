@@ -28,7 +28,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#737D91'"
+                      "Value": "'#E6EBFA'"
                     }
                   }
                 }
@@ -88,5 +88,6 @@
         }
       ]
     }
-  }
+  },
+  "cornerRadius": 10
 }

@@ -20,11 +20,11 @@
               {
                 "textRuns": [
                   {
-                    "value": "Accueil",
+                    "value": "Vue d'ensemble",
                     "textStyle": {
                       "bold": false,
-                      "fontFamily": "Montserrat, Arial",
                       "fontSize": "9pt",
+                      "fontFamily": "Segoe UI, sans-serif",
                       "color": {
                         "solid": {
                           "color": {
@@ -39,7 +39,7 @@
                     }
                   }
                 ],
-                "horizontalTextAlignment": "Left"
+                "horizontalTextAlignment": "Center"
               }
             ]
           }

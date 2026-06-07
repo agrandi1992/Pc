@@ -43,10 +43,21 @@
                 }
               }
             },
+            "color": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#051E73'"
+                    }
+                  }
+                }
+              }
+            },
             "fontSize": {
               "expr": {
                 "Literal": {
-                  "Value": "'12pt'"
+                  "Value": "'19pt'"
                 }
               }
             },
@@ -57,14 +68,10 @@
                 }
               }
             },
-            "fontColor": {
-              "solid": {
-                "color": {
-                  "expr": {
-                    "Literal": {
-                      "Value": "'#E67E22'"
-                    }
-                  }
+            "fontFamily": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Segoe UI, sans-serif'"
                 }
               }
             }
@@ -81,13 +88,6 @@
                 }
               }
             },
-            "fontSize": {
-              "expr": {
-                "Literal": {
-                  "Value": "'7pt'"
-                }
-              }
-            },
             "color": {
               "solid": {
                 "color": {
@@ -96,6 +96,20 @@
                       "Value": "'#6B7280'"
                     }
                   }
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "'8pt'"
+                }
+              }
+            },
+            "fontFamily": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Segoe UI, sans-serif'"
                 }
               }
             }
@@ -121,7 +135,56 @@
             "show": {
               "expr": {
                 "Literal": {
-                  "Value": "false"
+                  "Value": "true"
+                }
+              }
+            },
+            "color": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#FFFFFF'"
+                    }
+                  }
+                }
+              }
+            },
+            "transparency": {
+              "expr": {
+                "Literal": {
+                  "Value": "0"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "border": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "color": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#E6EBFA'"
+                    }
+                  }
+                }
+              }
+            },
+            "radius": {
+              "expr": {
+                "Literal": {
+                  "Value": "10"
                 }
               }
             }
@@ -129,5 +192,6 @@
         }
       ]
     }
-  }
+  },
+  "cornerRadius": 10
 }

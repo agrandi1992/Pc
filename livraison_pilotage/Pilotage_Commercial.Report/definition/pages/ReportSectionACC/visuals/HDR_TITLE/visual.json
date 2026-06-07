@@ -20,11 +20,11 @@
               {
                 "textRuns": [
                   {
-                    "value": "vue d’ensemble",
+                    "value": "Vue d'ensemble",
                     "textStyle": {
                       "bold": true,
-                      "fontFamily": "Montserrat, Arial",
-                      "fontSize": "25pt",
+                      "fontSize": "16pt",
+                      "fontFamily": "Segoe UI Semibold, Segoe UI, sans-serif",
                       "color": {
                         "solid": {
                           "color": {

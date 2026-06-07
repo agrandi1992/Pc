@@ -20,11 +20,11 @@
               {
                 "textRuns": [
                   {
-                    "value": "▦ Suivi des actions",
+                    "value": "▪  Suivi des actions",
                     "textStyle": {
-                      "bold": false,
-                      "fontFamily": "Montserrat, Arial",
-                      "fontSize": "8pt",
+                      "bold": true,
+                      "fontSize": "9pt",
+                      "fontFamily": "Segoe UI Semibold, Segoe UI, sans-serif",
                       "color": {
                         "solid": {
                           "color": {
@@ -44,17 +44,41 @@
               {
                 "textRuns": [
                   {
-                    "value": "Tableau de bord des actions correctives.",
+                    "value": "Tableau de bord des actions correctives",
                     "textStyle": {
                       "bold": false,
-                      "fontFamily": "Montserrat, Arial",
                       "fontSize": "8pt",
+                      "fontFamily": "Segoe UI, sans-serif",
                       "color": {
                         "solid": {
                           "color": {
                             "expr": {
                               "Literal": {
-                                "Value": "'#051E73'"
+                                "Value": "'#374151'"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                ],
+                "horizontalTextAlignment": "Left"
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "Pilotage des mesures correctives par agence.",
+                    "textStyle": {
+                      "bold": false,
+                      "fontSize": "7pt",
+                      "fontFamily": "Segoe UI, sans-serif",
+                      "color": {
+                        "solid": {
+                          "color": {
+                            "expr": {
+                              "Literal": {
+                                "Value": "'#6B7280'"
                               }
                             }
                           }
@@ -70,5 +94,6 @@
         }
       ]
     }
-  }
+  },
+  "cornerRadius": 8
 }

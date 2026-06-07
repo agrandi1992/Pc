@@ -20,11 +20,11 @@
               {
                 "textRuns": [
                   {
-                    "value": "logique d’envoi et diffusion",
+                    "value": "Diffusion & suivi des alertes",
                     "textStyle": {
                       "bold": true,
-                      "fontFamily": "Montserrat, Arial",
-                      "fontSize": "10pt",
+                      "fontSize": "11pt",
+                      "fontFamily": "Segoe UI Semibold, Segoe UI, sans-serif",
                       "color": {
                         "solid": {
                           "color": {

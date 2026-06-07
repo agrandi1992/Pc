@@ -16,32 +16,13 @@
       "general": [
         {
           "properties": {
-            "paragraphs": [
-              {
-                "textRuns": [
-                  {
-                    "value": "Mandataires",
-                    "textStyle": {
-                      "bold": true,
-                      "fontFamily": "Montserrat, Arial",
-                      "fontSize": "9pt",
-                      "color": {
-                        "solid": {
-                          "color": {
-                            "expr": {
-                              "Literal": {
-                                "Value": "'#FFFFFF'"
-                              }
-                            }
-                          }
-                        }
-                      }
-                    }
-                  }
-                ],
-                "horizontalTextAlignment": "Left"
+            "visible": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
               }
-            ]
+            }
           }
         }
       ]

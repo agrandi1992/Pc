@@ -19,7 +19,7 @@
             "strokeWidth": {
               "expr": {
                 "Literal": {
-                  "Value": "0"
+                  "Value": "1"
                 }
               }
             },
@@ -75,5 +75,6 @@
         }
       ]
     }
-  }
+  },
+  "cornerRadius": 10
 }
