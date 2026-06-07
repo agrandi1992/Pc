@@ -22,17 +22,6 @@
             "formatString": "General Date",
             "lineageTag": "f9eeabc4-a8ca-4884-b4b3-f6d7b34cda37",
             "summarizeBy": "none",
-            "variations": [
-              {
-                "name": "Variation",
-                "relationship": "6484d00f-9d27-4743-aeff-0af22fc65bf4",
-                "defaultHierarchy": {
-                  "table": "LocalDateTable_608a5c4d-d6d2-474e-a494-6c6b82f0fc3c",
-                  "hierarchy": "Date Hierarchy"
-                },
-                "isDefault": true
-              }
-            ],
             "annotations": [
               {
                 "name": "SummarizationSetBy",
