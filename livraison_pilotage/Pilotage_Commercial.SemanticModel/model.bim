@@ -2655,6 +2655,42 @@
           {
             "name": "CF Fond KPI Conforme",
             "expression": "IF([Nb Domaines Conformes] > 0, \"#D1FAE5\", \"#FFFFFF\")"
+          },
+          {
+            "name": "CF Fond Alerte Volume",
+            "expression": [
+              "SWITCH([Niveau Alerte Volume],",
+              "    \"CRITIQUE\", \"#FEE2E2\",",
+              "    \"HAUTE\",    \"#FEF3C7\",",
+              "    \"MOYENNE\",  \"#FEFCE8\",",
+              "    \"CONFORME\", \"#D1FAE5\",",
+              "    \"#F6F7FB\")"
+            ],
+            "displayFolder": "Pilotage Commercial - Alertes"
+          },
+          {
+            "name": "CF Fond Alerte RDV",
+            "expression": [
+              "SWITCH([Niveau Alerte RDV],",
+              "    \"CRITIQUE\", \"#FEE2E2\",",
+              "    \"HAUTE\",    \"#FEF3C7\",",
+              "    \"MOYENNE\",  \"#FEFCE8\",",
+              "    \"CONFORME\", \"#D1FAE5\",",
+              "    \"#F6F7FB\")"
+            ],
+            "displayFolder": "Pilotage Commercial - Alertes"
+          },
+          {
+            "name": "CF Fond Alerte Réseau",
+            "expression": [
+              "SWITCH([Niveau Alerte Réseau],",
+              "    \"CRITIQUE\", \"#FEE2E2\",",
+              "    \"HAUTE\",    \"#FEF3C7\",",
+              "    \"MOYENNE\",  \"#FEFCE8\",",
+              "    \"CONFORME\", \"#D1FAE5\",",
+              "    \"#F6F7FB\")"
+            ],
+            "displayFolder": "Pilotage Commercial - Alertes"
           }
         ],
         "annotations": [

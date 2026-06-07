@@ -160,6 +160,22 @@
             }
           },
           "properties": {
+            "backColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_Indicateurs"
+                        }
+                      },
+                      "Property": "CF Fond Alerte Volume"
+                    }
+                  }
+                }
+              }
+            },
             "fontColor": {
               "solid": {
                 "color": {
@@ -170,7 +186,7 @@
                           "Entity": "_Indicateurs"
                         }
                       },
-                      "Property": "CF Fond KPI Critique"
+                      "Property": "Couleur Alerte Volume"
                     }
                   }
                 }
@@ -180,6 +196,13 @@
               "expr": {
                 "Literal": {
                   "Value": "true"
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "'9pt'"
                 }
               }
             }
@@ -192,6 +215,22 @@
             }
           },
           "properties": {
+            "backColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_Indicateurs"
+                        }
+                      },
+                      "Property": "CF Fond Alerte RDV"
+                    }
+                  }
+                }
+              }
+            },
             "fontColor": {
               "solid": {
                 "color": {
@@ -202,7 +241,7 @@
                           "Entity": "_Indicateurs"
                         }
                       },
-                      "Property": "CF Fond KPI Critique"
+                      "Property": "Couleur Alerte RDV"
                     }
                   }
                 }
@@ -212,6 +251,13 @@
               "expr": {
                 "Literal": {
                   "Value": "true"
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "'9pt'"
                 }
               }
             }
@@ -224,6 +270,22 @@
             }
           },
           "properties": {
+            "backColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_Indicateurs"
+                        }
+                      },
+                      "Property": "CF Fond Alerte Réseau"
+                    }
+                  }
+                }
+              }
+            },
             "fontColor": {
               "solid": {
                 "color": {
@@ -234,7 +296,7 @@
                           "Entity": "_Indicateurs"
                         }
                       },
-                      "Property": "CF Fond KPI Critique"
+                      "Property": "Couleur Alerte Réseau"
                     }
                   }
                 }
@@ -244,6 +306,13 @@
               "expr": {
                 "Literal": {
                   "Value": "true"
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "'9pt'"
                 }
               }
             }
