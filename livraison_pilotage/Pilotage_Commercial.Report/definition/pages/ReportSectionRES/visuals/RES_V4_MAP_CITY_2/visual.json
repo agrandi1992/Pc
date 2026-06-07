@@ -1,0 +1,50 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.7.0/schema.json",
+  "name": "RES_V4_MAP_CITY_2",
+  "position": {
+    "x": 516.27,
+    "y": 570.19,
+    "z": 61,
+    "width": 80.0,
+    "height": 12.81,
+    "tabOrder": 61
+  },
+  "parentGroupName": "GRP_CHARTS",
+  "visual": {
+    "visualType": "textbox",
+    "objects": {
+      "general": [
+        {
+          "properties": {
+            "paragraphs": [
+              {
+                "textRuns": [
+                  {
+                    "value": "Lyon",
+                    "textStyle": {
+                      "bold": false,
+                      "fontFamily": "Montserrat, Arial",
+                      "fontSize": "6pt",
+                      "color": {
+                        "solid": {
+                          "color": {
+                            "expr": {
+                              "Literal": {
+                                "Value": "'#051E73'"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                ],
+                "horizontalTextAlignment": "Center"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

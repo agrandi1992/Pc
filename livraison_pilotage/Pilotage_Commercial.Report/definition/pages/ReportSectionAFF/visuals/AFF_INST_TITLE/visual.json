@@ -1,0 +1,50 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.7.0/schema.json",
+  "name": "AFF_INST_TITLE",
+  "position": {
+    "x": 976.0,
+    "y": 518.94,
+    "z": 52,
+    "width": 490.67,
+    "height": 23.49,
+    "tabOrder": 52
+  },
+  "parentGroupName": "GRP_CHARTS",
+  "visual": {
+    "visualType": "textbox",
+    "objects": {
+      "general": [
+        {
+          "properties": {
+            "paragraphs": [
+              {
+                "textRuns": [
+                  {
+                    "value": "liste des affaires en instance (à date)",
+                    "textStyle": {
+                      "bold": true,
+                      "fontFamily": "Montserrat, Arial",
+                      "fontSize": "10pt",
+                      "color": {
+                        "solid": {
+                          "color": {
+                            "expr": {
+                              "Literal": {
+                                "Value": "'#051E73'"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                ],
+                "horizontalTextAlignment": "Left"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

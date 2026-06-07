@@ -5,6 +5,11 @@
       "report": {
         "path": "Pilotage_Commercial.Report"
       }
+    },
+    {
+      "semanticModel": {
+        "path": "Pilotage_Commercial.SemanticModel"
+      }
     }
   ]
 }

@@ -1,0 +1,50 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.7.0/schema.json",
+  "name": "ALT_NOTE_TXT",
+  "position": {
+    "x": 1226.67,
+    "y": 843.54,
+    "z": 52,
+    "width": 261.33,
+    "height": 34.17,
+    "tabOrder": 52
+  },
+  "parentGroupName": "GRP_CHARTS",
+  "visual": {
+    "visualType": "textbox",
+    "objects": {
+      "general": [
+        {
+          "properties": {
+            "paragraphs": [
+              {
+                "textRuns": [
+                  {
+                    "value": "ⓘ Les alertes sont recalculées chaque nuit et historisées 90 jours.",
+                    "textStyle": {
+                      "bold": true,
+                      "fontFamily": "Montserrat, Arial",
+                      "fontSize": "9pt",
+                      "color": {
+                        "solid": {
+                          "color": {
+                            "expr": {
+                              "Literal": {
+                                "Value": "'#051E73'"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                ],
+                "horizontalTextAlignment": "Left"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

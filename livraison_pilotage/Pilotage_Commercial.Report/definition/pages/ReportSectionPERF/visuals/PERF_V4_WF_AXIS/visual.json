@@ -1,0 +1,146 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.7.0/schema.json",
+  "name": "PERF_V4_WF_AXIS",
+  "position": {
+    "x": 1139.2,
+    "y": 429.25,
+    "z": 58,
+    "width": 48.0,
+    "height": 128.13,
+    "tabOrder": 58
+  },
+  "parentGroupName": "GRP_CHARTS",
+  "visual": {
+    "visualType": "textbox",
+    "objects": {
+      "general": [
+        {
+          "properties": {
+            "paragraphs": [
+              {
+                "textRuns": [
+                  {
+                    "value": "30 M€",
+                    "textStyle": {
+                      "bold": false,
+                      "fontFamily": "Montserrat, Arial",
+                      "fontSize": "6pt",
+                      "color": {
+                        "solid": {
+                          "color": {
+                            "expr": {
+                              "Literal": {
+                                "Value": "'#737D91'"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                ],
+                "horizontalTextAlignment": "Left"
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "20 M€",
+                    "textStyle": {
+                      "bold": false,
+                      "fontFamily": "Montserrat, Arial",
+                      "fontSize": "6pt",
+                      "color": {
+                        "solid": {
+                          "color": {
+                            "expr": {
+                              "Literal": {
+                                "Value": "'#737D91'"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                ],
+                "horizontalTextAlignment": "Left"
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "10 M€",
+                    "textStyle": {
+                      "bold": false,
+                      "fontFamily": "Montserrat, Arial",
+                      "fontSize": "6pt",
+                      "color": {
+                        "solid": {
+                          "color": {
+                            "expr": {
+                              "Literal": {
+                                "Value": "'#737D91'"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                ],
+                "horizontalTextAlignment": "Left"
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "0 M€",
+                    "textStyle": {
+                      "bold": false,
+                      "fontFamily": "Montserrat, Arial",
+                      "fontSize": "6pt",
+                      "color": {
+                        "solid": {
+                          "color": {
+                            "expr": {
+                              "Literal": {
+                                "Value": "'#737D91'"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                ],
+                "horizontalTextAlignment": "Left"
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "-10 M€",
+                    "textStyle": {
+                      "bold": false,
+                      "fontFamily": "Montserrat, Arial",
+                      "fontSize": "6pt",
+                      "color": {
+                        "solid": {
+                          "color": {
+                            "expr": {
+                              "Literal": {
+                                "Value": "'#737D91'"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                ],
+                "horizontalTextAlignment": "Left"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.7.0/schema.json",
+  "name": "PERF_V4_WF_VAL_10",
+  "position": {
+    "x": 1397.33,
+    "y": 528.87,
+    "z": 59,
+    "width": 48.0,
+    "height": 12.81,
+    "tabOrder": 59
+  },
+  "parentGroupName": "GRP_CHARTS",
+  "visual": {
+    "visualType": "textbox",
+    "objects": {
+      "general": [
+        {
+          "properties": {
+            "paragraphs": [
+              {
+                "textRuns": [
+                  {
+                    "value": "+2,9 M€",
+                    "textStyle": {
+                      "bold": false,
+                      "fontFamily": "Montserrat, Arial",
+                      "fontSize": "6pt",
+                      "color": {
+                        "solid": {
+                          "color": {
+                            "expr": {
+                              "Literal": {
+                                "Value": "'#051E73'"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                ],
+                "horizontalTextAlignment": "Center"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.7.0/schema.json",
+  "name": "ACC_MINI_5_DELTA",
+  "position": {
+    "x": 1105.07,
+    "y": 435.65,
+    "z": 52,
+    "width": 106.67,
+    "height": 16.02,
+    "tabOrder": 52
+  },
+  "parentGroupName": "GRP_KPI",
+  "visual": {
+    "visualType": "textbox",
+    "objects": {
+      "general": [
+        {
+          "properties": {
+            "paragraphs": [
+              {
+                "textRuns": [
+                  {
+                    "value": "suivi période",
+                    "textStyle": {
+                      "bold": false,
+                      "fontFamily": "Montserrat, Arial",
+                      "fontSize": "7pt",
+                      "color": {
+                        "solid": {
+                          "color": {
+                            "expr": {
+                              "Literal": {
+                                "Value": "'#737D91'"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                ],
+                "horizontalTextAlignment": "Left"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

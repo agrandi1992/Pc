@@ -1,0 +1,50 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.7.0/schema.json",
+  "name": "PERF_V4_WF_LAB_2",
+  "position": {
+    "x": 1190.4,
+    "y": 563.79,
+    "z": 59,
+    "width": 51.2,
+    "height": 12.81,
+    "tabOrder": 59
+  },
+  "parentGroupName": "GRP_CHARTS",
+  "visual": {
+    "visualType": "textbox",
+    "objects": {
+      "general": [
+        {
+          "properties": {
+            "paragraphs": [
+              {
+                "textRuns": [
+                  {
+                    "value": "Mars",
+                    "textStyle": {
+                      "bold": false,
+                      "fontFamily": "Montserrat, Arial",
+                      "fontSize": "6pt",
+                      "color": {
+                        "solid": {
+                          "color": {
+                            "expr": {
+                              "Literal": {
+                                "Value": "'#737D91'"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                ],
+                "horizontalTextAlignment": "Center"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

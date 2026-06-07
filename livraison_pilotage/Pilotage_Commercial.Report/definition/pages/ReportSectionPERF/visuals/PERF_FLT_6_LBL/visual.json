@@ -1,0 +1,50 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.7.0/schema.json",
+  "name": "PERF_FLT_6_LBL",
+  "position": {
+    "x": 1314.13,
+    "y": 111.05,
+    "z": 30,
+    "width": 177.07,
+    "height": 14.95,
+    "tabOrder": 30
+  },
+  "parentGroupName": "GRP_FILTERS",
+  "visual": {
+    "visualType": "textbox",
+    "objects": {
+      "general": [
+        {
+          "properties": {
+            "paragraphs": [
+              {
+                "textRuns": [
+                  {
+                    "value": "Gamme produit",
+                    "textStyle": {
+                      "bold": true,
+                      "fontFamily": "Montserrat, Arial",
+                      "fontSize": "7pt",
+                      "color": {
+                        "solid": {
+                          "color": {
+                            "expr": {
+                              "Literal": {
+                                "Value": "'#051E73'"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                ],
+                "horizontalTextAlignment": "Left"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.7.0/schema.json",
+  "name": "GRP_HEADER",
+  "position": {
+    "x": 204.8,
+    "y": 0.0,
+    "z": 2,
+    "width": 1331.2,
+    "height": 91.83,
+    "tabOrder": 2
+  },
+  "visualGroup": {
+    "displayName": "HEADER",
+    "groupMode": "ScaleMode"
+  }
+}

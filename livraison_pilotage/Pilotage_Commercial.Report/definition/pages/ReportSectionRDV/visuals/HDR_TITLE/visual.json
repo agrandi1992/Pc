@@ -1,0 +1,50 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.7.0/schema.json",
+  "name": "HDR_TITLE",
+  "position": {
+    "x": 234.67,
+    "y": 25.63,
+    "z": 20,
+    "width": 768.0,
+    "height": 38.44,
+    "tabOrder": 20
+  },
+  "parentGroupName": "GRP_HEADER",
+  "visual": {
+    "visualType": "textbox",
+    "objects": {
+      "general": [
+        {
+          "properties": {
+            "paragraphs": [
+              {
+                "textRuns": [
+                  {
+                    "value": "suivi des rendez-vous",
+                    "textStyle": {
+                      "bold": true,
+                      "fontFamily": "Montserrat, Arial",
+                      "fontSize": "25pt",
+                      "color": {
+                        "solid": {
+                          "color": {
+                            "expr": {
+                              "Literal": {
+                                "Value": "'#051E73'"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                ],
+                "horizontalTextAlignment": "Left"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+}
