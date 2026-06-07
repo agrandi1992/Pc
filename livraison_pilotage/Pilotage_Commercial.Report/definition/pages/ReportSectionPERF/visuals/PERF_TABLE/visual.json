@@ -138,11 +138,23 @@
       ],
       "values": [
         {
+          "selector": {
+            "metadata": "_Indicateurs.Taux atteinte Budget N Volume"
+          },
           "properties": {
-            "fontSize": {
-              "expr": {
-                "Literal": {
-                  "Value": "'8pt'"
+            "backColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_Indicateurs"
+                        }
+                      },
+                      "Property": "CF Fond Taux Budget"
+                    }
+                  }
                 }
               }
             },
@@ -151,16 +163,16 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#051E73'"
+                      "Value": "'#1F2937'"
                     }
                   }
                 }
               }
             },
-            "rowPadding": {
+            "bold": {
               "expr": {
                 "Literal": {
-                  "Value": "5"
+                  "Value": "true"
                 }
               }
             }
@@ -223,51 +235,6 @@
               "expr": {
                 "Literal": {
                   "Value": "false"
-                }
-              }
-            }
-          }
-        }
-      ],
-      "values": [
-        {
-          "selector": {
-            "metadata": {
-              "queryRef": "_Indicateurs.Taux atteinte Budget N Volume"
-            }
-          },
-          "properties": {
-            "backColor": {
-              "solid": {
-                "color": {
-                  "expr": {
-                    "Measure": {
-                      "Expression": {
-                        "SourceRef": {
-                          "Entity": "_Indicateurs"
-                        }
-                      },
-                      "Property": "CF Fond Taux Budget"
-                    }
-                  }
-                }
-              }
-            },
-            "fontColor": {
-              "solid": {
-                "color": {
-                  "expr": {
-                    "Literal": {
-                      "Value": "'#1F2937'"
-                    }
-                  }
-                }
-              }
-            },
-            "bold": {
-              "expr": {
-                "Literal": {
-                  "Value": "true"
                 }
               }
             }

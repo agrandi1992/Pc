@@ -181,9 +181,7 @@
         },
         {
           "selector": {
-            "metadata": {
-              "queryRef": "_Indicateurs.Niveau Alerte Volume"
-            }
+            "metadata": "_Indicateurs.Niveau Alerte Volume"
           },
           "properties": {
             "backColor": {
@@ -229,9 +227,7 @@
         },
         {
           "selector": {
-            "metadata": {
-              "queryRef": "_Indicateurs.Recommandation Alerte Volume"
-            }
+            "metadata": "_Indicateurs.Recommandation Alerte Volume"
           },
           "properties": {
             "fontColor": {
@@ -261,9 +257,7 @@
         },
         {
           "selector": {
-            "metadata": {
-              "queryRef": "_Indicateurs.Niveau Alerte RDV"
-            }
+            "metadata": "_Indicateurs.Niveau Alerte RDV"
           },
           "properties": {
             "backColor": {
@@ -309,9 +303,7 @@
         },
         {
           "selector": {
-            "metadata": {
-              "queryRef": "_Indicateurs.Recommandation Alerte RDV"
-            }
+            "metadata": "_Indicateurs.Recommandation Alerte RDV"
           },
           "properties": {
             "fontColor": {
@@ -341,9 +333,7 @@
         },
         {
           "selector": {
-            "metadata": {
-              "queryRef": "_Indicateurs.Niveau Alerte Réseau"
-            }
+            "metadata": "_Indicateurs.Niveau Alerte Réseau"
           },
           "properties": {
             "backColor": {
