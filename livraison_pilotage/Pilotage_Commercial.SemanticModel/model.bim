@@ -2016,8 +2016,10 @@
           },
           {
             "name": "Nombre ventes",
-            "expression": "COALESCE(SUM(fact_affaire[collecte]), 0)",
-            "lineageTag": "Nombre ventes"
+            "expression": "COALESCE(\n    CALCULATE(\n        DISTINCTCOUNT(fact_affaire[contrat_id]),\n        fact_affaire[flag_pu] = 1\n    ),\n    0\n)",
+            "lineageTag": "Nombre ventes",
+            "formatString": "#,##0",
+            "displayFolder": "Pilotage Commercial - Production"
           },
           {
             "name": "Nombre affaires produites",
@@ -2103,10 +2105,10 @@
           },
           {
             "name": "Nombre mandataires productifs",
-            "expression": "COALESCE(CALCULATE(DISTINCTCOUNT(fact_affaire[contrat_id]), fact_affaire[flag_pu] = 1), 0)",
+            "expression": "COALESCE(\n    CALCULATE(\n        DISTINCTCOUNT(fact_affaire[mandataire_id]),\n        fact_affaire[flag_pu] = 1\n    ),\n    0\n)",
             "lineageTag": "Nombre mandataires productifs",
-            "formatString": "0",
-            "displayFolder": "03. Réseau MIA"
+            "formatString": "#,##0",
+            "displayFolder": "Pilotage Commercial - Réseau"
           },
           {
             "name": "Nombre mandataires non productifs",
@@ -2310,6 +2312,54 @@
               "RETURN \"🗓 \" & ref & \"  ↔  \" & cmp"
             ],
             "displayFolder": "00. Navigation"
+          },
+          {
+            "name": "Volume Mois Référence",
+            "expression": "CALCULATE([Volume affaires produites], TREATAS(VALUES(Mois_Reference[Date]), dim_date[Date]))",
+            "formatString": "#,##0",
+            "displayFolder": "Pilotage Commercial - Comparaison"
+          },
+          {
+            "name": "Volume Mois Comparé",
+            "expression": "CALCULATE([Volume affaires produites], TREATAS(VALUES(Mois_Compare[Date]), dim_date[Date]))",
+            "formatString": "#,##0",
+            "displayFolder": "Pilotage Commercial - Comparaison"
+          },
+          {
+            "name": "Écart Volume Mois",
+            "expression": "[Volume Mois Référence] - [Volume Mois Comparé]",
+            "formatString": "+#,##0;-#,##0;0",
+            "displayFolder": "Pilotage Commercial - Comparaison"
+          },
+          {
+            "name": "Écart % Volume Mois",
+            "expression": "DIVIDE([Volume Mois Référence] - [Volume Mois Comparé], [Volume Mois Comparé], 0)",
+            "formatString": "+0.0%;-0.0%;0%",
+            "displayFolder": "Pilotage Commercial - Comparaison"
+          },
+          {
+            "name": "Collecte Mois Référence",
+            "expression": "CALCULATE([Montant collecte], TREATAS(VALUES(Mois_Reference[Date]), dim_date[Date]))",
+            "formatString": "€#,##0",
+            "displayFolder": "Pilotage Commercial - Comparaison"
+          },
+          {
+            "name": "Collecte Mois Comparé",
+            "expression": "CALCULATE([Montant collecte], TREATAS(VALUES(Mois_Compare[Date]), dim_date[Date]))",
+            "formatString": "€#,##0",
+            "displayFolder": "Pilotage Commercial - Comparaison"
+          },
+          {
+            "name": "Écart Collecte Mois",
+            "expression": "[Collecte Mois Référence] - [Collecte Mois Comparé]",
+            "formatString": "+€#,##0;-€#,##0;€0",
+            "displayFolder": "Pilotage Commercial - Comparaison"
+          },
+          {
+            "name": "Écart % Collecte Mois",
+            "expression": "DIVIDE([Collecte Mois Référence] - [Collecte Mois Comparé], [Collecte Mois Comparé], 0)",
+            "formatString": "+0.0%;-0.0%;0%",
+            "displayFolder": "Pilotage Commercial - Comparaison"
           }
         ],
         "annotations": [
@@ -3367,7 +3417,7 @@
             "mode": "import",
             "source": {
               "type": "m",
-              "expression": "let\n    Source = #table(\n        type table [produit_id = text, libelle_produit = text, libelle_gamme_produit = text],\n        {\n            {\"PRD001\", \"PER Individuel TS\", \"PER TS\"},\n            {\"PRD002\", \"PER Individuel TNS\", \"PER TNS\"},\n            {\"PRD003\", \"Assurance Vie Multisupport\", \"Assurance vie\"},\n            {\"PRD004\", \"Capitalisation Collectif\", \"Capitalisation Collectif\"},\n            {\"PRD005\", \"Capitalisation Entreprise\", \"Capitalisation Entreprise\"},\n            {\"PRD006\", \"ADE – Assurance Décès Emprunt\", \"ADE\"},\n            {\"PRD007\", \"Crédit Immobilier\", \"Crédit\"},\n            {\"PRD008\", \"SCPI Rendement\", \"Immobilier\"},\n            {\"PRD009\", \"Prévoyance Individuelle\", \"Prévoyance\"},\n            {\"PRD010\", \"Mutuelle TNS\", \"Mutuelle\"}\n        }\n    )\nin Source"
+              "expression": "let\n    Source = #table(\n        type table [produit_id = text, libelle_produit = text, libelle_gamme_produit = text],\n        {\n            {\"PRD001\", \"PER Individuel TS\", \"PER TS\"},\n            {\"PRD002\", \"PER Individuel TNS\", \"PER TNS\"},\n            {\"PRD003\", \"Assurance Vie Multisupport\", \"Assurance vie\"},\n            {\"PRD004\", \"Capitalisation Collectif\", \"Capitalisation Collectif\"},\n            {\"PRD005\", \"Capitalisation Entreprise\", \"Capitalisation Entreprise\"},\n            {\"PRD006\", \"ADE – Assurance Décès Emprunteur\", \"ADE\"},\n            {\"PRD007\", \"Crédit Immobilier\", \"Crédit\"},\n            {\"PRD008\", \"SCPI Rendement\", \"SCPI\"},\n            {\"PRD009\", \"Prévoyance Individuelle\", \"Prévoyance\"},\n            {\"PRD010\", \"Mutuelle TNS\", \"Mutuelle\"},\n            {\"PRD011\", \"Investissement Immobilier Locatif\", \"Immobilier\"}\n        }\n    )\nin Source"
             }
           }
         ]
@@ -3515,8 +3565,8 @@
         "name": "b11afc35-5bcf-a30a-a864-0d4e5b6f66eb",
         "fromTable": "fact_affectation_mandataire",
         "fromColumn": "mandataire_id",
-        "toTable": "dim_charge_developpement_reseau",
-        "toColumn": "charge_developpement_id",
+        "toTable": "dim_mandataire",
+        "toColumn": "mandataire_id",
         "relyOnReferentialIntegrity": true
       },
       {
@@ -3632,6 +3682,13 @@
         "fromColumn": "agence_id",
         "toTable": "dim_agence",
         "toColumn": "agence_id"
+      },
+      {
+        "name": "fact_affaire_mandataire",
+        "fromTable": "fact_affaire",
+        "fromColumn": "mandataire_id",
+        "toTable": "dim_mandataire",
+        "toColumn": "mandataire_id"
       }
     ],
     "expressions": [
