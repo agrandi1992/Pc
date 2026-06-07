@@ -146,6 +146,110 @@
                 }
               },
               "queryRef": "_Indicateurs.Montant rétrocommission"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Indicateurs"
+                    }
+                  },
+                  "Property": "Volume Mois Référence"
+                }
+              },
+              "queryRef": "_Indicateurs.Volume Mois Référence"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Indicateurs"
+                    }
+                  },
+                  "Property": "Volume Mois Comparé"
+                }
+              },
+              "queryRef": "_Indicateurs.Volume Mois Comparé"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Indicateurs"
+                    }
+                  },
+                  "Property": "Écart Volume Mois"
+                }
+              },
+              "queryRef": "_Indicateurs.Écart Volume Mois"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Indicateurs"
+                    }
+                  },
+                  "Property": "Écart % Volume Mois"
+                }
+              },
+              "queryRef": "_Indicateurs.Écart % Volume Mois"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Indicateurs"
+                    }
+                  },
+                  "Property": "Collecte Mois Référence"
+                }
+              },
+              "queryRef": "_Indicateurs.Collecte Mois Référence"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Indicateurs"
+                    }
+                  },
+                  "Property": "Collecte Mois Comparé"
+                }
+              },
+              "queryRef": "_Indicateurs.Collecte Mois Comparé"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Indicateurs"
+                    }
+                  },
+                  "Property": "Écart Collecte Mois"
+                }
+              },
+              "queryRef": "_Indicateurs.Écart Collecte Mois"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Indicateurs"
+                    }
+                  },
+                  "Property": "Écart % Collecte Mois"
+                }
+              },
+              "queryRef": "_Indicateurs.Écart % Collecte Mois"
             }
           ]
         }

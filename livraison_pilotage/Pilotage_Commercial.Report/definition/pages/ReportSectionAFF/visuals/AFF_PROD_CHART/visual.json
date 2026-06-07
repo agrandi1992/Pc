@@ -19,16 +19,21 @@
           "projections": [
             {
               "field": {
-                "Column": {
+                "HierarchyLevel": {
                   "Expression": {
-                    "SourceRef": {
-                      "Entity": "dim_produit"
+                    "Hierarchy": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "FP_Periode_Date"
+                        }
+                      },
+                      "Hierarchy": "FP_Periode_Date Fields"
                     }
                   },
-                  "Property": "libelle_gamme_produit"
+                  "Level": "FP_Periode_Date Fields"
                 }
               },
-              "queryRef": "dim_produit.libelle_gamme_produit",
+              "queryRef": "FP_Periode_Date.FP_Periode_Date Fields",
               "active": true
             }
           ]

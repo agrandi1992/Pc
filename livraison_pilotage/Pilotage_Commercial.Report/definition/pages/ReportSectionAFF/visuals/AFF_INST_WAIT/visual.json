@@ -16,32 +16,13 @@
       "general": [
         {
           "properties": {
-            "paragraphs": [
-              {
-                "textRuns": [
-                  {
-                    "value": "Données disponibles via Direct Lake",
-                    "textStyle": {
-                      "bold": false,
-                      "fontFamily": "Montserrat, Arial",
-                      "fontSize": "16pt",
-                      "color": {
-                        "solid": {
-                          "color": {
-                            "expr": {
-                              "Literal": {
-                                "Value": "'#737D91'"
-                              }
-                            }
-                          }
-                        }
-                      }
-                    }
-                  }
-                ],
-                "horizontalTextAlignment": "Center"
+            "visible": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
               }
-            ]
+            }
           }
         }
       ]

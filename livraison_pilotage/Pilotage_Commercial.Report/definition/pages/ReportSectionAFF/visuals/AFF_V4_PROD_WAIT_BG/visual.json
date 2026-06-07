@@ -73,6 +73,19 @@
             "id": "default"
           }
         }
+      ],
+      "general": [
+        {
+          "properties": {
+            "visible": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
       ]
     }
   }

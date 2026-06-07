@@ -3599,6 +3599,58 @@
             }
           }
         ]
+      },
+      {
+        "name": "FP_Periode_Date",
+        "columns": [
+          {
+            "name": "Ordre",
+            "dataType": "int64",
+            "isHidden": true,
+            "sourceColumn": "Ordre",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "FP_Periode_Date",
+            "dataType": "string",
+            "isHidden": false,
+            "sourceColumn": "FP_Periode_Date",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "FP_Periode_Date Fields",
+            "dataType": "string",
+            "isHidden": false,
+            "sourceColumn": "FP_Periode_Date Fields",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          }
+        ],
+        "partitions": [
+          {
+            "name": "FP_Periode_Date",
+            "mode": "import",
+            "source": {
+              "type": "calculated",
+              "expression": "SELECTCOLUMNS(\n    {\n        (1, \"Jour\",       NAMEOF(dim_date[Date])),\n        (2, \"Semaine\",    NAMEOF(dim_date[numero_de_la_semaine])),\n        (3, \"Mois\",       NAMEOF(dim_date[annee_mois])),\n        (4, \"Trimestre\",  NAMEOF(dim_date[trimestre])),\n        (5, \"Année\",      NAMEOF(dim_date[annee]))\n    },\n    \"Ordre\",                 [Value1],\n    \"FP_Periode_Date\",        [Value2],\n    \"FP_Periode_Date Fields\", [Value3]\n)"
+            }
+          }
+        ],
+        "annotations": [
+          {
+            "name": "_PBI_QueryOrder",
+            "value": "[\"FP_Periode_Date\"]"
+          },
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          }
+        ]
       }
     ],
     "relationships": [
