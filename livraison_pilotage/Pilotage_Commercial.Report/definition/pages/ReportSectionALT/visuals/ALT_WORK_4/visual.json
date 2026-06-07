@@ -20,7 +20,7 @@
               {
                 "textRuns": [
                   {
-                    "value": "▰ Workflow Fabric",
+                    "value": "▰ Historique des alertes",
                     "textStyle": {
                       "bold": false,
                       "fontFamily": "Montserrat, Arial",
@@ -44,7 +44,7 @@
               {
                 "textRuns": [
                   {
-                    "value": "Suivi des prises en charge.",
+                    "value": "Traçabilité des alertes passées et résolues.",
                     "textStyle": {
                       "bold": false,
                       "fontFamily": "Montserrat, Arial",

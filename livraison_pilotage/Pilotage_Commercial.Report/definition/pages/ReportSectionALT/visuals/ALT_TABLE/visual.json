@@ -51,10 +51,36 @@
                       "Entity": "_Indicateurs"
                     }
                   },
+                  "Property": "Recommandation Alerte Volume"
+                }
+              },
+              "queryRef": "_Indicateurs.Recommandation Alerte Volume"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Indicateurs"
+                    }
+                  },
                   "Property": "Niveau Alerte RDV"
                 }
               },
               "queryRef": "_Indicateurs.Niveau Alerte RDV"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Indicateurs"
+                    }
+                  },
+                  "Property": "Recommandation Alerte RDV"
+                }
+              },
+              "queryRef": "_Indicateurs.Recommandation Alerte RDV"
             },
             {
               "field": {
@@ -80,7 +106,7 @@
             "fontSize": {
               "expr": {
                 "Literal": {
-                  "Value": "'9pt'"
+                  "Value": "'8pt'"
                 }
               }
             },
@@ -129,7 +155,7 @@
             "fontSize": {
               "expr": {
                 "Literal": {
-                  "Value": "'9pt'"
+                  "Value": "'8pt'"
                 }
               }
             },
@@ -147,7 +173,7 @@
             "rowPadding": {
               "expr": {
                 "Literal": {
-                  "Value": "8"
+                  "Value": "6"
                 }
               }
             }
@@ -198,11 +224,36 @@
                   "Value": "true"
                 }
               }
+            }
+          }
+        },
+        {
+          "selector": {
+            "metadata": {
+              "queryRef": "_Indicateurs.Recommandation Alerte Volume"
+            }
+          },
+          "properties": {
+            "fontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_Indicateurs"
+                        }
+                      },
+                      "Property": "Couleur Alerte Volume"
+                    }
+                  }
+                }
+              }
             },
-            "fontSize": {
+            "italic": {
               "expr": {
                 "Literal": {
-                  "Value": "'9pt'"
+                  "Value": "true"
                 }
               }
             }
@@ -253,11 +304,36 @@
                   "Value": "true"
                 }
               }
+            }
+          }
+        },
+        {
+          "selector": {
+            "metadata": {
+              "queryRef": "_Indicateurs.Recommandation Alerte RDV"
+            }
+          },
+          "properties": {
+            "fontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_Indicateurs"
+                        }
+                      },
+                      "Property": "Couleur Alerte RDV"
+                    }
+                  }
+                }
+              }
             },
-            "fontSize": {
+            "italic": {
               "expr": {
                 "Literal": {
-                  "Value": "'9pt'"
+                  "Value": "true"
                 }
               }
             }
@@ -306,13 +382,6 @@
               "expr": {
                 "Literal": {
                   "Value": "true"
-                }
-              }
-            },
-            "fontSize": {
-              "expr": {
-                "Literal": {
-                  "Value": "'9pt'"
                 }
               }
             }

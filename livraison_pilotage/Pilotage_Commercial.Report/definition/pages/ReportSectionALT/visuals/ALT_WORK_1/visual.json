@@ -20,7 +20,7 @@
               {
                 "textRuns": [
                   {
-                    "value": "▶ Détection & orchestration",
+                    "value": "▶ Détection automatique",
                     "textStyle": {
                       "bold": false,
                       "fontFamily": "Montserrat, Arial",
@@ -44,7 +44,7 @@
               {
                 "textRuns": [
                   {
-                    "value": "Power Automate",
+                    "value": "Surveillance des seuils KPI",
                     "textStyle": {
                       "bold": false,
                       "fontFamily": "Montserrat, Arial",
@@ -68,7 +68,7 @@
               {
                 "textRuns": [
                   {
-                    "value": "Déclenchement automatique des alertes.",
+                    "value": "Calcul en temps réel dès dépassement de seuil.",
                     "textStyle": {
                       "bold": false,
                       "fontFamily": "Montserrat, Arial",

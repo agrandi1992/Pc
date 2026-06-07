@@ -20,7 +20,7 @@
               {
                 "textRuns": [
                   {
-                    "value": "▦ Export & suivi",
+                    "value": "▦ Suivi des actions",
                     "textStyle": {
                       "bold": false,
                       "fontFamily": "Montserrat, Arial",
@@ -44,7 +44,7 @@
               {
                 "textRuns": [
                   {
-                    "value": "Téléchargement Excel de la table actionnable.",
+                    "value": "Tableau de bord des actions correctives.",
                     "textStyle": {
                       "bold": false,
                       "fontFamily": "Montserrat, Arial",

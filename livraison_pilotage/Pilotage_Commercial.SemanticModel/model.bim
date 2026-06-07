@@ -3367,7 +3367,7 @@
             "mode": "import",
             "source": {
               "type": "m",
-              "expression": "let\n    Source = #table(\n        type table [produit_id = text, libelle_produit = text, libelle_gamme_produit = text],\n        {\n            {\"PRD001\", \"Assurance Vie Multisupport\", \"Épargne\"},\n            {\"PRD002\", \"PER Individuel\",              \"Retraite\"},\n            {\"PRD003\", \"SCPI Rendement\",              \"Immobilier\"},\n            {\"PRD004\", \"Assurance Vie Euros\",         \"Épargne\"},\n            {\"PRD005\", \"PER Entreprise\",              \"Retraite\"}\n        }\n    )\nin Source"
+              "expression": "let\n    Source = #table(\n        type table [produit_id = text, libelle_produit = text, libelle_gamme_produit = text],\n        {\n            {\"PRD001\", \"PER Individuel TS\", \"PER TS\"},\n            {\"PRD002\", \"PER Individuel TNS\", \"PER TNS\"},\n            {\"PRD003\", \"Assurance Vie Multisupport\", \"Assurance vie\"},\n            {\"PRD004\", \"Capitalisation Collectif\", \"Capitalisation Collectif\"},\n            {\"PRD005\", \"Capitalisation Entreprise\", \"Capitalisation Entreprise\"},\n            {\"PRD006\", \"ADE – Assurance Décès Emprunt\", \"ADE\"},\n            {\"PRD007\", \"Crédit Immobilier\", \"Crédit\"},\n            {\"PRD008\", \"SCPI Rendement\", \"Immobilier\"},\n            {\"PRD009\", \"Prévoyance Individuelle\", \"Prévoyance\"},\n            {\"PRD010\", \"Mutuelle TNS\", \"Mutuelle\"}\n        }\n    )\nin Source"
             }
           }
         ]

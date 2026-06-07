@@ -20,7 +20,7 @@
               {
                 "textRuns": [
                   {
-                    "value": "En attente travaux prod",
+                    "value": "Données disponibles via Direct Lake",
                     "textStyle": {
                       "bold": false,
                       "fontFamily": "Montserrat, Arial",

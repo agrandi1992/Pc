@@ -20,7 +20,7 @@
               {
                 "textRuns": [
                   {
-                    "value": "En attente travaux",
+                    "value": "Données financières",
                     "textStyle": {
                       "bold": true,
                       "fontFamily": "Montserrat, Arial",
@@ -44,7 +44,7 @@
               {
                 "textRuns": [
                   {
-                    "value": "Finance",
+                    "value": "disponibles via Direct Lake",
                     "textStyle": {
                       "bold": true,
                       "fontFamily": "Montserrat, Arial",
