@@ -1321,6 +1321,12 @@
         ],
         "measures": [
           {
+            "name": "Montant collecte",
+            "expression": "COALESCE(SUM(fact_affaire[collecte]), 0)",
+            "formatString": "€#,##0",
+            "displayFolder": "01. Affaires"
+          },
+          {
             "name": "Nombre rendez-vous prévus",
             "expression": [
               "",
@@ -1929,12 +1935,14 @@
           {
             "name": "Niveau Alerte Volume",
             "expression": "VAR VarPct = [Variation vs N-1 Volume Affaires (%)]\nRETURN SWITCH(TRUE(),\n    ISBLANK(VarPct), \"NON DISPONIBLE\",\n    VarPct < -0.20, \"CRITIQUE\",\n    VarPct < -0.10, \"HAUTE\",\n    VarPct < 0, \"MOYENNE\",\n    \"CONFORME\")",
-            "lineageTag": "Niveau Alerte Volume"
+            "lineageTag": "Niveau Alerte Volume",
+            "displayFolder": "Pilotage Commercial - Alertes"
           },
           {
             "name": "Couleur Alerte Volume",
             "expression": "SWITCH([Niveau Alerte Volume],\n    \"CRITIQUE\", \"#D71920\",\n    \"HAUTE\", \"#E67E22\",\n    \"MOYENNE\", \"#F1C40F\",\n    \"CONFORME\", \"#198754\",\n    \"#667085\")",
-            "lineageTag": "Couleur Alerte Volume"
+            "lineageTag": "Couleur Alerte Volume",
+            "displayFolder": "Pilotage Commercial - Alertes"
           },
           {
             "name": "Niveau Alerte RDV",
@@ -2001,7 +2009,8 @@
           {
             "name": "Recommandation Alerte Volume",
             "expression": "VAR Var = [Variation vs N-1 Volume Affaires (%)]\nRETURN SWITCH([Niveau Alerte Volume],\n    \"CRITIQUE\", \"Volume affaires \" & FORMAT(Var, \"0%\") & \" vs N-1 — action commerciale urgente\",\n    \"HAUTE\",    \"Volume affaires \" & FORMAT(Var, \"0%\") & \" vs N-1 — surveiller la tendance\",\n    \"MOYENNE\",  \"Volume affaires légèrement en baisse \" & FORMAT(Var, \"0%\") & \" vs N-1\",\n    BLANK()\n)",
-            "lineageTag": "Recommandation Alerte Volume"
+            "lineageTag": "Recommandation Alerte Volume",
+            "displayFolder": "Pilotage Commercial - Alertes"
           },
           {
             "name": "Nombre ventes",
@@ -2056,7 +2065,8 @@
             "name": "Budget affaires en nombre",
             "expression": "COALESCE(ROUND([Nombre affaires produites] * 1.15, 0), 0)",
             "lineageTag": "Budget affaires en nombre",
-            "formatString": "0"
+            "formatString": "0",
+            "displayFolder": "Pilotage Commercial - Analytique"
           },
           {
             "name": "Budget affaires en euro",
@@ -2075,22 +2085,26 @@
           {
             "name": "Volume affaires produites N-1",
             "expression": "CALCULATE([Volume affaires produites], SAMEPERIODLASTYEAR(dim_date[Date]))",
-            "lineageTag": "Volume affaires produites N-1"
+            "lineageTag": "Volume affaires produites N-1",
+            "displayFolder": "Pilotage Commercial - Analytique"
           },
           {
             "name": "Variation vs N-1 Volume Affaires (%)",
             "expression": "DIVIDE([Volume affaires produites] - [Volume affaires produites N-1], [Volume affaires produites N-1], 0)",
-            "lineageTag": "Variation vs N-1 Volume Affaires (%)"
+            "lineageTag": "Variation vs N-1 Volume Affaires (%)",
+            "displayFolder": "Pilotage Commercial - Analytique"
           },
           {
             "name": "Volume affaires produites MTD-1",
             "expression": "CALCULATE([Volume affaires produites], DATEADD(dim_date[Date], -1, MONTH))",
-            "lineageTag": "Volume affaires produites MTD-1"
+            "lineageTag": "Volume affaires produites MTD-1",
+            "displayFolder": "Pilotage Commercial - Analytique"
           },
           {
             "name": "Variation vs MTD-1 Volume Affaires (%)",
             "expression": "DIVIDE([Volume affaires produites] - [Volume affaires produites MTD-1], [Volume affaires produites MTD-1], 0)",
-            "lineageTag": "Variation vs MTD-1 Volume Affaires (%)"
+            "lineageTag": "Variation vs MTD-1 Volume Affaires (%)",
+            "displayFolder": "Pilotage Commercial - Analytique"
           },
           {
             "name": "Nombre mandataires productifs",
@@ -2109,27 +2123,32 @@
           {
             "name": "CF Variation Texte Volume",
             "expression": "SWITCH(TRUE(),\n    ISBLANK([Variation vs N-1 Volume Affaires (%)]), \"#0A4E97\",\n    [Variation vs N-1 Volume Affaires (%)] >= 0, \"#198754\",\n    [Variation vs N-1 Volume Affaires (%)] > -0.10, \"#E67E22\",\n    \"#D71920\")",
-            "lineageTag": "CF Variation Texte Volume"
+            "lineageTag": "CF Variation Texte Volume",
+            "displayFolder": "Pilotage Commercial - Analytique"
           },
           {
             "name": "CF Budget Fill Volume",
             "expression": "SWITCH(TRUE(),\n    ISBLANK([Taux atteinte Budget N Volume]), \"#E8EEF5\",\n    [Taux atteinte Budget N Volume] >= 1, \"#198754\",\n    [Taux atteinte Budget N Volume] >= 0.8, \"#E67E22\",\n    \"#D71920\")",
-            "lineageTag": "CF Budget Fill Volume"
+            "lineageTag": "CF Budget Fill Volume",
+            "displayFolder": "Pilotage Commercial - Analytique"
           },
           {
             "name": "Libellé Variation Volume vs N-1",
             "expression": "VAR v = [Variation vs N-1 Volume Affaires (%)]\nRETURN SWITCH(TRUE(),\n    ISBLANK(v), \"Vs N-1 —\",\n    v >= 0, \"▲ Vs N-1 \" & FORMAT(v, \"+0.0%;-0.0%\"),\n    \"▼ Vs N-1 \" & FORMAT(v, \"+0.0%;-0.0%\"))",
-            "lineageTag": "Libellé Variation Volume vs N-1"
+            "lineageTag": "Libellé Variation Volume vs N-1",
+            "displayFolder": "Pilotage Commercial - Analytique"
           },
           {
             "name": "Libellé Variation Volume vs MTD-1",
             "expression": "VAR v = [Variation vs MTD-1 Volume Affaires (%)]\nRETURN SWITCH(TRUE(),\n    ISBLANK(v), \"Vs MTD-1 —\",\n    v >= 0, \"▲ Vs MTD-1 \" & FORMAT(v, \"+0.0%;-0.0%\"),\n    \"▼ Vs MTD-1 \" & FORMAT(v, \"+0.0%;-0.0%\"))",
-            "lineageTag": "Libellé Variation Volume vs MTD-1"
+            "lineageTag": "Libellé Variation Volume vs MTD-1",
+            "displayFolder": "Pilotage Commercial - Analytique"
           },
           {
             "name": "Recommandation Volume",
             "expression": "VAR VarPct = [Variation vs N-1 Volume Affaires (%)]\nRETURN SWITCH(TRUE(),\n    ISBLANK(VarPct), \"Données volume affaires indisponibles.\",\n    VarPct < -0.10, \"Identifier les agences en recul et déclencher un plan de relance.\",\n    VarPct < 0, \"Surveiller la trajectoire et challenger les zones en retrait.\",\n    \"Sécuriser l'atterrissage.\")",
-            "lineageTag": "Recommandation Volume"
+            "lineageTag": "Recommandation Volume",
+            "displayFolder": "Pilotage Commercial - Analytique"
           },
           {
             "name": "CF Fond Tile Taux RDV",
@@ -2142,7 +2161,8 @@
               "    \"#FEE2E2\"",
               ")"
             ],
-            "formatString": ""
+            "formatString": "",
+            "displayFolder": "Pilotage Commercial - RDV"
           },
           {
             "name": "CF Valeur Taux RDV",
@@ -2155,7 +2175,8 @@
               "    \"#F05062\"",
               ")"
             ],
-            "formatString": ""
+            "formatString": "",
+            "displayFolder": "Pilotage Commercial - RDV"
           },
           {
             "name": "CF Fond Taux Budget",
@@ -2168,7 +2189,8 @@
               "    \"#FEE2E2\"",
               ")"
             ],
-            "formatString": ""
+            "formatString": "",
+            "displayFolder": "Pilotage Commercial - RDV"
           },
           {
             "name": "Nb Domaines Critiques",
@@ -2178,7 +2200,8 @@
               "VAR n = IF([Niveau Alerte Réseau] = \"CRITIQUE\", 1, 0)",
               "RETURN v + r + n"
             ],
-            "formatString": "0"
+            "formatString": "0",
+            "displayFolder": "Pilotage Commercial"
           },
           {
             "name": "Nb Domaines Hautes",
@@ -2188,7 +2211,8 @@
               "VAR n = IF([Niveau Alerte Réseau] = \"HAUTE\", 1, 0)",
               "RETURN v + r + n"
             ],
-            "formatString": "0"
+            "formatString": "0",
+            "displayFolder": "Pilotage Commercial"
           },
           {
             "name": "Nb Domaines Moyennes",
@@ -2198,7 +2222,8 @@
               "VAR n = IF([Niveau Alerte Réseau] = \"MOYENNE\", 1, 0)",
               "RETURN v + r + n"
             ],
-            "formatString": "0"
+            "formatString": "0",
+            "displayFolder": "Pilotage Commercial"
           },
           {
             "name": "Nb Domaines Conformes",
@@ -2208,28 +2233,34 @@
               "VAR n = IF([Niveau Alerte Réseau] = \"CONFORME\", 1, 0)",
               "RETURN v + r + n"
             ],
-            "formatString": "0"
+            "formatString": "0",
+            "displayFolder": "Pilotage Commercial"
           },
           {
             "name": "Nb Alertes DAX Total",
             "expression": "[Nb Domaines Critiques] + [Nb Domaines Hautes] + [Nb Domaines Moyennes]",
-            "formatString": "0"
+            "formatString": "0",
+            "displayFolder": "Pilotage Commercial"
           },
           {
             "name": "CF Fond KPI Critique",
-            "expression": "IF([Nb Domaines Critiques] > 0, \"#FEE2E2\", \"#FFFFFF\")"
+            "expression": "IF([Nb Domaines Critiques] > 0, \"#FEE2E2\", \"#FFFFFF\")",
+            "displayFolder": "Pilotage Commercial"
           },
           {
             "name": "CF Fond KPI Haute",
-            "expression": "IF([Nb Domaines Hautes] > 0, \"#FEF3C7\", \"#FFFFFF\")"
+            "expression": "IF([Nb Domaines Hautes] > 0, \"#FEF3C7\", \"#FFFFFF\")",
+            "displayFolder": "Pilotage Commercial"
           },
           {
             "name": "CF Fond KPI Moyenne",
-            "expression": "IF([Nb Domaines Moyennes] > 0, \"#FEFCE8\", \"#FFFFFF\")"
+            "expression": "IF([Nb Domaines Moyennes] > 0, \"#FEFCE8\", \"#FFFFFF\")",
+            "displayFolder": "Pilotage Commercial"
           },
           {
             "name": "CF Fond KPI Conforme",
-            "expression": "IF([Nb Domaines Conformes] > 0, \"#D1FAE5\", \"#FFFFFF\")"
+            "expression": "IF([Nb Domaines Conformes] > 0, \"#D1FAE5\", \"#FFFFFF\")",
+            "displayFolder": "Pilotage Commercial"
           },
           {
             "name": "CF Fond Alerte Volume",
