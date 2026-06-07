@@ -7,7 +7,7 @@
       }
     },
     {
-      "semanticModel": {
+      "dataset": {
         "path": "Pilotage_Commercial.SemanticModel"
       }
     }
