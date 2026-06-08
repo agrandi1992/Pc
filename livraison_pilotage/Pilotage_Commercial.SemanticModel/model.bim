@@ -2008,7 +2008,7 @@
           },
           {
             "name": "Recommandation Alerte Volume",
-            "expression": "VAR Var = [Variation vs N-1 Volume Affaires (%)]\nRETURN SWITCH([Niveau Alerte Volume],\n    \"CRITIQUE\", \"Volume affaires \" & FORMAT(Var, \"0%\") & \" vs N-1 — action commerciale urgente\",\n    \"HAUTE\",    \"Volume affaires \" & FORMAT(Var, \"0%\") & \" vs N-1 — surveiller la tendance\",\n    \"MOYENNE\",  \"Volume affaires légèrement en baisse \" & FORMAT(Var, \"0%\") & \" vs N-1\",\n    BLANK()\n)",
+            "expression": "VAR _VarPct = [Variation vs N-1 Volume Affaires (%)]\nRETURN SWITCH([Niveau Alerte Volume],\n    \"CRITIQUE\", \"Volume affaires \" & FORMAT(_VarPct, \"0%\") & \" vs N-1 — action commerciale urgente\",\n    \"HAUTE\",    \"Volume affaires \" & FORMAT(_VarPct, \"0%\") & \" vs N-1 — surveiller la tendance\",\n    \"MOYENNE\",  \"Volume affaires légèrement en baisse \" & FORMAT(_VarPct, \"0%\") & \" vs N-1\",\n    \"CONFORME\", \"Volume affaires \" & FORMAT(_VarPct, \"0%\") & \" vs N-1 — objectif atteint\",\n    BLANK()\n)",
             "lineageTag": "Recommandation Alerte Volume",
             "displayFolder": "Pilotage Commercial - Alertes"
           },
