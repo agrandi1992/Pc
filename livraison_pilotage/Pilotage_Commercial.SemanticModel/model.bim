@@ -41,7 +41,9 @@
                 "name": "SummarizationSetBy",
                 "value": "Automatic"
               }
-            ]
+            ],
+            "isHidden": true,
+            "isKey": true
           },
           {
             "type": "calculatedTableColumn",
@@ -217,7 +219,7 @@
             "sourceColumn": "[date_id]",
             "formatString": "0",
             "lineageTag": "1e0a61cc-cc5c-4e96-a9da-517adfc3adc8",
-            "summarizeBy": "sum",
+            "summarizeBy": "none",
             "annotations": [
               {
                 "name": "SummarizationSetBy",
@@ -259,7 +261,8 @@
             "name": "PBI_Id",
             "value": "bafdfad88afd4fa2ba51953bbe2b86f3"
           }
-        ]
+        ],
+        "isDateTable": true
       },
       {
         "name": "DateTableTemplate_40f8e67e-c9f0-4e13-ad4f-6e840fdbf357",
@@ -708,7 +711,8 @@
                 "name": "SummarizationSetBy",
                 "value": "Automatic"
               }
-            ]
+            ],
+            "isHidden": true
           },
           {
             "name": "date_entree",
@@ -723,7 +727,8 @@
                 "name": "SummarizationSetBy",
                 "value": "Automatic"
               }
-            ]
+            ],
+            "isHidden": true
           },
           {
             "name": "date_sortie",
@@ -1137,7 +1142,8 @@
                 "name": "SummarizationSetBy",
                 "value": "Automatic"
               }
-            ]
+            ],
+            "isHidden": true
           },
           {
             "name": "agence_id",
@@ -1151,7 +1157,8 @@
                 "name": "SummarizationSetBy",
                 "value": "Automatic"
               }
-            ]
+            ],
+            "isHidden": true
           },
           {
             "name": "type_canal_id",
@@ -1165,7 +1172,8 @@
                 "name": "SummarizationSetBy",
                 "value": "Automatic"
               }
-            ]
+            ],
+            "isHidden": true
           },
           {
             "name": "niveau_etude_id",
@@ -1179,7 +1187,8 @@
                 "name": "SummarizationSetBy",
                 "value": "Automatic"
               }
-            ]
+            ],
+            "isHidden": true
           },
           {
             "name": "date_creation_candidat",
@@ -1460,7 +1469,8 @@
                 "name": "SummarizationSetBy",
                 "value": "Automatic"
               }
-            ]
+            ],
+            "isHidden": true
           },
           {
             "name": "etape_parcours_id",
@@ -1489,7 +1499,8 @@
                 "name": "SummarizationSetBy",
                 "value": "Automatic"
               }
-            ]
+            ],
+            "isHidden": true
           },
           {
             "name": "score_examen",
@@ -1518,7 +1529,8 @@
                 "name": "SummarizationSetBy",
                 "value": "Automatic"
               }
-            ]
+            ],
+            "isHidden": true
           }
         ],
         "partitions": [
@@ -1551,7 +1563,8 @@
                 "name": "SummarizationSetBy",
                 "value": "Automatic"
               }
-            ]
+            ],
+            "isHidden": true
           },
           {
             "name": "agence_id",
@@ -1565,7 +1578,8 @@
                 "name": "SummarizationSetBy",
                 "value": "Automatic"
               }
-            ]
+            ],
+            "isHidden": true
           },
           {
             "name": "date_connexion",
@@ -1580,7 +1594,8 @@
                 "name": "SummarizationSetBy",
                 "value": "Automatic"
               }
-            ]
+            ],
+            "isHidden": true
           },
           {
             "name": "flag_connexion",
@@ -1589,7 +1604,7 @@
             "formatString": "0",
             "lineageTag": "a57466f4-2491-4243-b7ea-4c8eda8b1059",
             "sourceLineageTag": "flag_connexion",
-            "summarizeBy": "sum",
+            "summarizeBy": "none",
             "annotations": [
               {
                 "name": "SummarizationSetBy",
@@ -1638,7 +1653,8 @@
               }
             ],
             "displayFolder": "Pilotage Commercial - Réseau",
-            "isHidden": true
+            "isHidden": true,
+            "formatString": "#,##0"
           }
         ]
       },
@@ -1659,7 +1675,8 @@
                 "name": "SummarizationSetBy",
                 "value": "Automatic"
               }
-            ]
+            ],
+            "isHidden": true
           },
           {
             "name": "mandataire_id",
@@ -1673,7 +1690,8 @@
                 "name": "SummarizationSetBy",
                 "value": "Automatic"
               }
-            ]
+            ],
+            "isHidden": true
           },
           {
             "name": "role_mandataire",
@@ -1762,7 +1780,8 @@
                 "name": "SummarizationSetBy",
                 "value": "Automatic"
               }
-            ]
+            ],
+            "isHidden": true
           },
           {
             "name": "date_pose_rendez_vous",
@@ -1792,7 +1811,8 @@
                 "name": "SummarizationSetBy",
                 "value": "Automatic"
               }
-            ]
+            ],
+            "isHidden": true
           },
           {
             "name": "flag_rendez_vous_realise",
@@ -1923,7 +1943,8 @@
               {
                 "property": "Name"
               }
-            ]
+            ],
+            "formatString": "#,##0 €"
           }
         ]
       },
@@ -2539,7 +2560,8 @@
                 "name": "SummarizationSetBy",
                 "value": "Automatic"
               }
-            ]
+            ],
+            "isHidden": true
           },
           {
             "name": "etat_affaire_id",
@@ -2568,7 +2590,8 @@
                 "value": "Automatic"
               }
             ],
-            "formatString": "General Date"
+            "formatString": "General Date",
+            "isHidden": true
           },
           {
             "name": "type_affaire",
@@ -2634,7 +2657,7 @@
             "sourceColumn": "flag_pu",
             "lineageTag": "12fcdd17-b029-4af3-b79b-8ce39fe68414",
             "sourceLineageTag": "flag_pu",
-            "summarizeBy": "sum",
+            "summarizeBy": "none",
             "annotations": [
               {
                 "name": "SummarizationSetBy",
@@ -2936,7 +2959,8 @@
                 "name": "SummarizationSetBy",
                 "value": "Automatic"
               }
-            ]
+            ],
+            "isHidden": true
           },
           {
             "name": "client_id",
@@ -2965,7 +2989,8 @@
                 "value": "Automatic"
               }
             ],
-            "formatString": "General Date"
+            "formatString": "General Date",
+            "isHidden": true
           },
           {
             "name": "niveau_vigilance_id",
@@ -2979,7 +3004,8 @@
                 "name": "SummarizationSetBy",
                 "value": "Automatic"
               }
-            ]
+            ],
+            "isHidden": true
           },
           {
             "name": "mandataire_id",
@@ -2993,7 +3019,8 @@
                 "name": "SummarizationSetBy",
                 "value": "Automatic"
               }
-            ]
+            ],
+            "isHidden": true
           },
           {
             "name": "delai_pris_en_charge",
@@ -3152,7 +3179,8 @@
                 "value": "{\"isGeneralNumber\":true}"
               }
             ],
-            "isHidden": true
+            "isHidden": true,
+            "formatString": "#,##0"
           },
           {
             "name": "Nombre journées découverte réalisées",
@@ -3318,7 +3346,8 @@
                 "name": "PBI_FormatHint",
                 "value": "{\"isGeneralNumber\":true}"
               }
-            ]
+            ],
+            "formatString": "0.0%"
           },
           {
             "name": "Ecart Taux Réalisation",
@@ -3346,7 +3375,8 @@
               ")"
             ],
             "displayFolder": "Pilotage Commercial - Analytique",
-            "lineageTag": "c7247f50-d351-4033-8aee-eaeea6049967"
+            "lineageTag": "c7247f50-d351-4033-8aee-eaeea6049967",
+            "formatString": "0.0%"
           },
           {
             "name": "Moyenne année présence mandataire dans le groupe",
@@ -3365,7 +3395,8 @@
                 "value": "{\"isGeneralNumber\":true}"
               }
             ],
-            "isHidden": true
+            "isHidden": true,
+            "formatString": "#,##0"
           },
           {
             "name": "Nombre candidats",
@@ -3406,7 +3437,8 @@
                 "value": "{\"isGeneralNumber\":true}"
               }
             ],
-            "isHidden": true
+            "isHidden": true,
+            "formatString": "0.0%"
           },
           {
             "name": "Moyenne age candidats",
@@ -3432,7 +3464,8 @@
                 "value": "{\"isGeneralNumber\":true}"
               }
             ],
-            "isHidden": true
+            "isHidden": true,
+            "formatString": "#,##0"
           },
           {
             "name": "Taux de succès à l'examen (%)",
@@ -3494,7 +3527,8 @@
                 "name": "PBI_FormatHint",
                 "value": "{\"isGeneralNumber\":true}"
               }
-            ]
+            ],
+            "formatString": "0.0%"
           },
           {
             "name": "Taux rendez-vous faits à domicile",
@@ -3514,7 +3548,8 @@
                 "name": "PBI_FormatHint",
                 "value": "{\"isGeneralNumber\":true}"
               }
-            ]
+            ],
+            "formatString": "0.0%"
           },
           {
             "name": "Nombre RDV prévus (par type mandataire)",
@@ -3559,7 +3594,8 @@
                 "name": "PBI_FormatHint",
                 "value": "{\"isGeneralNumber\":true}"
               }
-            ]
+            ],
+            "formatString": "0.0%"
           },
           {
             "name": "Nombre RDV prévus (agence)",
@@ -3658,7 +3694,8 @@
                 "name": "PBI_FormatHint",
                 "value": "{\"isGeneralNumber\":true}"
               }
-            ]
+            ],
+            "formatString": "0.0%"
           },
           {
             "name": "Montant rétrocommission",
@@ -3700,13 +3737,15 @@
             "name": "Niveau Alerte Volume",
             "expression": "VAR VarPct = [Variation vs N-1 Volume Affaires (%)]\nRETURN SWITCH(TRUE(),\n    ISBLANK(VarPct), \"NON DISPONIBLE\",\n    VarPct < -0.20, \"CRITIQUE\",\n    VarPct < -0.10, \"HAUTE\",\n    VarPct < 0, \"MOYENNE\",\n    \"CONFORME\")",
             "lineageTag": "Niveau Alerte Volume",
-            "displayFolder": "Pilotage Commercial - Alertes"
+            "displayFolder": "Pilotage Commercial - Alertes",
+            "formatString": "#,##0"
           },
           {
             "name": "Couleur Alerte Volume",
             "expression": "SWITCH([Niveau Alerte Volume],\n    \"CRITIQUE\", \"#D71920\",\n    \"HAUTE\", \"#E67E22\",\n    \"MOYENNE\", \"#F1C40F\",\n    \"CONFORME\", \"#198754\",\n    \"#667085\")",
             "lineageTag": "Couleur Alerte Volume",
-            "displayFolder": "Pilotage Commercial - Alertes"
+            "displayFolder": "Pilotage Commercial - Alertes",
+            "formatString": "#,##0"
           },
           {
             "name": "Niveau Alerte RDV",
@@ -3774,7 +3813,8 @@
             "name": "Recommandation Alerte Volume",
             "expression": "VAR _VarPct = [Variation vs N-1 Volume Affaires (%)]\nRETURN SWITCH([Niveau Alerte Volume],\n    \"CRITIQUE\", \"Volume affaires \" & FORMAT(_VarPct, \"0%\") & \" vs N-1 — action commerciale urgente\",\n    \"HAUTE\",    \"Volume affaires \" & FORMAT(_VarPct, \"0%\") & \" vs N-1 — surveiller la tendance\",\n    \"MOYENNE\",  \"Volume affaires légèrement en baisse \" & FORMAT(_VarPct, \"0%\") & \" vs N-1\",\n    \"CONFORME\", \"Volume affaires \" & FORMAT(_VarPct, \"0%\") & \" vs N-1 — objectif atteint\",\n    BLANK()\n)",
             "lineageTag": "Recommandation Alerte Volume",
-            "displayFolder": "Pilotage Commercial - Alertes"
+            "displayFolder": "Pilotage Commercial - Alertes",
+            "formatString": "#,##0"
           },
           {
             "name": "Nombre ventes",
@@ -3850,25 +3890,29 @@
             "name": "Volume affaires produites N-1",
             "expression": "CALCULATE([Volume affaires produites], SAMEPERIODLASTYEAR(dim_date[Date]))",
             "lineageTag": "Volume affaires produites N-1",
-            "displayFolder": "Pilotage Commercial - Analytique"
+            "displayFolder": "Pilotage Commercial - Analytique",
+            "formatString": "#,##0"
           },
           {
             "name": "Variation vs N-1 Volume Affaires (%)",
             "expression": "DIVIDE([Volume affaires produites] - [Volume affaires produites N-1], [Volume affaires produites N-1], 0)",
             "lineageTag": "Variation vs N-1 Volume Affaires (%)",
-            "displayFolder": "Pilotage Commercial - Analytique"
+            "displayFolder": "Pilotage Commercial - Analytique",
+            "formatString": "0.0%"
           },
           {
             "name": "Volume affaires produites MTD-1",
             "expression": "CALCULATE([Volume affaires produites], DATEADD(dim_date[Date], -1, MONTH))",
             "lineageTag": "Volume affaires produites MTD-1",
-            "displayFolder": "Pilotage Commercial - Analytique"
+            "displayFolder": "Pilotage Commercial - Analytique",
+            "formatString": "#,##0"
           },
           {
             "name": "Variation vs MTD-1 Volume Affaires (%)",
             "expression": "DIVIDE([Volume affaires produites] - [Volume affaires produites MTD-1], [Volume affaires produites MTD-1], 0)",
             "lineageTag": "Variation vs MTD-1 Volume Affaires (%)",
-            "displayFolder": "Pilotage Commercial - Analytique"
+            "displayFolder": "Pilotage Commercial - Analytique",
+            "formatString": "0.0%"
           },
           {
             "name": "Nombre mandataires productifs",
@@ -3888,31 +3932,36 @@
             "name": "CF Variation Texte Volume",
             "expression": "SWITCH(TRUE(),\n    ISBLANK([Variation vs N-1 Volume Affaires (%)]), \"#0A4E97\",\n    [Variation vs N-1 Volume Affaires (%)] >= 0, \"#198754\",\n    [Variation vs N-1 Volume Affaires (%)] > -0.10, \"#E67E22\",\n    \"#D71920\")",
             "lineageTag": "CF Variation Texte Volume",
-            "displayFolder": "Pilotage Commercial - Analytique"
+            "displayFolder": "Pilotage Commercial - Analytique",
+            "formatString": "0.0%"
           },
           {
             "name": "CF Budget Fill Volume",
             "expression": "SWITCH(TRUE(),\n    ISBLANK([Taux atteinte Budget N Volume]), \"#E8EEF5\",\n    [Taux atteinte Budget N Volume] >= 1, \"#198754\",\n    [Taux atteinte Budget N Volume] >= 0.8, \"#E67E22\",\n    \"#D71920\")",
             "lineageTag": "CF Budget Fill Volume",
-            "displayFolder": "Pilotage Commercial - Analytique"
+            "displayFolder": "Pilotage Commercial - Analytique",
+            "formatString": "#,##0"
           },
           {
             "name": "Libellé Variation Volume vs N-1",
             "expression": "VAR v = [Variation vs N-1 Volume Affaires (%)]\nRETURN SWITCH(TRUE(),\n    ISBLANK(v), \"Vs N-1 —\",\n    v >= 0, \"▲ Vs N-1 \" & FORMAT(v, \"+0.0%;-0.0%\"),\n    \"▼ Vs N-1 \" & FORMAT(v, \"+0.0%;-0.0%\"))",
             "lineageTag": "Libellé Variation Volume vs N-1",
-            "displayFolder": "Pilotage Commercial - Analytique"
+            "displayFolder": "Pilotage Commercial - Analytique",
+            "formatString": "0.0%"
           },
           {
             "name": "Libellé Variation Volume vs MTD-1",
             "expression": "VAR v = [Variation vs MTD-1 Volume Affaires (%)]\nRETURN SWITCH(TRUE(),\n    ISBLANK(v), \"Vs MTD-1 —\",\n    v >= 0, \"▲ Vs MTD-1 \" & FORMAT(v, \"+0.0%;-0.0%\"),\n    \"▼ Vs MTD-1 \" & FORMAT(v, \"+0.0%;-0.0%\"))",
             "lineageTag": "Libellé Variation Volume vs MTD-1",
-            "displayFolder": "Pilotage Commercial - Analytique"
+            "displayFolder": "Pilotage Commercial - Analytique",
+            "formatString": "0.0%"
           },
           {
             "name": "Recommandation Volume",
             "expression": "VAR VarPct = [Variation vs N-1 Volume Affaires (%)]\nRETURN SWITCH(TRUE(),\n    ISBLANK(VarPct), \"Données volume affaires indisponibles.\",\n    VarPct < -0.10, \"Identifier les agences en recul et déclencher un plan de relance.\",\n    VarPct < 0, \"Surveiller la trajectoire et challenger les zones en retrait.\",\n    \"Sécuriser l'atterrissage.\")",
             "lineageTag": "Recommandation Volume",
-            "displayFolder": "Pilotage Commercial - Analytique"
+            "displayFolder": "Pilotage Commercial - Analytique",
+            "formatString": "#,##0"
           },
           {
             "name": "CF Fond Tile Taux RDV",
@@ -3925,7 +3974,7 @@
               "    \"#FEE2E2\"",
               ")"
             ],
-            "formatString": "",
+            "formatString": "0.0%",
             "displayFolder": "Pilotage Commercial - RDV"
           },
           {
@@ -3939,7 +3988,7 @@
               "    \"#F05062\"",
               ")"
             ],
-            "formatString": "",
+            "formatString": "0.0%",
             "displayFolder": "Pilotage Commercial - RDV"
           },
           {
@@ -3953,7 +4002,7 @@
               "    \"#FEE2E2\"",
               ")"
             ],
-            "formatString": "",
+            "formatString": "0.0%",
             "displayFolder": "Pilotage Commercial - RDV"
           },
           {
@@ -4009,22 +4058,26 @@
           {
             "name": "CF Fond KPI Critique",
             "expression": "IF([Nb Domaines Critiques] > 0, \"#FEE2E2\", \"#FFFFFF\")",
-            "displayFolder": "Pilotage Commercial"
+            "displayFolder": "Pilotage Commercial",
+            "formatString": "#,##0"
           },
           {
             "name": "CF Fond KPI Haute",
             "expression": "IF([Nb Domaines Hautes] > 0, \"#FEF3C7\", \"#FFFFFF\")",
-            "displayFolder": "Pilotage Commercial"
+            "displayFolder": "Pilotage Commercial",
+            "formatString": "#,##0"
           },
           {
             "name": "CF Fond KPI Moyenne",
             "expression": "IF([Nb Domaines Moyennes] > 0, \"#FEFCE8\", \"#FFFFFF\")",
-            "displayFolder": "Pilotage Commercial"
+            "displayFolder": "Pilotage Commercial",
+            "formatString": "#,##0"
           },
           {
             "name": "CF Fond KPI Conforme",
             "expression": "IF([Nb Domaines Conformes] > 0, \"#D1FAE5\", \"#FFFFFF\")",
-            "displayFolder": "Pilotage Commercial"
+            "displayFolder": "Pilotage Commercial",
+            "formatString": "#,##0"
           },
           {
             "name": "CF Fond Alerte Volume",
@@ -4036,7 +4089,8 @@
               "    \"CONFORME\", \"#D1FAE5\",",
               "    \"#F6F7FB\")"
             ],
-            "displayFolder": "Pilotage Commercial - Alertes"
+            "displayFolder": "Pilotage Commercial - Alertes",
+            "formatString": "#,##0"
           },
           {
             "name": "CF Fond Alerte RDV",
@@ -4065,7 +4119,8 @@
           {
             "name": "Dernière MAJ",
             "expression": "FORMAT(NOW(), \"DD/MM/YYYY\")",
-            "displayFolder": "00. Navigation"
+            "displayFolder": "00. Navigation",
+            "formatString": "#,##0"
           },
           {
             "name": "Libellé Budget Volume",
@@ -4076,17 +4131,20 @@
               "    \"Budget N · \" & FORMAT([Budget affaires en euro], \"#,0 €\")",
               ")"
             ],
-            "displayFolder": "01. Affaires"
+            "displayFolder": "01. Affaires",
+            "formatString": "#,##0"
           },
           {
             "name": "Mois Comparaison Sélectionné",
             "expression": "COALESCE(SELECTEDVALUE(Mois_Compare[Mois]), \"— aucun —\")",
-            "displayFolder": "00. Navigation"
+            "displayFolder": "00. Navigation",
+            "formatString": "#,##0"
           },
           {
             "name": "Mois Référence Sélectionné",
             "expression": "COALESCE(SELECTEDVALUE(Mois_Reference[Mois]), \"— aucun —\")",
-            "displayFolder": "00. Navigation"
+            "displayFolder": "00. Navigation",
+            "formatString": "#,##0"
           },
           {
             "name": "Libellé Comparaison",
@@ -4175,7 +4233,8 @@
           {
             "name": "charge_production_id",
             "dataType": "string",
-            "sourceColumn": "charge_production_id"
+            "sourceColumn": "charge_production_id",
+            "summarizeBy": "none"
           },
           {
             "name": "nom_charge_production",
