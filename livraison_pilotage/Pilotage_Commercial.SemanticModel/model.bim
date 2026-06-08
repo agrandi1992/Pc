@@ -317,7 +317,9 @@
             "mode": "directLake",
             "source": {
               "type": "entity",
-              "entityName": "fact_affectation_mandataire"
+              "entityName": "fact_affectation_mandataire",
+              "schemaName": "gold",
+              "expressionSource": "DirectLake - lh_gold"
             }
           }
         ],
@@ -433,7 +435,9 @@
             "mode": "directLake",
             "source": {
               "type": "entity",
-              "entityName": "glossaire_indicateurs"
+              "entityName": "glossaire_indicateurs",
+              "schemaName": "gold",
+              "expressionSource": "DirectLake - lh_gold"
             }
           }
         ]
@@ -478,7 +482,9 @@
             "mode": "directLake",
             "source": {
               "type": "entity",
-              "entityName": "dim_type_rendez_vous_client"
+              "entityName": "dim_type_rendez_vous_client",
+              "schemaName": "gold",
+              "expressionSource": "DirectLake - lh_gold"
             }
           }
         ]
@@ -537,7 +543,9 @@
             "mode": "directLake",
             "source": {
               "type": "entity",
-              "entityName": "dim_niveau_etude"
+              "entityName": "dim_niveau_etude",
+              "schemaName": "gold",
+              "expressionSource": "DirectLake - lh_gold"
             }
           }
         ],
@@ -583,7 +591,9 @@
             "mode": "directLake",
             "source": {
               "type": "entity",
-              "entityName": "dim_motif_depart_formation"
+              "entityName": "dim_motif_depart_formation",
+              "schemaName": "gold",
+              "expressionSource": "DirectLake - lh_gold"
             }
           }
         ],
@@ -643,7 +653,9 @@
             "mode": "directLake",
             "source": {
               "type": "entity",
-              "entityName": "dim_charge_developpement_reseau"
+              "entityName": "dim_charge_developpement_reseau",
+              "schemaName": "gold",
+              "expressionSource": "DirectLake - lh_gold"
             }
           }
         ],
@@ -689,7 +701,9 @@
             "mode": "directLake",
             "source": {
               "type": "entity",
-              "entityName": "dim_type_canal"
+              "entityName": "dim_type_canal",
+              "schemaName": "gold",
+              "expressionSource": "DirectLake - lh_gold"
             }
           }
         ],
@@ -950,7 +964,9 @@
             "mode": "directLake",
             "source": {
               "type": "entity",
-              "entityName": "dim_candidat"
+              "entityName": "dim_candidat",
+              "schemaName": "gold",
+              "expressionSource": "DirectLake - lh_gold"
             }
           }
         ],
@@ -1084,7 +1100,9 @@
             "mode": "directLake",
             "source": {
               "type": "entity",
-              "entityName": "dim_agence"
+              "entityName": "dim_agence",
+              "schemaName": "gold",
+              "expressionSource": "DirectLake - lh_gold"
             }
           }
         ],
@@ -1174,7 +1192,9 @@
             "mode": "directLake",
             "source": {
               "type": "entity",
-              "entityName": "fact_parcours_candidat"
+              "entityName": "fact_parcours_candidat",
+              "schemaName": "gold",
+              "expressionSource": "DirectLake - lh_gold"
             }
           }
         ],
@@ -1250,7 +1270,9 @@
             "mode": "directLake",
             "source": {
               "type": "entity",
-              "entityName": "fact_activite_mandataire"
+              "entityName": "fact_activite_mandataire",
+              "schemaName": "gold",
+              "expressionSource": "DirectLake - lh_gold"
             }
           }
         ],
@@ -2459,7 +2481,9 @@
             "mode": "directLake",
             "source": {
               "type": "entity",
-              "entityName": "bridge_rendez_vous_mandataire"
+              "entityName": "bridge_rendez_vous_mandataire",
+              "schemaName": "gold",
+              "expressionSource": "DirectLake - lh_gold"
             }
           }
         ]
@@ -2667,7 +2691,9 @@
             "mode": "directLake",
             "source": {
               "type": "entity",
-              "entityName": "fact_rendez_vous_client"
+              "entityName": "fact_rendez_vous_client",
+              "schemaName": "gold",
+              "expressionSource": "DirectLake - lh_gold"
             }
           }
         ],
@@ -2846,7 +2872,9 @@
             "mode": "directLake",
             "source": {
               "type": "entity",
-              "entityName": "dim_mandataire"
+              "entityName": "dim_mandataire",
+              "schemaName": "gold",
+              "expressionSource": "DirectLake - lh_gold"
             }
           }
         ]
@@ -3370,7 +3398,9 @@
             "mode": "directLake",
             "source": {
               "type": "entity",
-              "entityName": "fact_affaire"
+              "entityName": "fact_affaire",
+              "schemaName": "gold",
+              "expressionSource": "DirectLake - lh_gold"
             }
           }
         ]
@@ -3425,7 +3455,9 @@
             "mode": "directLake",
             "source": {
               "type": "entity",
-              "entityName": "dim_produit"
+              "entityName": "dim_produit",
+              "schemaName": "gold",
+              "expressionSource": "DirectLake - lh_gold"
             }
           }
         ]
@@ -3452,7 +3484,9 @@
             "mode": "directLake",
             "source": {
               "type": "entity",
-              "entityName": "dim_charge_production"
+              "entityName": "dim_charge_production",
+              "schemaName": "gold",
+              "expressionSource": "DirectLake - lh_gold"
             }
           }
         ]
@@ -3479,7 +3513,9 @@
             "mode": "directLake",
             "source": {
               "type": "entity",
-              "entityName": "dim_compagnie"
+              "entityName": "dim_compagnie",
+              "schemaName": "gold",
+              "expressionSource": "DirectLake - lh_gold"
             }
           }
         ]
@@ -3524,7 +3560,9 @@
             "mode": "directLake",
             "source": {
               "type": "entity",
-              "entityName": "dim_dossier"
+              "entityName": "dim_dossier",
+              "schemaName": "gold",
+              "expressionSource": "DirectLake - lh_gold"
             }
           }
         ]
@@ -3551,7 +3589,9 @@
             "mode": "directLake",
             "source": {
               "type": "entity",
-              "entityName": "dim_niveau_vigilance"
+              "entityName": "dim_niveau_vigilance",
+              "schemaName": "gold",
+              "expressionSource": "DirectLake - lh_gold"
             }
           }
         ]
@@ -3603,7 +3643,9 @@
             "mode": "directLake",
             "source": {
               "type": "entity",
-              "entityName": "fact_vigilance"
+              "entityName": "fact_vigilance",
+              "schemaName": "gold",
+              "expressionSource": "DirectLake - lh_gold"
             }
           }
         ]
@@ -3957,7 +3999,25 @@
         "value": "1"
       }
     ],
-    "dataSources": []
+    "dataSources": [
+      {
+        "name": "DirectLake - lh_gold",
+        "type": "structured",
+        "connectionDetails": {
+          "protocol": "tds",
+          "address": {
+            "server": "placeholder-faw-partners.datawarehouse.fabric.microsoft.com",
+            "database": "lh_gold"
+          }
+        },
+        "options": {},
+        "credential": {
+          "AuthenticationKind": "OAuth2",
+          "kind": "OAuth2",
+          "path": "placeholder-faw-partners.datawarehouse.fabric.microsoft.com/lh_gold"
+        }
+      }
+    ]
   },
   "id": "602d3e8d-78fe-4f39-af9c-47b39fcb164f",
   "name": "Pilotage_Commercial",
