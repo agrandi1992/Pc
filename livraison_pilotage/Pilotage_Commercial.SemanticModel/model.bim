@@ -1,4 +1,7 @@
 {
+  "name": "Pilotage_Commercial",
+  "id": "602d3e8d-78fe-4f39-af9c-47b39fcb164f",
+  "compatibilityLevel": 1604,
   "model": {
     "culture": "en-US",
     "dataAccessOptions": {
@@ -22,6 +25,17 @@
             "formatString": "General Date",
             "lineageTag": "f9eeabc4-a8ca-4884-b4b3-f6d7b34cda37",
             "summarizeBy": "none",
+            "variations": [
+              {
+                "name": "Variation",
+                "relationship": "6484d00f-9d27-4743-aeff-0af22fc65bf4",
+                "defaultHierarchy": {
+                  "table": "LocalDateTable_608a5c4d-d6d2-474e-a494-6c6b82f0fc3c",
+                  "hierarchy": "Date Hierarchy"
+                },
+                "isDefault": true
+              }
+            ],
             "annotations": [
               {
                 "name": "SummarizationSetBy",
@@ -248,6 +262,422 @@
         ]
       },
       {
+        "name": "DateTableTemplate_40f8e67e-c9f0-4e13-ad4f-6e840fdbf357",
+        "isHidden": true,
+        "isPrivate": true,
+        "lineageTag": "43cd1826-2586-436f-b115-89bb49e241e0",
+        "columns": [
+          {
+            "type": "calculatedTableColumn",
+            "name": "Date",
+            "dataType": "dateTime",
+            "isNameInferred": true,
+            "isHidden": true,
+            "sourceColumn": "[Date]",
+            "formatString": "General Date",
+            "lineageTag": "b7614d3b-dbf9-42d7-9f8b-ade5aa69263e",
+            "dataCategory": "PaddedDateTableDates",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              }
+            ]
+          },
+          {
+            "type": "calculated",
+            "name": "Year",
+            "dataType": "int64",
+            "isHidden": true,
+            "expression": "YEAR([Date])",
+            "formatString": "0",
+            "lineageTag": "57b9a6d3-6865-4588-b52d-5a15c1ddb05e",
+            "dataCategory": "Years",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              },
+              {
+                "name": "TemplateId",
+                "value": "Year"
+              }
+            ]
+          },
+          {
+            "type": "calculated",
+            "name": "MonthNo",
+            "dataType": "int64",
+            "isHidden": true,
+            "expression": "MONTH([Date])",
+            "formatString": "0",
+            "lineageTag": "5f10da82-de00-4482-971e-ab0cbff2e6ca",
+            "dataCategory": "MonthOfYear",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              },
+              {
+                "name": "TemplateId",
+                "value": "MonthNumber"
+              }
+            ]
+          },
+          {
+            "type": "calculated",
+            "name": "Month",
+            "dataType": "string",
+            "isHidden": true,
+            "expression": "FORMAT([Date], \"MMMM\")",
+            "sortByColumn": "MonthNo",
+            "lineageTag": "541a02bd-cf06-4a90-a088-2dcad50c88a3",
+            "dataCategory": "Months",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              },
+              {
+                "name": "TemplateId",
+                "value": "Month"
+              }
+            ]
+          },
+          {
+            "type": "calculated",
+            "name": "QuarterNo",
+            "dataType": "int64",
+            "isHidden": true,
+            "expression": "INT(([MonthNo] + 2) / 3)",
+            "formatString": "0",
+            "lineageTag": "4bc53ab1-b2f1-4fa5-9d31-3a91013f039b",
+            "dataCategory": "QuarterOfYear",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              },
+              {
+                "name": "TemplateId",
+                "value": "QuarterNumber"
+              }
+            ]
+          },
+          {
+            "type": "calculated",
+            "name": "Quarter",
+            "dataType": "string",
+            "isHidden": true,
+            "expression": "\"Qtr \" & [QuarterNo]",
+            "sortByColumn": "QuarterNo",
+            "lineageTag": "1814fe31-f64f-4d9d-8771-8ace2315919f",
+            "dataCategory": "Quarters",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              },
+              {
+                "name": "TemplateId",
+                "value": "Quarter"
+              }
+            ]
+          },
+          {
+            "type": "calculated",
+            "name": "Day",
+            "dataType": "int64",
+            "isHidden": true,
+            "expression": "DAY([Date])",
+            "formatString": "0",
+            "lineageTag": "926d1a9f-734d-423e-b572-c21dcf4b5798",
+            "dataCategory": "DayOfMonth",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              },
+              {
+                "name": "TemplateId",
+                "value": "Day"
+              }
+            ]
+          }
+        ],
+        "partitions": [
+          {
+            "name": "DateTableTemplate_40f8e67e-c9f0-4e13-ad4f-6e840fdbf357",
+            "mode": "import",
+            "source": {
+              "type": "calculated",
+              "expression": "Calendar(Date(2015,1,1), Date(2015,1,1))"
+            }
+          }
+        ],
+        "hierarchies": [
+          {
+            "name": "Date Hierarchy",
+            "lineageTag": "12d23a38-5887-4335-b0ad-8b61bc212ce0",
+            "levels": [
+              {
+                "name": "Year",
+                "ordinal": 0,
+                "column": "Year",
+                "lineageTag": "a6add4b9-1771-487a-8e5a-153014213116"
+              },
+              {
+                "name": "Quarter",
+                "ordinal": 1,
+                "column": "Quarter",
+                "lineageTag": "7202fa76-337f-4d61-a7bb-756e4a9bf98e"
+              },
+              {
+                "name": "Month",
+                "ordinal": 2,
+                "column": "Month",
+                "lineageTag": "0ee7c889-4489-4cb5-98e3-8fb2772859f1"
+              },
+              {
+                "name": "Day",
+                "ordinal": 3,
+                "column": "Day",
+                "lineageTag": "35248b11-7ee8-415a-bd43-f936d5bfe693"
+              }
+            ],
+            "annotations": [
+              {
+                "name": "TemplateId",
+                "value": "DateHierarchy"
+              }
+            ]
+          }
+        ],
+        "annotations": [
+          {
+            "name": "__PBI_TemplateDateTable",
+            "value": "true"
+          },
+          {
+            "name": "DefaultItem",
+            "value": "DateHierarchy"
+          }
+        ]
+      },
+      {
+        "name": "LocalDateTable_608a5c4d-d6d2-474e-a494-6c6b82f0fc3c",
+        "isHidden": true,
+        "showAsVariationsOnly": true,
+        "lineageTag": "afafa457-0987-4a62-8b6b-9f54f239164f",
+        "columns": [
+          {
+            "type": "calculatedTableColumn",
+            "name": "Date",
+            "dataType": "dateTime",
+            "isNameInferred": true,
+            "isHidden": true,
+            "sourceColumn": "[Date]",
+            "formatString": "General Date",
+            "lineageTag": "306c96f4-f68c-467b-85a6-b67ce896a2c9",
+            "dataCategory": "PaddedDateTableDates",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              }
+            ]
+          },
+          {
+            "type": "calculated",
+            "name": "Year",
+            "dataType": "int64",
+            "isHidden": true,
+            "expression": "YEAR([Date])",
+            "formatString": "0",
+            "lineageTag": "770561a6-27fb-4508-8f9b-d23d28b3f4be",
+            "dataCategory": "Years",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              },
+              {
+                "name": "TemplateId",
+                "value": "Year"
+              }
+            ]
+          },
+          {
+            "type": "calculated",
+            "name": "MonthNo",
+            "dataType": "int64",
+            "isHidden": true,
+            "expression": "MONTH([Date])",
+            "formatString": "0",
+            "lineageTag": "c35f8106-b8ee-4e06-809f-18f5da0528fd",
+            "dataCategory": "MonthOfYear",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              },
+              {
+                "name": "TemplateId",
+                "value": "MonthNumber"
+              }
+            ]
+          },
+          {
+            "type": "calculated",
+            "name": "Month",
+            "dataType": "string",
+            "isHidden": true,
+            "expression": "FORMAT([Date], \"MMMM\")",
+            "sortByColumn": "MonthNo",
+            "lineageTag": "3104f51c-436f-4a30-9611-80c84a36863b",
+            "dataCategory": "Months",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              },
+              {
+                "name": "TemplateId",
+                "value": "Month"
+              }
+            ]
+          },
+          {
+            "type": "calculated",
+            "name": "QuarterNo",
+            "dataType": "int64",
+            "isHidden": true,
+            "expression": "INT(([MonthNo] + 2) / 3)",
+            "formatString": "0",
+            "lineageTag": "6f413c46-81c4-4d32-8fcd-a3c5fd967055",
+            "dataCategory": "QuarterOfYear",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              },
+              {
+                "name": "TemplateId",
+                "value": "QuarterNumber"
+              }
+            ]
+          },
+          {
+            "type": "calculated",
+            "name": "Quarter",
+            "dataType": "string",
+            "isHidden": true,
+            "expression": "\"Qtr \" & [QuarterNo]",
+            "sortByColumn": "QuarterNo",
+            "lineageTag": "c4737d24-b50d-4b97-aff0-a741372fe786",
+            "dataCategory": "Quarters",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              },
+              {
+                "name": "TemplateId",
+                "value": "Quarter"
+              }
+            ]
+          },
+          {
+            "type": "calculated",
+            "name": "Day",
+            "dataType": "int64",
+            "isHidden": true,
+            "expression": "DAY([Date])",
+            "formatString": "0",
+            "lineageTag": "bb157e2d-c8bc-44ab-9766-bdb19a35d94c",
+            "dataCategory": "DayOfMonth",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              },
+              {
+                "name": "TemplateId",
+                "value": "Day"
+              }
+            ]
+          }
+        ],
+        "partitions": [
+          {
+            "name": "LocalDateTable_608a5c4d-d6d2-474e-a494-6c6b82f0fc3c",
+            "mode": "import",
+            "source": {
+              "type": "calculated",
+              "expression": "Calendar(Date(Year(MIN('dim_date'[Date])), 1, 1), Date(Year(MAX('dim_date'[Date])), 12, 31))"
+            }
+          }
+        ],
+        "hierarchies": [
+          {
+            "name": "Date Hierarchy",
+            "lineageTag": "a652ef7d-10df-4474-b1dd-ce65989729cf",
+            "levels": [
+              {
+                "name": "Year",
+                "ordinal": 0,
+                "column": "Year",
+                "lineageTag": "a1bb345a-2910-4289-a103-cd257ba0c5fe"
+              },
+              {
+                "name": "Quarter",
+                "ordinal": 1,
+                "column": "Quarter",
+                "lineageTag": "f26c73ee-20f1-43fc-9574-8afa0708bd5e"
+              },
+              {
+                "name": "Month",
+                "ordinal": 2,
+                "column": "Month",
+                "lineageTag": "be3bd005-20bf-4109-ae66-d0628af3b63e"
+              },
+              {
+                "name": "Day",
+                "ordinal": 3,
+                "column": "Day",
+                "lineageTag": "991d35ed-58bf-4024-a851-da127e2b8e63"
+              }
+            ],
+            "annotations": [
+              {
+                "name": "TemplateId",
+                "value": "DateHierarchy"
+              }
+            ]
+          }
+        ],
+        "annotations": [
+          {
+            "name": "__PBI_LocalDateTable",
+            "value": "true"
+          }
+        ]
+      },
+      {
         "name": "fact_affectation_mandataire",
         "lineageTag": "f52eb9a9-16e3-4f47-929d-c40ba218d63e",
         "sourceLineageTag": "[gold].[fact_affectation_mandataire]",
@@ -318,12 +748,11 @@
             "source": {
               "type": "entity",
               "entityName": "fact_affectation_mandataire",
-              "schemaName": "gold",
-              "expressionSource": "DirectLake - lh_gold"
+              "expressionSource": "DirectLake - lh_gold",
+              "schemaName": "gold"
             }
           }
-        ],
-        "isHidden": true
+        ]
       },
       {
         "name": "glossaire_indicateurs",
@@ -380,8 +809,8 @@
             "source": {
               "type": "entity",
               "entityName": "glossaire_indicateurs",
-              "schemaName": "gold",
-              "expressionSource": "DirectLake - lh_gold"
+              "expressionSource": "DirectLake - lh_gold",
+              "schemaName": "gold"
             }
           }
         ]
@@ -427,8 +856,8 @@
             "source": {
               "type": "entity",
               "entityName": "dim_type_rendez_vous_client",
-              "schemaName": "gold",
-              "expressionSource": "DirectLake - lh_gold"
+              "expressionSource": "DirectLake - lh_gold",
+              "schemaName": "gold"
             }
           }
         ]
@@ -488,12 +917,11 @@
             "source": {
               "type": "entity",
               "entityName": "dim_niveau_etude",
-              "schemaName": "gold",
-              "expressionSource": "DirectLake - lh_gold"
+              "expressionSource": "DirectLake - lh_gold",
+              "schemaName": "gold"
             }
           }
-        ],
-        "isHidden": true
+        ]
       },
       {
         "name": "dim_motif_depart_formation",
@@ -536,12 +964,11 @@
             "source": {
               "type": "entity",
               "entityName": "dim_motif_depart_formation",
-              "schemaName": "gold",
-              "expressionSource": "DirectLake - lh_gold"
+              "expressionSource": "DirectLake - lh_gold",
+              "schemaName": "gold"
             }
           }
-        ],
-        "isHidden": true
+        ]
       },
       {
         "name": "dim_charge_developpement_reseau",
@@ -598,12 +1025,11 @@
             "source": {
               "type": "entity",
               "entityName": "dim_charge_developpement_reseau",
-              "schemaName": "gold",
-              "expressionSource": "DirectLake - lh_gold"
+              "expressionSource": "DirectLake - lh_gold",
+              "schemaName": "gold"
             }
           }
-        ],
-        "isHidden": true
+        ]
       },
       {
         "name": "dim_type_canal",
@@ -646,12 +1072,11 @@
             "source": {
               "type": "entity",
               "entityName": "dim_type_canal",
-              "schemaName": "gold",
-              "expressionSource": "DirectLake - lh_gold"
+              "expressionSource": "DirectLake - lh_gold",
+              "schemaName": "gold"
             }
           }
-        ],
-        "isHidden": true
+        ]
       },
       {
         "name": "dim_candidat",
@@ -909,12 +1334,11 @@
             "source": {
               "type": "entity",
               "entityName": "dim_candidat",
-              "schemaName": "gold",
-              "expressionSource": "DirectLake - lh_gold"
+              "expressionSource": "DirectLake - lh_gold",
+              "schemaName": "gold"
             }
           }
-        ],
-        "isHidden": true
+        ]
       },
       {
         "name": "dim_agence",
@@ -1013,12 +1437,11 @@
             "source": {
               "type": "entity",
               "entityName": "dim_agence",
-              "schemaName": "gold",
-              "expressionSource": "DirectLake - lh_gold"
+              "expressionSource": "DirectLake - lh_gold",
+              "schemaName": "gold"
             }
           }
-        ],
-        "measures": []
+        ]
       },
       {
         "name": "fact_parcours_candidat",
@@ -1105,12 +1528,11 @@
             "source": {
               "type": "entity",
               "entityName": "fact_parcours_candidat",
-              "schemaName": "gold",
-              "expressionSource": "DirectLake - lh_gold"
+              "expressionSource": "DirectLake - lh_gold",
+              "schemaName": "gold"
             }
           }
-        ],
-        "isHidden": true
+        ]
       },
       {
         "name": "fact_activite_mandataire",
@@ -1183,8 +1605,8 @@
             "source": {
               "type": "entity",
               "entityName": "fact_activite_mandataire",
-              "schemaName": "gold",
-              "expressionSource": "DirectLake - lh_gold"
+              "expressionSource": "DirectLake - lh_gold",
+              "schemaName": "gold"
             }
           }
         ],
@@ -1293,7 +1715,16 @@
           },
           {
             "name": "Nombre mandataires actifs",
-            "expression": "VAR MandatairesAgence =\n    CALCULATETABLE(\n        VALUES(fact_affectation_mandataire[mandataire_id]),\n        TREATAS(VALUES(dim_agence[agence_id]), fact_affectation_mandataire[agence_id])\n    )\nRETURN\nCOALESCE(\n    CALCULATE(\n        DISTINCTCOUNT(dim_mandataire[mandataire_id]),\n        dim_mandataire[flag_present] = TRUE(),\n        TREATAS(MandatairesAgence, dim_mandataire[mandataire_id])\n    ),\n    0\n)",
+            "expression": [
+              "",
+              "VAR DateLimite = TODAY() - 30",
+              "RETURN",
+              "CALCULATE(",
+              "    DISTINCTCOUNT(fact_activite_mandataire[mandataire_id]),",
+              "    fact_activite_mandataire[flag_connexion] = 1,",
+              "    fact_activite_mandataire[date_connexion] >= DateLimite",
+              ")"
+            ],
             "displayFolder": "03. Réseau MIA",
             "lineageTag": "a74c07da-3566-4e43-95a6-dbe9a4ff73fd",
             "annotations": [
@@ -1302,12 +1733,23 @@
                 "value": "{\"isGeneralNumber\":true}"
               }
             ],
-            "formatString": "0"
+            "formatString": "#,0"
           },
           {
             "name": "Nombre mandataires inactifs",
-            "expression": "VAR MandatairesAgence =\n    CALCULATETABLE(\n        VALUES(fact_affectation_mandataire[mandataire_id]),\n        TREATAS(VALUES(dim_agence[agence_id]), fact_affectation_mandataire[agence_id])\n    )\nRETURN\nCOALESCE(\n    CALCULATE(\n        DISTINCTCOUNT(dim_mandataire[mandataire_id]),\n        dim_mandataire[flag_present] = FALSE(),\n        TREATAS(MandatairesAgence, dim_mandataire[mandataire_id])\n    ),\n    0\n)",
-            "formatString": "0",
+            "expression": [
+              "",
+              "VAR DateLimite = TODAY() - 30",
+              "RETURN",
+              "CALCULATE(",
+              "    DISTINCTCOUNT(fact_activite_mandataire[mandataire_id]),",
+              "    NOT (",
+              "        fact_activite_mandataire[flag_connexion] = 1",
+              "            && fact_activite_mandataire[date_connexion] >= DateLimite",
+              "    )",
+              ")"
+            ],
+            "formatString": "#,0",
             "displayFolder": "03. Réseau MIA",
             "lineageTag": "7d7cc140-2dbd-484c-a4cc-d408bf56636c"
           },
@@ -1454,7 +1896,13 @@
           },
           {
             "name": "Nombre mandataires rétrocommissionnés",
-            "expression": "VAR MandatairesAgence =\n    CALCULATETABLE(\n        VALUES(fact_affectation_mandataire[mandataire_id]),\n        TREATAS(VALUES(dim_agence[agence_id]), fact_affectation_mandataire[agence_id])\n    )\nVAR MandatairesContexte =\n    INTERSECT(\n        VALUES(dim_mandataire[mandataire_id]),\n        MandatairesAgence\n    )\nRETURN\nCOUNTROWS(\n    FILTER(\n        MandatairesContexte,\n        VAR CurrentMandataire = dim_mandataire[mandataire_id]\n        VAR RdvMandataire =\n            CALCULATETABLE(\n                VALUES(bridge_rendez_vous_mandataire[rendez_vous_id]),\n                bridge_rendez_vous_mandataire[mandataire_id] = CurrentMandataire\n            )\n        VAR Commission =\n            CALCULATE(\n                SUM(fact_rendez_vous_client[commission_realise]),\n                TREATAS(RdvMandataire, fact_rendez_vous_client[rendez_vous_id])\n            )\n        RETURN Commission > 0\n    )\n)",
+            "expression": [
+              "",
+              "CALCULATE(",
+              "    DISTINCTCOUNT(dim_mandataire[mandataire_id]),",
+              "    fact_rendez_vous_client[commission_realise] > 0",
+              ")"
+            ],
             "formatString": "0",
             "displayFolder": "03. Réseau MIA",
             "lineageTag": "9b648af1-f1c6-4f2a-a4ae-ba5b5b59498a"
@@ -2394,8 +2842,8 @@
             "source": {
               "type": "entity",
               "entityName": "bridge_rendez_vous_mandataire",
-              "schemaName": "gold",
-              "expressionSource": "DirectLake - lh_gold"
+              "expressionSource": "DirectLake - lh_gold",
+              "schemaName": "gold"
             }
           }
         ]
@@ -2589,8 +3037,8 @@
             "source": {
               "type": "entity",
               "entityName": "fact_rendez_vous_client",
-              "schemaName": "gold",
-              "expressionSource": "DirectLake - lh_gold"
+              "expressionSource": "DirectLake - lh_gold",
+              "schemaName": "gold"
             }
           }
         ],
@@ -2600,9 +3048,9 @@
             "expression": [
               "",
               "VAR DateContexteMax =",
-              "    MAX(dim_date[Date])",
+              "    MAX(dim_date[date])",
               "VAR DateContexteMin =",
-              "    MIN(dim_date[Date])",
+              "    MIN(dim_date[date])",
               "",
               "VAR NbCommissions =",
               "    CALCULATE(",
@@ -2620,9 +3068,7 @@
               {
                 "property": "Name"
               }
-            ],
-            "displayFolder": "Pilotage Commercial - Réseau",
-            "isHidden": true
+            ]
           }
         ]
       },
@@ -2750,8 +3196,8 @@
             "source": {
               "type": "entity",
               "entityName": "dim_mandataire",
-              "schemaName": "gold",
-              "expressionSource": "DirectLake - lh_gold"
+              "expressionSource": "DirectLake - lh_gold",
+              "schemaName": "gold"
             }
           }
         ]
@@ -3010,6 +3456,58 @@
         ]
       },
       {
+        "name": "FP_Periode_Date",
+        "columns": [
+          {
+            "name": "Ordre",
+            "dataType": "int64",
+            "isHidden": true,
+            "sourceColumn": "Ordre",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "FP_Periode_Date",
+            "dataType": "string",
+            "isHidden": false,
+            "sourceColumn": "FP_Periode_Date",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "FP_Periode_Date Fields",
+            "dataType": "string",
+            "isHidden": false,
+            "sourceColumn": "FP_Periode_Date Fields",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          }
+        ],
+        "partitions": [
+          {
+            "name": "FP_Periode_Date",
+            "mode": "import",
+            "source": {
+              "type": "calculated",
+              "expression": "SELECTCOLUMNS(\n    {\n        (1, \"Jour\",       NAMEOF(dim_date[Date])),\n        (2, \"Semaine\",    NAMEOF(dim_date[numero_de_la_semaine])),\n        (3, \"Mois\",       NAMEOF(dim_date[annee_mois])),\n        (4, \"Trimestre\",  NAMEOF(dim_date[trimestre])),\n        (5, \"Année\",      NAMEOF(dim_date[annee]))\n    },\n    \"Ordre\",                 [Value1],\n    \"FP_Periode_Date\",        [Value2],\n    \"FP_Periode_Date Fields\", [Value3]\n)"
+            }
+          }
+        ],
+        "annotations": [
+          {
+            "name": "_PBI_QueryOrder",
+            "value": "[\"FP_Periode_Date\"]"
+          },
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          }
+        ]
+      },
+      {
         "name": "Mois_Reference",
         "lineageTag": "d4748a67-4180-4769-a195-36ef9b0a0146",
         "columns": [
@@ -3100,6 +3598,69 @@
               "expression": "ADDCOLUMNS(\n    CALENDAR(DATE(2020, 1, 1), DATE(2030, 12, 31)),\n    \"Année Mois\", FORMAT([Date], \"YYYY-MM\"),\n    \"Mois\", FORMAT([Date], \"MMMM\")\n)"
             },
             "mode": "import"
+          }
+        ]
+      },
+      {
+        "name": "dim_assureur_v5",
+        "columns": [
+          {
+            "name": "Assureur",
+            "dataType": "string",
+            "summarizeBy": "none",
+            "sourceColumn": "Assureur"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "dim_assureur_v5",
+            "mode": "import",
+            "source": {
+              "type": "calculated",
+              "expression": "DATATABLE(\n    \"Assureur\", STRING,\n    {\n        {\"AXA\"},\n        {\"Allianz\"},\n        {\"Generali\"},\n        {\"Cardif\"},\n        {\"Spirica\"}\n    }\n)"
+            }
+          }
+        ]
+      },
+      {
+        "name": "dim_centre_affaires_v5",
+        "columns": [
+          {
+            "name": "Centre d'affaires",
+            "dataType": "string",
+            "summarizeBy": "none",
+            "sourceColumn": "Centre d'affaires"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "dim_centre_affaires_v5",
+            "mode": "import",
+            "source": {
+              "type": "calculated",
+              "expression": "DATATABLE(\n    \"Centre d'affaires\", STRING,\n    {\n        {\"Paris\"},\n        {\"Lyon\"},\n        {\"Marseille\"},\n        {\"Bordeaux\"},\n        {\"Nantes\"}\n    }\n)"
+            }
+          }
+        ]
+      },
+      {
+        "name": "dim_client_prospect_v5",
+        "columns": [
+          {
+            "name": "Client / Prospect",
+            "dataType": "string",
+            "summarizeBy": "none",
+            "sourceColumn": "Client / Prospect"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "dim_client_prospect_v5",
+            "mode": "import",
+            "source": {
+              "type": "calculated",
+              "expression": "DATATABLE(\n    \"Client / Prospect\", STRING,\n    {\n        {\"Client\"},\n        {\"Prospect\"}\n    }\n)"
+            }
           }
         ]
       },
@@ -3335,35 +3896,6 @@
         ]
       },
       {
-        "name": "dim_charge_production",
-        "columns": [
-          {
-            "name": "charge_production_id",
-            "dataType": "string",
-            "summarizeBy": "none",
-            "sourceColumn": "charge_production_id"
-          },
-          {
-            "name": "nom_charge_production",
-            "dataType": "string",
-            "summarizeBy": "none",
-            "sourceColumn": "nom_charge_production"
-          }
-        ],
-        "partitions": [
-          {
-            "name": "dim_charge_production",
-            "mode": "directLake",
-            "source": {
-              "type": "entity",
-              "entityName": "dim_charge_production",
-              "schemaName": "gold",
-              "expressionSource": "DirectLake - lh_gold"
-            }
-          }
-        ]
-      },
-      {
         "name": "dim_compagnie",
         "columns": [
           {
@@ -3521,124 +4053,17 @@
             }
           }
         ]
-      },
-      {
-        "name": "FP_Periode_Date",
-        "columns": [
-          {
-            "name": "Ordre",
-            "dataType": "int64",
-            "isHidden": true,
-            "sourceColumn": "Ordre",
-            "summarizeBy": "none"
-          },
-          {
-            "name": "FP_Periode_Date",
-            "dataType": "string",
-            "isHidden": false,
-            "sourceColumn": "FP_Periode_Date",
-            "summarizeBy": "none"
-          },
-          {
-            "name": "FP_Periode_Date Fields",
-            "dataType": "string",
-            "isHidden": false,
-            "sourceColumn": "FP_Periode_Date Fields",
-            "summarizeBy": "none",
-            "annotations": [
-              {
-                "name": "SummarizationSetBy",
-                "value": "Automatic"
-              }
-            ]
-          }
-        ],
-        "partitions": [
-          {
-            "name": "FP_Periode_Date",
-            "mode": "import",
-            "source": {
-              "type": "calculated",
-              "expression": "SELECTCOLUMNS(\n    {\n        (1, \"Jour\",       NAMEOF(dim_date[Date])),\n        (2, \"Semaine\",    NAMEOF(dim_date[numero_de_la_semaine])),\n        (3, \"Mois\",       NAMEOF(dim_date[annee_mois])),\n        (4, \"Trimestre\",  NAMEOF(dim_date[trimestre])),\n        (5, \"Année\",      NAMEOF(dim_date[annee]))\n    },\n    \"Ordre\",                 [Value1],\n    \"FP_Periode_Date\",        [Value2],\n    \"FP_Periode_Date Fields\", [Value3]\n)"
-            }
-          }
-        ],
-        "annotations": [
-          {
-            "name": "_PBI_QueryOrder",
-            "value": "[\"FP_Periode_Date\"]"
-          },
-          {
-            "name": "PBI_ResultType",
-            "value": "Table"
-          }
-        ]
-      },
-      {
-        "name": "dim_assureur_v5",
-        "columns": [
-          {
-            "name": "Assureur",
-            "dataType": "string",
-            "summarizeBy": "none",
-            "sourceColumn": "Assureur"
-          }
-        ],
-        "partitions": [
-          {
-            "name": "dim_assureur_v5",
-            "mode": "import",
-            "source": {
-              "type": "calculated",
-              "expression": "DATATABLE(\n    \"Assureur\", STRING,\n    {\n        {\"AXA\"},\n        {\"Allianz\"},\n        {\"Generali\"},\n        {\"Cardif\"},\n        {\"Spirica\"}\n    }\n)"
-            }
-          }
-        ]
-      },
-      {
-        "name": "dim_centre_affaires_v5",
-        "columns": [
-          {
-            "name": "Centre d'affaires",
-            "dataType": "string",
-            "summarizeBy": "none",
-            "sourceColumn": "Centre d'affaires"
-          }
-        ],
-        "partitions": [
-          {
-            "name": "dim_centre_affaires_v5",
-            "mode": "import",
-            "source": {
-              "type": "calculated",
-              "expression": "DATATABLE(\n    \"Centre d'affaires\", STRING,\n    {\n        {\"Paris\"},\n        {\"Lyon\"},\n        {\"Marseille\"},\n        {\"Bordeaux\"},\n        {\"Nantes\"}\n    }\n)"
-            }
-          }
-        ]
-      },
-      {
-        "name": "dim_client_prospect_v5",
-        "columns": [
-          {
-            "name": "Client / Prospect",
-            "dataType": "string",
-            "summarizeBy": "none",
-            "sourceColumn": "Client / Prospect"
-          }
-        ],
-        "partitions": [
-          {
-            "name": "dim_client_prospect_v5",
-            "mode": "import",
-            "source": {
-              "type": "calculated",
-              "expression": "DATATABLE(\n    \"Client / Prospect\", STRING,\n    {\n        {\"Client\"},\n        {\"Prospect\"}\n    }\n)"
-            }
-          }
-        ]
       }
     ],
     "relationships": [
+      {
+        "name": "6484d00f-9d27-4743-aeff-0af22fc65bf4",
+        "fromTable": "dim_date",
+        "fromColumn": "Date",
+        "toTable": "LocalDateTable_608a5c4d-d6d2-474e-a494-6c6b82f0fc3c",
+        "toColumn": "Date",
+        "joinOnDateBehavior": "datePartOnly"
+      },
       {
         "name": "be891e18-b4b0-8bbc-7a76-e94d065b945f",
         "fromTable": "fact_parcours_candidat",
@@ -3669,14 +4094,6 @@
         "fromColumn": "type_canal_id",
         "toTable": "dim_type_canal",
         "toColumn": "type_canal_id",
-        "relyOnReferentialIntegrity": true
-      },
-      {
-        "name": "b11afc35-5bcf-a30a-a864-0d4e5b6f66eb",
-        "fromTable": "fact_affectation_mandataire",
-        "fromColumn": "mandataire_id",
-        "toTable": "dim_mandataire",
-        "toColumn": "mandataire_id",
         "relyOnReferentialIntegrity": true
       },
       {
@@ -3768,47 +4185,46 @@
         "toColumn": "mandataire_id"
       },
       {
-        "name": "fact_affaire_date_saisie_administrative_to_dim_date_Date",
+        "name": "9930fd1f-2c18-434f-be55-d7cf9822b956",
         "fromTable": "fact_affaire",
         "fromColumn": "date_saisie_administrative",
         "toTable": "dim_date",
-        "toColumn": "Date",
-        "crossFilteringBehavior": "automatic",
-        "isActive": true,
-        "joinOnDateBehavior": "datePartOnly"
+        "toColumn": "Date"
       },
       {
-        "name": "fact_affaire_produit_id_to_dim_produit_produit_id",
+        "name": "57c445ec-1b83-43ef-8d11-1cb9626d4f2c",
         "fromTable": "fact_affaire",
         "fromColumn": "produit_id",
         "toTable": "dim_produit",
         "toColumn": "produit_id",
-        "crossFilteringBehavior": "automatic",
-        "isActive": true
+        "relyOnReferentialIntegrity": true
       },
       {
-        "name": "fact_vigilance_dossier",
+        "name": "37497232-b5ba-4226-994d-1b72f98f4a90",
         "fromTable": "fact_vigilance",
         "fromColumn": "dossier_id",
         "toTable": "dim_dossier",
-        "toColumn": "dossier_id"
+        "toColumn": "dossier_id",
+        "relyOnReferentialIntegrity": true
       },
       {
-        "name": "fact_vigilance_niveau_vigilance",
+        "name": "64e8454b-669a-45a4-82b9-1fa2314743c2",
         "fromTable": "fact_vigilance",
         "fromColumn": "niveau_vigilance_id",
         "toTable": "dim_niveau_vigilance",
-        "toColumn": "niveau_vigilance_id"
+        "toColumn": "niveau_vigilance_id",
+        "relyOnReferentialIntegrity": true
       },
       {
-        "name": "fact_vigilance_mandataire",
+        "name": "6b7ffdb8-7db5-4072-a22f-7d36164d75b6",
         "fromTable": "fact_vigilance",
         "fromColumn": "mandataire_id",
         "toTable": "dim_mandataire",
-        "toColumn": "mandataire_id"
+        "toColumn": "mandataire_id",
+        "relyOnReferentialIntegrity": true
       },
       {
-        "name": "fact_vigilance_date",
+        "name": "3e595781-f400-4571-bef8-1e18bff6a067",
         "fromTable": "fact_vigilance",
         "fromColumn": "date_id",
         "toTable": "dim_date",
@@ -3857,16 +4273,12 @@
       },
       {
         "name": "TabularEditor_SerializeOptions",
-        "value": "{\"IgnoreInferredObjects\":true,\"IgnoreInferredProperties\":true,\"IgnoreTimestamps\":true,\"SplitMultilineStrings\":true,\"PrefixFilenames\":false,\"LocalTranslations\":false,\"LocalPerspectives\":false,\"SortArrays\":false,\"LocalRelationships\":false,\"Levels\":[\"Data Sources\",\"Shared Expressions\",\"Perspectives\",\"Relationships\",\"Roles\",\"Tables\",\"Tables/Columns\",\"Tables/Hierarchies\",\"Tables/Measures\",\"Tables/Partitions\",\"Tables/Calculation Items\",\"Translations\"]}"
+        "value": "{\"IgnoreInferredObjects\":true,\"IgnoreInferredProperties\":true,\"IgnoreTimestamps\":true,\"SplitMultilineStrings\":true,\"PrefixFilenames\":false,\"LocalTranslations\":false,\"LocalPerspectives\":false,\"LocalRelationships\":false,\"Levels\":[\"Data Sources\",\"Perspectives\",\"Relationships\",\"Roles\",\"Shared Expressions\",\"Tables\",\"Tables/Calculation Items\",\"Tables/Columns\",\"Tables/Hierarchies\",\"Tables/Measures\",\"Tables/Partitions\",\"Translations\"]}"
       },
       {
         "name": "__TEdtr",
         "value": "1"
       }
-    ],
-    "dataSources": []
-  },
-  "id": "602d3e8d-78fe-4f39-af9c-47b39fcb164f",
-  "name": "Pilotage_Commercial",
-  "compatibilityLevel": 1604
+    ]
+  }
 }
