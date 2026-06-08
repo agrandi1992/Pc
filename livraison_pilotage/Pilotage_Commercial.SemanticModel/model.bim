@@ -317,7 +317,8 @@
             "mode": "directLake",
             "source": {
               "type": "entity",
-              "entityName": "fact_affectation_mandataire"
+              "entityName": "fact_affectation_mandataire",
+              "expressionSource": "EntityDataSource"
             }
           }
         ],
@@ -433,7 +434,8 @@
             "mode": "directLake",
             "source": {
               "type": "entity",
-              "entityName": "glossaire_indicateurs"
+              "entityName": "glossaire_indicateurs",
+              "expressionSource": "EntityDataSource"
             }
           }
         ]
@@ -478,7 +480,8 @@
             "mode": "directLake",
             "source": {
               "type": "entity",
-              "entityName": "dim_type_rendez_vous_client"
+              "entityName": "dim_type_rendez_vous_client",
+              "expressionSource": "EntityDataSource"
             }
           }
         ]
@@ -537,7 +540,8 @@
             "mode": "directLake",
             "source": {
               "type": "entity",
-              "entityName": "dim_niveau_etude"
+              "entityName": "dim_niveau_etude",
+              "expressionSource": "EntityDataSource"
             }
           }
         ],
@@ -583,7 +587,8 @@
             "mode": "directLake",
             "source": {
               "type": "entity",
-              "entityName": "dim_motif_depart_formation"
+              "entityName": "dim_motif_depart_formation",
+              "expressionSource": "EntityDataSource"
             }
           }
         ],
@@ -643,7 +648,8 @@
             "mode": "directLake",
             "source": {
               "type": "entity",
-              "entityName": "dim_charge_developpement_reseau"
+              "entityName": "dim_charge_developpement_reseau",
+              "expressionSource": "EntityDataSource"
             }
           }
         ],
@@ -689,7 +695,8 @@
             "mode": "directLake",
             "source": {
               "type": "entity",
-              "entityName": "dim_type_canal"
+              "entityName": "dim_type_canal",
+              "expressionSource": "EntityDataSource"
             }
           }
         ],
@@ -950,7 +957,8 @@
             "mode": "directLake",
             "source": {
               "type": "entity",
-              "entityName": "dim_candidat"
+              "entityName": "dim_candidat",
+              "expressionSource": "EntityDataSource"
             }
           }
         ],
@@ -1084,7 +1092,8 @@
             "mode": "directLake",
             "source": {
               "type": "entity",
-              "entityName": "dim_agence"
+              "entityName": "dim_agence",
+              "expressionSource": "EntityDataSource"
             }
           }
         ],
@@ -1174,7 +1183,8 @@
             "mode": "directLake",
             "source": {
               "type": "entity",
-              "entityName": "fact_parcours_candidat"
+              "entityName": "fact_parcours_candidat",
+              "expressionSource": "EntityDataSource"
             }
           }
         ],
@@ -1250,7 +1260,8 @@
             "mode": "directLake",
             "source": {
               "type": "entity",
-              "entityName": "fact_activite_mandataire"
+              "entityName": "fact_activite_mandataire",
+              "expressionSource": "EntityDataSource"
             }
           }
         ],
@@ -2389,7 +2400,7 @@
           },
           {
             "name": "Recommandation Principale",
-            "expression": "-- Retourne la recommandation du domaine le plus critique\nVAR _prio = [Priorité Alerte Maximale]\nRETURN\nSWITCH(\n    TRUE(),\n    _prio >= 3, [Recommandation Alerte Volume],\n    _prio >= 2 && [Niveau Alerte RDV] IN {\"CRITIQUE\", \"HAUTE\"}, [Recommandation Alerte RDV],\n    _prio >= 1 && [Niveau Alerte Réseau] IN {\"CRITIQUE\", \"HAUTE\"}, [Recommandation Alerte Réseau],\n    \"Tous les indicateurs sont conformes.\"\n)",
+            "expression": "-- Retourne la recommandation du domaine le plus critique\nVAR _prio    = [Priorité Alerte Maximale]\nVAR _rdv_lvl = [Niveau Alerte RDV]\nVAR _res_lvl = [Niveau Alerte Réseau]\nRETURN\nSWITCH(\n    TRUE(),\n    _prio >= 3,\n        [Recommandation Alerte Volume],\n    _prio >= 2 && (_rdv_lvl = \"CRITIQUE\" || _rdv_lvl = \"HAUTE\"),\n        [Recommandation Alerte RDV],\n    _prio >= 1 && (_res_lvl = \"CRITIQUE\" || _res_lvl = \"HAUTE\"),\n        [Recommandation Alerte Réseau],\n    \"Tous les indicateurs sont conformes.\"\n)",
             "formatString": "",
             "displayFolder": "Pilotage Commercial - Alertes"
           }
@@ -2459,7 +2470,8 @@
             "mode": "directLake",
             "source": {
               "type": "entity",
-              "entityName": "bridge_rendez_vous_mandataire"
+              "entityName": "bridge_rendez_vous_mandataire",
+              "expressionSource": "EntityDataSource"
             }
           }
         ]
@@ -2667,7 +2679,8 @@
             "mode": "directLake",
             "source": {
               "type": "entity",
-              "entityName": "fact_rendez_vous_client"
+              "entityName": "fact_rendez_vous_client",
+              "expressionSource": "EntityDataSource"
             }
           }
         ],
@@ -2846,7 +2859,8 @@
             "mode": "directLake",
             "source": {
               "type": "entity",
-              "entityName": "dim_mandataire"
+              "entityName": "dim_mandataire",
+              "expressionSource": "EntityDataSource"
             }
           }
         ]
@@ -3370,7 +3384,8 @@
             "mode": "directLake",
             "source": {
               "type": "entity",
-              "entityName": "fact_affaire"
+              "entityName": "fact_affaire",
+              "expressionSource": "EntityDataSource"
             }
           }
         ]
@@ -3425,7 +3440,8 @@
             "mode": "directLake",
             "source": {
               "type": "entity",
-              "entityName": "dim_produit"
+              "entityName": "dim_produit",
+              "expressionSource": "EntityDataSource"
             }
           }
         ]
@@ -3452,7 +3468,8 @@
             "mode": "directLake",
             "source": {
               "type": "entity",
-              "entityName": "dim_charge_production"
+              "entityName": "dim_charge_production",
+              "expressionSource": "EntityDataSource"
             }
           }
         ]
@@ -3479,7 +3496,8 @@
             "mode": "directLake",
             "source": {
               "type": "entity",
-              "entityName": "dim_compagnie"
+              "entityName": "dim_compagnie",
+              "expressionSource": "EntityDataSource"
             }
           }
         ]
@@ -3524,7 +3542,8 @@
             "mode": "directLake",
             "source": {
               "type": "entity",
-              "entityName": "dim_dossier"
+              "entityName": "dim_dossier",
+              "expressionSource": "EntityDataSource"
             }
           }
         ]
@@ -3551,7 +3570,8 @@
             "mode": "directLake",
             "source": {
               "type": "entity",
-              "entityName": "dim_niveau_vigilance"
+              "entityName": "dim_niveau_vigilance",
+              "expressionSource": "EntityDataSource"
             }
           }
         ]
@@ -3603,7 +3623,8 @@
             "mode": "directLake",
             "source": {
               "type": "entity",
-              "entityName": "fact_vigilance"
+              "entityName": "fact_vigilance",
+              "expressionSource": "EntityDataSource"
             }
           }
         ]
@@ -3955,6 +3976,25 @@
       {
         "name": "__TEdtr",
         "value": "1"
+      }
+    ],
+    "dataSources": [
+      {
+        "name": "EntityDataSource",
+        "type": "structured",
+        "connectionDetails": {
+          "protocol": "entity",
+          "address": {
+            "server": "placeholder",
+            "database": "placeholder"
+          }
+        },
+        "options": {},
+        "credential": {
+          "AuthenticationKind": "OAuth2",
+          "kind": "OAuth2",
+          "path": "placeholder"
+        }
       }
     ]
   },
