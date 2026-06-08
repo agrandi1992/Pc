@@ -1,0 +1,95 @@
+{
+  "name": "Capfinances_charte_V1",
+  "dataColors": [
+    "#051E73",
+    "#3C41BE",
+    "#8096FF",
+    "#F05062",
+    "#FF9A87",
+    "#99A0AF",
+    "#737D91"
+  ],
+  "background": "#F6F7FB",
+  "foreground": "#051E73",
+  "tableAccent": "#3C41BE",
+  "textClasses": {
+    "title": {
+      "fontFace": "Montserrat",
+      "color": "#051E73"
+    },
+    "label": {
+      "fontFace": "Montserrat",
+      "color": "#737D91"
+    },
+    "callout": {
+      "fontFace": "Montserrat",
+      "color": "#051E73"
+    }
+  },
+  "visualStyles": {
+    "*": {
+      "*": {
+        "background": [
+          {
+            "show": true,
+            "color": {
+              "solid": {
+                "color": "#FFFFFF"
+              }
+            },
+            "transparency": 0
+          }
+        ],
+        "border": [
+          {
+            "show": false
+          }
+        ],
+        "dropShadow": [
+          {
+            "show": true,
+            "preset": "Custom",
+            "color": {
+              "solid": {
+                "color": "#D9DEE8"
+              }
+            },
+            "transparency": 65,
+            "blur": 6,
+            "angle": 45,
+            "distance": 2
+          }
+        ],
+        "visualHeader": [
+          {
+            "show": false
+          }
+        ]
+      }
+    },
+    "page": {
+      "*": {
+        "background": [
+          {
+            "color": {
+              "solid": {
+                "color": "#F6F7FB"
+              }
+            },
+            "transparency": 0
+          }
+        ],
+        "outspace": [
+          {
+            "color": {
+              "solid": {
+                "color": "#F6F7FB"
+              }
+            },
+            "transparency": 0
+          }
+        ]
+      }
+    }
+  }
+}

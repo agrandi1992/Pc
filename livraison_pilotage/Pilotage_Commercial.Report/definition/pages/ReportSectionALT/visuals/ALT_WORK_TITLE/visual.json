@@ -1,0 +1,50 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.7.0/schema.json",
+  "name": "ALT_WORK_TITLE",
+  "position": {
+    "x": 1226.67,
+    "y": 384.4,
+    "z": 52,
+    "width": 245.33,
+    "height": 23.49,
+    "tabOrder": 52
+  },
+  "parentGroupName": "GRP_CHARTS",
+  "visual": {
+    "visualType": "textbox",
+    "objects": {
+      "general": [
+        {
+          "properties": {
+            "paragraphs": [
+              {
+                "textRuns": [
+                  {
+                    "value": "État des alertes par domaine",
+                    "textStyle": {
+                      "bold": true,
+                      "fontSize": "10pt",
+                      "fontFamily": "Segoe UI Semibold, Segoe UI, sans-serif",
+                      "color": {
+                        "solid": {
+                          "color": {
+                            "expr": {
+                              "Literal": {
+                                "Value": "'#051E73'"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                ],
+                "horizontalTextAlignment": "Left"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

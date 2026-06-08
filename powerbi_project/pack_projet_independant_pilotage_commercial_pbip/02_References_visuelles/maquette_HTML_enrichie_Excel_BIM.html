@@ -1,0 +1,1126 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Pilotage Commercial</title>
+<style>
+:root{
+  --red:#D71920;
+  --red-dark:#B31219;
+  --red-soft:#FFF1F2;
+  --blue:#0A4E97;
+  --blue-dark:#073B73;
+  --blue-soft:#EAF3FF;
+  --bg:#F1F5F9;
+  --card:#FFFFFF;
+  --ink:#1C2434;
+  --muted:#667085;
+  --line:#E1E8F0;
+  --green:#198754;
+  --green-soft:#EAF7EF;
+  --orange:#E67E22;
+  --orange-soft:#FFF3E8;
+  --yellow:#F1C40F;
+  --yellow-soft:#FFF9DB;
+  --grey-soft:#F7F9FC;
+  --shadow:0 12px 30px rgba(15,23,42,.06);
+  --radius:22px;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,"Segoe UI",Arial,sans-serif}
+button,select{font:inherit}
+.header{
+  position:sticky;top:0;z-index:50;
+  background:#fff;border-bottom:1px solid var(--line);
+  box-shadow:0 8px 22px rgba(15,23,42,.05);
+  padding:14px 24px;
+}
+.header-row{display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap}
+.brand strong{display:block;color:var(--blue-dark);font-size:20px;letter-spacing:-.2px}
+.brand span{display:block;color:var(--muted);font-size:12px;margin-top:4px}
+.nav{display:flex;gap:8px;flex-wrap:wrap}
+.nav button{
+  border:1px solid #F3CFD2;background:#fff;color:var(--red);
+  border-radius:999px;padding:10px 13px;cursor:pointer;
+  font-weight:750;transition:.18s ease;
+}
+.nav button.active,.nav button:hover{background:var(--red);border-color:var(--red);color:#fff}
+.header-tools select{
+  border:1px solid var(--line);background:#fff;border-radius:999px;
+  padding:10px 14px;color:var(--ink);
+}
+.container{max-width:1540px;margin:0 auto;padding:22px}
+.page{display:none}
+.page.active{display:block}
+.title-zone{
+  background:linear-gradient(135deg,var(--blue-dark),var(--blue));
+  color:#fff;border-radius:28px;padding:24px 26px;
+  box-shadow:0 18px 40px rgba(8,58,114,.15);
+  display:flex;align-items:end;justify-content:space-between;gap:18px;flex-wrap:wrap;
+}
+.title-zone h1{margin:0;font-size:34px;letter-spacing:-1px}
+.title-zone p{margin:8px 0 0;color:rgba(255,255,255,.88);font-size:15px;line-height:1.5;max-width:900px}
+.title-pills{display:flex;gap:10px;flex-wrap:wrap}
+.title-pill{background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.22);border-radius:999px;padding:10px 14px;font-size:12px;font-weight:700}
+.toolbar{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;margin:18px 0}
+.period,.axis-buttons{display:flex;gap:8px;flex-wrap:wrap}
+.period button,.axis-buttons button{
+  border:1px solid var(--line);background:#fff;color:var(--ink);padding:10px 13px;border-radius:999px;
+  cursor:pointer;font-weight:700;transition:.18s ease;
+}
+.period button.active,.period button:hover,.axis-buttons button.active,.axis-buttons button:hover{
+  background:var(--red);border-color:var(--red);color:#fff;
+}
+.filters{display:flex;gap:10px;flex-wrap:wrap}
+.filters select{border:1px solid var(--line);background:#fff;border-radius:999px;padding:10px 14px;color:var(--ink)}
+.section-title{display:flex;align-items:end;justify-content:space-between;gap:16px;flex-wrap:wrap;margin:24px 0 14px}
+.section-title h2{margin:0;font-size:24px;letter-spacing:-.5px}
+.section-title p{margin:6px 0 0;color:var(--muted);font-size:13px}
+.grid{display:grid;gap:16px}
+.grid.kpis{grid-template-columns:repeat(5,1fr)}
+.grid.two{grid-template-columns:1.05fr .95fr}
+.grid.three{grid-template-columns:repeat(3,1fr)}
+.card{
+  background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  box-shadow:var(--shadow);padding:18px;
+}
+.card h3{margin:0;font-size:16px}
+.subtitle{font-size:12px;color:var(--muted);margin-top:4px;line-height:1.45}
+.kpi{min-height:150px}
+.kpi-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+.icon{
+  width:44px;height:44px;border-radius:14px;background:var(--blue-soft);color:var(--blue);
+  display:grid;place-items:center;font-size:20px;font-weight:900;flex:0 0 auto;
+}
+.kpi .label{font-size:11px;text-transform:uppercase;color:var(--muted);letter-spacing:.7px;font-weight:800;line-height:1.35}
+.kpi .value{font-size:29px;font-weight:900;letter-spacing:-.8px;margin-top:10px}
+.compare-row{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}
+.compare{display:inline-flex;align-items:center;border-radius:999px;padding:6px 8px;font-size:10.5px;font-weight:850}
+.compare.positive{background:var(--green-soft);color:var(--green)}
+.compare.negative{background:var(--red-soft);color:var(--red)}
+.compare.neutral{background:var(--blue-soft);color:var(--blue)}
+.compare.orange{background:var(--orange-soft);color:var(--orange)}
+.compare.yellow{background:var(--yellow-soft);color:#8A6D00}
+.budget-gauge{margin-top:12px;border-top:1px solid var(--line);padding-top:10px}
+.budget-label{display:flex;justify-content:space-between;align-items:center;color:var(--muted);font-size:10.5px;font-weight:850;text-transform:uppercase;letter-spacing:.5px}
+.budget-track{height:9px;background:#E8EEF5;border-radius:999px;margin-top:7px;position:relative;overflow:hidden}
+.budget-track:before{content:"";position:absolute;left:0;top:0;bottom:0;width:100%;background:linear-gradient(90deg,rgba(10,78,151,.16),rgba(10,78,151,.04))}
+.budget-marker{position:absolute;right:0;top:-3px;width:3px;height:15px;background:var(--red);border-radius:999px}
+
+.gauge-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.gauge-card{display:flex;align-items:center;gap:14px;min-height:132px}
+.gauge{--value:75;width:106px;height:106px;border-radius:50%;display:grid;place-items:center;position:relative;flex:0 0 auto;background:conic-gradient(var(--blue) calc(var(--value)*1%), #E8EEF5 0)}
+.gauge.green{background:conic-gradient(var(--green) calc(var(--value)*1%), #E8EEF5 0)}
+.gauge.orange{background:conic-gradient(var(--orange) calc(var(--value)*1%), #E8EEF5 0)}
+.gauge.red{background:conic-gradient(var(--red) calc(var(--value)*1%), #E8EEF5 0)}
+.gauge:before{content:"";position:absolute;inset:12px;background:#fff;border-radius:50%}
+.gauge span{position:relative;z-index:1;font-size:20px;font-weight:900}
+.gauge-text strong{display:block;font-size:14px}
+.gauge-text small{display:block;color:var(--muted);font-size:12px;line-height:1.45;margin-top:5px}
+.list{display:flex;flex-direction:column;gap:12px;margin-top:12px}
+.list-item{
+  display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;
+  background:var(--grey-soft);border:1px solid var(--line);border-radius:16px;padding:13px;
+}
+.dot{width:12px;height:12px;border-radius:50%}
+.dot.red{background:var(--red)} .dot.orange{background:var(--orange)} .dot.yellow{background:var(--yellow)} .dot.green{background:var(--green)} .dot.blue{background:var(--blue)}
+.list-item strong{display:block;font-size:13px}
+.list-item span{display:block;font-size:12px;color:var(--muted);margin-top:3px}
+.pill{display:inline-flex;align-items:center;padding:6px 9px;border-radius:999px;font-size:11px;font-weight:850}
+.pill.red{background:var(--red-soft);color:var(--red)}
+.pill.orange{background:var(--orange-soft);color:var(--orange)}
+.pill.yellow{background:var(--yellow-soft);color:#8A6D00}
+.pill.green{background:var(--green-soft);color:var(--green)}
+.pill.blue{background:var(--blue-soft);color:var(--blue)}
+.line-card svg{width:100%;height:270px}
+.axis-line{stroke:#D7E0EA;stroke-width:1}
+.line-a{fill:none;stroke:var(--blue);stroke-width:4;stroke-linecap:round;stroke-linejoin:round}
+.line-b{fill:none;stroke:var(--red);stroke-width:3;stroke-dasharray:7 6;stroke-linecap:round;stroke-linejoin:round}
+.line-c{fill:none;stroke:var(--orange);stroke-width:3;stroke-dasharray:2 6;stroke-linecap:round;stroke-linejoin:round}
+.area{fill:url(#areaGrad)}
+.legend{display:flex;gap:14px;flex-wrap:wrap;color:var(--muted);font-size:12px;margin-top:8px}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:6px;vertical-align:middle}
+.bars{display:flex;flex-direction:column;gap:14px;margin-top:12px}
+.bar-row{display:grid;grid-template-columns:190px 1fr 72px;gap:12px;align-items:center}
+.bar-row span{font-size:12px;font-weight:750;color:var(--ink)}
+.track{height:12px;background:#E8EEF5;border-radius:999px;overflow:hidden}
+.fill{height:100%;border-radius:999px;background:linear-gradient(90deg,var(--blue),#68A6FF)}
+.fill.red{background:linear-gradient(90deg,var(--red),#F36A70)}
+.fill.green{background:linear-gradient(90deg,var(--green),#42C280)}
+.fill.orange{background:linear-gradient(90deg,var(--orange),#FFD166)}
+.table{width:100%;border-collapse:separate;border-spacing:0 10px;margin-top:8px}
+.table th{text-align:left;padding:0 10px;color:var(--muted);font-size:11px;text-transform:uppercase;letter-spacing:.7px}
+.table td{background:var(--grey-soft);padding:12px 10px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);font-size:12px}
+.table td:first-child{border-left:1px solid var(--line);border-radius:14px 0 0 14px;font-weight:850}
+.table td:last-child{border-right:1px solid var(--line);border-radius:0 14px 14px 0}
+.donut-wrap{display:flex;justify-content:center;align-items:center;padding:14px 0}
+.donut{width:220px;height:220px;border-radius:50%;background:conic-gradient(var(--blue) 0 36%, #6C8CFF 36% 58%, #C87BA4 58% 74%, #F0B5C7 74% 100%);position:relative}
+.donut:before{content:"";position:absolute;inset:48px;background:#fff;border-radius:50%}
+.donut-center{position:absolute;inset:0;display:grid;place-items:center;z-index:1;font-weight:900;color:var(--ink)}
+.split{display:grid;grid-template-columns:.58fr .42fr;gap:16px}
+.network-layout{display:grid;grid-template-columns:1.06fr .94fr;gap:16px}
+.map-shell{display:grid;grid-template-columns:.92fr 1.08fr;gap:14px;align-items:center}
+.map-box{background:#fff;border:1px solid var(--line);border-radius:20px;padding:12px;display:grid;place-items:center;min-height:445px}
+.map-svg{width:100%;max-width:410px;height:auto}
+.fr-shape{fill:#EAF4FF;stroke:#95BFF1;stroke-width:2}
+.bubble{cursor:pointer}
+.bubble circle{fill:var(--blue)}
+.bubble.active circle,.bubble:hover circle{fill:var(--red)}
+.bubble text{font-size:10.5px;font-weight:900;fill:#fff;pointer-events:none}
+.region-panel{display:flex;flex-direction:column;gap:12px}
+.region-focus{background:var(--grey-soft);border:1px solid var(--line);border-radius:20px;padding:16px}
+.focus-kpis{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:12px}
+.focus-kpi{background:#fff;border:1px solid var(--line);border-radius:16px;padding:12px}
+.focus-kpi span{display:block;font-size:11px;text-transform:uppercase;color:var(--muted);letter-spacing:.6px}
+.focus-kpi strong{display:block;font-size:20px;margin-top:6px}
+.region-list{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.region-item{background:#fff;border:1px solid var(--line);border-radius:16px;padding:12px;cursor:pointer;transition:.15s ease}
+.region-item.active,.region-item:hover{border-color:#F2A3A7;background:#FFFBFB;transform:translateY(-2px)}
+.region-item strong{font-size:13px}
+.region-item span{display:block;font-size:12px;color:var(--muted);margin-top:4px}
+.region-item em{font-style:normal;display:block;font-size:18px;color:var(--blue);font-weight:900;margin-top:6px}
+.empty-note{background:#fff;border:1px dashed var(--line);border-radius:16px;padding:14px;color:var(--muted);font-size:12px;line-height:1.5;margin-top:12px}
+
+.network-fun-layout{display:grid;grid-template-columns:1.08fr .92fr;gap:16px;margin-top:16px}
+.network-map-card{min-height:560px}
+.network-side{display:grid;gap:16px}
+.network-action-row{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-top:12px}
+.toggle-table-btn{
+  border:1px solid var(--red);background:var(--red);color:#fff;border-radius:999px;
+  padding:10px 14px;cursor:pointer;font-weight:850;transition:.18s ease
+}
+.toggle-table-btn:hover{filter:brightness(.96);transform:translateY(-1px)}
+.map-legend{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px;color:var(--muted);font-size:12px}
+.map-legend span{display:inline-flex;align-items:center;gap:6px}
+.map-legend i{display:inline-block;width:10px;height:10px;border-radius:50%}
+.donut-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.donut-card{min-height:300px}
+.donut-title-row{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.donut-small{
+  width:178px;height:178px;border-radius:50%;position:relative;margin:18px auto 12px;
+  background:conic-gradient(var(--blue) 0 48%, var(--red) 48% 70%, var(--orange) 70% 86%, #8CB8F0 86% 100%)
+}
+.donut-small.alt{background:conic-gradient(var(--blue) 0 54%, #6C8CFF 54% 73%, #C87BA4 73% 88%, #F0B5C7 88% 100%)}
+.donut-small::before{content:"";position:absolute;inset:39px;background:#fff;border-radius:50%}
+.donut-small-center{position:absolute;inset:0;display:grid;place-items:center;text-align:center;font-weight:900;color:var(--ink);z-index:1;line-height:1.05}
+.donut-small-center small{display:block;font-size:10px;color:var(--muted);font-weight:800;margin-top:4px}
+.donut-legend{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px}
+.donut-legend span{font-size:11px;color:var(--muted);display:inline-flex;align-items:center;gap:6px}
+.donut-legend i{width:10px;height:10px;border-radius:50%;display:inline-block}
+.mini-network-table{width:100%;border-collapse:separate;border-spacing:0 8px;margin-top:10px}
+.mini-network-table th{text-align:left;color:var(--muted);font-size:10px;text-transform:uppercase;letter-spacing:.6px;padding:0 8px}
+.mini-network-table td{background:var(--grey-soft);border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:10px 8px;font-size:12px}
+.mini-network-table td:first-child{border-left:1px solid var(--line);border-radius:12px 0 0 12px;font-weight:850}
+.mini-network-table td:last-child{border-right:1px solid var(--line);border-radius:0 12px 12px 0}
+.network-table-panel{display:none;margin-top:16px}
+.network-table-panel.open{display:block}
+.agency-chip-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.agency-chip{
+  border:1px solid var(--line);background:#fff;border-radius:999px;padding:8px 11px;
+  font-size:11px;font-weight:800;color:var(--ink);cursor:pointer;transition:.15s ease
+}
+.agency-chip.active,.agency-chip:hover{background:var(--red);border-color:var(--red);color:#fff}
+@media(max-width:1280px){.network-fun-layout,.donut-grid{grid-template-columns:1fr}}
+
+.footer{padding:16px 22px 30px;text-align:center;font-size:11px;color:var(--muted)}
+@media(max-width:1280px){
+  .grid.kpis{grid-template-columns:repeat(3,1fr)}
+  .grid.two,.network-layout,.map-shell,.split,.title-zone{grid-template-columns:1fr}
+  .gauge-grid{grid-template-columns:1fr}
+}
+@media(max-width:820px){
+  .container{padding:14px}
+  .grid.kpis,.grid.three,.region-list,.focus-kpis{grid-template-columns:1fr}
+  .bar-row{grid-template-columns:120px 1fr 54px}
+  .header{padding:12px}
+  .title-zone h1{font-size:28px}
+}
+</style>
+
+<style>
+.card{position:relative!important;padding-bottom:34px!important;}
+.source-badge{position:absolute;right:12px;bottom:8px;z-index:20;max-width:calc(100% - 24px);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;background:rgba(10,78,151,.94);color:#fff;border-radius:999px;padding:5px 8px;font-size:9.5px;font-weight:850;letter-spacing:.1px;box-shadow:0 6px 14px rgba(10,78,151,.16)}
+.source-page-badge{position:absolute;right:18px;bottom:10px;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.28);color:#fff;border-radius:999px;padding:7px 10px;font-size:10.5px;font-weight:850;backdrop-filter:blur(4px)}
+.title-zone{position:relative;padding-bottom:42px!important;}
+.table td,.table th{font-size:11.5px!important;}
+@media(max-width:1280px){.source-page-badge{position:static;margin-top:12px;display:inline-block}.title-zone{padding-bottom:24px!important}}
+</style>
+
+
+<style id="kpi-element-source-v3-css">
+/* V3 : source KPI au niveau élément métier */
+.card{position:relative!important;}
+.card.kpi{padding-top:34px!important;padding-bottom:36px!important;}
+.gauge-card{padding-bottom:34px!important;}
+.source-badge{top:9px!important;right:12px!important;bottom:auto!important;background:rgba(215,25,32,.96)!important;max-width:calc(100% - 24px)!important;font-size:9px!important;line-height:1.1!important;white-space:normal!important;text-align:right!important;padding:5px 8px!important;}
+.source-chip,.cell-source{display:inline-flex;align-items:center;gap:4px;border-radius:999px;background:#EEF6FF;border:1px solid #B9D8FF;color:#073B73;font-size:9px;font-weight:850;line-height:1.15;padding:4px 7px;letter-spacing:.05px;box-shadow:0 3px 8px rgba(10,78,151,.05)}
+.source-chip strong,.cell-source strong{color:#D71920;font-weight:950;}
+.card.kpi .source-chip.kpi-source,.gauge-card .source-chip.kpi-source{position:absolute;left:14px;bottom:10px;max-width:calc(100% - 28px);white-space:normal;}
+.list-item{grid-template-columns:auto 1fr auto!important;position:relative;padding-bottom:34px!important;}
+.list-item .source-chip{position:absolute;left:12px;right:12px;bottom:8px;width:max-content;max-width:calc(100% - 24px);white-space:normal;}
+.bar-row{position:relative;padding-bottom:21px;}
+.bar-row .source-chip{position:absolute;left:0;bottom:0;max-width:100%;white-space:normal;}
+.budget-gauge{position:relative;padding-bottom:18px;}
+.budget-gauge .source-chip{position:absolute;left:0;bottom:-3px;max-width:100%;white-space:normal;}
+.focus-kpi{position:relative;padding-bottom:32px!important;}
+.focus-kpi .source-chip{position:absolute;left:10px;bottom:8px;max-width:calc(100% - 20px);white-space:normal;}
+.donut-legend span,.legend span,.agency-chip{position:relative;}
+.legend .source-chip,.donut-legend .source-chip{margin-left:4px;vertical-align:middle;}
+.table td:first-child{min-width:190px;}
+.cell-source{display:flex;margin-top:6px;width:max-content;max-width:100%;white-space:normal;}
+.title-zone{position:relative;}
+.source-page-badge{right:18px!important;bottom:10px!important;}
+/* Réduire légèrement les libellés pour garder les badges lisibles */
+.kpi .value{font-size:27px!important;}
+.bar-row{grid-template-columns:180px 1fr 68px!important;}
+@media(max-width:1280px){.bar-row{grid-template-columns:130px 1fr 54px!important}}
+</style>
+
+
+<style id="excel-bim-annotations-v4">
+.source-chip,.source-badge,.source-page-badge{display:none!important;}
+.card,.kpi,.gauge-card,.list-item,.bar-row,.focus-kpi,.region-focus,.donut-card{position:relative!important;}
+.combo-chip{display:inline-flex;flex-direction:column;gap:2px;border-radius:10px;background:rgba(255,255,255,.98);border:1px solid #9CC7F4;color:#073B73;font-size:8.7px;font-weight:850;line-height:1.12;padding:4px 6px;box-shadow:0 5px 12px rgba(10,78,151,.12);max-width:100%;z-index:40;}
+.combo-chip b{color:#D71920;font-weight:950}.combo-chip em{font-style:normal;color:#198754;font-weight:950}.combo-chip.warn em{color:#E67E22}.combo-chip.miss em{color:#D71920}
+.card.kpi{padding-bottom:48px!important}.card.kpi>.combo-chip{position:absolute;left:12px;right:12px;bottom:8px;}
+.gauge-card{padding-bottom:46px!important}.gauge-card>.combo-chip{position:absolute;left:14px;right:14px;bottom:8px;}
+.list-item{padding-bottom:42px!important}.list-item>.combo-chip{position:absolute;left:12px;right:12px;bottom:8px;}
+.bar-row{padding-bottom:28px!important}.bar-row>.combo-chip{position:absolute;left:0;right:0;bottom:0;font-size:8px;}
+.focus-kpi{padding-bottom:40px!important}.focus-kpi>.combo-chip{position:absolute;left:10px;right:10px;bottom:8px;font-size:8px;}
+.legend span,.donut-legend span,.agency-chip{position:relative}.legend .combo-chip,.donut-legend .combo-chip{margin-left:4px;font-size:7.7px;padding:2px 4px;vertical-align:middle;max-width:210px;}
+.card:not(.kpi):not(.gauge-card)>.combo-chip.card-level{position:absolute;right:14px;top:12px;max-width:46%;font-size:8px;}
+.table td:first-child .combo-chip,.mini-network-table td:first-child .combo-chip{display:flex;margin-top:4px;font-size:7.8px;padding:3px 5px;}
+.title-zone{position:relative}.title-zone:after{content:'Sources par élément : Excel KPI + modèle BIM existant';position:absolute;right:18px;bottom:10px;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.28);color:#fff;border-radius:999px;padding:7px 10px;font-size:11px;font-weight:800;}
+.footer:after{content:' · V4 : chaque élément affiche KPI Excel attendu + statut BIM';}
+</style>
+
+</head>
+<body>
+<div class="app">
+<header class="header">
+  <div class="header-row">
+    <div class="brand">
+      <strong>Pilotage Commercial</strong>
+      <span>Affaires, réseau MIA et rendez-vous</span>
+    </div>
+    <nav class="nav">
+      <button class="active" data-page="home">Accueil</button>
+      <button data-page="performance">Performance</button>
+      <button data-page="affaires">Affaires</button>
+      <button data-page="reseau">Réseau MIA</button>
+      <button data-page="rdv">Rendez-vous</button>
+      <button data-page="alertes">Alertes</button>
+      <button data-page="glossaire">Glossaire</button>
+    </nav>
+    <div class="header-tools">
+      <select><option>France entière</option><option>Région</option><option>Agence</option><option>Centre d'affaires</option><option>Secteur</option><option>Mandataire</option></select>
+    </div>
+  </div>
+</header>
+
+<main class="container">
+  <section id="home" class="page active">
+    <div class="title-zone">
+      <div>
+        <h1>Vue d’ensemble</h1>
+        <p>Synthèse des volumes d’affaires, de l’activité rendez-vous et de la performance du réseau MIA.</p>
+      </div>
+      <div class="title-pills">
+        <div class="title-pill">YTD</div>
+        <div class="title-pill">Vs N-1</div>
+        <div class="title-pill">Vs MTD-1</div>
+      </div>
+    </div>
+
+    <div class="toolbar">
+      <div class="period" id="periodSwitch">
+        <button class="active">Jour</button><button>Semaine</button><button>Mois</button><button>Trimestre</button><button>Année</button>
+      </div>
+      <div class="filters">
+        <select><option>Axe Organisation</option><option>Agence</option><option>Centre d'affaires</option><option>Région</option><option>Secteur</option><option>Mandataire</option></select>
+        <select><option>Axe Activité</option><option>Type de rendez-vous</option><option>Canal de rendez-vous</option><option>Statut rendez-vous</option><option>Motif rendez-vous</option></select>
+      </div>
+    </div>
+
+    <div class="grid kpis">
+      <div class="card kpi"><div class="kpi-head"><div><div class="label">Volume d’affaires produites</div><div class="value">144,84 M€</div></div><div class="icon">€</div></div><div class="compare-row"><span class="compare negative">Vs N-1 -17 %</span><span class="compare neutral">Vs MTD-1</span></div></div>
+      <div class="card kpi"><div class="kpi-head"><div><div class="label">Volume d’affaires en instance</div><div class="value">3,65 K€</div></div><div class="icon">◔</div></div><div class="compare-row"><span class="compare negative">Vs N-1 -17 %</span><span class="compare neutral">Vs MTD-1</span></div></div>
+      <div class="card kpi"><div class="kpi-head"><div><div class="label">Volume d’affaires commissionnées</div><div class="value">202,6 K€</div></div><div class="icon">◇</div></div><div class="compare-row"><span class="compare negative">Vs N-1 -17 %</span><span class="compare neutral">Vs MTD-1</span></div></div>
+      <div class="card kpi"><div class="kpi-head"><div><div class="label">Montant moyen de rétrocommission</div><div class="value">2,81 K€</div></div><div class="icon">◎</div></div><div class="compare-row"><span class="compare negative">Vs N-1 -17 %</span><span class="compare neutral">Vs MTD-1</span></div></div>
+      <div class="card kpi"><div class="kpi-head"><div><div class="label">Nombre rendez-vous réalisés</div><div class="value">102 K</div></div><div class="icon">📅</div></div><div class="compare-row"><span class="compare negative">Vs N-1 -17 %</span><span class="compare neutral">Vs MTD-1</span></div></div>
+    </div>
+
+    <div class="gauge-grid" style="margin-top:16px">
+      <div class="card gauge-card"><div class="gauge red" style="--value:83"><span>HAUTE</span></div><div class="gauge-text"><strong>Niveau Alerte Volume</strong><small>Basé sur la variation du Volume Affaires vs N-1.</small></div></div>
+      <div class="card gauge-card"><div class="gauge orange" style="--value:70"><span>RDV</span></div><div class="gauge-text"><strong>Niveau Alerte RDV</strong><small>Basé sur le Taux Réalisation RDV.</small></div></div>
+      <div class="card gauge-card"><div class="gauge orange" style="--value:80"><span>MIA</span></div><div class="gauge-text"><strong>Niveau Alerte Réseau</strong><small>Basé sur le Taux Mandataires Actifs.</small></div></div>
+    </div>
+
+    <div class="grid two" style="margin-top:16px">
+      <div class="card">
+        <h3>Alertes</h3>
+        <div class="subtitle">Éléments d’alerte disponibles dans le modèle, sans détail d’alerte inventé.</div>
+        <div class="list">
+          <div class="list-item"><div class="dot red"></div><div><strong>Nombre Alertes Critiques</strong><span>Compte les alertes ouvertes avec niveau_priorite = CRITIQUE.</span></div><span class="pill red">CRITIQUE</span></div>
+          <div class="list-item"><div class="dot orange"></div><div><strong>Nombre Alertes Hautes</strong><span>Compte les alertes ouvertes avec niveau_priorite = HAUTE.</span></div><span class="pill orange">HAUTE</span></div>
+          <div class="list-item"><div class="dot yellow"></div><div><strong>Nombre Alertes Moyennes</strong><span>Compte les alertes ouvertes avec niveau_priorite = MOYENNE.</span></div><span class="pill yellow">MOYENNE</span></div>
+          <div class="list-item"><div class="dot blue"></div><div><strong>Nombre Alertes Ouvertes</strong><span>Compte les alertes dont le statut n’est pas clôturé.</span></div><span class="pill blue">OUVERTES</span></div>
+        </div>
+      </div>
+      <div class="card">
+        <h3>Recommandation Volume</h3>
+        <div class="subtitle">Texte repris de la logique de recommandation existante.</div>
+        <div class="list">
+          <div class="list-item"><div class="dot red"></div><div><strong>Variation vs N-1 Volume Affaires &lt; -10 %</strong><span>Identifier les agences contributrices au recul et déclencher un plan de relance.</span></div><span class="pill red">Action</span></div>
+          <div class="list-item"><div class="dot orange"></div><div><strong>Variation vs N-1 Volume Affaires &lt; 0</strong><span>Surveiller la trajectoire et challenger les zones en retrait.</span></div><span class="pill orange">Suivi</span></div>
+          <div class="list-item"><div class="dot green"></div><div><strong>Trajectoire conforme ou positive</strong><span>Sécuriser l’atterrissage.</span></div><span class="pill green">Conforme</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid two" style="margin-top:16px">
+      <div class="card line-card">
+        <h3>Évolution du nombre d’affaires</h3>
+        <div class="subtitle">Nombre affaires produites, en instance et commissionnées.</div>
+        <div class="chart" data-series="affaires"></div>
+        <div class="legend"><span><i style="background:var(--blue)"></i>Nombre affaires produites</span><span><i style="background:var(--red)"></i>Nombre affaires en instance</span><span><i style="background:var(--orange)"></i>Nombre affaires commissionnées</span></div>
+      </div>
+      <div class="card">
+        <h3>Répartition des affaires commissionnées</h3>
+        <div class="bars">
+          <div class="bar-row"><span>PER</span><div class="track"><div class="fill" style="width:72%"></div></div><strong></strong></div>
+          <div class="bar-row"><span>ADE</span><div class="track"><div class="fill green" style="width:48%"></div></div><strong></strong></div>
+          <div class="bar-row"><span>Immo</span><div class="track"><div class="fill orange" style="width:61%"></div></div><strong></strong></div>
+          <div class="bar-row"><span>Prévoyance</span><div class="track"><div class="fill red" style="width:36%"></div></div><strong></strong></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="performance" class="page">
+    <div class="title-zone">
+      <div>
+        <h1>Performance du réseau</h1>
+        <p>Trajectoire affaires : identifier les agences qui tirent ou freinent la performance, avec lecture Budget N.</p>
+      </div>
+      <div class="title-pills"><div class="title-pill">Performance</div><div class="title-pill">Affaires</div></div>
+    </div>
+
+    <div class="toolbar">
+      <div class="axis-buttons" id="perfAxis"></div>
+      <div class="filters"><select><option>Agence</option><option>Région</option><option>Centre d'affaires</option><option>Secteur</option><option>Mandataire</option></select></div>
+    </div>
+
+    <div class="grid kpis">
+      <div class="card kpi"><div class="kpi-head"><div><div class="label">Volume d’affaires produites</div><div class="value">144,84 M€</div></div><div class="icon">€</div></div><div class="compare-row"><span class="compare negative">Vs N-1 -17 %</span></div><div class="budget-gauge">
+  <div class="budget-label"><span>Budget N</span><span>Budget N</span></div>
+  <div class="budget-track"><span class="budget-marker"></span></div>
+</div></div>
+      <div class="card kpi"><div class="kpi-head"><div><div class="label">Volume d’affaires en instance</div><div class="value">3,65 K€</div></div><div class="icon">◔</div></div><div class="compare-row"><span class="compare negative">Vs N-1 -17 %</span></div><div class="budget-gauge">
+  <div class="budget-label"><span>Budget N</span><span>Budget N</span></div>
+  <div class="budget-track"><span class="budget-marker"></span></div>
+</div></div>
+      <div class="card kpi"><div class="kpi-head"><div><div class="label">Volume d’affaires commissionnées</div><div class="value">202,6 K€</div></div><div class="icon">◇</div></div><div class="compare-row"><span class="compare negative">Vs N-1 -17 %</span></div><div class="budget-gauge">
+  <div class="budget-label"><span>Budget N</span><span>Budget N</span></div>
+  <div class="budget-track"><span class="budget-marker"></span></div>
+</div></div>
+      <div class="card kpi"><div class="kpi-head"><div><div class="label">Montant moyen de rétrocommission</div><div class="value">2,81 K€</div></div><div class="icon">◎</div></div><div class="compare-row"><span class="compare negative">Vs N-1 -17 %</span></div></div>
+      <div class="card kpi"><div class="kpi-head"><div><div class="label">Taux atteinte Budget N Volume</div><div class="value">—</div></div><div class="icon">%</div></div><div class="compare-row"><span class="compare neutral">Disponible dans le modèle</span></div></div>
+    </div>
+
+    <div class="grid three" style="margin-top:16px">
+      <div class="card line-card">
+        <h3>Évolution du nombre d’affaires</h3>
+        <div class="chart" data-series="affaires"></div>
+        <div class="legend"><span><i style="background:var(--blue)"></i>Nombre affaires produites</span><span><i style="background:var(--red)"></i>Nombre affaires en instance</span><span><i style="background:var(--orange)"></i>Nombre affaires commissionnées</span></div>
+      </div>
+      <div class="card">
+        <h3>Performance</h3>
+        <div class="subtitle">Performance du réseau en volume d’affaires commissionnées.</div>
+        <div class="bars">
+          <div class="bar-row"><span>Predictis</span><div class="track"><div class="fill" style="width:100%"></div></div><strong>125</strong></div>
+          <div class="bar-row"><span>Capfinances</span><div class="track"><div class="fill green" style="width:61%"></div></div><strong>76</strong></div>
+          <div class="bar-row"><span>Capfinances 35</span><div class="track"><div class="fill orange" style="width:30%"></div></div><strong>37</strong></div>
+          <div class="bar-row"><span>Capfinances 14</span><div class="track"><div class="fill red" style="width:10%"></div></div><strong>13</strong></div>
+          <div class="bar-row"><span>Capfinances 59</span><div class="track"><div class="fill red" style="width:9%"></div></div><strong>12</strong></div>
+          <div class="bar-row"><span>Capfinances 25</span><div class="track"><div class="fill red" style="width:5%"></div></div><strong>6</strong></div>
+          <div class="bar-row"><span>Capfinances 34</span><div class="track"><div class="fill red" style="width:4%"></div></div><strong>5</strong></div>
+          <div class="bar-row"><span>Capfinances 67</span><div class="track"><div class="fill red" style="width:2%"></div></div><strong>2</strong></div>
+        </div>
+      </div>
+      <div class="card">
+        <h3>Répartition des affaires commissionnées</h3>
+        <div class="bars">
+          <div class="bar-row"><span>PER</span><div class="track"><div class="fill" style="width:72%"></div></div><strong></strong></div>
+          <div class="bar-row"><span>ADE</span><div class="track"><div class="fill green" style="width:48%"></div></div><strong></strong></div>
+          <div class="bar-row"><span>Immo</span><div class="track"><div class="fill orange" style="width:61%"></div></div><strong></strong></div>
+          <div class="bar-row"><span>Prévoyance</span><div class="track"><div class="fill red" style="width:36%"></div></div><strong></strong></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="affaires" class="page">
+    <div class="title-zone">
+      <div>
+        <h1>Affaires</h1>
+        <p>Suivi des volumes d’affaires produites, en instance et commissionnées.</p>
+      </div>
+      <div class="title-pills"><div class="title-pill">Affaires</div><div class="title-pill">Rétrocommission</div></div>
+    </div>
+
+    <div class="toolbar">
+      <div class="axis-buttons" id="affairesAxis"></div>
+      <div class="filters">
+        <select id="moisRefAffaires">
+          <option>Mois référence : Janvier</option>
+          <option>Mois référence : Février</option>
+          <option>Mois référence : Mars</option>
+          <option>Mois référence : Avril</option>
+          <option>Mois référence : Mai</option>
+        </select>
+        <select id="moisCompAffaires">
+          <option>Mois comparé : Mai</option>
+          <option>Mois comparé : Avril</option>
+          <option>Mois comparé : Mars</option>
+          <option>Mois comparé : Février</option>
+          <option>Mois comparé : Janvier</option>
+        </select>
+        <select><option>Région</option><option>Agence</option><option>Mandataire</option></select>
+      </div>
+    </div>
+
+    <div class="grid kpis">
+      <div class="card kpi"><div class="kpi-head"><div><div class="label">Nombre d’affaires produites</div><div class="value">—</div></div><div class="icon">↗</div></div><div class="compare-row"><span class="compare neutral">Indicateur modèle</span></div></div>
+      <div class="card kpi"><div class="kpi-head"><div><div class="label">Volume d’affaires produites</div><div class="value">144,84 M€</div></div><div class="icon">€</div></div><div class="compare-row"><span class="compare negative">Vs N-1 -17 %</span></div></div>
+      <div class="card kpi"><div class="kpi-head"><div><div class="label">Volume d’affaires en instance</div><div class="value">3,65 K€</div></div><div class="icon">◔</div></div><div class="compare-row"><span class="compare negative">Vs N-1 -17 %</span></div></div>
+      <div class="card kpi"><div class="kpi-head"><div><div class="label">Volume d’affaires commissionnées</div><div class="value">202,6 K€</div></div><div class="icon">◇</div></div><div class="compare-row"><span class="compare negative">Vs N-1 -17 %</span></div></div>
+      <div class="card kpi"><div class="kpi-head"><div><div class="label">Montant moyen de rétrocommission</div><div class="value">2,81 K€</div></div><div class="icon">◎</div></div><div class="compare-row"><span class="compare negative">Vs N-1 -17 %</span></div></div>
+    </div>
+
+    <div class="card" style="margin-top:16px">
+      <h3>Comparaison de deux mois</h3>
+      <div class="subtitle">Sélectionner un mois de référence et un mois comparé pour analyser l'écart sur les affaires.</div>
+      <div class="grid three" style="margin-top:12px">
+        <div class="card kpi"><div class="kpi-head"><div><div class="label">Mois référence</div><div class="value" id="moisRefValue">Janvier</div></div><div class="icon">M1</div></div></div>
+        <div class="card kpi"><div class="kpi-head"><div><div class="label">Mois comparé</div><div class="value" id="moisCompValue">Mai</div></div><div class="icon">M2</div></div></div>
+        <div class="card kpi"><div class="kpi-head"><div><div class="label">Écart affaires</div><div class="value" id="moisEcartValue">À calculer</div></div><div class="icon">Δ</div></div><div class="compare-row"><span class="compare neutral">Selon les mois sélectionnés</span></div></div>
+      </div>
+    </div>
+
+    <div class="gauge-grid" style="margin-top:16px">
+      <div class="card gauge-card"><div class="gauge" style="--value:82"><span>—</span></div><div class="gauge-text"><strong>Taux atteinte Budget N Volume</strong><small>Présent dans le modèle.</small></div></div>
+      <div class="card gauge-card"><div class="gauge green" style="--value:76"><span>—</span></div><div class="gauge-text"><strong>Budget N Volume Affaires</strong><small>Budget N monétaire affaires.</small></div></div>
+      <div class="card gauge-card"><div class="gauge orange" style="--value:69"><span>—</span></div><div class="gauge-text"><strong>Budget N Rétrocommission</strong><small>Budget N de rétrocommission.</small></div></div>
+    </div>
+
+    <div class="grid two" style="margin-top:16px">
+      <div class="card line-card">
+        <h3>Volume d’affaires — Réalisé vs N-1 vs MTD-1</h3>
+        <div class="chart" data-series="volume"></div>
+        <div class="legend"><span><i style="background:var(--blue)"></i>Réalisé</span><span><i style="background:var(--red)"></i>N-1</span><span><i style="background:var(--orange)"></i>MTD-1</span></div>
+      </div>
+      <div class="card">
+        <h3>Axes d’analyse affaires</h3>
+        <div class="bars">
+          <div class="bar-row"><span>Agence</span><div class="track"><div class="fill" style="width:79%"></div></div><strong></strong></div>
+          <div class="bar-row"><span>Centre d'affaires</span><div class="track"><div class="fill green" style="width:71%"></div></div><strong></strong></div>
+          <div class="bar-row"><span>Région</span><div class="track"><div class="fill orange" style="width:63%"></div></div><strong></strong></div>
+          <div class="bar-row"><span>Secteur</span><div class="track"><div class="fill red" style="width:51%"></div></div><strong></strong></div>
+          <div class="bar-row"><span>Mandataire</span><div class="track"><div class="fill red" style="width:45%"></div></div><strong></strong></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="reseau" class="page">
+    <div class="title-zone">
+      <div>
+        <h1>Réseau MIA & géographie</h1>
+        <p>Lecture interactive du réseau : carte de France, agences, répartition des RDV par CSP et suivi des MIA.</p>
+      </div>
+      <div class="title-pills"><div class="title-pill">MIA</div><div class="title-pill">Géographie</div><div class="title-pill">Tableau</div></div>
+    </div>
+
+    <div class="toolbar">
+      <div class="axis-buttons" id="networkAxis"></div>
+      <div class="filters">
+        <select><option>Région</option><option>Agence</option><option>Centre d'affaires</option><option>Raison sociale</option></select>
+        <button class="toggle-table-btn" id="toggleNetworkTable">Afficher le tableau</button>
+      </div>
+    </div>
+
+    <div class="grid kpis">
+      <div class="card kpi"><div class="kpi-head"><div><div class="label">Nombre de MIA oriasés</div><div class="value">4K</div></div><div class="icon">#</div></div><div class="compare-row"><span class="compare negative">Vs N-1 -17 %</span><span class="compare neutral">sur total de MIA</span></div></div>
+      <div class="card kpi"><div class="kpi-head"><div><div class="label">Nombre de MIA actifs</div><div class="value">2K</div></div><div class="icon">👥</div></div><div class="compare-row"><span class="compare negative">Vs N-1 -17 %</span><span class="compare neutral">sur total de MIA</span></div></div>
+      <div class="card kpi"><div class="kpi-head"><div><div class="label">Nombre de MIA productifs</div><div class="value">222</div></div><div class="icon">★</div></div><div class="compare-row"><span class="compare negative">Vs N-1 -17 %</span><span class="compare neutral">sur total de MIA</span></div></div>
+      <div class="card kpi"><div class="kpi-head"><div><div class="label">Nombre total de MIA commissionnés</div><div class="value">100</div></div><div class="icon">◇</div></div><div class="compare-row"><span class="compare negative">Vs N-1 -17 %</span><span class="compare neutral">sur total de MIA</span></div></div>
+      <div class="card kpi"><div class="kpi-head"><div><div class="label">Montant moyen de rétrocommission</div><div class="value">2,81 K€</div></div><div class="icon">◎</div></div><div class="compare-row"><span class="compare negative">Vs N-1 -17 %</span></div></div>
+    </div>
+
+    <div class="network-fun-layout">
+      <div class="card network-map-card">
+        <div class="network-action-row">
+          <div>
+            <h3>Carte de France — Nombre mandataires actifs par Agence</h3>
+            <div class="subtitle">Cliquer sur une agence pour mettre à jour le détail réseau.</div>
+          </div>
+          <span class="pill blue" id="selectedAgencyPill">Vasquehal</span>
+        </div>
+
+        <div class="map-shell" style="margin-top:14px">
+          <div class="map-box">
+            <svg class="map-svg" viewBox="0 0 430 520">
+              <path class="fr-shape" d="M139 48 L176 28 L210 39 L250 28 L289 48 L322 87 L344 130 L374 157 L364 202 L389 250 L364 282 L365 332 L338 356 L321 407 L283 428 L245 469 L205 462 L181 441 L138 445 L111 411 L69 405 L45 360 L61 321 L29 270 L52 239 L43 194 L74 166 L82 126 L111 109 L120 78 Z"></path>
+              <g id="mapBubbles"></g>
+            </svg>
+            <div class="map-legend">
+              <span><i style="background:var(--blue)"></i>Agence</span>
+              <span><i style="background:var(--red)"></i>Agence sélectionnée</span>
+            </div>
+          </div>
+          <div class="region-panel">
+            <div class="region-focus">
+              <span class="pill blue">Agence</span>
+              <h3 id="focusRegion" style="margin-top:10px">Vasquehal</h3>
+              <div class="subtitle" id="focusDesc">Nombre mandataires actifs par agence.</div>
+              <div class="focus-kpis">
+                <div class="focus-kpi"><span>Nombre de MIA actifs</span><strong id="fk1">2K</strong></div>
+                <div class="focus-kpi"><span>Nombre de MIA productifs</span><strong id="fk2">222</strong></div>
+                <div class="focus-kpi"><span>Nombre total de MIA commissionnés</span><strong id="fk3">100</strong></div>
+                <div class="focus-kpi"><span>Montant moyen rétrocommission</span><strong id="fk4">2,81 K€</strong></div>
+              </div>
+            </div>
+            <div class="agency-chip-row" id="agencyChipRow"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="network-side">
+        <div class="donut-grid">
+          <div class="card donut-card">
+            <div class="donut-title-row">
+              <div>
+                <h3>Répartition des RDV par CSP</h3>
+                <div class="subtitle">CSP issue de l'analyse réseau.</div>
+              </div>
+              <span class="pill blue">RDV</span>
+            </div>
+            <div class="donut-small alt"><div class="donut-small-center">CSP<small>RDV</small></div></div>
+            <div class="donut-legend">
+              <span><i style="background:var(--blue)"></i>C1</span>
+              <span><i style="background:#6C8CFF"></i>C2</span>
+              <span><i style="background:#C87BA4"></i>C3</span>
+              <span><i style="background:#F0B5C7"></i>C4</span>
+            </div>
+          </div>
+
+          <div class="card donut-card">
+            <div class="donut-title-row">
+              <div>
+                <h3>Répartition MIA</h3>
+                <div class="subtitle">Oriasés, actifs, productifs, commissionnés.</div>
+              </div>
+              <span class="pill red">MIA</span>
+            </div>
+            <div class="donut-small"><div class="donut-small-center">MIA<small>réseau</small></div></div>
+            <div class="donut-legend">
+              <span><i style="background:var(--blue)"></i>Oriasés</span>
+              <span><i style="background:var(--red)"></i>Actifs</span>
+              <span><i style="background:var(--orange)"></i>Productifs</span>
+              <span><i style="background:#8CB8F0"></i>Commissionnés</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Petit tableau réseau</h3>
+          <div class="subtitle">Vue compacte des éléments présents dans le détail réseau.</div>
+          <table class="mini-network-table">
+            <thead><tr><th>Raison sociale</th><th>Flag rétro.</th><th>Flag actif</th><th>Rétro.</th></tr></thead>
+            <tbody>
+              <tr><td>Capfinances</td><td>Rétrocommissionné</td><td>Inactif</td><td>$2 809</td></tr>
+              <tr><td>Capfinances</td><td>Rétrocommissionné</td><td>Inactif</td><td>$2 809</td></tr>
+              <tr><td>Capfinances</td><td>Rétrocommissionné</td><td>Inactif</td><td>$2 809</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="card">
+          <h3>Nombre de MIA Productifs</h3>
+          <div class="bars">
+            <div class="bar-row"><span>Predictis</span><div class="track"><div class="fill" style="width:100%"></div></div><strong>125</strong></div>
+            <div class="bar-row"><span>Capfinances</span><div class="track"><div class="fill green" style="width:61%"></div></div><strong>76</strong></div>
+            <div class="bar-row"><span>Capfinances 35</span><div class="track"><div class="fill orange" style="width:30%"></div></div><strong>37</strong></div>
+            <div class="bar-row"><span>Capfinances 14</span><div class="track"><div class="fill red" style="width:10%"></div></div><strong>13</strong></div>
+            <div class="bar-row"><span>Capfinances 25</span><div class="track"><div class="fill red" style="width:5%"></div></div><strong>6</strong></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card network-table-panel" id="networkTablePanel">
+      <h3>Tableau réseau détaillé</h3>
+      <div class="subtitle">Affiché ou masqué avec le bouton de l’onglet Réseau MIA.</div>
+      <table class="table">
+        <thead><tr><th>Raison sociale</th><th>Flag rétrocommissionné</th><th>Flag mandataire actif</th><th>Montant moyen de rétrocommission</th></tr></thead>
+        <tbody>
+          <tr><td>Capfinances</td><td>Rétrocommissionné</td><td>Inactif</td><td>$2 809</td></tr>
+          <tr><td>Capfinances</td><td>Rétrocommissionné</td><td>Inactif</td><td>$2 809</td></tr>
+          <tr><td>Capfinances</td><td>Rétrocommissionné</td><td>Inactif</td><td>$2 809</td></tr>
+          <tr><td>Capfinances</td><td>Rétrocommissionné</td><td>Inactif</td><td>$2 809</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+
+  <section id="rdv" class="page">
+    <div class="title-zone">
+      <div>
+        <h1>Rendez-vous</h1>
+        <p>Mesurer l'activité commerciale : RDV prévus, réalisés, à domicile ou en visio.</p>
+      </div>
+      <div class="title-pills"><div class="title-pill">RDV prévus</div><div class="title-pill">RDV réalisés</div></div>
+    </div>
+
+    <div class="toolbar">
+      <div class="axis-buttons" id="rdvAxis"></div>
+      <div class="filters"><select><option>Type de rendez-vous</option><option>Canal de rendez-vous</option><option>Statut rendez-vous</option><option>Motif rendez-vous</option></select></div>
+    </div>
+
+    <div class="grid kpis">
+      <div class="card kpi"><div class="kpi-head"><div><div class="label">Nombre rendez-vous réalisés</div><div class="value">102K</div></div><div class="icon">📅</div></div><div class="compare-row"><span class="compare negative">Vs N-1 -17 %</span><span class="compare neutral">sur total de RDV prévus</span></div></div>
+      <div class="card kpi"><div class="kpi-head"><div><div class="label">Nombre rendez-vous prévus</div><div class="value">202K</div></div><div class="icon">◉</div></div><div class="compare-row"><span class="compare positive">Vs N-1 +17 %</span></div></div>
+      <div class="card kpi"><div class="kpi-head"><div><div class="label">Nombre RDV Confirmés</div><div class="value">—</div></div><div class="icon">✓</div></div><div class="compare-row"><span class="compare neutral">Indicateur modèle</span></div></div>
+      <div class="card kpi"><div class="kpi-head"><div><div class="label">Taux Réalisation RDV</div><div class="value">—</div></div><div class="icon">%</div></div><div class="compare-row"><span class="compare neutral">Indicateur modèle</span></div></div>
+      <div class="card kpi"><div class="kpi-head"><div><div class="label">Taux RDV Visio / Domicile</div><div class="value">—</div></div><div class="icon">⌂</div></div><div class="compare-row"><span class="compare neutral">Indicateur partiel</span></div></div>
+    </div>
+
+    <div class="grid three" style="margin-top:16px">
+      <div class="card">
+        <h3>Répartition des rendez-vous réalisés</h3>
+        <div class="bars">
+          <div class="bar-row"><span>R1</span><div class="track"><div class="fill" style="width:74%"></div></div><strong></strong></div>
+          <div class="bar-row"><span>R2</span><div class="track"><div class="fill orange" style="width:58%"></div></div><strong></strong></div>
+          <div class="bar-row"><span>SCPI</span><div class="track"><div class="fill green" style="width:63%"></div></div><strong></strong></div>
+          <div class="bar-row"><span>SCPI R2</span><div class="track"><div class="fill red" style="width:18%"></div></div><strong></strong></div>
+        </div>
+      </div>
+      <div class="card line-card" style="grid-column:span 2">
+        <h3>Nombre rendez-vous prévus VS réalisés</h3>
+        <div class="chart" data-series="rdv"></div>
+        <div class="legend"><span><i style="background:var(--blue)"></i>Nombre rendez-vous prévus</span><span><i style="background:var(--red)"></i>Nombre rendez-vous réalisés</span></div>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:16px">
+      <h3>Détail rendez-vous</h3>
+      <table class="table">
+        <thead><tr><th>Libellé type rendez-vous</th><th>R1 - Nombre rendez-vous prévus</th><th>R1 - Nombre rendez-vous réalisés</th><th>R2 - Nombre rendez-vous prévus</th><th>R2 - Nombre rendez-vous réalisés</th><th>Total - Nombre rendez-vous prévus</th><th>Total - Nombre rendez-vous réalisés</th></tr></thead>
+        <tbody>
+          <tr><td>R1</td><td>141 252</td><td>71 018</td><td>58 091</td><td>30 219</td><td>199 343</td><td>101 237</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section id="alertes" class="page">
+    <div class="title-zone">
+      <div>
+        <h1>Alertes</h1>
+        <p>Éléments d’alerte et de recommandation disponibles dans le modèle.</p>
+      </div>
+      <div class="title-pills"><div class="title-pill">CRITIQUE</div><div class="title-pill">HAUTE</div><div class="title-pill">MOYENNE</div></div>
+    </div>
+
+    <div class="grid kpis" style="margin-top:18px">
+      <div class="card kpi"><div class="kpi-head"><div><div class="label">Nombre Alertes Critiques</div><div class="value">—</div></div><div class="icon">!</div></div><div class="compare-row"><span class="compare red">fact_alertes</span></div></div>
+      <div class="card kpi"><div class="kpi-head"><div><div class="label">Nombre Alertes Hautes</div><div class="value">—</div></div><div class="icon">▲</div></div><div class="compare-row"><span class="compare orange">fact_alertes</span></div></div>
+      <div class="card kpi"><div class="kpi-head"><div><div class="label">Nombre Alertes Moyennes</div><div class="value">—</div></div><div class="icon">●</div></div><div class="compare-row"><span class="compare yellow">fact_alertes</span></div></div>
+      <div class="card kpi"><div class="kpi-head"><div><div class="label">Nombre Alertes Ouvertes</div><div class="value">—</div></div><div class="icon">□</div></div><div class="compare-row"><span class="compare neutral">statut_alerte ≠ Cloturee</span></div></div>
+      <div class="card kpi"><div class="kpi-head"><div><div class="label">Couleur Alerte</div><div class="value">●</div></div><div class="icon">◌</div></div><div class="compare-row"><span class="compare neutral">CRITIQUE / HAUTE / MOYENNE / INFO</span></div></div>
+    </div>
+
+    <div class="grid two" style="margin-top:16px">
+      <div class="card">
+        <h3>Niveaux d’alerte</h3>
+        <div class="list">
+          <div class="list-item"><div class="dot red"></div><div><strong>Niveau Alerte Volume</strong><span>CRITIQUE si Variation vs N-1 Volume Affaires &lt; -20 %. HAUTE si &lt; -10 %. MOYENNE si &lt; 0.</span></div><span class="pill red">Volume</span></div>
+          <div class="list-item"><div class="dot orange"></div><div><strong>Niveau Alerte RDV</strong><span>CRITIQUE si Taux Réalisation RDV &lt; 50 %. HAUTE si &lt; 70 %. MOYENNE si &lt; 85 %.</span></div><span class="pill orange">RDV</span></div>
+          <div class="list-item"><div class="dot yellow"></div><div><strong>Niveau Alerte Réseau</strong><span>CRITIQUE si Taux Mandataires Actifs &lt; 60 %. HAUTE si &lt; 80 %. MOYENNE si &lt; 90 %.</span></div><span class="pill yellow">Réseau</span></div>
+        </div>
+      </div>
+      <div class="card">
+        <h3>Recommandation Volume</h3>
+        <div class="list">
+          <div class="list-item"><div class="dot red"></div><div><strong>Variation vs N-1 Volume Affaires &lt; -10 %</strong><span>Identifier les agences contributrices au recul et déclencher un plan de relance.</span></div><span class="pill red">Action</span></div>
+          <div class="list-item"><div class="dot orange"></div><div><strong>Variation vs N-1 Volume Affaires &lt; 0</strong><span>Surveiller la trajectoire et challenger les zones en retrait.</span></div><span class="pill orange">Suivi</span></div>
+          <div class="list-item"><div class="dot green"></div><div><strong>Trajectoire conforme ou positive</strong><span>Sécuriser l’atterrissage.</span></div><span class="pill green">Conforme</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:16px">
+      <h3>Détail alertes</h3>
+      <div class="empty-note">Le modèle contient la structure d’alertes : alerte_id, date_analyse, date_detection, niveau_priorite, categorie_alerte, kpi_concerne, valeur_actuelle, seuil_alerte, ecart, agence, mandataire, impact_metier, recommandation, statut_alerte. Aucun détail d’alerte n’est inventé dans cette maquette.</div>
+      <table class="table">
+        <thead><tr><th>alerte_id</th><th>niveau_priorite</th><th>categorie_alerte</th><th>kpi_concerne</th><th>valeur_actuelle</th><th>seuil_alerte</th><th>ecart</th><th>impact_metier</th><th>recommandation</th><th>statut_alerte</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section id="glossaire" class="page">
+    <div class="title-zone">
+      <div>
+        <h1>Glossaire</h1>
+        <p>Définitions des indicateurs utilisés dans le dashboard.</p>
+      </div>
+      <div class="title-pills"><div class="title-pill">Indicateurs</div><div class="title-pill">Définitions</div></div>
+    </div>
+    <div class="card" style="margin-top:18px">
+      <table class="table">
+        <thead><tr><th>Indicateur</th><th>Définition</th><th>Fréquence</th><th>Priorité</th></tr></thead>
+        <tbody>
+          <tr><td>Nombre d'affaires produites</td><td>Nombre d'affaires valides produites.</td><td>Quotidien</td><td>P1</td></tr>
+          <tr><td>Volume d'affaires</td><td>Volume monétaire des affaires produites.</td><td>Quotidien</td><td>P1</td></tr>
+          <tr><td>Nombre de RDV prévus</td><td>RDV planifiés sur la période.</td><td>Quotidien</td><td>P1</td></tr>
+          <tr><td>Nombre de RDV réalisés</td><td>RDV effectivement tenus.</td><td>Quotidien</td><td>P1</td></tr>
+          <tr><td>Taux de réalisation RDV</td><td>Part des RDV prévus effectivement réalisés.</td><td>Quotidien</td><td>P1</td></tr>
+          <tr><td>Mandataires actifs</td><td>Mandataires avec activité sur la période.</td><td>Quotidien</td><td>P1</td></tr>
+          <tr><td>Mandataires productifs</td><td>Mandataires ayant produit au moins une affaire.</td><td>Quotidien</td><td>P1</td></tr>
+          <tr><td>Taux de mandataires actifs</td><td>% du réseau actif.</td><td>Quotidien</td><td>P1</td></tr>
+          <tr><td>Rétrocommission</td><td>Montant total rétrocommissionné.</td><td>Quotidien</td><td>P1</td></tr>
+          <tr><td>Taux RDV visio</td><td>Part des RDV en visio.</td><td>Quotidien</td><td>P2</td></tr>
+          <tr><td>Taux RDV domicile</td><td>Part des RDV à domicile.</td><td>Quotidien</td><td>P2</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+</main>
+<div class="footer">Maquette HTML interactive — contenu limité aux éléments fournis ou présents dans le modèle</div>
+</div>
+
+
+<script>
+(function(){
+const pages=document.querySelectorAll('.page');
+window.showPilotagePage=function(id){
+  document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('active', b.dataset.page===id));
+  pages.forEach(p=>p.classList.toggle('active', p.id===id));
+  window.scrollTo(0,0);
+};
+document.querySelectorAll('.nav button').forEach(btn=>{
+  btn.addEventListener('click',()=>window.showPilotagePage(btn.dataset.page));
+});
+document.querySelectorAll('#periodSwitch button').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('#periodSwitch button').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+  });
+});
+function makeChart(container, series){
+  const presets={
+    affaires:{a:[641,953,1519,781,15],b:[818,1038,1559,1369,0],c:[18,46,27,1369,0],labels:['January','February','March','April','May']},
+    volume:{a:[88,94,102,110,121,128,133,141,138,145,149,153],b:[105,101,99,97,101,104,108,111,114,117,119,122],c:[84,90,93,98,100,104,109,114,117,120,124,127],labels:['J','F','M','A','M','J','J','A','S','O','N','D']},
+    rdv:{a:[58,60,66,20,1],b:[31,32,33,0,0],c:null,labels:['January','February','March','April','May']}
+  };
+  const cfg=presets[series] || presets.volume;
+  const svgNS='http://www.w3.org/2000/svg';
+  const svg=document.createElementNS(svgNS,'svg');
+  svg.setAttribute('viewBox','0 0 680 270');
+  svg.innerHTML=`<defs><linearGradient id="areaGrad2" x1="0" x2="0" y1="0" y2="1"><stop offset="0%" stop-color="#0A4E97" stop-opacity=".18"/><stop offset="100%" stop-color="#0A4E97" stop-opacity="0"/></linearGradient></defs><line class="axis-line" x1="52" y1="226" x2="650" y2="226"></line><line class="axis-line" x1="52" y1="28" x2="52" y2="226"></line>`;
+  const all=[...cfg.a,...cfg.b,...(cfg.c||[])], min=Math.min(...all), max=Math.max(...all), range=max-min||1;
+  const left=52,bottom=226,width=598,height=178;
+  function path(vals){return vals.map((v,i)=>{const x=left+(width/(vals.length-1))*i; const y=bottom-((v-min)/range)*height; return `${i?'L':'M'}${x.toFixed(1)} ${y.toFixed(1)}`}).join(' ');}
+  const area=document.createElementNS(svgNS,'path');
+  area.setAttribute('fill','url(#areaGrad2)');
+  area.setAttribute('d', path(cfg.a)+` L ${left+width} ${bottom} L ${left} ${bottom} Z`);
+  svg.appendChild(area);
+  [['line-a',cfg.a],['line-b',cfg.b],['line-c',cfg.c]].forEach(([cls,vals])=>{
+    if(!vals) return;
+    const p=document.createElementNS(svgNS,'path'); p.setAttribute('class',cls); p.setAttribute('d',path(vals)); svg.appendChild(p);
+  });
+  cfg.labels.forEach((m,i)=>{const t=document.createElementNS(svgNS,'text');t.setAttribute('x',left+(width/(cfg.labels.length-1))*i);t.setAttribute('y',248);t.setAttribute('text-anchor','middle');t.setAttribute('fill','#667085');t.setAttribute('font-size','11');t.textContent=m;svg.appendChild(t);});
+  container.innerHTML=''; container.appendChild(svg);
+}
+document.querySelectorAll('.chart').forEach(el=>makeChart(el, el.dataset.series));
+function fillAxis(id, arr){
+  const el=document.getElementById(id); if(!el) return;
+  el.innerHTML='';
+  arr.forEach((x,i)=>{
+    const b=document.createElement('button'); b.textContent=x; if(i===0) b.classList.add('active');
+    b.addEventListener('click',()=>{el.querySelectorAll('button').forEach(v=>v.classList.remove('active')); b.classList.add('active');});
+    el.appendChild(b);
+  });
+}
+fillAxis('perfAxis',['Volume d’affaires produites','Volume d’affaires en instance','Volume d’affaires commissionnées','Montant moyen de rétrocommission','Taux atteinte Budget N Volume']);
+fillAxis('affairesAxis',['Agence','Centre d’affaires','Région','Secteur','Mandataire']);
+fillAxis('networkAxis',['Région','Agence','Centre d’affaires','Raison sociale']);
+fillAxis('rdvAxis',['Type de rendez-vous','Canal de rendez-vous','Statut rendez-vous','Motif rendez-vous']);
+const agences=[
+ {id:'vasquehal',name:'Vasquehal',x:210,y:115,actifs:'2K',prod:'222',comm:'100',retro:'2,81 K€',desc:'Nombre mandataires actifs par agence.'},
+ {id:'bois',name:'Bois-Guillaume',x:185,y:160,actifs:'2K',prod:'222',comm:'100',retro:'2,81 K€',desc:'Nombre mandataires actifs par agence.'},
+ {id:'boulogne',name:'Boulogne-Billancourt',x:235,y:180,actifs:'2K',prod:'222',comm:'100',retro:'2,81 K€',desc:'Nombre mandataires actifs par agence.'},
+ {id:'colombelles',name:'Colombelles',x:148,y:200,actifs:'2K',prod:'222',comm:'100',retro:'2,81 K€',desc:'Nombre mandataires actifs par agence.'},
+ {id:'saint',name:'Saint-Grégoire',x:140,y:218,actifs:'2K',prod:'222',comm:'100',retro:'2,81 K€',desc:'Nombre mandataires actifs par agence.'},
+ {id:'ecole',name:'École-Valentin',x:300,y:245,actifs:'2K',prod:'222',comm:'100',retro:'2,81 K€',desc:'Nombre mandataires actifs par agence.'},
+ {id:'lattes',name:'Lattes',x:260,y:350,actifs:'2K',prod:'222',comm:'100',retro:'2,81 K€',desc:'Nombre mandataires actifs par agence.'}
+];
+let selectedAgence='vasquehal';
+function renderMap(){
+  const bubbleBox=document.getElementById('mapBubbles');
+  const chipBox=document.getElementById('agencyChipRow');
+  if(!bubbleBox) return;
+  bubbleBox.innerHTML=''; if(chipBox) chipBox.innerHTML='';
+  agences.forEach(r=>{
+    const g=document.createElementNS('http://www.w3.org/2000/svg','g');
+    g.setAttribute('class','bubble'+(r.id===selectedAgence?' active':''));
+    const initials=r.name.split(/[- ]/).map(s=>s[0]).join('').slice(0,3);
+    g.innerHTML=`<circle cx="${r.x}" cy="${r.y}" r="13"></circle><text x="${r.x}" y="${r.y+4}" text-anchor="middle">${initials}</text>`;
+    g.addEventListener('click',()=>{selectedAgence=r.id; renderMap(); updateAgence();});
+    bubbleBox.appendChild(g);
+    if(chipBox){
+      const chip=document.createElement('button');
+      chip.className='agency-chip'+(r.id===selectedAgence?' active':'');
+      chip.textContent=r.name;
+      chip.addEventListener('click',()=>{selectedAgence=r.id; renderMap(); updateAgence();});
+      chipBox.appendChild(chip);
+    }
+  });
+}
+function updateAgence(){
+  const r=agences.find(v=>v.id===selectedAgence); if(!r) return;
+  const ids={focusRegion:r.name, focusDesc:r.desc, selectedAgencyPill:r.name, fk1:r.actifs, fk2:r.prod, fk3:r.comm, fk4:r.retro};
+  Object.entries(ids).forEach(([id,val])=>{const el=document.getElementById(id); if(el) el.textContent=val;});
+}
+renderMap(); updateAgence();
+const toggleNetworkTable=document.getElementById('toggleNetworkTable');
+const networkTablePanel=document.getElementById('networkTablePanel');
+if(toggleNetworkTable && networkTablePanel){
+  toggleNetworkTable.addEventListener('click',()=>{
+    networkTablePanel.classList.toggle('open');
+    toggleNetworkTable.textContent = networkTablePanel.classList.contains('open') ? 'Masquer le tableau' : 'Afficher le tableau';
+  });
+}
+const moisRefAffaires = document.getElementById('moisRefAffaires');
+const moisCompAffaires = document.getElementById('moisCompAffaires');
+function cleanMonthLabel(value){ return (value || '').replace('Mois référence : ','').replace('Mois comparé : ',''); }
+function updateAffairesMonthCompare(){
+  const ref = cleanMonthLabel(moisRefAffaires?.value);
+  const comp = cleanMonthLabel(moisCompAffaires?.value);
+  const refEl = document.getElementById('moisRefValue');
+  const compEl = document.getElementById('moisCompValue');
+  const ecartEl = document.getElementById('moisEcartValue');
+  if(refEl) refEl.textContent = ref || '—';
+  if(compEl) compEl.textContent = comp || '—';
+  if(ecartEl) ecartEl.textContent = ref && comp ? `${comp} vs ${ref}` : 'À calculer';
+}
+if(moisRefAffaires) moisRefAffaires.addEventListener('change', updateAffairesMonthCompare);
+if(moisCompAffaires) moisCompAffaires.addEventListener('change', updateAffairesMonthCompare);
+updateAffairesMonthCompare();
+})();
+</script>
+
+
+<script>
+(function(){
+const rules = [{"terms": ["nombre de ventes"], "source": "Source : Excel KPI G.1 · P1 · ok dev"}, {"terms": ["nombre d’affaires produites"], "source": "Source : Excel KPI G.2 · P1 · ok dev"}, {"terms": ["nombre d'affaires produites"], "source": "Source : Excel KPI G.2 · P1 · ok dev"}, {"terms": ["volume d’affaires produites"], "source": "Source : Excel KPI G.3 · P1 · ok dev"}, {"terms": ["volume d'affaires produites"], "source": "Source : Excel KPI G.3 · P1 · ok dev"}, {"terms": ["volume d’affaires — réalisé"], "source": "Source : Excel KPI G.3 · P1 · ok dev + comparatifs période"}, {"terms": ["budget affaires en nombre"], "source": "Source : Excel KPI G.4 · P1 · Fichier Excel donc voir l'intégration. Voir Jean-Yves "}, {"terms": ["budget n volume affaires"], "source": "Source : Excel KPI G.5 · P1 · Fichier Excel donc voir l'intégration. Voir Jean-Yves "}, {"terms": ["budget n volume"], "source": "Source : Excel KPI G.5 · P1 · Fichier Excel donc voir l'intégration. Voir Jean-Yves "}, {"terms": ["taux atteinte budget n volume"], "source": "Source : Calcul à créer · Volume affaires G.3 / Budget affaires € G.5"}, {"terms": ["volume d’affaires en instance"], "source": "Source : À créer / à confirmer · non explicite dans Excel KPI"}, {"terms": ["volume d'affaires en instance"], "source": "Source : À créer / à confirmer · non explicite dans Excel KPI"}, {"terms": ["volume d’affaires commissionnées"], "source": "Source : À créer / à confirmer · non explicite dans Excel KPI"}, {"terms": ["volume d'affaires commissionnées"], "source": "Source : À créer / à confirmer · non explicite dans Excel KPI"}, {"terms": ["montant moyen de rétrocommission"], "source": "Source : À créer · dérivé rétrocommission / MIA commissionnés G.10"}, {"terms": ["répartition des affaires commissionnées"], "source": "Source : À créer · détail affaires commissionnées non explicite Excel KPI"}, {"terms": ["performance"], "source": "Source : Excel KPI G.3/G.8/G.10 · axe Organisation"}, {"terms": ["axes d’analyse affaires"], "source": "Source : Axes Excel KPI G.2/G.3"}, {"terms": ["comparaison de deux mois"], "source": "Source : Excel KPI G.2/G.3 · Date période / Field parameters"}, {"terms": ["nombre de mia oriasés"], "source": "Source : À créer · MIA ORIAS non explicite Excel KPI"}, {"terms": ["nombre de mia actifs"], "source": "Source : Excel KPI G.6 · P1 · ok dev"}, {"terms": ["mandataires actifs"], "source": "Source : Excel KPI G.6 · P1 · ok dev"}, {"terms": ["nombre de mia productifs"], "source": "Source : Excel KPI G.8 · P1 · A revoir avec Hmida"}, {"terms": ["mia productifs"], "source": "Source : Excel KPI G.8 · P1 · A revoir avec Hmida"}, {"terms": ["nombre total de mia commissionnés"], "source": "Source : Excel KPI G.10 · P1 · A revoir avec Hmida"}, {"terms": ["mandataires commissionnés"], "source": "Source : Excel KPI G.10 · P1 · A revoir avec Hmida"}, {"terms": ["répartition mia"], "source": "Source : Excel KPI G.6/G.8/G.10 + MIA ORIAS à créer"}, {"terms": ["carte de france"], "source": "Source : Excel KPI G.6/G.8/G.10 · axe Agence/Région"}, {"terms": ["petit tableau réseau"], "source": "Source : détail réseau · G.6/G.8/G.10 + rétrocommission à créer"}, {"terms": ["tableau réseau détaillé"], "source": "Source : détail réseau · G.6/G.8/G.10 + rétrocommission à créer"}, {"terms": ["répartition des rdv par csp"], "source": "Source : à créer / dimension CSP non explicite Excel KPI"}, {"terms": ["nombre rendez-vous réalisés"], "source": "Source : Excel KPI G.15 · P1 · Distinction quand prévu par le binôme --> valider la dispo de l'info"}, {"terms": ["nombre rendez-vous prévus"], "source": "Source : Excel KPI G.14 · P1 · ok dev"}, {"terms": ["nombre rdv confirmés"], "source": "Source : À créer · statut RDV confirmé non explicite Excel KPI"}, {"terms": ["taux réalisation rdv"], "source": "Source : Excel KPI G.13 · P1 · ok dev"}, {"terms": ["taux de réalisation des rendez-vous"], "source": "Source : Excel KPI G.13 · P1 · ok dev"}, {"terms": ["taux rdv visio / domicile"], "source": "Source : Excel KPI G.18/G.19"}, {"terms": ["nombre rendez-vous prévus vs réalisés"], "source": "Source : Excel KPI G.14/G.15"}, {"terms": ["répartition des rendez-vous réalisés"], "source": "Source : Excel KPI G.15 · axes type/canal/statut/motif"}, {"terms": ["détail rendez-vous"], "source": "Source : Excel KPI G.14/G.15 · détail type RDV"}, {"terms": ["nombre alertes critiques"], "source": "Source : À créer · fact_alertes + seuils Excel KPI"}, {"terms": ["nombre alertes hautes"], "source": "Source : À créer · fact_alertes + seuils Excel KPI"}, {"terms": ["nombre alertes moyennes"], "source": "Source : À créer · fact_alertes + seuils Excel KPI"}, {"terms": ["nombre alertes ouvertes"], "source": "Source : À créer · fact_alertes statut ≠ clôturé"}, {"terms": ["couleur alerte"], "source": "Source : À créer · règle couleur selon niveau_priorite"}, {"terms": ["niveaux d’alerte"], "source": "Source : seuils Excel KPI G.3/G.13/G.6"}, {"terms": ["niveau alerte volume"], "source": "Source : règle alerte sur Excel KPI G.3"}, {"terms": ["niveau alerte rdv"], "source": "Source : règle alerte sur Excel KPI G.13/G.15"}, {"terms": ["niveau alerte réseau"], "source": "Source : règle alerte sur Excel KPI G.6"}, {"terms": ["recommandation volume"], "source": "Source : logique recommandation à créer sur Excel KPI G.3"}, {"terms": ["détail alertes"], "source": "Source : À créer · table fact_alertes"}, {"terms": ["évolution du nombre d’affaires"], "source": "Source : Excel KPI G.2 + KPI à créer instance/commissionnées"}, {"terms": ["évolution du nombre d'affaires"], "source": "Source : Excel KPI G.2 + KPI à créer instance/commissionnées"}, {"terms": ["glossaire"], "source": "Source : Excel KPI G.1 à G.26"}];
+function norm(s){ return (s||'').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/[’']/g,"'").replace(/\s+/g,' ').trim(); }
+function getSource(text){
+  const n = norm(text);
+  for(const r of rules){
+    if((r.terms||[]).some(t=>n.includes(norm(t)))) return r.source;
+  }
+  return 'Source : à confirmer / non explicite dans Excel KPI';
+}
+function addBadge(el, text){
+  if(!el || el.querySelector(':scope > .source-badge')) return;
+  const b=document.createElement('div'); b.className='source-badge'; b.textContent=text; b.title=text; el.appendChild(b);
+}
+document.querySelectorAll('.card').forEach(card=>{
+  const label = card.querySelector(':scope .label')?.textContent || card.querySelector(':scope > h3')?.textContent || card.querySelector('h3')?.textContent || card.textContent.slice(0,90);
+  addBadge(card, getSource(label));
+});
+document.querySelectorAll('.title-zone').forEach(tz=>{
+  const b=document.createElement('div'); b.className='source-page-badge'; b.textContent='Sources : Maquette HTML Pilotage Commercial + Excel KPI G.1–G.26'; tz.appendChild(b);
+});
+})();
+</script>
+
+
+<script id="kpi-element-source-v3">
+(function(){
+function clean(s){return (s||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[’']/g,"'").replace(/\s+/g,' ').trim();}
+const MAP=[
+  {k:['nombre de ventes'],src:'<strong>G.1</strong> · Nombre de ventes · P1 · ok dev'},
+  {k:["nombre d'affaires produites",'nombre d’affaires produites'],src:'<strong>G.2</strong> · Nombre d’affaires produites · P1 · ok dev'},
+  {k:["volume d'affaires produites",'volume d’affaires produites','volume d’affaires','volume affaires'],src:'<strong>G.3</strong> · Volume d’affaires produites (€) · P1 · ok dev'},
+  {k:['budget affaires en nombre'],src:'<strong>G.4</strong> · Budget affaires en nombre · P1 · source Excel budget'},
+  {k:['budget affaires en euro','budget n volume affaires','budget n volume','budget affaires €'],src:'<strong>G.5</strong> · Budget affaires en euro · P1 · source Excel budget'},
+  {k:['nombre de mandataire actif','nombre de mia actifs','mandataires actifs','mia actifs'],src:'<strong>G.6</strong> · Nombre de mandataire actif · P1 · ok dev'},
+  {k:['nombre de mandataire inactif','mandataires inactifs'],src:'<strong>G.7</strong> · Nombre de mandataire inactif · P1 · ok dev'},
+  {k:['nombre de mandataire productif','nombre de mia productifs','mia productifs','nombre de mia productifs'],src:'<strong>G.8</strong> · Nombre de mandataire productif · P1 · à revoir Hmida'},
+  {k:['mandataire non productif','non productifs'],src:'<strong>G.9</strong> · Nombre de mandataire non productif · P1 · à revoir Hmida'},
+  {k:['nombre total de mia commissionnes','nombre total de mia commissionnés','mandataires commissionnes','mandataires commissionnés','mia commissionnes','mia commissionnés'],src:'<strong>G.10</strong> · Nombre de mandataire rétrocommissionné · P1 · à revoir Hmida'},
+  {k:['mandataire non retrocommissiones','non rétrocommissionnés'],src:'<strong>G.11</strong> · Nombre de mandataire non rétrocommissionné · P1'},
+  {k:['rdv hebdomadaire moyen','nombre de rdv hebdomadaire moyen'],src:'<strong>G.12</strong> · Nombre de RDV hebdomadaire moyen · P1 · ok dev'},
+  {k:['taux realisation rdv','taux de realisation des rendez-vous','taux de réalisation des rendez-vous','taux réalisation rdv'],src:'<strong>G.13</strong> · Taux de réalisation RDV · P1 · ok dev'},
+  {k:['nombre rendez-vous prevus','nombre rendez-vous prévus','rdv prevus','rdv prévus','rendez-vous prevus','rendez-vous prévus'],src:'<strong>G.14</strong> · Nombre de rendez-vous prévus · P1 · ok dev'},
+  {k:['nombre rendez-vous realises','nombre rendez-vous réalisés','rdv realises','rdv réalisés','rendez-vous realises','rendez-vous réalisés'],src:'<strong>G.15</strong> · Nombre de rendez-vous réalisés · P1 · à valider binôme'},
+  {k:['taux transformation prospects','transformation des prospects'],src:'<strong>G.16</strong> · Taux de transformation prospects · P2 · OAV'},
+  {k:['taux rendez-vous realises en visioconference','taux rdv visio','rdv visio'],src:'<strong>G.18</strong> · Taux RDV réalisés en visioconférence · P2 · OAV'},
+  {k:['taux rendez-vous faits a domicile','taux rdv domicile','rdv domicile'],src:'<strong>G.19</strong> · Taux RDV faits à domicile · P2 · OAV'},
+  {k:['nombre de rendez-vous realises en visioconference','nombre rdv visio'],src:'<strong>G.20</strong> · Nombre RDV réalisés en visio · P2 · OAV'},
+  {k:['nombre de rendez-vous faits a domicile','nombre rdv domicile'],src:'<strong>G.21</strong> · Nombre RDV faits à domicile · P2 · OAV'},
+  {k:['pourcentage du patrimoine capte','patrimoine capté'],src:'<strong>G.22</strong> · Pourcentage du patrimoine capté · P2 · OAV'},
+  {k:['patrimoine exploitable'],src:'<strong>G.23</strong> · Patrimoine exploitable · P2 · OAV'},
+  {k:['patrimoine contractualise','patrimoine contractualisé'],src:'<strong>G.24</strong> · Patrimoine contractualisé · P2 · OAV'},
+  {k:['nombre de produits detenus','produits détenus'],src:'<strong>G.25</strong> · Nombre de produits détenus par client · hors périmètre'},
+  {k:['date du dernier rdv','dernier rendez-vous'],src:'<strong>G.26</strong> · Date du dernier RDV par client · hors périmètre'},
+];
+const CREATE=[
+  {k:['volume d’affaires en instance','volume d\'affaires en instance'],src:'<strong>À créer</strong> · Volume d’affaires en instance · absent de l’Excel KPI'},
+  {k:['volume d’affaires commissionnées','volume d\'affaires commissionnées'],src:'<strong>À créer</strong> · Volume d’affaires commissionnées · absent de l’Excel KPI'},
+  {k:['montant moyen de retrocommission','montant moyen de rétrocommission','retrocommission','rétrocommission'],src:'<strong>À créer</strong> · Montant moyen rétrocommission · dérivé rétrocommission / G.10'},
+  {k:['nombre de mia oriases','nombre de mia oriasés','oriases','oriasés'],src:'<strong>À créer</strong> · MIA ORIASés · non explicite dans l’Excel KPI'},
+  {k:['nombre rdv confirmes','nombre rdv confirmés','rdv confirmes'],src:'<strong>À créer</strong> · RDV confirmés · statut RDV non explicite Excel KPI'},
+  {k:['taux atteinte budget n volume'],src:'<strong>Calcul à créer</strong> · G.3 Volume affaires / G.5 Budget affaires €'},
+  {k:['taux mandataires actifs'],src:'<strong>Calcul à créer</strong> · G.6 actifs / (G.6 actifs + G.7 inactifs)'},
+  {k:['alertes critiques','alertes hautes','alertes moyennes','alertes ouvertes','couleur alerte','detail alertes','détail alertes'],src:'<strong>À créer</strong> · fact_alertes · seuils issus G.3 / G.13 / G.6'},
+  {k:['repartition des rdv par csp','répartition des rdv par csp','csp'],src:'<strong>À créer</strong> · Dimension CSP RDV · non explicite Excel KPI'},
+  {k:['repartition des affaires commissionnees','répartition des affaires commissionnées'],src:'<strong>À créer</strong> · Affaires commissionnées par produit · absent Excel KPI'},
+  {k:['nombre affaires en instance','affaires en instance'],src:'<strong>À créer</strong> · Nombre affaires en instance · absent Excel KPI'},
+  {k:['nombre affaires commissionnees','affaires commissionnées'],src:'<strong>À créer</strong> · Nombre affaires commissionnées · absent Excel KPI'},
+];
+function srcFor(text,ctx){
+  let n=clean((ctx?ctx+' ':'')+(text||''));
+  // context-specific combined visual rules first
+  if(n.includes('niveau alerte volume')) return '<strong>Règle alerte</strong> · G.3 Volume affaires · seuils variation vs N-1';
+  if(n.includes('niveau alerte rdv')) return '<strong>Règle alerte</strong> · G.13/G.15 RDV · seuils taux réalisation';
+  if(n.includes('niveau alerte reseau')) return '<strong>Règle alerte</strong> · G.6 Mandataires actifs · seuils réseau';
+  if(n.includes('recommandation volume')) return '<strong>Règle reco</strong> · G.3 Volume affaires · variation vs N-1';
+  if(n.includes('comparaison de deux mois')) return '<strong>Analyse</strong> · G.2/G.3 + calendrier · mois ref / mois comparé';
+  if(n.includes('evolution du nombre d\'affaires')||n.includes('evolution du nombre d’affaires')) return '<strong>Visuel</strong> · G.2 + KPI à créer instance/commissionnées';
+  if(n.includes('nombre rendez-vous prevus vs realises')||n.includes('nombre rendez-vous prévus vs réalisés')) return '<strong>Visuel</strong> · G.14 RDV prévus + G.15 RDV réalisés';
+  if(n.includes('detail rendez-vous')||n.includes('détail rendez-vous')) return '<strong>Table</strong> · G.14/G.15 par type RDV';
+  if(n.includes('repartition des rendez-vous realises')||n.includes('répartition des rendez-vous réalisés')) return '<strong>Visuel</strong> · G.15 RDV réalisés · axe type/canal/statut';
+  if(n.includes('carte de france')) return '<strong>Carte</strong> · G.6/G.8/G.10 · axe agence/région';
+  if(n.includes('repartition mia')||n.includes('répartition mia')) return '<strong>Donut</strong> · G.6 actifs + G.8 productifs + G.10 commissionnés + ORIAS à créer';
+  if(n.includes('petit tableau reseau')||n.includes('tableau reseau detaille')||n.includes('tableau réseau détaillé')) return '<strong>Table réseau</strong> · G.6/G.8/G.10 + rétrocommission à créer';
+  if(n.includes('performance') && (n.includes('predictis')||n.includes('capfinances'))) return '<strong>Visuel</strong> · G.3 Volume affaires · axe organisation';
+  if(n.includes('axes d\'analyse affaires')||n.includes('axes d’analyse affaires')) return '<strong>Axe</strong> · Axes Excel G.2/G.3 · Agence/CA/Région/Secteur/Mandataire';
+  if(n.includes('budget n')) return '<strong>G.5</strong> · Budget affaires en euro · P1';
+  for(const r of CREATE){ if(r.k.some(k=>n.includes(clean(k)))) return r.src; }
+  for(const r of MAP){ if(r.k.some(k=>n.includes(clean(k)))) return r.src; }
+  return '<strong>À confirmer</strong> · KPI non explicite dans l’Excel fourni';
+}
+function stripTags(html){const d=document.createElement('div');d.innerHTML=html;return d.textContent||d.innerText||'';}
+function ensureChip(el, html, cls){
+  if(!el) return;
+  const existing=el.querySelector(':scope > .source-chip.'+(cls||'kpi-source'));
+  if(existing){ existing.innerHTML=html; return; }
+  const s=document.createElement('span'); s.className='source-chip '+(cls||'kpi-source'); s.innerHTML=html; s.title='KPI source : '+stripTags(html); el.appendChild(s);
+}
+function setBadge(card, html){
+  let b=card.querySelector(':scope > .source-badge');
+  if(!b){ b=document.createElement('div'); b.className='source-badge'; card.appendChild(b); }
+  b.innerHTML=html; b.title='KPI source : '+stripTags(html);
+}
+function heading(card){return card?.querySelector(':scope > h3')?.textContent || card?.querySelector('h3')?.textContent || card?.querySelector('.label')?.textContent || '';}
+// KPI cards and gauges
+[...document.querySelectorAll('.card')].forEach(card=>{
+  const label=card.querySelector(':scope .label')?.textContent || heading(card) || card.textContent.slice(0,80);
+  const src=srcFor(label);
+  setBadge(card,src);
+  if(card.classList.contains('kpi') || card.classList.contains('gauge-card')) ensureChip(card,src,'kpi-source');
+});
+// Budget mini gauge inside KPI card
+[...document.querySelectorAll('.budget-gauge')].forEach(g=>{
+  const parent=g.closest('.card');
+  ensureChip(g,srcFor('budget n volume affaires '+(heading(parent)||'')),'budget-source');
+});
+// List items (alertes / recommandations)
+[...document.querySelectorAll('.list-item')].forEach(item=>{
+  const ctx=heading(item.closest('.card'));
+  const t=(item.querySelector('strong')?.textContent || item.textContent || '').trim();
+  ensureChip(item,srcFor(t,ctx),'row-source');
+});
+// Bar rows. Context matters; the row label alone is sometimes a dimension.
+[...document.querySelectorAll('.bar-row')].forEach(row=>{
+  const card=row.closest('.card');
+  const ctx=heading(card);
+  const t=row.querySelector('span')?.textContent || row.textContent;
+  ensureChip(row,srcFor(t,ctx),'bar-source');
+});
+// Focus KPI boxes in map
+[...document.querySelectorAll('.focus-kpi')].forEach(box=>{
+  const t=box.querySelector('span')?.textContent || box.textContent;
+  ensureChip(box,srcFor(t,'réseau mia carte'),'focus-source');
+});
+// Chart legends: add source chips per series
+[...document.querySelectorAll('.legend span')].forEach(sp=>{
+  const ctx=heading(sp.closest('.card'));
+  ensureChip(sp,srcFor(sp.textContent,ctx),'legend-source');
+});
+// Donut legends per segment
+[...document.querySelectorAll('.donut-legend span')].forEach(sp=>{
+  const ctx=heading(sp.closest('.card'));
+  ensureChip(sp,srcFor(sp.textContent,ctx),'legend-source');
+});
+// Table rows: add source under first cell based on table context + first cell content
+[...document.querySelectorAll('table tbody tr')].forEach(tr=>{
+  const first=tr.querySelector('td:first-child'); if(!first) return;
+  if(first.querySelector('.cell-source')) return;
+  const ctx=heading(tr.closest('.card'));
+  const html=srcFor(first.textContent,ctx);
+  const div=document.createElement('div'); div.className='cell-source'; div.innerHTML=html; div.title='KPI source : '+stripTags(html); first.appendChild(div);
+});
+// Region / agency chips in map are dimension filters, not KPIs. Label as axes.
+[...document.querySelectorAll('.agency-chip')].forEach(chip=>{
+  if(!chip.querySelector('.source-chip')) ensureChip(chip,'<strong>Axe</strong> · Agence · source dimensions organisation','axis-source');
+});
+// Page-level source wording
+[...document.querySelectorAll('.source-page-badge')].forEach(b=>{b.textContent='Sources élémentaires : Excel KPI G.1–G.26 + éléments à créer signalés';});
+})();
+</script>
+
+
+<script id="excel-bim-annotations-v4-script">
+(function(){
+const rules = [{"terms": ["nombre alertes critiques"], "excel": "À créer · Alertes critiques", "model": "BIM absent · table fact_alertes à créer"}, {"terms": ["nombre alertes hautes"], "excel": "À créer · Alertes hautes", "model": "BIM absent · table fact_alertes à créer"}, {"terms": ["nombre alertes moyennes"], "excel": "À créer · Alertes moyennes", "model": "BIM absent · table fact_alertes à créer"}, {"terms": ["nombre alertes ouvertes"], "excel": "À créer · Alertes ouvertes", "model": "BIM absent · table fact_alertes à créer"}, {"terms": ["couleur alerte"], "excel": "À créer · règle couleur niveau_priorite", "model": "BIM absent · fact_alertes à créer"}, {"terms": ["niveau alerte volume"], "excel": "G.3 · seuil variation volume affaires", "model": "BIM absent · fact_affaires + alerte à créer"}, {"terms": ["niveau alerte rdv"], "excel": "G.13/G.15 · seuil taux réalisation RDV", "model": "BIM OK · _Indicateurs[Taux réalisation de rendez-vous]"}, {"terms": ["niveau alerte reseau", "niveau alerte réseau"], "excel": "G.6 · seuil taux mandataires actifs", "model": "BIM OK partiel · _Indicateurs[Nombre mandataires actifs]"}, {"terms": ["recommandation volume", "variation vs n-1 volume affaires"], "excel": "G.3 · recommandation volume", "model": "BIM absent · fact_affaires + recommandation à créer"}, {"terms": ["détail alertes", "detail alertes"], "excel": "À créer · fact_alertes", "model": "BIM absent · table fact_alertes à créer"}, {"terms": ["taux atteinte budget n volume"], "excel": "Calcul à créer · G.3/G.5", "model": "BIM absent · fact_affaires + budget_affaires à créer"}, {"terms": ["budget n volume affaires", "budget n volume", "budget affaires en euro", "budget affaires €"], "excel": "G.5 · Budget affaires en euro", "model": "BIM absent · budget_affaires à intégrer"}, {"terms": ["budget affaires en nombre"], "excel": "G.4 · Budget affaires en nombre", "model": "BIM absent · budget_affaires à intégrer"}, {"terms": ["nombre d’affaires produites", "nombre d'affaires produites"], "excel": "G.2 · Nombre affaires produites", "model": "BIM absent · fact_affaires à créer"}, {"terms": ["volume d’affaires produites", "volume d'affaires produites", "volume d’affaires — réalisé", "volume d'affaires — réalisé"], "excel": "G.3 · Volume affaires produites (€)", "model": "BIM absent · fact_affaires à créer"}, {"terms": ["volume d’affaires en instance", "volume d'affaires en instance"], "excel": "À confirmer · non explicite Excel", "model": "BIM absent · statut affaires/fact_affaires à créer"}, {"terms": ["volume d’affaires commissionnées", "volume d'affaires commissionnées"], "excel": "À confirmer · affaires commissionnées", "model": "BIM absent · fact_affaires à créer"}, {"terms": ["répartition des affaires commissionnées", "repartition des affaires commissionnees"], "excel": "À confirmer · détail affaires commissionnées", "model": "BIM absent · fact_affaires + dimension produit à créer"}, {"terms": ["montant moyen de rétrocommission", "montant moyen de retrocommission"], "excel": "Hors Excel direct · indicateur demandé maquette", "model": "BIM OK · _Indicateurs[Montant moyen de rétrocommission]"}, {"terms": ["montant rétrocommission", "montant retrocommission"], "excel": "Hors Excel direct · rétrocommission", "model": "BIM OK · _Indicateurs[Montant rétrocommission]"}, {"terms": ["comparaison de deux mois"], "excel": "G.2/G.3 · mois référence vs comparé", "model": "BIM absent · fact_affaires + Date à relier"}, {"terms": ["mois référence", "mois reference", "mois comparé", "mois compare", "écart affaires", "ecart affaires"], "excel": "G.2/G.3 · comparaison période", "model": "BIM absent · fact_affaires à créer"}, {"terms": ["évolution du nombre d’affaires", "evolution du nombre d'affaires"], "excel": "G.2 + indicateurs instance/commissionnées à confirmer", "model": "BIM absent · fact_affaires à créer"}, {"terms": ["volume d’affaires", "volume d'affaires"], "excel": "G.3 · Volume affaires produites (€)", "model": "BIM absent · fact_affaires à créer"}, {"terms": ["nombre de ventes"], "excel": "G.1 · Nombre de ventes", "model": "BIM absent · fact_ventes/fact_affaires à créer"}, {"terms": ["nombre de mia oriasés", "nombre de mia oriases"], "excel": "À confirmer · MIA ORIAS non explicite", "model": "BIM partiel · dim_mandataire[numero_orias], mesure à créer"}, {"terms": ["nombre de mia actifs", "nombre de mandataire actif", "mandataires actifs", "mia actifs"], "excel": "G.6 · Nombre mandataire actif", "model": "BIM OK · _Indicateurs[Nombre mandataires actifs]"}, {"terms": ["nombre de mandataire inactif", "mandataires inactifs"], "excel": "G.7 · Nombre mandataire inactif", "model": "BIM OK · _Indicateurs[Nombre mandataires inactifs]"}, {"terms": ["nombre de mia productifs", "nombre de mandataire productif", "mia productifs", "productifs"], "excel": "G.8 · Nombre mandataire productif", "model": "BIM absent · mesure productifs à créer"}, {"terms": ["mandataire non productif", "non productifs"], "excel": "G.9 · Nombre mandataire non productif", "model": "BIM absent · mesure non productifs à créer"}, {"terms": ["nombre total de mia commissionnés", "nombre total de mia commissionnes", "mandataires commissionnés", "mandataires commissionnes", "mia commissionnés", "mia commissionnes"], "excel": "G.10 · Mandataires rétrocommissionnés", "model": "BIM OK · _Indicateurs[Nombre mandataires rétrocommissionnés]"}, {"terms": ["mandataire non rétrocommissionné", "mandataire non retrocommissionne", "non rétrocommissionnés", "non retrocommissionnes"], "excel": "G.11 · Mandataires non rétrocommissionnés", "model": "BIM absent · mesure à créer"}, {"terms": ["flag rétro", "flag retro", "flag rétrocommissionné", "flag retrocommissionne"], "excel": "G.10/G.11 · statut rétrocommission", "model": "BIM OK · fact_rendez_vous_client[Flag rétrocommissionné]"}, {"terms": ["flag actif"], "excel": "G.6/G.7 · statut actif", "model": "BIM OK · fact_activite_mandataire[Flag mandataire actif]"}, {"terms": ["répartition mia", "repartition mia"], "excel": "G.6/G.8/G.10 + ORIAS à confirmer", "model": "BIM mixte · actifs/rétro OK, productifs/ORIAS à créer"}, {"terms": ["carte de france", "agence sélectionnée", "agence selectionnee"], "excel": "G.6/G.8/G.10 · axe agence/région", "model": "BIM partiel · dim_agence OK, productifs à créer"}, {"terms": ["nombre mandataires actifs par agence"], "excel": "G.6 · axe agence", "model": "BIM OK · dim_agence + _Indicateurs[Nombre mandataires actifs]"}, {"terms": ["petit tableau réseau", "petit tableau reseau", "tableau réseau détaillé", "tableau reseau detaille"], "excel": "G.6/G.8/G.10 + rétrocommission", "model": "BIM mixte · actifs/rétro OK, productifs à créer"}, {"terms": ["raison sociale"], "excel": "Axe organisation", "model": "BIM OK · dim_agence[raison_sociale]"}, {"terms": ["nombre de mia commissionnés", "nombre de mia commissionnes"], "excel": "G.10 · Mandataires rétrocommissionnés", "model": "BIM OK · _Indicateurs[Nombre mandataires rétrocommissionnés]"}, {"terms": ["taux mandataires actifs"], "excel": "Calcul à créer · G.6/(G.6+G.7)", "model": "BIM à créer · actifs/inactifs déjà présents"}, {"terms": ["taux rdv visio / domicile"], "excel": "G.18/G.19 · taux visio/domicile", "model": "BIM OK · taux visio + taux domicile"}, {"terms": ["taux rendez-vous réalisés en visioconférence", "taux rendez vous realises en visioconference", "taux rdv visio", "rdv visio"], "excel": "G.18 · Taux RDV réalisés en visio", "model": "BIM OK · _Indicateurs[Taux rendez vous réalisés en visioconférence]"}, {"terms": ["taux rendez-vous faits à domicile", "taux rendez-vous faits a domicile", "taux rdv domicile", "rdv domicile"], "excel": "G.19 · Taux RDV faits à domicile", "model": "BIM OK · _Indicateurs[Taux rendez-vous faits à domicile]"}, {"terms": ["nombre de rendez-vous réalisés en visioconférence", "nombre rendez-vous réalisés en visioconférence", "nombre rdv visio"], "excel": "G.20 · Nombre RDV réalisés en visio", "model": "BIM OK · _Indicateurs[Nombre rendez-vous réalisés en visioconférence]"}, {"terms": ["nombre de rendez-vous faits à domicile", "nombre rendez-vous faits à domicile", "nombre rdv domicile"], "excel": "G.21 · Nombre RDV faits à domicile", "model": "BIM OK · _Indicateurs[Nombre rendez-vous réalisés à domicile]"}, {"terms": ["taux réalisation rdv", "taux realisation rdv", "taux de réalisation des rendez-vous", "taux de realisation des rendez-vous"], "excel": "G.13 · Taux réalisation RDV", "model": "BIM OK · _Indicateurs[Taux réalisation de rendez-vous]"}, {"terms": ["nombre rendez-vous prévus vs réalisés", "nombre rendez-vous prevus vs realises"], "excel": "G.14/G.15 · RDV prévus/réalisés", "model": "BIM OK · mesures RDV prévues/réalisées"}, {"terms": ["nombre rendez-vous prévus", "nombre rendez-vous prevus", "rendez-vous prévus", "rendez-vous prevus", "rdv prévus", "rdv prevus"], "excel": "G.14 · Nombre rendez-vous prévus", "model": "BIM OK · _Indicateurs[Nombre rendez-vous prévus]"}, {"terms": ["nombre rendez-vous réalisés", "nombre rendez-vous realises", "rendez-vous réalisés", "rendez-vous realises", "rdv réalisés", "rdv realises"], "excel": "G.15 · Nombre rendez-vous réalisés", "model": "BIM OK · _Indicateurs[Nombre rendez-vous réalisés]"}, {"terms": ["nombre rdv confirmés", "nombre rdv confirmes"], "excel": "À créer · statut RDV confirmé", "model": "BIM absent direct · statut confirmé à modéliser"}, {"terms": ["répartition des rendez-vous réalisés", "repartition des rendez-vous realises"], "excel": "G.15 · RDV réalisés par type/canal/statut", "model": "BIM OK partiel · RDV réalisés + dims type/canal"}, {"terms": ["détail rendez-vous", "detail rendez-vous"], "excel": "G.14/G.15 · détail type RDV", "model": "BIM OK partiel · fact_rendez_vous_client + dim_type_rendez_vous_client"}, {"terms": ["nombre de rdv hebdomadaire moyen", "rdv hebdomadaire moyen"], "excel": "G.12 · RDV hebdomadaire moyen", "model": "BIM à créer · dérivable depuis RDV + date"}, {"terms": ["r1", "r2", "scpi"], "excel": "G.14/G.15 · RDV par type", "model": "BIM OK partiel · dim_type_rendez_vous_client"}, {"terms": ["taux de transformation des prospects", "transformation des prospects"], "excel": "G.16 · Taux transformation prospects", "model": "BIM absent direct · parcours candidat ≠ prospects OAV"}, {"terms": ["pourcentage du patrimoine capté", "patrimoine capté", "patrimoine capte"], "excel": "G.22 · Patrimoine capté", "model": "BIM absent · patrimoine OAV à intégrer"}, {"terms": ["patrimoine exploitable"], "excel": "G.23 · Patrimoine exploitable", "model": "BIM absent · patrimoine OAV à intégrer"}, {"terms": ["patrimoine contractualisé", "patrimoine contractualise"], "excel": "G.24 · Patrimoine contractualisé", "model": "BIM absent · patrimoine OAV à intégrer"}, {"terms": ["nombre de produits détenus", "nombre de produits detenus", "produits détenus"], "excel": "G.25 · Produits détenus par client", "model": "BIM absent · hors périmètre"}, {"terms": ["date du dernier rdv", "dernier rendez-vous"], "excel": "G.26 · Dernier RDV par client", "model": "BIM absent direct · hors périmètre"}, {"terms": ["glossaire"], "excel": "G.1–G.26 · définitions Excel", "model": "BIM OK · table glossaire_indicateurs"}, {"terms": ["agence", "centre d’affaires", "centre d'affaires", "région", "secteur", "mandataire"], "excel": "Axes d’analyse Excel", "model": "BIM partiel · dim_agence/dim_mandataire disponibles"}, {"terms": ["per", "ade", "immo", "prévoyance", "prevoyance"], "excel": "Axe produit/gamme à confirmer", "model": "BIM absent · dimension produit/gamme non trouvée"}, {"terms": ["répartition des rdv par csp", "repartition des rdv par csp", "csp"], "excel": "À créer · CSP non explicite Excel", "model": "BIM absent · dimension CSP non trouvée"}, {"terms": ["performance"], "excel": "G.3/G.6/G.8/G.10 selon visuel", "model": "BIM partiel · RDV/réseau OK, affaires absentes"}];
+function norm(s){return (s||'').toString().normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase().replace(/[’']/g,"'").replace(/\s+/g,' ').trim();}
+function statusClass(model){let m=norm(model); if(m.includes('bim ok')) return 'ok'; if(m.includes('partiel')||m.includes('à créer')||m.includes('a creer')) return 'warn'; return 'miss';}
+function findInfo(text){let n=norm(text); for(const r of rules){ for(const term of r.terms){ if(n.includes(norm(term))) return r; } } return null;}
+function strip(s){return (s||'').replace(/<[^>]+>/g,'');}
+function addChip(el, info, cls){ if(!el||!info||el.querySelector(':scope > .combo-chip')) return; let chip=document.createElement('span'); chip.className='combo-chip '+statusClass(info.model)+' '+(cls||''); chip.innerHTML='<span><b>Excel</b> : '+info.excel+'</span><span><em>Modèle</em> : '+info.model+'</span>'; chip.title='Excel : '+strip(info.excel)+' | Modèle : '+strip(info.model); el.appendChild(chip); }
+function textWithoutChips(el){let clone=el.cloneNode(true); clone.querySelectorAll('.source-chip,.source-badge,.combo-chip,.source-page-badge').forEach(x=>x.remove()); return clone.innerText||clone.textContent||'';}
+function annotate(){
+  document.querySelectorAll('.source-chip,.source-badge,.source-page-badge').forEach(x=>x.style.display='none');
+  // KPI cards, gauges, list elements, focus KPIs, bars
+  document.querySelectorAll('.card.kpi,.gauge-card,.list-item,.bar-row,.focus-kpi').forEach(el=>{ addChip(el, findInfo(textWithoutChips(el))); });
+  // Chart / table cards: use title first to avoid generic text collisions
+  document.querySelectorAll('.card:not(.kpi):not(.gauge-card)').forEach(card=>{
+    const title = card.querySelector('h3') ? card.querySelector('h3').innerText : textWithoutChips(card).slice(0,300);
+    let info=findInfo(title)||findInfo(textWithoutChips(card).slice(0,500));
+    addChip(card, info, 'card-level');
+  });
+  // Legends and donut legend items
+  document.querySelectorAll('.legend span,.donut-legend span').forEach(el=>{ addChip(el, findInfo(textWithoutChips(el))); });
+  // Tables: first cell per row
+  document.querySelectorAll('.table tbody tr,.mini-network-table tbody tr').forEach(tr=>{ const first=tr.querySelector('td'); if(first) addChip(first, findInfo(textWithoutChips(tr))); });
+  // Glossaire exact row matching
+  document.querySelectorAll('#glossaire .table tbody tr').forEach(tr=>{ const first=tr.querySelector('td'); if(first) addChip(first, findInfo(first.innerText)); });
+  // Agency chips / map region selected: annotate via network axis
+  document.querySelectorAll('.agency-chip').forEach(el=>{ addChip(el, {excel:'G.6/G.8/G.10 · axe agence', model:'BIM partiel · dim_agence OK, productifs à créer'}); });
+}
+setTimeout(annotate,100);
+setTimeout(annotate,500);
+setTimeout(annotate,1000);
+})();
+</script>
+
+</body>
+</html>

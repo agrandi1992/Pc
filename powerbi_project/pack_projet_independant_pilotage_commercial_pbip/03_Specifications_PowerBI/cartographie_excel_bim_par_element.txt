@@ -1,0 +1,323 @@
+Cartographie combinée Excel KPI + Modèle BIM - Pilotage Commercial
+==============================================================================
+
+Synthèse modèle BIM
+- Tables : 18
+- Mesures : 41
+- Relations : 18
+
+Mesures principales disponibles dans le BIM
+- fact_activite_mandataire[Flag mandataire actif]
+- _Indicateurs[Nombre rendez-vous prévus]
+- _Indicateurs[Nombre rendez-vous réalisés]
+- _Indicateurs[Taux réalisation de rendez-vous]
+- _Indicateurs[Nombre mandataires actifs]
+- _Indicateurs[Nombre mandataires inactifs]
+- _Indicateurs[Nombre entretiens réalisés]
+- _Indicateurs[Nombre journées découverte réalisées]
+- _Indicateurs[Nombre inscrits formation initiale]
+- _Indicateurs[Nombre mandataires ayant passé l'examen]
+- _Indicateurs[Nombre mandataires ayant réussi l'examen]
+- _Indicateurs[Année présence mandataire dans le groupe]
+- _Indicateurs[Année présence mandataire dans agence]
+- _Indicateurs[Nombre mandataires rétrocommissionnés]
+- _Indicateurs[Montant moyen de rétrocommission]
+- _Indicateurs[Moyenne Taux Réalisation de rendez-vous]
+- _Indicateurs[Ecart Taux Réalisation]
+- _Indicateurs[Couleur Ecart Taux Réalisation]
+- _Indicateurs[Moyenne année présence mandataire dans le groupe]
+- _Indicateurs[Nombre candidats]
+- _Indicateurs[Nombre candidats intégrés]
+- _Indicateurs[Taux intégration candidats]
+- _Indicateurs[Moyenne age candidats]
+- _Indicateurs[Taux de succès à l'examen (%)]
+- _Indicateurs[Nombre rendez-vous réalisés en visioconférence]
+- _Indicateurs[Nombre rendez-vous réalisés à domicile]
+- _Indicateurs[Taux rendez vous réalisés en visioconférence]
+- _Indicateurs[Taux rendez-vous faits à domicile]
+- _Indicateurs[Nombre RDV prévus (par type mandataire)]
+- _Indicateurs[Nombre RDV réalisés (par type mandataire)]
+- _Indicateurs[Taux réalisation RDV (par type mandataire)]
+- _Indicateurs[Nombre RDV prévus (agence)]
+- _Indicateurs[Nombre RDV réalisés (agence)]
+- _Indicateurs[Nombre mandataires actifs new]
+- _Indicateurs[Nombre mandataires rétrocommissionnés N-1]
+- _Indicateurs[Évolution mandataires rétro vs N-1 (%)]
+- _Indicateurs[test_Taux réalisation RDV N-1]
+- _Indicateurs[test_Evolution RDV vs N-1]
+- _Indicateurs[test_Evolution RDV affichage]
+- _Indicateurs[Montant rétrocommission]
+- fact_rendez_vous_client[Flag rétrocommissionné]
+
+Éléments annotés : Excel attendu + statut modèle existant
+------------------------------------------------------------------------------
+nombre alertes critiques
+  Excel : À créer · Alertes critiques
+  Modèle : BIM absent · table fact_alertes à créer
+
+nombre alertes hautes
+  Excel : À créer · Alertes hautes
+  Modèle : BIM absent · table fact_alertes à créer
+
+nombre alertes moyennes
+  Excel : À créer · Alertes moyennes
+  Modèle : BIM absent · table fact_alertes à créer
+
+nombre alertes ouvertes
+  Excel : À créer · Alertes ouvertes
+  Modèle : BIM absent · table fact_alertes à créer
+
+couleur alerte
+  Excel : À créer · règle couleur niveau_priorite
+  Modèle : BIM absent · fact_alertes à créer
+
+niveau alerte volume
+  Excel : G.3 · seuil variation volume affaires
+  Modèle : BIM absent · fact_affaires + alerte à créer
+
+niveau alerte rdv
+  Excel : G.13/G.15 · seuil taux réalisation RDV
+  Modèle : BIM OK · _Indicateurs[Taux réalisation de rendez-vous]
+
+niveau alerte reseau
+  Excel : G.6 · seuil taux mandataires actifs
+  Modèle : BIM OK partiel · _Indicateurs[Nombre mandataires actifs]
+
+recommandation volume
+  Excel : G.3 · recommandation volume
+  Modèle : BIM absent · fact_affaires + recommandation à créer
+
+détail alertes
+  Excel : À créer · fact_alertes
+  Modèle : BIM absent · table fact_alertes à créer
+
+taux atteinte budget n volume
+  Excel : Calcul à créer · G.3/G.5
+  Modèle : BIM absent · fact_affaires + budget_affaires à créer
+
+budget n volume affaires
+  Excel : G.5 · Budget affaires en euro
+  Modèle : BIM absent · budget_affaires à intégrer
+
+budget affaires en nombre
+  Excel : G.4 · Budget affaires en nombre
+  Modèle : BIM absent · budget_affaires à intégrer
+
+nombre d’affaires produites
+  Excel : G.2 · Nombre affaires produites
+  Modèle : BIM absent · fact_affaires à créer
+
+volume d’affaires produites
+  Excel : G.3 · Volume affaires produites (€)
+  Modèle : BIM absent · fact_affaires à créer
+
+volume d’affaires en instance
+  Excel : À confirmer · non explicite Excel
+  Modèle : BIM absent · statut affaires/fact_affaires à créer
+
+volume d’affaires commissionnées
+  Excel : À confirmer · affaires commissionnées
+  Modèle : BIM absent · fact_affaires à créer
+
+répartition des affaires commissionnées
+  Excel : À confirmer · détail affaires commissionnées
+  Modèle : BIM absent · fact_affaires + dimension produit à créer
+
+montant moyen de rétrocommission
+  Excel : Hors Excel direct · indicateur demandé maquette
+  Modèle : BIM OK · _Indicateurs[Montant moyen de rétrocommission]
+
+montant rétrocommission
+  Excel : Hors Excel direct · rétrocommission
+  Modèle : BIM OK · _Indicateurs[Montant rétrocommission]
+
+comparaison de deux mois
+  Excel : G.2/G.3 · mois référence vs comparé
+  Modèle : BIM absent · fact_affaires + Date à relier
+
+mois référence
+  Excel : G.2/G.3 · comparaison période
+  Modèle : BIM absent · fact_affaires à créer
+
+évolution du nombre d’affaires
+  Excel : G.2 + indicateurs instance/commissionnées à confirmer
+  Modèle : BIM absent · fact_affaires à créer
+
+volume d’affaires
+  Excel : G.3 · Volume affaires produites (€)
+  Modèle : BIM absent · fact_affaires à créer
+
+nombre de ventes
+  Excel : G.1 · Nombre de ventes
+  Modèle : BIM absent · fact_ventes/fact_affaires à créer
+
+nombre de mia oriasés
+  Excel : À confirmer · MIA ORIAS non explicite
+  Modèle : BIM partiel · dim_mandataire[numero_orias], mesure à créer
+
+nombre de mia actifs
+  Excel : G.6 · Nombre mandataire actif
+  Modèle : BIM OK · _Indicateurs[Nombre mandataires actifs]
+
+nombre de mandataire inactif
+  Excel : G.7 · Nombre mandataire inactif
+  Modèle : BIM OK · _Indicateurs[Nombre mandataires inactifs]
+
+nombre de mia productifs
+  Excel : G.8 · Nombre mandataire productif
+  Modèle : BIM absent · mesure productifs à créer
+
+mandataire non productif
+  Excel : G.9 · Nombre mandataire non productif
+  Modèle : BIM absent · mesure non productifs à créer
+
+nombre total de mia commissionnés
+  Excel : G.10 · Mandataires rétrocommissionnés
+  Modèle : BIM OK · _Indicateurs[Nombre mandataires rétrocommissionnés]
+
+mandataire non rétrocommissionné
+  Excel : G.11 · Mandataires non rétrocommissionnés
+  Modèle : BIM absent · mesure à créer
+
+flag rétro
+  Excel : G.10/G.11 · statut rétrocommission
+  Modèle : BIM OK · fact_rendez_vous_client[Flag rétrocommissionné]
+
+flag actif
+  Excel : G.6/G.7 · statut actif
+  Modèle : BIM OK · fact_activite_mandataire[Flag mandataire actif]
+
+répartition mia
+  Excel : G.6/G.8/G.10 + ORIAS à confirmer
+  Modèle : BIM mixte · actifs/rétro OK, productifs/ORIAS à créer
+
+carte de france
+  Excel : G.6/G.8/G.10 · axe agence/région
+  Modèle : BIM partiel · dim_agence OK, productifs à créer
+
+nombre mandataires actifs par agence
+  Excel : G.6 · axe agence
+  Modèle : BIM OK · dim_agence + _Indicateurs[Nombre mandataires actifs]
+
+petit tableau réseau
+  Excel : G.6/G.8/G.10 + rétrocommission
+  Modèle : BIM mixte · actifs/rétro OK, productifs à créer
+
+raison sociale
+  Excel : Axe organisation
+  Modèle : BIM OK · dim_agence[raison_sociale]
+
+nombre de mia commissionnés
+  Excel : G.10 · Mandataires rétrocommissionnés
+  Modèle : BIM OK · _Indicateurs[Nombre mandataires rétrocommissionnés]
+
+taux mandataires actifs
+  Excel : Calcul à créer · G.6/(G.6+G.7)
+  Modèle : BIM à créer · actifs/inactifs déjà présents
+
+taux rdv visio / domicile
+  Excel : G.18/G.19 · taux visio/domicile
+  Modèle : BIM OK · taux visio + taux domicile
+
+taux rendez-vous réalisés en visioconférence
+  Excel : G.18 · Taux RDV réalisés en visio
+  Modèle : BIM OK · _Indicateurs[Taux rendez vous réalisés en visioconférence]
+
+taux rendez-vous faits à domicile
+  Excel : G.19 · Taux RDV faits à domicile
+  Modèle : BIM OK · _Indicateurs[Taux rendez-vous faits à domicile]
+
+nombre de rendez-vous réalisés en visioconférence
+  Excel : G.20 · Nombre RDV réalisés en visio
+  Modèle : BIM OK · _Indicateurs[Nombre rendez-vous réalisés en visioconférence]
+
+nombre de rendez-vous faits à domicile
+  Excel : G.21 · Nombre RDV faits à domicile
+  Modèle : BIM OK · _Indicateurs[Nombre rendez-vous réalisés à domicile]
+
+taux réalisation rdv
+  Excel : G.13 · Taux réalisation RDV
+  Modèle : BIM OK · _Indicateurs[Taux réalisation de rendez-vous]
+
+nombre rendez-vous prévus vs réalisés
+  Excel : G.14/G.15 · RDV prévus/réalisés
+  Modèle : BIM OK · mesures RDV prévues/réalisées
+
+nombre rendez-vous prévus
+  Excel : G.14 · Nombre rendez-vous prévus
+  Modèle : BIM OK · _Indicateurs[Nombre rendez-vous prévus]
+
+nombre rendez-vous réalisés
+  Excel : G.15 · Nombre rendez-vous réalisés
+  Modèle : BIM OK · _Indicateurs[Nombre rendez-vous réalisés]
+
+nombre rdv confirmés
+  Excel : À créer · statut RDV confirmé
+  Modèle : BIM absent direct · statut confirmé à modéliser
+
+répartition des rendez-vous réalisés
+  Excel : G.15 · RDV réalisés par type/canal/statut
+  Modèle : BIM OK partiel · RDV réalisés + dims type/canal
+
+détail rendez-vous
+  Excel : G.14/G.15 · détail type RDV
+  Modèle : BIM OK partiel · fact_rendez_vous_client + dim_type_rendez_vous_client
+
+nombre de rdv hebdomadaire moyen
+  Excel : G.12 · RDV hebdomadaire moyen
+  Modèle : BIM à créer · dérivable depuis RDV + date
+
+r1
+  Excel : G.14/G.15 · RDV par type
+  Modèle : BIM OK partiel · dim_type_rendez_vous_client
+
+taux de transformation des prospects
+  Excel : G.16 · Taux transformation prospects
+  Modèle : BIM absent direct · parcours candidat ≠ prospects OAV
+
+pourcentage du patrimoine capté
+  Excel : G.22 · Patrimoine capté
+  Modèle : BIM absent · patrimoine OAV à intégrer
+
+patrimoine exploitable
+  Excel : G.23 · Patrimoine exploitable
+  Modèle : BIM absent · patrimoine OAV à intégrer
+
+patrimoine contractualisé
+  Excel : G.24 · Patrimoine contractualisé
+  Modèle : BIM absent · patrimoine OAV à intégrer
+
+nombre de produits détenus
+  Excel : G.25 · Produits détenus par client
+  Modèle : BIM absent · hors périmètre
+
+date du dernier rdv
+  Excel : G.26 · Dernier RDV par client
+  Modèle : BIM absent direct · hors périmètre
+
+glossaire
+  Excel : G.1–G.26 · définitions Excel
+  Modèle : BIM OK · table glossaire_indicateurs
+
+agence
+  Excel : Axes d’analyse Excel
+  Modèle : BIM partiel · dim_agence/dim_mandataire disponibles
+
+per
+  Excel : Axe produit/gamme à confirmer
+  Modèle : BIM absent · dimension produit/gamme non trouvée
+
+répartition des rdv par csp
+  Excel : À créer · CSP non explicite Excel
+  Modèle : BIM absent · dimension CSP non trouvée
+
+performance
+  Excel : G.3/G.6/G.8/G.10 selon visuel
+  Modèle : BIM partiel · RDV/réseau OK, affaires absentes
+
+
+Constats structurants
+- La partie RDV est largement présente dans le modèle : mesures de RDV prévus, réalisés, taux de réalisation, visio et domicile.
+- La partie réseau est partiellement présente : actifs/inactifs/rétrocommissionnés existent ; productifs, non-productifs et ORIAS sont à compléter.
+- La partie affaires/budget affaires est absente du BIM actuel : fact_affaires et budget_affaires sont à créer/intégrer pour alimenter les pages Accueil, Performance et Affaires.
+- Les alertes et recommandations nécessitent une table fact_alertes ou une couche calculée dédiée.

@@ -1,0 +1,16 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.7.0/schema.json",
+  "name": "GRP_TABLES",
+  "position": {
+    "x": 218.67,
+    "y": 694.06,
+    "z": 6,
+    "width": 1296.0,
+    "height": 245.59,
+    "tabOrder": 6
+  },
+  "visualGroup": {
+    "displayName": "TABLES",
+    "groupMode": "ScaleMode"
+  }
+}

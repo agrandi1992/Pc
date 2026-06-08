@@ -1,0 +1,108 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.7.0/schema.json",
+  "name": "NAV_BTN_ACC",
+  "position": {
+    "x": 14.93,
+    "y": 144.15,
+    "z": 15,
+    "width": 174.93,
+    "height": 46.98,
+    "tabOrder": 15
+  },
+  "parentGroupName": "GRP_NAV",
+  "visual": {
+    "visualType": "shape",
+    "objects": {
+      "line": [
+        {
+          "properties": {
+            "strokeWidth": {
+              "expr": {
+                "Literal": {
+                  "Value": "1"
+                }
+              }
+            },
+            "strokeColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#051E73'"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "selector": {
+            "id": "default"
+          }
+        }
+      ],
+      "fill": [
+        {
+          "properties": {
+            "fillColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#051E73'"
+                    }
+                  }
+                }
+              }
+            },
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "transparency": {
+              "expr": {
+                "Literal": {
+                  "Value": "0"
+                }
+              }
+            }
+          },
+          "selector": {
+            "id": "default"
+          }
+        }
+      ],
+      "action": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "actionType": {
+              "expr": {
+                "Literal": {
+                  "Value": "'PAGE_NAVIGATION'"
+                }
+              }
+            },
+            "navigationSection": {
+              "expr": {
+                "Section": {
+                  "SourceRef": {
+                    "Section": "ReportSectionACC"
+                  }
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

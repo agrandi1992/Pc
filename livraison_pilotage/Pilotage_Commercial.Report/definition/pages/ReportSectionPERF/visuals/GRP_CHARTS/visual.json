@@ -1,0 +1,16 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.7.0/schema.json",
+  "name": "GRP_CHARTS",
+  "position": {
+    "x": 218.67,
+    "y": 352.37,
+    "z": 5,
+    "width": 1296.0,
+    "height": 341.69,
+    "tabOrder": 5
+  },
+  "visualGroup": {
+    "displayName": "CHARTS",
+    "groupMode": "ScaleMode"
+  }
+}

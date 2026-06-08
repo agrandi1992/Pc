@@ -1,0 +1,8 @@
+﻿Contrôle;Statut;Commentaire
+Source PC_LOCAL_v5.zip utilisée;OK;Projet extrait depuis le pack fourni
+PBIR enhanced structure definition/;OK;Fichiers page.json et visual.json générés
+JSON syntax;OK;0 erreur(s)
+Chemins longs;OK;0 chemin(s) >260
+DAX références connues;OK;0 référence(s) invalides restantes
+Power BI Desktop opening;A_TESTER_DESKTOP;Non exécutable dans cet environnement
+KPI inventés;OK;Aucun KPI inventé, absents documentés
