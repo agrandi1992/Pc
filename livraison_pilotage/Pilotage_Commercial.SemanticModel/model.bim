@@ -371,62 +371,6 @@
                 "value": "Automatic"
               }
             ]
-          },
-          {
-            "name": "regle_calcul",
-            "dataType": "string",
-            "sourceColumn": "regle_calcul",
-            "lineageTag": "a2e3820b-ea21-49eb-9560-862690ed8298",
-            "sourceLineageTag": "regle_calcul",
-            "summarizeBy": "none",
-            "annotations": [
-              {
-                "name": "SummarizationSetBy",
-                "value": "Automatic"
-              }
-            ]
-          },
-          {
-            "name": "lecture",
-            "dataType": "string",
-            "sourceColumn": "lecture",
-            "lineageTag": "eed67f1e-d123-4de0-ab01-6f061100cdab",
-            "sourceLineageTag": "lecture",
-            "summarizeBy": "none",
-            "annotations": [
-              {
-                "name": "SummarizationSetBy",
-                "value": "Automatic"
-              }
-            ]
-          },
-          {
-            "name": "disponibilite",
-            "dataType": "string",
-            "sourceColumn": "disponibilite",
-            "lineageTag": "640dc56d-a0eb-4390-8db3-c73c3664f869",
-            "sourceLineageTag": "disponibilite",
-            "summarizeBy": "none",
-            "annotations": [
-              {
-                "name": "SummarizationSetBy",
-                "value": "Automatic"
-              }
-            ]
-          },
-          {
-            "name": "commentaire",
-            "dataType": "string",
-            "sourceColumn": "commentaire",
-            "lineageTag": "f28404de-38f0-43db-9c4b-2083e3e2d06c",
-            "sourceLineageTag": "commentaire",
-            "summarizeBy": "none",
-            "annotations": [
-              {
-                "name": "SummarizationSetBy",
-                "value": "Automatic"
-              }
-            ]
           }
         ],
         "partitions": [
@@ -1060,38 +1004,6 @@
                 "value": "Automatic"
               }
             ]
-          },
-          {
-            "type": "calculated",
-            "name": "latitude_agence_v4",
-            "dataType": "double",
-            "isDataTypeInferred": true,
-            "expression": "SWITCH(TRUE(), CONTAINSSTRING(dim_agence[raison_sociale], \"Paris\"), 48.8566, CONTAINSSTRING(dim_agence[raison_sociale], \"Lyon\"), 45.7640, CONTAINSSTRING(dim_agence[raison_sociale], \"Marseille\"), 43.2965, CONTAINSSTRING(dim_agence[raison_sociale], \"Bordeaux\"), 44.8378, CONTAINSSTRING(dim_agence[raison_sociale], \"Nantes\"), 47.2184, CONTAINSSTRING(dim_agence[raison_sociale], \"Lille\"), 50.6292, CONTAINSSTRING(dim_agence[raison_sociale], \"Toulouse\"), 43.6047, CONTAINSSTRING(dim_agence[raison_sociale], \"Strasbourg\"), 48.5734, CONTAINSSTRING(dim_agence[raison_sociale], \"Rennes\"), 48.1173, 46.6034)",
-            "formatString": "0.0000",
-            "summarizeBy": "none",
-            "lineageTag": "b2b06b02-01c5-4351-a3e3-13bccec1eda7",
-            "annotations": [
-              {
-                "name": "SummarizationSetBy",
-                "value": "Automatic"
-              }
-            ]
-          },
-          {
-            "type": "calculated",
-            "name": "longitude_agence_v4",
-            "dataType": "double",
-            "isDataTypeInferred": true,
-            "expression": "SWITCH(TRUE(), CONTAINSSTRING(dim_agence[raison_sociale], \"Paris\"), 2.3522, CONTAINSSTRING(dim_agence[raison_sociale], \"Lyon\"), 4.8357, CONTAINSSTRING(dim_agence[raison_sociale], \"Marseille\"), 5.3698, CONTAINSSTRING(dim_agence[raison_sociale], \"Bordeaux\"), -0.5792, CONTAINSSTRING(dim_agence[raison_sociale], \"Nantes\"), -1.5536, CONTAINSSTRING(dim_agence[raison_sociale], \"Lille\"), 3.0573, CONTAINSSTRING(dim_agence[raison_sociale], \"Toulouse\"), 1.4442, CONTAINSSTRING(dim_agence[raison_sociale], \"Strasbourg\"), 7.7521, CONTAINSSTRING(dim_agence[raison_sociale], \"Rennes\"), -1.6778, 2.2137)",
-            "formatString": "0.0000",
-            "summarizeBy": "none",
-            "lineageTag": "8a2145ac-0ca8-45bb-80c2-12ecf12abaca",
-            "annotations": [
-              {
-                "name": "SummarizationSetBy",
-                "value": "Automatic"
-              }
-            ]
           }
         ],
         "partitions": [
@@ -1381,7 +1293,7 @@
           },
           {
             "name": "Nombre mandataires actifs",
-            "expression": "VAR MandatairesAgence =\n    CALCULATETABLE(\n        VALUES(fact_affectation_mandataire[mandataire_id]),\n        TREATAS(VALUES(dim_agence[agence_id]), fact_affectation_mandataire[agence_id])\n    )\nRETURN\nCOALESCE(\n    CALCULATE(\n        DISTINCTCOUNT(dim_mandataire[mandataire_id]),\n        dim_mandataire[statut_mandataire] = \"Actif\",\n        TREATAS(MandatairesAgence, dim_mandataire[mandataire_id])\n    ),\n    0\n)",
+            "expression": "VAR MandatairesAgence =\n    CALCULATETABLE(\n        VALUES(fact_affectation_mandataire[mandataire_id]),\n        TREATAS(VALUES(dim_agence[agence_id]), fact_affectation_mandataire[agence_id])\n    )\nRETURN\nCOALESCE(\n    CALCULATE(\n        DISTINCTCOUNT(dim_mandataire[mandataire_id]),\n        dim_mandataire[flag_present] = TRUE(),\n        TREATAS(MandatairesAgence, dim_mandataire[mandataire_id])\n    ),\n    0\n)",
             "displayFolder": "03. Réseau MIA",
             "lineageTag": "a74c07da-3566-4e43-95a6-dbe9a4ff73fd",
             "annotations": [
@@ -1394,7 +1306,7 @@
           },
           {
             "name": "Nombre mandataires inactifs",
-            "expression": "VAR MandatairesAgence =\n    CALCULATETABLE(\n        VALUES(fact_affectation_mandataire[mandataire_id]),\n        TREATAS(VALUES(dim_agence[agence_id]), fact_affectation_mandataire[agence_id])\n    )\nRETURN\nCOALESCE(\n    CALCULATE(\n        DISTINCTCOUNT(dim_mandataire[mandataire_id]),\n        dim_mandataire[statut_mandataire] = \"Inactif\",\n        TREATAS(MandatairesAgence, dim_mandataire[mandataire_id])\n    ),\n    0\n)",
+            "expression": "VAR MandatairesAgence =\n    CALCULATETABLE(\n        VALUES(fact_affectation_mandataire[mandataire_id]),\n        TREATAS(VALUES(dim_agence[agence_id]), fact_affectation_mandataire[agence_id])\n    )\nRETURN\nCOALESCE(\n    CALCULATE(\n        DISTINCTCOUNT(dim_mandataire[mandataire_id]),\n        dim_mandataire[flag_present] = FALSE(),\n        TREATAS(MandatairesAgence, dim_mandataire[mandataire_id])\n    ),\n    0\n)",
             "formatString": "0",
             "displayFolder": "03. Réseau MIA",
             "lineageTag": "7d7cc140-2dbd-484c-a4cc-d408bf56636c"
@@ -2668,21 +2580,6 @@
                 "value": "Automatic"
               }
             ]
-          },
-          {
-            "type": "calculated",
-            "name": "rdv_modalite_v5",
-            "dataType": "string",
-            "isDataTypeInferred": true,
-            "expression": "IF ( fact_rendez_vous_client[flag_visio] = TRUE (), \"Visio\", \"Présentiel\" )",
-            "summarizeBy": "none",
-            "lineageTag": "0cfe55f1-fdf7-47f9-9f2c-0e2e051ba70f",
-            "annotations": [
-              {
-                "name": "SummarizationSetBy",
-                "value": "Automatic"
-              }
-            ]
           }
         ],
         "partitions": [
@@ -2838,26 +2735,6 @@
             "lineageTag": "flag_present",
             "summarizeBy": "none",
             "sourceColumn": "flag_present",
-            "annotations": [
-              {
-                "name": "SummarizationSetBy",
-                "value": "Automatic"
-              }
-            ]
-          },
-          {
-            "name": "statut_mandataire",
-            "dataType": "string",
-            "sourceColumn": "statut_mandataire"
-          },
-          {
-            "type": "calculated",
-            "name": "anciennete_mandataire_v5",
-            "dataType": "string",
-            "isDataTypeInferred": true,
-            "expression": "VAR d = dim_mandataire[date_passage_mia] VAR m = IF ( ISBLANK ( d ), BLANK (), DATEDIFF ( d, TODAY (), MONTH ) ) RETURN SWITCH ( TRUE (), ISBLANK ( m ), \"nd\", m < 6, \"0-6 mois\", m < 12, \"6-12 mois\", m < 24, \"12-24 mois\", \"24+ mois\" )",
-            "summarizeBy": "none",
-            "lineageTag": "0c6e805d-6f6a-45e2-9967-863ede392159",
             "annotations": [
               {
                 "name": "SummarizationSetBy",
@@ -3385,11 +3262,6 @@
                 "value": "Automatic"
               }
             ]
-          },
-          {
-            "name": "agence_id",
-            "dataType": "string",
-            "sourceColumn": "agence_id"
           }
         ],
         "partitions": [
@@ -3915,13 +3787,6 @@
         "isActive": true
       },
       {
-        "name": "fact_affaire_agence",
-        "fromTable": "fact_affaire",
-        "fromColumn": "agence_id",
-        "toTable": "dim_agence",
-        "toColumn": "agence_id"
-      },
-      {
         "name": "fact_vigilance_dossier",
         "fromTable": "fact_vigilance",
         "fromColumn": "dossier_id",
@@ -3999,25 +3864,7 @@
         "value": "1"
       }
     ],
-    "dataSources": [
-      {
-        "name": "DirectLake - lh_gold",
-        "type": "structured",
-        "connectionDetails": {
-          "protocol": "tds",
-          "address": {
-            "server": "placeholder-faw-partners.datawarehouse.fabric.microsoft.com",
-            "database": "lh_gold"
-          }
-        },
-        "options": {},
-        "credential": {
-          "AuthenticationKind": "OAuth2",
-          "kind": "OAuth2",
-          "path": "placeholder-faw-partners.datawarehouse.fabric.microsoft.com/lh_gold"
-        }
-      }
-    ]
+    "dataSources": []
   },
   "id": "602d3e8d-78fe-4f39-af9c-47b39fcb164f",
   "name": "Pilotage_Commercial",
