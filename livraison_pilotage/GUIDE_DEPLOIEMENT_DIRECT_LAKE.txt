@@ -1,0 +1,71 @@
+# DÉPLOIEMENT DIRECT LAKE — TABULAR EDITOR 3
+# Pilotage Commercial — Guide de déploiement
+
+## PRÉREQUIS
+- Tabular Editor 3 (TE3)
+- Accès workspace Fabric : faw-partners-smart-data-dev
+- Fichier : DEPLOY_TMSL_DirectLake.xmla (dans ce dossier)
+
+═══════════════════════════════════════════════════════
+## ÉTAPE 1 — Connexion XMLA dans TE3
+═══════════════════════════════════════════════════════
+
+1. Ouvrir Tabular Editor 3
+2. File > Open > Analysis Services Database...
+3. Server :  powerbi://api.powerbi.com/v1.0/myorg/faw-partners-smart-data-dev
+4. Authentication : Azure Active Directory (votre compte Microsoft Fabric)
+5. Database : Pilotage_Commercial → OK
+
+═══════════════════════════════════════════════════════
+## ÉTAPE 2 — Exécuter le TMSL (createOrReplace)
+═══════════════════════════════════════════════════════
+
+1. Dans TE3, menu : View > XMLA Query / ou Ctrl+Shift+Q
+2. Ouvrir le fichier DEPLOY_TMSL_DirectLake.xmla
+   (ou copier-coller son contenu dans la fenêtre XMLA Query)
+3. Cliquer sur ▶ Execute (ou F5)
+4. Attendre le message : "The commands completed successfully"
+
+⚠️ NE PAS utiliser "Deploy workspace database" — utiliser uniquement le XMLA Query
+
+═══════════════════════════════════════════════════════
+## ÉTAPE 3 — Lier au Lakehouse lh_gold dans Fabric
+═══════════════════════════════════════════════════════
+
+1. Ouvrir le workspace Fabric : faw-partners-smart-data-dev
+2. Cliquer sur Pilotage_Commercial (Semantic model)
+3. Settings (icône engrenage) > Data source credentials / DirectLake settings
+4. Sélectionner le Lakehouse : lh_gold
+5. Sauvegarder
+
+═══════════════════════════════════════════════════════
+## ÉTAPE 4 — Rafraîchissement
+═══════════════════════════════════════════════════════
+
+1. Dans le workspace : Pilotage_Commercial > ... > Refresh now
+2. Attendre la fin du refresh
+3. Le modèle est maintenant en mode Direct Lake ✅
+
+═══════════════════════════════════════════════════════
+## CE QUE CONTIENT LE MODÈLE DÉPLOYÉ
+═══════════════════════════════════════════════════════
+
+Tables Gold (entity/DirectLake → lh_gold) :
+  fact_affaire, fact_affectation_mandataire, fact_activite_mandataire,
+  fact_rendez_vous_client, fact_parcours_candidat, fact_vigilance,
+  dim_agence, dim_mandataire, dim_produit, dim_candidat,
+  dim_type_rendez_vous_client, dim_niveau_etude, dim_motif_depart_formation,
+  dim_charge_developpement_reseau, dim_type_canal, bridge_rendez_vous_mandataire,
+  glossaire_indicateurs, dim_charge_production, dim_compagnie,
+  dim_dossier, dim_niveau_vigilance
+
+Tables calculées DL-compatibles :
+  dim_date (CALENDAR), Mois_Reference, Mois_Compare (ADDCOLUMNS CALENDAR)
+  Periode_Affichage, dim_assureur_v5, dim_centre_affaires_v5,
+  dim_client_prospect_v5 (DATATABLE)
+  FP_Axe_Organisation, FP_Axe_Reseau, FP_Axe_RDV, FP_Periode_Date
+  (Field Parameters — SELECTCOLUMNS+NAMEOF)
+  _Indicateurs (104 mesures DAX)
+
+Relations : 24
+DataSources : 0 (correct — Fabric gère le binding)
