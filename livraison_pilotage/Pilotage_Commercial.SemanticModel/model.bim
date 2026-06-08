@@ -317,8 +317,7 @@
             "mode": "directLake",
             "source": {
               "type": "entity",
-              "entityName": "fact_affectation_mandataire",
-              "expressionSource": "EntityDataSource"
+              "entityName": "fact_affectation_mandataire"
             }
           }
         ],
@@ -434,8 +433,7 @@
             "mode": "directLake",
             "source": {
               "type": "entity",
-              "entityName": "glossaire_indicateurs",
-              "expressionSource": "EntityDataSource"
+              "entityName": "glossaire_indicateurs"
             }
           }
         ]
@@ -480,8 +478,7 @@
             "mode": "directLake",
             "source": {
               "type": "entity",
-              "entityName": "dim_type_rendez_vous_client",
-              "expressionSource": "EntityDataSource"
+              "entityName": "dim_type_rendez_vous_client"
             }
           }
         ]
@@ -540,8 +537,7 @@
             "mode": "directLake",
             "source": {
               "type": "entity",
-              "entityName": "dim_niveau_etude",
-              "expressionSource": "EntityDataSource"
+              "entityName": "dim_niveau_etude"
             }
           }
         ],
@@ -587,8 +583,7 @@
             "mode": "directLake",
             "source": {
               "type": "entity",
-              "entityName": "dim_motif_depart_formation",
-              "expressionSource": "EntityDataSource"
+              "entityName": "dim_motif_depart_formation"
             }
           }
         ],
@@ -648,8 +643,7 @@
             "mode": "directLake",
             "source": {
               "type": "entity",
-              "entityName": "dim_charge_developpement_reseau",
-              "expressionSource": "EntityDataSource"
+              "entityName": "dim_charge_developpement_reseau"
             }
           }
         ],
@@ -695,8 +689,7 @@
             "mode": "directLake",
             "source": {
               "type": "entity",
-              "entityName": "dim_type_canal",
-              "expressionSource": "EntityDataSource"
+              "entityName": "dim_type_canal"
             }
           }
         ],
@@ -957,8 +950,7 @@
             "mode": "directLake",
             "source": {
               "type": "entity",
-              "entityName": "dim_candidat",
-              "expressionSource": "EntityDataSource"
+              "entityName": "dim_candidat"
             }
           }
         ],
@@ -1092,8 +1084,7 @@
             "mode": "directLake",
             "source": {
               "type": "entity",
-              "entityName": "dim_agence",
-              "expressionSource": "EntityDataSource"
+              "entityName": "dim_agence"
             }
           }
         ],
@@ -1183,8 +1174,7 @@
             "mode": "directLake",
             "source": {
               "type": "entity",
-              "entityName": "fact_parcours_candidat",
-              "expressionSource": "EntityDataSource"
+              "entityName": "fact_parcours_candidat"
             }
           }
         ],
@@ -1260,8 +1250,7 @@
             "mode": "directLake",
             "source": {
               "type": "entity",
-              "entityName": "fact_activite_mandataire",
-              "expressionSource": "EntityDataSource"
+              "entityName": "fact_activite_mandataire"
             }
           }
         ],
@@ -2470,8 +2459,7 @@
             "mode": "directLake",
             "source": {
               "type": "entity",
-              "entityName": "bridge_rendez_vous_mandataire",
-              "expressionSource": "EntityDataSource"
+              "entityName": "bridge_rendez_vous_mandataire"
             }
           }
         ]
@@ -2679,8 +2667,7 @@
             "mode": "directLake",
             "source": {
               "type": "entity",
-              "entityName": "fact_rendez_vous_client",
-              "expressionSource": "EntityDataSource"
+              "entityName": "fact_rendez_vous_client"
             }
           }
         ],
@@ -2859,8 +2846,7 @@
             "mode": "directLake",
             "source": {
               "type": "entity",
-              "entityName": "dim_mandataire",
-              "expressionSource": "EntityDataSource"
+              "entityName": "dim_mandataire"
             }
           }
         ]
@@ -3384,8 +3370,7 @@
             "mode": "directLake",
             "source": {
               "type": "entity",
-              "entityName": "fact_affaire",
-              "expressionSource": "EntityDataSource"
+              "entityName": "fact_affaire"
             }
           }
         ]
@@ -3440,8 +3425,7 @@
             "mode": "directLake",
             "source": {
               "type": "entity",
-              "entityName": "dim_produit",
-              "expressionSource": "EntityDataSource"
+              "entityName": "dim_produit"
             }
           }
         ]
@@ -3468,8 +3452,7 @@
             "mode": "directLake",
             "source": {
               "type": "entity",
-              "entityName": "dim_charge_production",
-              "expressionSource": "EntityDataSource"
+              "entityName": "dim_charge_production"
             }
           }
         ]
@@ -3496,8 +3479,7 @@
             "mode": "directLake",
             "source": {
               "type": "entity",
-              "entityName": "dim_compagnie",
-              "expressionSource": "EntityDataSource"
+              "entityName": "dim_compagnie"
             }
           }
         ]
@@ -3542,8 +3524,7 @@
             "mode": "directLake",
             "source": {
               "type": "entity",
-              "entityName": "dim_dossier",
-              "expressionSource": "EntityDataSource"
+              "entityName": "dim_dossier"
             }
           }
         ]
@@ -3570,8 +3551,7 @@
             "mode": "directLake",
             "source": {
               "type": "entity",
-              "entityName": "dim_niveau_vigilance",
-              "expressionSource": "EntityDataSource"
+              "entityName": "dim_niveau_vigilance"
             }
           }
         ]
@@ -3623,8 +3603,7 @@
             "mode": "directLake",
             "source": {
               "type": "entity",
-              "entityName": "fact_vigilance",
-              "expressionSource": "EntityDataSource"
+              "entityName": "fact_vigilance"
             }
           }
         ]
@@ -3978,25 +3957,7 @@
         "value": "1"
       }
     ],
-    "dataSources": [
-      {
-        "name": "EntityDataSource",
-        "type": "structured",
-        "connectionDetails": {
-          "protocol": "entity",
-          "address": {
-            "server": "placeholder",
-            "database": "placeholder"
-          }
-        },
-        "options": {},
-        "credential": {
-          "AuthenticationKind": "OAuth2",
-          "kind": "OAuth2",
-          "path": "placeholder"
-        }
-      }
-    ]
+    "dataSources": []
   },
   "id": "602d3e8d-78fe-4f39-af9c-47b39fcb164f",
   "name": "Pilotage_Commercial",
