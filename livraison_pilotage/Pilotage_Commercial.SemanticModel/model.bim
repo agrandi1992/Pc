@@ -1643,6 +1643,1388 @@
         ]
       },
       {
+        "name": "bridge_rendez_vous_mandataire",
+        "lineageTag": "d4465e80-bd8d-49a3-8d48-160f9feccd52",
+        "sourceLineageTag": "[gold].[bridge_rendez_vous_mandataire]",
+        "columns": [
+          {
+            "name": "rendez_vous_id",
+            "dataType": "string",
+            "sourceColumn": "rendez_vous_id",
+            "lineageTag": "2c60ae8a-3f71-43a3-b17c-802aa3b17c0f",
+            "sourceLineageTag": "rendez_vous_id",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "mandataire_id",
+            "dataType": "string",
+            "sourceColumn": "mandataire_id",
+            "lineageTag": "737624e7-890f-4ea6-b96c-7c12d5baa7c7",
+            "sourceLineageTag": "mandataire_id",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "role_mandataire",
+            "dataType": "string",
+            "sourceColumn": "role_mandataire",
+            "lineageTag": "9f4eeab6-c20d-407e-9eb4-eda6f9191325",
+            "sourceLineageTag": "role_mandataire",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          }
+        ],
+        "partitions": [
+          {
+            "name": "bridge_rendez_vous_mandataire",
+            "mode": "directLake",
+            "source": {
+              "type": "entity",
+              "entityName": "bridge_rendez_vous_mandataire",
+              "expressionSource": "DirectLake - lh_gold",
+              "schemaName": "gold"
+            }
+          }
+        ]
+      },
+      {
+        "name": "fact_rendez_vous_client",
+        "lineageTag": "579d75cd-d76b-4b0f-a4b7-70fcab1dab4a",
+        "sourceLineageTag": "[gold].[fact_rendez_vous_client]",
+        "columns": [
+          {
+            "name": "rendez_vous_id",
+            "dataType": "string",
+            "sourceColumn": "rendez_vous_id",
+            "lineageTag": "068f2f01-4524-409e-9e4c-88c4249be3f4",
+            "sourceLineageTag": "rendez_vous_id",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "contact_id",
+            "dataType": "string",
+            "sourceColumn": "contact_id",
+            "lineageTag": "164fad46-c496-496c-8e15-bdb5df4e2b7e",
+            "sourceLineageTag": "contact_id",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "parent_rendez_vous_id",
+            "dataType": "string",
+            "sourceColumn": "parent_rendez_vous_id",
+            "lineageTag": "e4b1eaed-8873-4c5b-a5e5-92160b5cc741",
+            "sourceLineageTag": "parent_rendez_vous_id",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "type_rendez_vous_id",
+            "dataType": "string",
+            "sourceColumn": "type_rendez_vous_id",
+            "lineageTag": "952c32a3-5796-42b6-ba08-ca27990befd0",
+            "sourceLineageTag": "type_rendez_vous_id",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "date_pose_rendez_vous",
+            "dataType": "dateTime",
+            "sourceColumn": "date_pose_rendez_vous",
+            "formatString": "General Date",
+            "lineageTag": "573ea7f2-58c0-4807-8123-b94836a05eeb",
+            "sourceLineageTag": "date_pose_rendez_vous",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "date_rendez_vous_client",
+            "dataType": "dateTime",
+            "sourceColumn": "date_rendez_vous_client",
+            "formatString": "General Date",
+            "lineageTag": "03df44ed-e083-4486-bfb5-af87ea50e331",
+            "sourceLineageTag": "date_rendez_vous_client",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "flag_rendez_vous_realise",
+            "dataType": "boolean",
+            "sourceColumn": "flag_rendez_vous_realise",
+            "formatString": "\"TRUE\";\"TRUE\";\"FALSE\"",
+            "lineageTag": "f8a9c079-7a9a-48db-af1e-9b612e5bbefd",
+            "sourceLineageTag": "flag_rendez_vous_realise",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "flag_visio",
+            "dataType": "boolean",
+            "sourceColumn": "flag_visio",
+            "formatString": "\"TRUE\";\"TRUE\";\"FALSE\"",
+            "lineageTag": "59b39ad8-ac4c-4f0b-aaab-ac7ed81acfdf",
+            "sourceLineageTag": "flag_visio",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "montant_prescrit",
+            "dataType": "int64",
+            "sourceColumn": "montant_prescrit",
+            "formatString": "0",
+            "lineageTag": "30c7b9d5-9470-416d-af6e-8b2b4cd1b420",
+            "sourceLineageTag": "montant_prescrit",
+            "summarizeBy": "sum",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "montant_realise",
+            "dataType": "int64",
+            "sourceColumn": "montant_realise",
+            "formatString": "0",
+            "lineageTag": "b1985796-5698-4182-9a06-83d7a85785c2",
+            "sourceLineageTag": "montant_realise",
+            "summarizeBy": "sum",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "commission_realise",
+            "dataType": "int64",
+            "sourceColumn": "commission_realise",
+            "formatString": "0",
+            "lineageTag": "cfd8f9d7-961f-4d55-b2b0-fc349f3f2400",
+            "sourceLineageTag": "commission_realise",
+            "summarizeBy": "sum",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "nombre_mandataires_presents",
+            "dataType": "int64",
+            "sourceColumn": "nombre_mandataires_presents",
+            "formatString": "0",
+            "lineageTag": "000bb398-1453-46db-b62a-146fe3e99850",
+            "sourceLineageTag": "nombre_mandataires_presents",
+            "summarizeBy": "sum",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          }
+        ],
+        "partitions": [
+          {
+            "name": "fact_rendez_vous_client",
+            "mode": "directLake",
+            "source": {
+              "type": "entity",
+              "entityName": "fact_rendez_vous_client",
+              "expressionSource": "DirectLake - lh_gold",
+              "schemaName": "gold"
+            }
+          }
+        ],
+        "measures": [
+          {
+            "name": "Flag rétrocommissionné",
+            "expression": [
+              "",
+              "VAR DateContexteMax =",
+              "    MAX(dim_date[date])",
+              "VAR DateContexteMin =",
+              "    MIN(dim_date[date])",
+              "",
+              "VAR NbCommissions =",
+              "    CALCULATE(",
+              "        COUNTROWS(fact_rendez_vous_client),",
+              "        fact_rendez_vous_client[commission_realise] > 0,",
+              "        fact_rendez_vous_client[date_rendez_vous_client] >= DateContexteMin,",
+              "        fact_rendez_vous_client[date_rendez_vous_client] <= DateContexteMax",
+              "    )",
+              "",
+              "RETURN",
+              "IF(NbCommissions > 0, \"Rétrocommissionné\", \"Non rétrocommissionné\")"
+            ],
+            "lineageTag": "c0b3924b-c8fe-4bd2-848d-4728f657f552",
+            "changedProperties": [
+              {
+                "property": "Name"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "dim_mandataire",
+        "lineageTag": "41f506ac-1859-4c9f-ac09-1ad0c5e18331",
+        "sourceLineageTag": "[gold].[dim_mandataire]",
+        "columns": [
+          {
+            "name": "mandataire_id",
+            "dataType": "string",
+            "sourceColumn": "mandataire_id",
+            "lineageTag": "ed5f0a94-0636-4d9f-b562-f9becf5f4d16",
+            "sourceLineageTag": "mandataire_id",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "candidat_id",
+            "dataType": "string",
+            "sourceColumn": "candidat_id",
+            "lineageTag": "b59ce7c9-d80e-4876-bf65-f54bb9e8387a",
+            "sourceLineageTag": "candidat_id",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "sexe",
+            "dataType": "string",
+            "sourceColumn": "sexe",
+            "lineageTag": "8f674779-f165-4f6f-828f-a207cfdf6bbf",
+            "sourceLineageTag": "sexe",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "date_naissance",
+            "dataType": "dateTime",
+            "sourceColumn": "date_naissance",
+            "formatString": "General Date",
+            "lineageTag": "8e889093-b3f0-4fb9-9938-454b5bd8d9ea",
+            "sourceLineageTag": "date_naissance",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "date_passage_mia",
+            "dataType": "dateTime",
+            "sourceColumn": "date_passage_mia",
+            "formatString": "General Date",
+            "lineageTag": "9090c465-1aba-46e5-a4b3-7e566bec3405",
+            "sourceLineageTag": "date_passage_mia",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          }
+        ],
+        "partitions": [
+          {
+            "name": "dim_mandataire",
+            "mode": "directLake",
+            "source": {
+              "type": "entity",
+              "entityName": "dim_mandataire",
+              "expressionSource": "DirectLake - lh_gold",
+              "schemaName": "gold"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Periode_Affichage",
+        "lineageTag": "6ad5e16e-c033-46df-8dba-2f9bec559f16",
+        "columns": [
+          {
+            "type": "calculatedTableColumn",
+            "name": "Periode",
+            "dataType": "string",
+            "isNameInferred": true,
+            "isDataTypeInferred": true,
+            "sourceColumn": "[Periode]",
+            "lineageTag": "bc328f5b-6207-4e42-a4d3-be6eeea7c9ea",
+            "summarizeBy": "none"
+          },
+          {
+            "type": "calculatedTableColumn",
+            "name": "Ordre",
+            "dataType": "int64",
+            "isNameInferred": true,
+            "isDataTypeInferred": true,
+            "sourceColumn": "[Ordre]",
+            "lineageTag": "7ca8f8f0-90cc-422c-8dd2-dd46529681c0",
+            "summarizeBy": "sum"
+          }
+        ],
+        "annotations": [
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Periode_Affichage",
+            "source": {
+              "type": "calculated",
+              "expression": [
+                "DATATABLE(",
+                "    \"Periode\", STRING,",
+                "    \"Ordre\", INTEGER,",
+                "    {",
+                "        {\"Jour\", 1},",
+                "        {\"Semaine\", 2},",
+                "        {\"Mois\", 3},",
+                "        {\"Trimestre\", 4},",
+                "        {\"Ann\\u00e9e\", 5}",
+                "    }",
+                ")"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "FP_Axe_Organisation",
+        "lineageTag": "e69939a1-c666-43cd-81e6-2ee411658828",
+        "columns": [
+          {
+            "type": "calculatedTableColumn",
+            "name": "Ordre",
+            "dataType": "int64",
+            "isNameInferred": true,
+            "isDataTypeInferred": true,
+            "sourceColumn": "[Ordre]",
+            "lineageTag": "6e0ce439-d11b-4b90-976c-755c27f66d26",
+            "summarizeBy": "none"
+          },
+          {
+            "type": "calculatedTableColumn",
+            "name": "FP_Axe_Organisation",
+            "dataType": "string",
+            "isNameInferred": true,
+            "isDataTypeInferred": true,
+            "sourceColumn": "[FP_Axe_Organisation]",
+            "lineageTag": "faea1640-eebb-466a-8629-19d28c8e6f56",
+            "summarizeBy": "none"
+          },
+          {
+            "type": "calculatedTableColumn",
+            "name": "FP_Axe_Organisation Fields",
+            "dataType": "string",
+            "isNameInferred": true,
+            "isDataTypeInferred": true,
+            "sourceColumn": "[FP_Axe_Organisation Fields]",
+            "lineageTag": "06602250-4433-4c7b-b35d-5f5c53cc946d",
+            "summarizeBy": "none",
+            "dataCategory": "FieldList"
+          }
+        ],
+        "annotations": [
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          },
+          {
+            "name": "PBI_NavigationStepName",
+            "value": "Navigation"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "FP_Axe_Organisation",
+            "source": {
+              "type": "calculated",
+              "expression": [
+                "SELECTCOLUMNS(",
+                "    {",
+                "        (1, \"Agence\", NAMEOF(dim_agence[raison_sociale])),",
+                "        (2, \"Ville Agence\", NAMEOF(dim_agence[ville_agence])),",
+                "        (3, \"Mandataire\", NAMEOF(dim_mandataire[mandataire_id]))",
+                "    },",
+                "    \"Ordre\", [Value1],",
+                "    \"FP_Axe_Organisation\", [Value2],",
+                "    \"FP_Axe_Organisation Fields\", [Value3]",
+                ")"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "FP_Axe_Reseau",
+        "lineageTag": "1ed78ba3-2646-4627-8010-49e6aecbdeac",
+        "columns": [
+          {
+            "type": "calculatedTableColumn",
+            "name": "Ordre",
+            "dataType": "int64",
+            "isNameInferred": true,
+            "isDataTypeInferred": true,
+            "sourceColumn": "[Ordre]",
+            "lineageTag": "2a3da1ca-6e4f-4b6b-a12e-b282f6962840",
+            "summarizeBy": "none"
+          },
+          {
+            "type": "calculatedTableColumn",
+            "name": "FP_Axe_Reseau",
+            "dataType": "string",
+            "isNameInferred": true,
+            "isDataTypeInferred": true,
+            "sourceColumn": "[FP_Axe_Reseau]",
+            "lineageTag": "1f39d558-8b21-4a65-8a94-b0fd96a32014",
+            "summarizeBy": "none"
+          },
+          {
+            "type": "calculatedTableColumn",
+            "name": "FP_Axe_Reseau Fields",
+            "dataType": "string",
+            "isNameInferred": true,
+            "isDataTypeInferred": true,
+            "sourceColumn": "[FP_Axe_Reseau Fields]",
+            "lineageTag": "7bd34613-a371-4fc9-9186-ee45c97c7bab",
+            "summarizeBy": "none",
+            "dataCategory": "FieldList"
+          }
+        ],
+        "annotations": [
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          },
+          {
+            "name": "PBI_NavigationStepName",
+            "value": "Navigation"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "FP_Axe_Reseau",
+            "source": {
+              "type": "calculated",
+              "expression": [
+                "SELECTCOLUMNS(",
+                "    {",
+                "        (1, \"Agence\", NAMEOF(dim_agence[raison_sociale])),",
+                "        (2, \"Ville Agence\", NAMEOF(dim_agence[ville_agence])),",
+                "        (3, \"Mandataire\", NAMEOF(dim_mandataire[mandataire_id]))",
+                "    },",
+                "    \"Ordre\", [Value1],",
+                "    \"FP_Axe_Reseau\", [Value2],",
+                "    \"FP_Axe_Reseau Fields\", [Value3]",
+                ")"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "FP_Axe_RDV",
+        "lineageTag": "48c5c6de-9991-4dca-a878-a64cd60075dd",
+        "columns": [
+          {
+            "type": "calculatedTableColumn",
+            "name": "Ordre",
+            "dataType": "int64",
+            "isNameInferred": true,
+            "isDataTypeInferred": true,
+            "sourceColumn": "[Ordre]",
+            "lineageTag": "dd009cf5-ea27-4eb3-b65c-421cb9ae007f",
+            "summarizeBy": "none"
+          },
+          {
+            "type": "calculatedTableColumn",
+            "name": "FP_Axe_RDV",
+            "dataType": "string",
+            "isNameInferred": true,
+            "isDataTypeInferred": true,
+            "sourceColumn": "[FP_Axe_RDV]",
+            "lineageTag": "e8b6508c-185b-4bf5-bd4f-d689bcb7edd7",
+            "summarizeBy": "none"
+          },
+          {
+            "type": "calculatedTableColumn",
+            "name": "FP_Axe_RDV Fields",
+            "dataType": "string",
+            "isNameInferred": true,
+            "isDataTypeInferred": true,
+            "sourceColumn": "[FP_Axe_RDV Fields]",
+            "lineageTag": "f0429aa9-3cdc-4498-975d-ae1869ddd30e",
+            "summarizeBy": "none",
+            "dataCategory": "FieldList"
+          }
+        ],
+        "annotations": [
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          },
+          {
+            "name": "PBI_NavigationStepName",
+            "value": "Navigation"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "FP_Axe_RDV",
+            "source": {
+              "type": "calculated",
+              "expression": [
+                "SELECTCOLUMNS(",
+                "    {",
+                "        (1, \"Type de rendez-vous\", NAMEOF(dim_type_rendez_vous_client[libelle_type_rendez_vous])),",
+                "        (2, \"Canal\", NAMEOF(fact_rendez_vous_client[type_rendez_vous_id]))",
+                "    },",
+                "    \"Ordre\", [Value1],",
+                "    \"FP_Axe_RDV\", [Value2],",
+                "    \"FP_Axe_RDV Fields\", [Value3]",
+                ")"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "FP_Periode_Date",
+        "columns": [
+          {
+            "name": "Ordre",
+            "dataType": "int64",
+            "isHidden": true,
+            "sourceColumn": "Ordre",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "FP_Periode_Date",
+            "dataType": "string",
+            "isHidden": false,
+            "sourceColumn": "FP_Periode_Date",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "FP_Periode_Date Fields",
+            "dataType": "string",
+            "isHidden": false,
+            "sourceColumn": "FP_Periode_Date Fields",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          }
+        ],
+        "partitions": [
+          {
+            "name": "FP_Periode_Date",
+            "mode": "import",
+            "source": {
+              "type": "calculated",
+              "expression": "SELECTCOLUMNS(\n    {\n        (1, \"Jour\",       NAMEOF(dim_date[Date])),\n        (2, \"Semaine\",    NAMEOF(dim_date[numero_de_la_semaine])),\n        (3, \"Mois\",       NAMEOF(dim_date[annee_mois])),\n        (4, \"Trimestre\",  NAMEOF(dim_date[trimestre])),\n        (5, \"Année\",      NAMEOF(dim_date[annee]))\n    },\n    \"Ordre\",                 [Value1],\n    \"FP_Periode_Date\",        [Value2],\n    \"FP_Periode_Date Fields\", [Value3]\n)"
+            }
+          }
+        ],
+        "annotations": [
+          {
+            "name": "_PBI_QueryOrder",
+            "value": "[\"FP_Periode_Date\"]"
+          },
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          }
+        ]
+      },
+      {
+        "name": "Mois_Reference",
+        "lineageTag": "d4748a67-4180-4769-a195-36ef9b0a0146",
+        "columns": [
+          {
+            "name": "Date",
+            "dataType": "dateTime",
+            "summarizeBy": "none",
+            "sourceColumn": "Date",
+            "formatString": "Short Date",
+            "annotations": [
+              {
+                "name": "UnderlyingDateTimeDataType",
+                "value": "Date"
+              }
+            ]
+          },
+          {
+            "name": "Année Mois",
+            "dataType": "string",
+            "summarizeBy": "none",
+            "sourceColumn": "Année Mois"
+          },
+          {
+            "name": "Mois",
+            "dataType": "string",
+            "summarizeBy": "none",
+            "sourceColumn": "Mois"
+          }
+        ],
+        "annotations": [
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Mois_Reference",
+            "source": {
+              "type": "calculated",
+              "expression": "ADDCOLUMNS(\n    CALENDAR(DATE(2020, 1, 1), DATE(2030, 12, 31)),\n    \"Année Mois\", FORMAT([Date], \"YYYY-MM\"),\n    \"Mois\", FORMAT([Date], \"MMMM\")\n)"
+            },
+            "mode": "import"
+          }
+        ]
+      },
+      {
+        "name": "Mois_Compare",
+        "lineageTag": "aeb0f371-6f26-4e88-83ea-018b3d9e2d87",
+        "columns": [
+          {
+            "name": "Date",
+            "dataType": "dateTime",
+            "summarizeBy": "none",
+            "sourceColumn": "Date",
+            "formatString": "Short Date",
+            "annotations": [
+              {
+                "name": "UnderlyingDateTimeDataType",
+                "value": "Date"
+              }
+            ]
+          },
+          {
+            "name": "Année Mois",
+            "dataType": "string",
+            "summarizeBy": "none",
+            "sourceColumn": "Année Mois"
+          },
+          {
+            "name": "Mois",
+            "dataType": "string",
+            "summarizeBy": "none",
+            "sourceColumn": "Mois"
+          }
+        ],
+        "annotations": [
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Mois_Compare",
+            "source": {
+              "type": "calculated",
+              "expression": "ADDCOLUMNS(\n    CALENDAR(DATE(2020, 1, 1), DATE(2030, 12, 31)),\n    \"Année Mois\", FORMAT([Date], \"YYYY-MM\"),\n    \"Mois\", FORMAT([Date], \"MMMM\")\n)"
+            },
+            "mode": "import"
+          }
+        ]
+      },
+      {
+        "name": "dim_assureur_v5",
+        "columns": [
+          {
+            "name": "Assureur",
+            "dataType": "string",
+            "summarizeBy": "none",
+            "sourceColumn": "Assureur"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "dim_assureur_v5",
+            "mode": "import",
+            "source": {
+              "type": "calculated",
+              "expression": "DATATABLE(\n    \"Assureur\", STRING,\n    {\n        {\"AXA\"},\n        {\"Allianz\"},\n        {\"Generali\"},\n        {\"Cardif\"},\n        {\"Spirica\"}\n    }\n)"
+            }
+          }
+        ]
+      },
+      {
+        "name": "dim_centre_affaires_v5",
+        "columns": [
+          {
+            "name": "Centre d'affaires",
+            "dataType": "string",
+            "summarizeBy": "none",
+            "sourceColumn": "Centre d'affaires"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "dim_centre_affaires_v5",
+            "mode": "import",
+            "source": {
+              "type": "calculated",
+              "expression": "DATATABLE(\n    \"Centre d'affaires\", STRING,\n    {\n        {\"Paris\"},\n        {\"Lyon\"},\n        {\"Marseille\"},\n        {\"Bordeaux\"},\n        {\"Nantes\"}\n    }\n)"
+            }
+          }
+        ]
+      },
+      {
+        "name": "dim_client_prospect_v5",
+        "columns": [
+          {
+            "name": "Client / Prospect",
+            "dataType": "string",
+            "summarizeBy": "none",
+            "sourceColumn": "Client / Prospect"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "dim_client_prospect_v5",
+            "mode": "import",
+            "source": {
+              "type": "calculated",
+              "expression": "DATATABLE(\n    \"Client / Prospect\", STRING,\n    {\n        {\"Client\"},\n        {\"Prospect\"}\n    }\n)"
+            }
+          }
+        ]
+      },
+      {
+        "name": "fact_affaire",
+        "lineageTag": "b87f1841-abda-4ac9-ad42-d9c1068e1d43",
+        "sourceLineageTag": "[gold].[fact_affaire]",
+        "columns": [
+          {
+            "name": "affaire_id",
+            "dataType": "string",
+            "sourceColumn": "affaire_id",
+            "lineageTag": "307052c0-5231-4655-9c4a-c05d42edf02f",
+            "sourceLineageTag": "affaire_id",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "client_id",
+            "dataType": "string",
+            "sourceColumn": "client_id",
+            "lineageTag": "616095e7-0bf3-477e-b446-aa30986e9f79",
+            "sourceLineageTag": "client_id",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "contrat_id",
+            "dataType": "string",
+            "sourceColumn": "contrat_id",
+            "lineageTag": "c51d8678-08b0-41ae-b724-4ee0fb765a0e",
+            "sourceLineageTag": "contrat_id",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "produit_id",
+            "dataType": "string",
+            "sourceColumn": "produit_id",
+            "lineageTag": "2f18bf03-00c9-4bd8-a484-b7382ac7c926",
+            "sourceLineageTag": "produit_id",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "etat_affaire_id",
+            "dataType": "string",
+            "sourceColumn": "etat_affaire_id",
+            "lineageTag": "a17a5980-39ee-44ad-b6ef-d1c91cd55704",
+            "sourceLineageTag": "etat_affaire_id",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "date_saisie_administrative",
+            "dataType": "dateTime",
+            "sourceColumn": "date_saisie_administrative",
+            "lineageTag": "3db25b51-6928-4d3e-86d9-34283188e8db",
+            "sourceLineageTag": "date_saisie_administrative",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "formatString": "General Date"
+          },
+          {
+            "name": "type_affaire",
+            "dataType": "string",
+            "sourceColumn": "type_affaire",
+            "lineageTag": "8e47f0e9-109a-4ab8-8ce1-d8619832731c",
+            "sourceLineageTag": "type_affaire",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "collecte",
+            "dataType": "int64",
+            "sourceColumn": "collecte",
+            "lineageTag": "68fd9af5-0c6c-4ec9-9928-7204712b4c69",
+            "sourceLineageTag": "collecte",
+            "summarizeBy": "sum",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "formatString": "0"
+          },
+          {
+            "name": "periodicite",
+            "dataType": "string",
+            "sourceColumn": "periodicite",
+            "lineageTag": "7640d079-d486-4775-af40-739afca65bc9",
+            "sourceLineageTag": "periodicite",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "chiffre_affaires",
+            "dataType": "int64",
+            "sourceColumn": "chiffre_affaires",
+            "lineageTag": "b5f3247e-7301-490e-b6fa-190d245675d2",
+            "sourceLineageTag": "chiffre_affaires",
+            "summarizeBy": "sum",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "formatString": "0"
+          },
+          {
+            "name": "flag_pu",
+            "dataType": "int64",
+            "sourceColumn": "flag_pu",
+            "lineageTag": "12fcdd17-b029-4af3-b79b-8ce39fe68414",
+            "sourceLineageTag": "flag_pu",
+            "summarizeBy": "sum",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "formatString": "0"
+          },
+          {
+            "name": "flag_cross_selling",
+            "dataType": "boolean",
+            "sourceColumn": "flag_cross_selling",
+            "lineageTag": "4c666bdb-7e30-46d8-a744-b731ebd2d9d0",
+            "sourceLineageTag": "flag_cross_selling",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "formatString": "\"TRUE\";\"TRUE\";\"FALSE\""
+          }
+        ],
+        "partitions": [
+          {
+            "name": "fact_affaire",
+            "mode": "directLake",
+            "source": {
+              "type": "entity",
+              "entityName": "fact_affaire",
+              "expressionSource": "DirectLake - lh_gold",
+              "schemaName": "gold"
+            }
+          }
+        ]
+      },
+      {
+        "name": "dim_produit",
+        "lineageTag": "5b80804e-b2dd-46a3-8603-4748a6f018d3",
+        "sourceLineageTag": "[gold].[dim_produit]",
+        "columns": [
+          {
+            "name": "produit_id",
+            "dataType": "string",
+            "sourceColumn": "produit_id",
+            "lineageTag": "f3718ba5-5e13-495a-8c7e-37e9295bb06d",
+            "sourceLineageTag": "produit_id",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "libelle_produit",
+            "dataType": "string",
+            "sourceColumn": "libelle_produit",
+            "lineageTag": "f611d8c7-ae5f-4c2b-a52f-a9abb0d0c066",
+            "sourceLineageTag": "libelle_produit",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "libelle_gamme_produit",
+            "dataType": "string",
+            "sourceColumn": "libelle_gamme_produit",
+            "lineageTag": "d908d851-c788-4b00-a0b0-e40d59e36d4d",
+            "sourceLineageTag": "libelle_gamme_produit",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          }
+        ],
+        "partitions": [
+          {
+            "name": "dim_produit",
+            "mode": "directLake",
+            "source": {
+              "type": "entity",
+              "entityName": "dim_produit",
+              "expressionSource": "DirectLake - lh_gold",
+              "schemaName": "gold"
+            }
+          }
+        ]
+      },
+      {
+        "name": "dim_compagnie",
+        "lineageTag": "8082ed71-a5eb-49b2-bb3e-da683f7dfc3c",
+        "sourceLineageTag": "[gold].[dim_compagnie]",
+        "columns": [
+          {
+            "name": "compagnie_id",
+            "dataType": "string",
+            "sourceColumn": "compagnie_id",
+            "lineageTag": "6fbedcd2-10ef-4c4c-bb58-556ca328e1c0",
+            "sourceLineageTag": "compagnie_id",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "libelle_compagnie",
+            "dataType": "string",
+            "sourceColumn": "libelle_compagnie",
+            "lineageTag": "4de6c4df-0c82-41f0-aedf-27c2d1468e8a",
+            "sourceLineageTag": "libelle_compagnie",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          }
+        ],
+        "partitions": [
+          {
+            "name": "dim_compagnie",
+            "mode": "directLake",
+            "source": {
+              "type": "entity",
+              "entityName": "dim_compagnie",
+              "expressionSource": "DirectLake - lh_gold",
+              "schemaName": "gold"
+            }
+          }
+        ]
+      },
+      {
+        "name": "dim_dossier",
+        "lineageTag": "b2833613-ca9d-4afe-ae4b-183e39eb69e4",
+        "sourceLineageTag": "[gold].[dim_dossier]",
+        "columns": [
+          {
+            "name": "dossier_id",
+            "dataType": "string",
+            "sourceColumn": "dossier_id",
+            "lineageTag": "88177c53-7524-42d1-b0ca-4e4eb39f2cce",
+            "sourceLineageTag": "dossier_id",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "date_signature",
+            "dataType": "dateTime",
+            "sourceColumn": "date_signature",
+            "lineageTag": "728e0cbc-5f9d-423e-847d-e3bf94832ceb",
+            "sourceLineageTag": "date_signature",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "formatString": "General Date"
+          },
+          {
+            "name": "etat_du_dossier",
+            "dataType": "string",
+            "sourceColumn": "etat_du_dossier",
+            "lineageTag": "d3b21503-f596-4411-8035-fea299cba434",
+            "sourceLineageTag": "etat_du_dossier",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "date_debut_traitement",
+            "dataType": "dateTime",
+            "sourceColumn": "date_debut_traitement",
+            "lineageTag": "0af4af67-3941-4648-8196-c00488e22490",
+            "sourceLineageTag": "date_debut_traitement",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "formatString": "General Date"
+          },
+          {
+            "name": "date_fin_traitement",
+            "dataType": "dateTime",
+            "sourceColumn": "date_fin_traitement",
+            "lineageTag": "cfeea72e-302a-4825-aea9-932dd530cd2b",
+            "sourceLineageTag": "date_fin_traitement",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "formatString": "General Date"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "dim_dossier",
+            "mode": "directLake",
+            "source": {
+              "type": "entity",
+              "entityName": "dim_dossier",
+              "expressionSource": "DirectLake - lh_gold",
+              "schemaName": "gold"
+            }
+          }
+        ]
+      },
+      {
+        "name": "dim_niveau_vigilance",
+        "lineageTag": "3a38b175-fd33-4e68-859d-d4c598ab0eb6",
+        "sourceLineageTag": "[gold].[dim_niveau_vigilance]",
+        "columns": [
+          {
+            "name": "niveau_vigilance_id",
+            "dataType": "string",
+            "sourceColumn": "niveau_vigilance_id",
+            "lineageTag": "83a6ec8f-a21b-463f-a365-15178bfc03da",
+            "sourceLineageTag": "niveau_vigilance_id",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "libelle_niveau_vigilance",
+            "dataType": "string",
+            "sourceColumn": "libelle_niveau_vigilance",
+            "lineageTag": "b7848066-4a2c-418d-9960-738b2fdb9c13",
+            "sourceLineageTag": "libelle_niveau_vigilance",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          }
+        ],
+        "partitions": [
+          {
+            "name": "dim_niveau_vigilance",
+            "mode": "directLake",
+            "source": {
+              "type": "entity",
+              "entityName": "dim_niveau_vigilance",
+              "expressionSource": "DirectLake - lh_gold",
+              "schemaName": "gold"
+            }
+          }
+        ]
+      },
+      {
+        "name": "fact_vigilance",
+        "lineageTag": "875e1897-a84e-4577-8569-8e61dcf9f32d",
+        "sourceLineageTag": "[gold].[fact_vigilance]",
+        "columns": [
+          {
+            "name": "dossier_id",
+            "dataType": "string",
+            "sourceColumn": "dossier_id",
+            "lineageTag": "2bf50181-a000-4b7e-b4eb-55269d5b1207",
+            "sourceLineageTag": "dossier_id",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "client_id",
+            "dataType": "string",
+            "sourceColumn": "client_id",
+            "lineageTag": "50e66486-3181-40c9-aa40-03bb011e7dfa",
+            "sourceLineageTag": "client_id",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "date_id",
+            "dataType": "dateTime",
+            "sourceColumn": "date_id",
+            "lineageTag": "1cd02109-1603-445b-9b8e-bad1bf4532dc",
+            "sourceLineageTag": "date_id",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "formatString": "General Date"
+          },
+          {
+            "name": "niveau_vigilance_id",
+            "dataType": "string",
+            "sourceColumn": "niveau_vigilance_id",
+            "lineageTag": "7b4f587f-a000-4a0e-b044-66d156cffe60",
+            "sourceLineageTag": "niveau_vigilance_id",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "mandataire_id",
+            "dataType": "string",
+            "sourceColumn": "mandataire_id",
+            "lineageTag": "e80da433-94ef-4eee-9131-6939b449136f",
+            "sourceLineageTag": "mandataire_id",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "delai_pris_en_charge",
+            "dataType": "int64",
+            "sourceColumn": "delai_pris_en_charge",
+            "lineageTag": "eca32a14-93a2-4904-a763-2c753b35c309",
+            "sourceLineageTag": "delai_pris_en_charge",
+            "summarizeBy": "sum",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "formatString": "0"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "fact_vigilance",
+            "mode": "directLake",
+            "source": {
+              "type": "entity",
+              "entityName": "fact_vigilance",
+              "expressionSource": "DirectLake - lh_gold",
+              "schemaName": "gold"
+            }
+          }
+        ]
+      },
+      {
         "name": "_Indicateurs",
         "lineageTag": "aceac64d-589e-41ce-841d-56e859ed91f2",
         "columns": [
@@ -2788,1268 +4170,28 @@
         ]
       },
       {
-        "name": "bridge_rendez_vous_mandataire",
-        "lineageTag": "d4465e80-bd8d-49a3-8d48-160f9feccd52",
-        "sourceLineageTag": "[gold].[bridge_rendez_vous_mandataire]",
+        "name": "dim_charge_production",
         "columns": [
           {
-            "name": "rendez_vous_id",
+            "name": "charge_production_id",
             "dataType": "string",
-            "sourceColumn": "rendez_vous_id",
-            "lineageTag": "2c60ae8a-3f71-43a3-b17c-802aa3b17c0f",
-            "sourceLineageTag": "rendez_vous_id",
-            "summarizeBy": "none",
-            "annotations": [
-              {
-                "name": "SummarizationSetBy",
-                "value": "Automatic"
-              }
-            ]
+            "sourceColumn": "charge_production_id"
           },
           {
-            "name": "mandataire_id",
+            "name": "nom_charge_production",
             "dataType": "string",
-            "sourceColumn": "mandataire_id",
-            "lineageTag": "737624e7-890f-4ea6-b96c-7c12d5baa7c7",
-            "sourceLineageTag": "mandataire_id",
-            "summarizeBy": "none",
-            "annotations": [
-              {
-                "name": "SummarizationSetBy",
-                "value": "Automatic"
-              }
-            ]
-          },
-          {
-            "name": "role_mandataire",
-            "dataType": "string",
-            "sourceColumn": "role_mandataire",
-            "lineageTag": "9f4eeab6-c20d-407e-9eb4-eda6f9191325",
-            "sourceLineageTag": "role_mandataire",
-            "summarizeBy": "none",
-            "annotations": [
-              {
-                "name": "SummarizationSetBy",
-                "value": "Automatic"
-              }
-            ]
+            "sourceColumn": "nom_charge_production"
           }
         ],
         "partitions": [
           {
-            "name": "bridge_rendez_vous_mandataire",
+            "name": "dim_charge_production",
             "mode": "directLake",
             "source": {
               "type": "entity",
-              "entityName": "bridge_rendez_vous_mandataire",
+              "entityName": "dim_charge_production",
               "expressionSource": "DirectLake - lh_gold",
               "schemaName": "gold"
-            }
-          }
-        ]
-      },
-      {
-        "name": "fact_rendez_vous_client",
-        "lineageTag": "579d75cd-d76b-4b0f-a4b7-70fcab1dab4a",
-        "sourceLineageTag": "[gold].[fact_rendez_vous_client]",
-        "columns": [
-          {
-            "name": "rendez_vous_id",
-            "dataType": "string",
-            "sourceColumn": "rendez_vous_id",
-            "lineageTag": "068f2f01-4524-409e-9e4c-88c4249be3f4",
-            "sourceLineageTag": "rendez_vous_id",
-            "summarizeBy": "none",
-            "annotations": [
-              {
-                "name": "SummarizationSetBy",
-                "value": "Automatic"
-              }
-            ]
-          },
-          {
-            "name": "contact_id",
-            "dataType": "string",
-            "sourceColumn": "contact_id",
-            "lineageTag": "164fad46-c496-496c-8e15-bdb5df4e2b7e",
-            "sourceLineageTag": "contact_id",
-            "summarizeBy": "none",
-            "annotations": [
-              {
-                "name": "SummarizationSetBy",
-                "value": "Automatic"
-              }
-            ]
-          },
-          {
-            "name": "parent_rendez_vous_id",
-            "dataType": "string",
-            "sourceColumn": "parent_rendez_vous_id",
-            "lineageTag": "e4b1eaed-8873-4c5b-a5e5-92160b5cc741",
-            "sourceLineageTag": "parent_rendez_vous_id",
-            "summarizeBy": "none",
-            "annotations": [
-              {
-                "name": "SummarizationSetBy",
-                "value": "Automatic"
-              }
-            ]
-          },
-          {
-            "name": "type_rendez_vous_id",
-            "dataType": "string",
-            "sourceColumn": "type_rendez_vous_id",
-            "lineageTag": "952c32a3-5796-42b6-ba08-ca27990befd0",
-            "sourceLineageTag": "type_rendez_vous_id",
-            "summarizeBy": "none",
-            "annotations": [
-              {
-                "name": "SummarizationSetBy",
-                "value": "Automatic"
-              }
-            ]
-          },
-          {
-            "name": "date_pose_rendez_vous",
-            "dataType": "dateTime",
-            "sourceColumn": "date_pose_rendez_vous",
-            "formatString": "General Date",
-            "lineageTag": "573ea7f2-58c0-4807-8123-b94836a05eeb",
-            "sourceLineageTag": "date_pose_rendez_vous",
-            "summarizeBy": "none",
-            "annotations": [
-              {
-                "name": "SummarizationSetBy",
-                "value": "Automatic"
-              }
-            ]
-          },
-          {
-            "name": "date_rendez_vous_client",
-            "dataType": "dateTime",
-            "sourceColumn": "date_rendez_vous_client",
-            "formatString": "General Date",
-            "lineageTag": "03df44ed-e083-4486-bfb5-af87ea50e331",
-            "sourceLineageTag": "date_rendez_vous_client",
-            "summarizeBy": "none",
-            "annotations": [
-              {
-                "name": "SummarizationSetBy",
-                "value": "Automatic"
-              }
-            ]
-          },
-          {
-            "name": "flag_rendez_vous_realise",
-            "dataType": "boolean",
-            "sourceColumn": "flag_rendez_vous_realise",
-            "formatString": "\"TRUE\";\"TRUE\";\"FALSE\"",
-            "lineageTag": "f8a9c079-7a9a-48db-af1e-9b612e5bbefd",
-            "sourceLineageTag": "flag_rendez_vous_realise",
-            "summarizeBy": "none",
-            "annotations": [
-              {
-                "name": "SummarizationSetBy",
-                "value": "Automatic"
-              }
-            ]
-          },
-          {
-            "name": "flag_visio",
-            "dataType": "boolean",
-            "sourceColumn": "flag_visio",
-            "formatString": "\"TRUE\";\"TRUE\";\"FALSE\"",
-            "lineageTag": "59b39ad8-ac4c-4f0b-aaab-ac7ed81acfdf",
-            "sourceLineageTag": "flag_visio",
-            "summarizeBy": "none",
-            "annotations": [
-              {
-                "name": "SummarizationSetBy",
-                "value": "Automatic"
-              }
-            ]
-          },
-          {
-            "name": "montant_prescrit",
-            "dataType": "int64",
-            "sourceColumn": "montant_prescrit",
-            "formatString": "0",
-            "lineageTag": "30c7b9d5-9470-416d-af6e-8b2b4cd1b420",
-            "sourceLineageTag": "montant_prescrit",
-            "summarizeBy": "sum",
-            "annotations": [
-              {
-                "name": "SummarizationSetBy",
-                "value": "Automatic"
-              }
-            ]
-          },
-          {
-            "name": "montant_realise",
-            "dataType": "int64",
-            "sourceColumn": "montant_realise",
-            "formatString": "0",
-            "lineageTag": "b1985796-5698-4182-9a06-83d7a85785c2",
-            "sourceLineageTag": "montant_realise",
-            "summarizeBy": "sum",
-            "annotations": [
-              {
-                "name": "SummarizationSetBy",
-                "value": "Automatic"
-              }
-            ]
-          },
-          {
-            "name": "commission_realise",
-            "dataType": "int64",
-            "sourceColumn": "commission_realise",
-            "formatString": "0",
-            "lineageTag": "cfd8f9d7-961f-4d55-b2b0-fc349f3f2400",
-            "sourceLineageTag": "commission_realise",
-            "summarizeBy": "sum",
-            "annotations": [
-              {
-                "name": "SummarizationSetBy",
-                "value": "Automatic"
-              }
-            ]
-          },
-          {
-            "name": "nombre_mandataires_presents",
-            "dataType": "int64",
-            "sourceColumn": "nombre_mandataires_presents",
-            "formatString": "0",
-            "lineageTag": "000bb398-1453-46db-b62a-146fe3e99850",
-            "sourceLineageTag": "nombre_mandataires_presents",
-            "summarizeBy": "sum",
-            "annotations": [
-              {
-                "name": "SummarizationSetBy",
-                "value": "Automatic"
-              }
-            ]
-          }
-        ],
-        "partitions": [
-          {
-            "name": "fact_rendez_vous_client",
-            "mode": "directLake",
-            "source": {
-              "type": "entity",
-              "entityName": "fact_rendez_vous_client",
-              "expressionSource": "DirectLake - lh_gold",
-              "schemaName": "gold"
-            }
-          }
-        ],
-        "measures": [
-          {
-            "name": "Flag rétrocommissionné",
-            "expression": [
-              "",
-              "VAR DateContexteMax =",
-              "    MAX(dim_date[date])",
-              "VAR DateContexteMin =",
-              "    MIN(dim_date[date])",
-              "",
-              "VAR NbCommissions =",
-              "    CALCULATE(",
-              "        COUNTROWS(fact_rendez_vous_client),",
-              "        fact_rendez_vous_client[commission_realise] > 0,",
-              "        fact_rendez_vous_client[date_rendez_vous_client] >= DateContexteMin,",
-              "        fact_rendez_vous_client[date_rendez_vous_client] <= DateContexteMax",
-              "    )",
-              "",
-              "RETURN",
-              "IF(NbCommissions > 0, \"Rétrocommissionné\", \"Non rétrocommissionné\")"
-            ],
-            "lineageTag": "c0b3924b-c8fe-4bd2-848d-4728f657f552",
-            "changedProperties": [
-              {
-                "property": "Name"
-              }
-            ]
-          }
-        ]
-      },
-      {
-        "name": "dim_mandataire",
-        "lineageTag": "41f506ac-1859-4c9f-ac09-1ad0c5e18331",
-        "sourceLineageTag": "[gold].[dim_mandataire]",
-        "columns": [
-          {
-            "name": "mandataire_id",
-            "dataType": "string",
-            "sourceColumn": "mandataire_id",
-            "lineageTag": "ed5f0a94-0636-4d9f-b562-f9becf5f4d16",
-            "sourceLineageTag": "mandataire_id",
-            "summarizeBy": "none",
-            "annotations": [
-              {
-                "name": "SummarizationSetBy",
-                "value": "Automatic"
-              }
-            ]
-          },
-          {
-            "name": "candidat_id",
-            "dataType": "string",
-            "sourceColumn": "candidat_id",
-            "lineageTag": "b59ce7c9-d80e-4876-bf65-f54bb9e8387a",
-            "sourceLineageTag": "candidat_id",
-            "summarizeBy": "none",
-            "annotations": [
-              {
-                "name": "SummarizationSetBy",
-                "value": "Automatic"
-              }
-            ]
-          },
-          {
-            "name": "sexe",
-            "dataType": "string",
-            "sourceColumn": "sexe",
-            "lineageTag": "8f674779-f165-4f6f-828f-a207cfdf6bbf",
-            "sourceLineageTag": "sexe",
-            "summarizeBy": "none",
-            "annotations": [
-              {
-                "name": "SummarizationSetBy",
-                "value": "Automatic"
-              }
-            ]
-          },
-          {
-            "name": "date_naissance",
-            "dataType": "dateTime",
-            "sourceColumn": "date_naissance",
-            "formatString": "General Date",
-            "lineageTag": "8e889093-b3f0-4fb9-9938-454b5bd8d9ea",
-            "sourceLineageTag": "date_naissance",
-            "summarizeBy": "none",
-            "annotations": [
-              {
-                "name": "SummarizationSetBy",
-                "value": "Automatic"
-              }
-            ]
-          },
-          {
-            "name": "date_passage_mia",
-            "dataType": "dateTime",
-            "sourceColumn": "date_passage_mia",
-            "formatString": "General Date",
-            "lineageTag": "9090c465-1aba-46e5-a4b3-7e566bec3405",
-            "sourceLineageTag": "date_passage_mia",
-            "summarizeBy": "none",
-            "annotations": [
-              {
-                "name": "SummarizationSetBy",
-                "value": "Automatic"
-              }
-            ]
-          },
-          {
-            "name": "nom_mandataire",
-            "dataType": "string",
-            "lineageTag": "nom_mandataire",
-            "summarizeBy": "none",
-            "sourceColumn": "nom_mandataire",
-            "annotations": [
-              {
-                "name": "SummarizationSetBy",
-                "value": "Automatic"
-              }
-            ]
-          },
-          {
-            "name": "prenom_mandataire",
-            "dataType": "string",
-            "lineageTag": "prenom_mandataire",
-            "summarizeBy": "none",
-            "sourceColumn": "prenom_mandataire",
-            "annotations": [
-              {
-                "name": "SummarizationSetBy",
-                "value": "Automatic"
-              }
-            ]
-          },
-          {
-            "name": "flag_present",
-            "dataType": "boolean",
-            "lineageTag": "flag_present",
-            "summarizeBy": "none",
-            "sourceColumn": "flag_present",
-            "annotations": [
-              {
-                "name": "SummarizationSetBy",
-                "value": "Automatic"
-              }
-            ]
-          }
-        ],
-        "partitions": [
-          {
-            "name": "dim_mandataire",
-            "mode": "directLake",
-            "source": {
-              "type": "entity",
-              "entityName": "dim_mandataire",
-              "expressionSource": "DirectLake - lh_gold",
-              "schemaName": "gold"
-            }
-          }
-        ]
-      },
-      {
-        "name": "Periode_Affichage",
-        "lineageTag": "6ad5e16e-c033-46df-8dba-2f9bec559f16",
-        "columns": [
-          {
-            "type": "calculatedTableColumn",
-            "name": "Periode",
-            "dataType": "string",
-            "isNameInferred": true,
-            "isDataTypeInferred": true,
-            "sourceColumn": "[Periode]",
-            "lineageTag": "bc328f5b-6207-4e42-a4d3-be6eeea7c9ea",
-            "summarizeBy": "none"
-          },
-          {
-            "type": "calculatedTableColumn",
-            "name": "Ordre",
-            "dataType": "int64",
-            "isNameInferred": true,
-            "isDataTypeInferred": true,
-            "sourceColumn": "[Ordre]",
-            "lineageTag": "7ca8f8f0-90cc-422c-8dd2-dd46529681c0",
-            "summarizeBy": "sum"
-          }
-        ],
-        "annotations": [
-          {
-            "name": "PBI_ResultType",
-            "value": "Table"
-          }
-        ],
-        "partitions": [
-          {
-            "name": "Periode_Affichage",
-            "source": {
-              "type": "calculated",
-              "expression": [
-                "DATATABLE(",
-                "    \"Periode\", STRING,",
-                "    \"Ordre\", INTEGER,",
-                "    {",
-                "        {\"Jour\", 1},",
-                "        {\"Semaine\", 2},",
-                "        {\"Mois\", 3},",
-                "        {\"Trimestre\", 4},",
-                "        {\"Ann\\u00e9e\", 5}",
-                "    }",
-                ")"
-              ]
-            }
-          }
-        ]
-      },
-      {
-        "name": "FP_Axe_Organisation",
-        "lineageTag": "e69939a1-c666-43cd-81e6-2ee411658828",
-        "columns": [
-          {
-            "type": "calculatedTableColumn",
-            "name": "Ordre",
-            "dataType": "int64",
-            "isNameInferred": true,
-            "isDataTypeInferred": true,
-            "sourceColumn": "[Ordre]",
-            "lineageTag": "6e0ce439-d11b-4b90-976c-755c27f66d26",
-            "summarizeBy": "none"
-          },
-          {
-            "type": "calculatedTableColumn",
-            "name": "FP_Axe_Organisation",
-            "dataType": "string",
-            "isNameInferred": true,
-            "isDataTypeInferred": true,
-            "sourceColumn": "[FP_Axe_Organisation]",
-            "lineageTag": "faea1640-eebb-466a-8629-19d28c8e6f56",
-            "summarizeBy": "none"
-          },
-          {
-            "type": "calculatedTableColumn",
-            "name": "FP_Axe_Organisation Fields",
-            "dataType": "string",
-            "isNameInferred": true,
-            "isDataTypeInferred": true,
-            "sourceColumn": "[FP_Axe_Organisation Fields]",
-            "lineageTag": "06602250-4433-4c7b-b35d-5f5c53cc946d",
-            "summarizeBy": "none",
-            "dataCategory": "FieldList"
-          }
-        ],
-        "annotations": [
-          {
-            "name": "PBI_ResultType",
-            "value": "Table"
-          },
-          {
-            "name": "PBI_NavigationStepName",
-            "value": "Navigation"
-          }
-        ],
-        "partitions": [
-          {
-            "name": "FP_Axe_Organisation",
-            "source": {
-              "type": "calculated",
-              "expression": [
-                "SELECTCOLUMNS(",
-                "    {",
-                "        (1, \"Agence\", NAMEOF(dim_agence[raison_sociale])),",
-                "        (2, \"Ville Agence\", NAMEOF(dim_agence[ville_agence])),",
-                "        (3, \"Mandataire\", NAMEOF(dim_mandataire[mandataire_id]))",
-                "    },",
-                "    \"Ordre\", [Value1],",
-                "    \"FP_Axe_Organisation\", [Value2],",
-                "    \"FP_Axe_Organisation Fields\", [Value3]",
-                ")"
-              ]
-            }
-          }
-        ]
-      },
-      {
-        "name": "FP_Axe_Reseau",
-        "lineageTag": "1ed78ba3-2646-4627-8010-49e6aecbdeac",
-        "columns": [
-          {
-            "type": "calculatedTableColumn",
-            "name": "Ordre",
-            "dataType": "int64",
-            "isNameInferred": true,
-            "isDataTypeInferred": true,
-            "sourceColumn": "[Ordre]",
-            "lineageTag": "2a3da1ca-6e4f-4b6b-a12e-b282f6962840",
-            "summarizeBy": "none"
-          },
-          {
-            "type": "calculatedTableColumn",
-            "name": "FP_Axe_Reseau",
-            "dataType": "string",
-            "isNameInferred": true,
-            "isDataTypeInferred": true,
-            "sourceColumn": "[FP_Axe_Reseau]",
-            "lineageTag": "1f39d558-8b21-4a65-8a94-b0fd96a32014",
-            "summarizeBy": "none"
-          },
-          {
-            "type": "calculatedTableColumn",
-            "name": "FP_Axe_Reseau Fields",
-            "dataType": "string",
-            "isNameInferred": true,
-            "isDataTypeInferred": true,
-            "sourceColumn": "[FP_Axe_Reseau Fields]",
-            "lineageTag": "7bd34613-a371-4fc9-9186-ee45c97c7bab",
-            "summarizeBy": "none",
-            "dataCategory": "FieldList"
-          }
-        ],
-        "annotations": [
-          {
-            "name": "PBI_ResultType",
-            "value": "Table"
-          },
-          {
-            "name": "PBI_NavigationStepName",
-            "value": "Navigation"
-          }
-        ],
-        "partitions": [
-          {
-            "name": "FP_Axe_Reseau",
-            "source": {
-              "type": "calculated",
-              "expression": [
-                "SELECTCOLUMNS(",
-                "    {",
-                "        (1, \"Agence\", NAMEOF(dim_agence[raison_sociale])),",
-                "        (2, \"Ville Agence\", NAMEOF(dim_agence[ville_agence])),",
-                "        (3, \"Mandataire\", NAMEOF(dim_mandataire[mandataire_id]))",
-                "    },",
-                "    \"Ordre\", [Value1],",
-                "    \"FP_Axe_Reseau\", [Value2],",
-                "    \"FP_Axe_Reseau Fields\", [Value3]",
-                ")"
-              ]
-            }
-          }
-        ]
-      },
-      {
-        "name": "FP_Axe_RDV",
-        "lineageTag": "48c5c6de-9991-4dca-a878-a64cd60075dd",
-        "columns": [
-          {
-            "type": "calculatedTableColumn",
-            "name": "Ordre",
-            "dataType": "int64",
-            "isNameInferred": true,
-            "isDataTypeInferred": true,
-            "sourceColumn": "[Ordre]",
-            "lineageTag": "dd009cf5-ea27-4eb3-b65c-421cb9ae007f",
-            "summarizeBy": "none"
-          },
-          {
-            "type": "calculatedTableColumn",
-            "name": "FP_Axe_RDV",
-            "dataType": "string",
-            "isNameInferred": true,
-            "isDataTypeInferred": true,
-            "sourceColumn": "[FP_Axe_RDV]",
-            "lineageTag": "e8b6508c-185b-4bf5-bd4f-d689bcb7edd7",
-            "summarizeBy": "none"
-          },
-          {
-            "type": "calculatedTableColumn",
-            "name": "FP_Axe_RDV Fields",
-            "dataType": "string",
-            "isNameInferred": true,
-            "isDataTypeInferred": true,
-            "sourceColumn": "[FP_Axe_RDV Fields]",
-            "lineageTag": "f0429aa9-3cdc-4498-975d-ae1869ddd30e",
-            "summarizeBy": "none",
-            "dataCategory": "FieldList"
-          }
-        ],
-        "annotations": [
-          {
-            "name": "PBI_ResultType",
-            "value": "Table"
-          },
-          {
-            "name": "PBI_NavigationStepName",
-            "value": "Navigation"
-          }
-        ],
-        "partitions": [
-          {
-            "name": "FP_Axe_RDV",
-            "source": {
-              "type": "calculated",
-              "expression": [
-                "SELECTCOLUMNS(",
-                "    {",
-                "        (1, \"Type de rendez-vous\", NAMEOF(dim_type_rendez_vous_client[libelle_type_rendez_vous])),",
-                "        (2, \"Canal\", NAMEOF(fact_rendez_vous_client[type_rendez_vous_id]))",
-                "    },",
-                "    \"Ordre\", [Value1],",
-                "    \"FP_Axe_RDV\", [Value2],",
-                "    \"FP_Axe_RDV Fields\", [Value3]",
-                ")"
-              ]
-            }
-          }
-        ]
-      },
-      {
-        "name": "FP_Periode_Date",
-        "columns": [
-          {
-            "name": "Ordre",
-            "dataType": "int64",
-            "isHidden": true,
-            "sourceColumn": "Ordre",
-            "summarizeBy": "none"
-          },
-          {
-            "name": "FP_Periode_Date",
-            "dataType": "string",
-            "isHidden": false,
-            "sourceColumn": "FP_Periode_Date",
-            "summarizeBy": "none"
-          },
-          {
-            "name": "FP_Periode_Date Fields",
-            "dataType": "string",
-            "isHidden": false,
-            "sourceColumn": "FP_Periode_Date Fields",
-            "summarizeBy": "none",
-            "annotations": [
-              {
-                "name": "SummarizationSetBy",
-                "value": "Automatic"
-              }
-            ]
-          }
-        ],
-        "partitions": [
-          {
-            "name": "FP_Periode_Date",
-            "mode": "import",
-            "source": {
-              "type": "calculated",
-              "expression": "SELECTCOLUMNS(\n    {\n        (1, \"Jour\",       NAMEOF(dim_date[Date])),\n        (2, \"Semaine\",    NAMEOF(dim_date[numero_de_la_semaine])),\n        (3, \"Mois\",       NAMEOF(dim_date[annee_mois])),\n        (4, \"Trimestre\",  NAMEOF(dim_date[trimestre])),\n        (5, \"Année\",      NAMEOF(dim_date[annee]))\n    },\n    \"Ordre\",                 [Value1],\n    \"FP_Periode_Date\",        [Value2],\n    \"FP_Periode_Date Fields\", [Value3]\n)"
-            }
-          }
-        ],
-        "annotations": [
-          {
-            "name": "_PBI_QueryOrder",
-            "value": "[\"FP_Periode_Date\"]"
-          },
-          {
-            "name": "PBI_ResultType",
-            "value": "Table"
-          }
-        ]
-      },
-      {
-        "name": "Mois_Reference",
-        "lineageTag": "d4748a67-4180-4769-a195-36ef9b0a0146",
-        "columns": [
-          {
-            "name": "Date",
-            "dataType": "dateTime",
-            "summarizeBy": "none",
-            "sourceColumn": "Date",
-            "formatString": "Short Date",
-            "annotations": [
-              {
-                "name": "UnderlyingDateTimeDataType",
-                "value": "Date"
-              }
-            ]
-          },
-          {
-            "name": "Année Mois",
-            "dataType": "string",
-            "summarizeBy": "none",
-            "sourceColumn": "Année Mois"
-          },
-          {
-            "name": "Mois",
-            "dataType": "string",
-            "summarizeBy": "none",
-            "sourceColumn": "Mois"
-          }
-        ],
-        "annotations": [
-          {
-            "name": "PBI_ResultType",
-            "value": "Table"
-          }
-        ],
-        "partitions": [
-          {
-            "name": "Mois_Reference",
-            "source": {
-              "type": "calculated",
-              "expression": "ADDCOLUMNS(\n    CALENDAR(DATE(2020, 1, 1), DATE(2030, 12, 31)),\n    \"Année Mois\", FORMAT([Date], \"YYYY-MM\"),\n    \"Mois\", FORMAT([Date], \"MMMM\")\n)"
-            },
-            "mode": "import"
-          }
-        ]
-      },
-      {
-        "name": "Mois_Compare",
-        "lineageTag": "aeb0f371-6f26-4e88-83ea-018b3d9e2d87",
-        "columns": [
-          {
-            "name": "Date",
-            "dataType": "dateTime",
-            "summarizeBy": "none",
-            "sourceColumn": "Date",
-            "formatString": "Short Date",
-            "annotations": [
-              {
-                "name": "UnderlyingDateTimeDataType",
-                "value": "Date"
-              }
-            ]
-          },
-          {
-            "name": "Année Mois",
-            "dataType": "string",
-            "summarizeBy": "none",
-            "sourceColumn": "Année Mois"
-          },
-          {
-            "name": "Mois",
-            "dataType": "string",
-            "summarizeBy": "none",
-            "sourceColumn": "Mois"
-          }
-        ],
-        "annotations": [
-          {
-            "name": "PBI_ResultType",
-            "value": "Table"
-          }
-        ],
-        "partitions": [
-          {
-            "name": "Mois_Compare",
-            "source": {
-              "type": "calculated",
-              "expression": "ADDCOLUMNS(\n    CALENDAR(DATE(2020, 1, 1), DATE(2030, 12, 31)),\n    \"Année Mois\", FORMAT([Date], \"YYYY-MM\"),\n    \"Mois\", FORMAT([Date], \"MMMM\")\n)"
-            },
-            "mode": "import"
-          }
-        ]
-      },
-      {
-        "name": "dim_assureur_v5",
-        "columns": [
-          {
-            "name": "Assureur",
-            "dataType": "string",
-            "summarizeBy": "none",
-            "sourceColumn": "Assureur"
-          }
-        ],
-        "partitions": [
-          {
-            "name": "dim_assureur_v5",
-            "mode": "import",
-            "source": {
-              "type": "calculated",
-              "expression": "DATATABLE(\n    \"Assureur\", STRING,\n    {\n        {\"AXA\"},\n        {\"Allianz\"},\n        {\"Generali\"},\n        {\"Cardif\"},\n        {\"Spirica\"}\n    }\n)"
-            }
-          }
-        ]
-      },
-      {
-        "name": "dim_centre_affaires_v5",
-        "columns": [
-          {
-            "name": "Centre d'affaires",
-            "dataType": "string",
-            "summarizeBy": "none",
-            "sourceColumn": "Centre d'affaires"
-          }
-        ],
-        "partitions": [
-          {
-            "name": "dim_centre_affaires_v5",
-            "mode": "import",
-            "source": {
-              "type": "calculated",
-              "expression": "DATATABLE(\n    \"Centre d'affaires\", STRING,\n    {\n        {\"Paris\"},\n        {\"Lyon\"},\n        {\"Marseille\"},\n        {\"Bordeaux\"},\n        {\"Nantes\"}\n    }\n)"
-            }
-          }
-        ]
-      },
-      {
-        "name": "dim_client_prospect_v5",
-        "columns": [
-          {
-            "name": "Client / Prospect",
-            "dataType": "string",
-            "summarizeBy": "none",
-            "sourceColumn": "Client / Prospect"
-          }
-        ],
-        "partitions": [
-          {
-            "name": "dim_client_prospect_v5",
-            "mode": "import",
-            "source": {
-              "type": "calculated",
-              "expression": "DATATABLE(\n    \"Client / Prospect\", STRING,\n    {\n        {\"Client\"},\n        {\"Prospect\"}\n    }\n)"
-            }
-          }
-        ]
-      },
-      {
-        "name": "fact_affaire",
-        "lineageTag": "fact_affaire",
-        "columns": [
-          {
-            "name": "affaire_id",
-            "dataType": "string",
-            "lineageTag": "affaire_id",
-            "summarizeBy": "none",
-            "sourceColumn": "affaire_id",
-            "annotations": [
-              {
-                "name": "SummarizationSetBy",
-                "value": "Automatic"
-              }
-            ]
-          },
-          {
-            "name": "client_id",
-            "dataType": "string",
-            "lineageTag": "client_id",
-            "summarizeBy": "none",
-            "sourceColumn": "client_id",
-            "annotations": [
-              {
-                "name": "SummarizationSetBy",
-                "value": "Automatic"
-              }
-            ]
-          },
-          {
-            "name": "contrat_id",
-            "dataType": "string",
-            "lineageTag": "contrat_id",
-            "summarizeBy": "none",
-            "sourceColumn": "contrat_id",
-            "annotations": [
-              {
-                "name": "SummarizationSetBy",
-                "value": "Automatic"
-              }
-            ]
-          },
-          {
-            "name": "produit_id",
-            "dataType": "string",
-            "lineageTag": "produit_id",
-            "summarizeBy": "none",
-            "sourceColumn": "produit_id",
-            "annotations": [
-              {
-                "name": "SummarizationSetBy",
-                "value": "Automatic"
-              }
-            ]
-          },
-          {
-            "name": "etat_affaire_id",
-            "dataType": "string",
-            "lineageTag": "etat_affaire_id",
-            "summarizeBy": "none",
-            "sourceColumn": "etat_affaire_id",
-            "annotations": [
-              {
-                "name": "SummarizationSetBy",
-                "value": "Automatic"
-              }
-            ]
-          },
-          {
-            "name": "date_saisie_administrative",
-            "dataType": "dateTime",
-            "lineageTag": "date_saisie_administrative",
-            "summarizeBy": "none",
-            "sourceColumn": "date_saisie_administrative",
-            "annotations": [
-              {
-                "name": "SummarizationSetBy",
-                "value": "Automatic"
-              }
-            ]
-          },
-          {
-            "name": "type_affaire",
-            "dataType": "string",
-            "lineageTag": "type_affaire",
-            "summarizeBy": "none",
-            "sourceColumn": "type_affaire",
-            "annotations": [
-              {
-                "name": "SummarizationSetBy",
-                "value": "Automatic"
-              }
-            ]
-          },
-          {
-            "name": "collecte",
-            "dataType": "int64",
-            "lineageTag": "collecte",
-            "summarizeBy": "none",
-            "sourceColumn": "collecte",
-            "annotations": [
-              {
-                "name": "SummarizationSetBy",
-                "value": "Automatic"
-              }
-            ]
-          },
-          {
-            "name": "periodicite",
-            "dataType": "string",
-            "lineageTag": "periodicite",
-            "summarizeBy": "none",
-            "sourceColumn": "periodicite",
-            "annotations": [
-              {
-                "name": "SummarizationSetBy",
-                "value": "Automatic"
-              }
-            ]
-          },
-          {
-            "name": "chiffre_affaires",
-            "dataType": "int64",
-            "lineageTag": "chiffre_affaires",
-            "summarizeBy": "none",
-            "sourceColumn": "chiffre_affaires",
-            "annotations": [
-              {
-                "name": "SummarizationSetBy",
-                "value": "Automatic"
-              }
-            ]
-          },
-          {
-            "name": "flag_pu",
-            "dataType": "int64",
-            "lineageTag": "flag_pu",
-            "summarizeBy": "none",
-            "sourceColumn": "flag_pu",
-            "annotations": [
-              {
-                "name": "SummarizationSetBy",
-                "value": "Automatic"
-              }
-            ]
-          },
-          {
-            "name": "flag_cross_selling",
-            "dataType": "boolean",
-            "lineageTag": "flag_cross_selling",
-            "summarizeBy": "none",
-            "sourceColumn": "flag_cross_selling",
-            "annotations": [
-              {
-                "name": "SummarizationSetBy",
-                "value": "Automatic"
-              }
-            ]
-          }
-        ],
-        "partitions": [
-          {
-            "name": "fact_affaire",
-            "mode": "directLake",
-            "source": {
-              "type": "entity",
-              "entityName": "fact_affaire",
-              "schemaName": "gold",
-              "expressionSource": "DirectLake - lh_gold"
-            }
-          }
-        ]
-      },
-      {
-        "name": "dim_produit",
-        "lineageTag": "dim_produit",
-        "columns": [
-          {
-            "name": "produit_id",
-            "dataType": "string",
-            "lineageTag": "produit_id",
-            "summarizeBy": "none",
-            "sourceColumn": "produit_id",
-            "annotations": [
-              {
-                "name": "SummarizationSetBy",
-                "value": "Automatic"
-              }
-            ]
-          },
-          {
-            "name": "libelle_produit",
-            "dataType": "string",
-            "lineageTag": "libelle_produit",
-            "summarizeBy": "none",
-            "sourceColumn": "libelle_produit",
-            "annotations": [
-              {
-                "name": "SummarizationSetBy",
-                "value": "Automatic"
-              }
-            ]
-          },
-          {
-            "name": "libelle_gamme_produit",
-            "dataType": "string",
-            "lineageTag": "libelle_gamme_produit",
-            "summarizeBy": "none",
-            "sourceColumn": "libelle_gamme_produit",
-            "annotations": [
-              {
-                "name": "SummarizationSetBy",
-                "value": "Automatic"
-              }
-            ]
-          }
-        ],
-        "partitions": [
-          {
-            "name": "dim_produit",
-            "mode": "directLake",
-            "source": {
-              "type": "entity",
-              "entityName": "dim_produit",
-              "schemaName": "gold",
-              "expressionSource": "DirectLake - lh_gold"
-            }
-          }
-        ]
-      },
-      {
-        "name": "dim_compagnie",
-        "columns": [
-          {
-            "name": "compagnie_id",
-            "dataType": "string",
-            "summarizeBy": "none",
-            "sourceColumn": "compagnie_id"
-          },
-          {
-            "name": "libelle_compagnie",
-            "dataType": "string",
-            "summarizeBy": "none",
-            "sourceColumn": "libelle_compagnie"
-          }
-        ],
-        "partitions": [
-          {
-            "name": "dim_compagnie",
-            "mode": "directLake",
-            "source": {
-              "type": "entity",
-              "entityName": "dim_compagnie",
-              "schemaName": "gold",
-              "expressionSource": "DirectLake - lh_gold"
-            }
-          }
-        ]
-      },
-      {
-        "name": "dim_dossier",
-        "columns": [
-          {
-            "name": "dossier_id",
-            "dataType": "string",
-            "summarizeBy": "none",
-            "sourceColumn": "dossier_id"
-          },
-          {
-            "name": "date_signature",
-            "dataType": "dateTime",
-            "summarizeBy": "none",
-            "sourceColumn": "date_signature"
-          },
-          {
-            "name": "etat_du_dossier",
-            "dataType": "string",
-            "summarizeBy": "none",
-            "sourceColumn": "etat_du_dossier"
-          },
-          {
-            "name": "date_debut_traitement",
-            "dataType": "dateTime",
-            "summarizeBy": "none",
-            "sourceColumn": "date_debut_traitement"
-          },
-          {
-            "name": "date_fin_traitement",
-            "dataType": "dateTime",
-            "summarizeBy": "none",
-            "sourceColumn": "date_fin_traitement"
-          }
-        ],
-        "partitions": [
-          {
-            "name": "dim_dossier",
-            "mode": "directLake",
-            "source": {
-              "type": "entity",
-              "entityName": "dim_dossier",
-              "schemaName": "gold",
-              "expressionSource": "DirectLake - lh_gold"
-            }
-          }
-        ]
-      },
-      {
-        "name": "dim_niveau_vigilance",
-        "columns": [
-          {
-            "name": "niveau_vigilance_id",
-            "dataType": "string",
-            "summarizeBy": "none",
-            "sourceColumn": "niveau_vigilance_id"
-          },
-          {
-            "name": "libelle_niveau_vigilance",
-            "dataType": "string",
-            "summarizeBy": "none",
-            "sourceColumn": "libelle_niveau_vigilance"
-          }
-        ],
-        "partitions": [
-          {
-            "name": "dim_niveau_vigilance",
-            "mode": "directLake",
-            "source": {
-              "type": "entity",
-              "entityName": "dim_niveau_vigilance",
-              "schemaName": "gold",
-              "expressionSource": "DirectLake - lh_gold"
-            }
-          }
-        ]
-      },
-      {
-        "name": "fact_vigilance",
-        "columns": [
-          {
-            "name": "dossier_id",
-            "dataType": "string",
-            "summarizeBy": "none",
-            "sourceColumn": "dossier_id"
-          },
-          {
-            "name": "client_id",
-            "dataType": "string",
-            "summarizeBy": "none",
-            "sourceColumn": "client_id"
-          },
-          {
-            "name": "date_id",
-            "dataType": "dateTime",
-            "summarizeBy": "none",
-            "sourceColumn": "date_id"
-          },
-          {
-            "name": "niveau_vigilance_id",
-            "dataType": "string",
-            "summarizeBy": "none",
-            "sourceColumn": "niveau_vigilance_id"
-          },
-          {
-            "name": "mandataire_id",
-            "dataType": "string",
-            "summarizeBy": "none",
-            "sourceColumn": "mandataire_id"
-          },
-          {
-            "name": "delai_pris_en_charge",
-            "dataType": "int64",
-            "summarizeBy": "none",
-            "sourceColumn": "delai_pris_en_charge",
-            "formatString": "#,##0"
-          }
-        ],
-        "partitions": [
-          {
-            "name": "fact_vigilance",
-            "mode": "directLake",
-            "source": {
-              "type": "entity",
-              "entityName": "fact_vigilance",
-              "schemaName": "gold",
-              "expressionSource": "DirectLake - lh_gold"
             }
           }
         ]
@@ -4185,46 +4327,42 @@
         "toColumn": "mandataire_id"
       },
       {
-        "name": "9930fd1f-2c18-434f-be55-d7cf9822b956",
+        "name": "b69e1122-3ce6-47b6-9db3-24fa2f5e033e",
         "fromTable": "fact_affaire",
         "fromColumn": "date_saisie_administrative",
         "toTable": "dim_date",
         "toColumn": "Date"
       },
       {
-        "name": "57c445ec-1b83-43ef-8d11-1cb9626d4f2c",
+        "name": "52666fa2-4558-422a-b44a-bb96bf871210",
         "fromTable": "fact_affaire",
         "fromColumn": "produit_id",
         "toTable": "dim_produit",
-        "toColumn": "produit_id",
-        "relyOnReferentialIntegrity": true
+        "toColumn": "produit_id"
       },
       {
-        "name": "37497232-b5ba-4226-994d-1b72f98f4a90",
+        "name": "af42ac0b-894f-4daa-b661-e37f89a0161f",
         "fromTable": "fact_vigilance",
         "fromColumn": "dossier_id",
         "toTable": "dim_dossier",
-        "toColumn": "dossier_id",
-        "relyOnReferentialIntegrity": true
+        "toColumn": "dossier_id"
       },
       {
-        "name": "64e8454b-669a-45a4-82b9-1fa2314743c2",
+        "name": "7e85af38-2863-45a0-bc9b-32937fdbab53",
         "fromTable": "fact_vigilance",
         "fromColumn": "niveau_vigilance_id",
         "toTable": "dim_niveau_vigilance",
-        "toColumn": "niveau_vigilance_id",
-        "relyOnReferentialIntegrity": true
+        "toColumn": "niveau_vigilance_id"
       },
       {
-        "name": "6b7ffdb8-7db5-4072-a22f-7d36164d75b6",
+        "name": "c6c6c098-b2b3-472b-9246-59f2764eecf4",
         "fromTable": "fact_vigilance",
         "fromColumn": "mandataire_id",
         "toTable": "dim_mandataire",
-        "toColumn": "mandataire_id",
-        "relyOnReferentialIntegrity": true
+        "toColumn": "mandataire_id"
       },
       {
-        "name": "3e595781-f400-4571-bef8-1e18bff6a067",
+        "name": "a00190bf-ee74-4fe7-9003-95586a950422",
         "fromTable": "fact_vigilance",
         "fromColumn": "date_id",
         "toTable": "dim_date",
